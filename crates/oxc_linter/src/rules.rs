@@ -144,6 +144,7 @@ pub(crate) mod eslint {
     pub mod no_nonoctal_decimal_escape;
     pub mod no_obj_calls;
     pub mod no_object_constructor;
+    pub mod no_octal;
     pub mod no_param_reassign;
     pub mod no_plusplus;
     pub mod no_promise_executor_return;

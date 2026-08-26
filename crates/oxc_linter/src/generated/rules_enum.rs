@@ -112,6 +112,7 @@ pub use crate::rules::eslint::no_new_wrappers::NoNewWrappers as EslintNoNewWrapp
 pub use crate::rules::eslint::no_nonoctal_decimal_escape::NoNonoctalDecimalEscape as EslintNoNonoctalDecimalEscape;
 pub use crate::rules::eslint::no_obj_calls::NoObjCalls as EslintNoObjCalls;
 pub use crate::rules::eslint::no_object_constructor::NoObjectConstructor as EslintNoObjectConstructor;
+pub use crate::rules::eslint::no_octal::NoOctal as EslintNoOctal;
 pub use crate::rules::eslint::no_param_reassign::NoParamReassign as EslintNoParamReassign;
 pub use crate::rules::eslint::no_plusplus::NoPlusplus as EslintNoPlusplus;
 pub use crate::rules::eslint::no_promise_executor_return::NoPromiseExecutorReturn as EslintNoPromiseExecutorReturn;
@@ -1024,6 +1025,7 @@ pub enum RuleEnum {
     EslintNoNewWrappers(EslintNoNewWrappers),
     EslintNoNonoctalDecimalEscape(EslintNoNonoctalDecimalEscape),
     EslintNoObjCalls(EslintNoObjCalls),
+    EslintNoOctal(EslintNoOctal),
     EslintNoObjectConstructor(EslintNoObjectConstructor),
     EslintNoParamReassign(EslintNoParamReassign),
     EslintNoPlusplus(EslintNoPlusplus),
@@ -1903,7 +1905,8 @@ const ESLINT_NO_NEW_NATIVE_NONCONSTRUCTOR_ID: usize = ESLINT_NO_NEW_FUNC_ID + 1u
 const ESLINT_NO_NEW_WRAPPERS_ID: usize = ESLINT_NO_NEW_NATIVE_NONCONSTRUCTOR_ID + 1usize;
 const ESLINT_NO_NONOCTAL_DECIMAL_ESCAPE_ID: usize = ESLINT_NO_NEW_WRAPPERS_ID + 1usize;
 const ESLINT_NO_OBJ_CALLS_ID: usize = ESLINT_NO_NONOCTAL_DECIMAL_ESCAPE_ID + 1usize;
-const ESLINT_NO_OBJECT_CONSTRUCTOR_ID: usize = ESLINT_NO_OBJ_CALLS_ID + 1usize;
+const ESLINT_NO_OCTAL_ID: usize = ESLINT_NO_OBJ_CALLS_ID + 1usize;
+const ESLINT_NO_OBJECT_CONSTRUCTOR_ID: usize = ESLINT_NO_OCTAL_ID + 1usize;
 const ESLINT_NO_PARAM_REASSIGN_ID: usize = ESLINT_NO_OBJECT_CONSTRUCTOR_ID + 1usize;
 const ESLINT_NO_PLUSPLUS_ID: usize = ESLINT_NO_PARAM_REASSIGN_ID + 1usize;
 const ESLINT_NO_PROMISE_EXECUTOR_RETURN_ID: usize = ESLINT_NO_PLUSPLUS_ID + 1usize;
@@ -2748,7 +2751,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 870usize] = [
+static RULE_NAMES: [&str; 871usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -2883,6 +2886,7 @@ static RULE_NAMES: [&str; 870usize] = [
     EslintNoNewWrappers::NAME,
     EslintNoNonoctalDecimalEscape::NAME,
     EslintNoObjCalls::NAME,
+    EslintNoOctal::NAME,
     EslintNoObjectConstructor::NAME,
     EslintNoParamReassign::NAME,
     EslintNoPlusplus::NAME,
@@ -3759,6 +3763,7 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(_) => ESLINT_NO_NEW_WRAPPERS_ID,
             Self::EslintNoNonoctalDecimalEscape(_) => ESLINT_NO_NONOCTAL_DECIMAL_ESCAPE_ID,
             Self::EslintNoObjCalls(_) => ESLINT_NO_OBJ_CALLS_ID,
+            Self::EslintNoOctal(_) => ESLINT_NO_OCTAL_ID,
             Self::EslintNoObjectConstructor(_) => ESLINT_NO_OBJECT_CONSTRUCTOR_ID,
             Self::EslintNoParamReassign(_) => ESLINT_NO_PARAM_REASSIGN_ID,
             Self::EslintNoPlusplus(_) => ESLINT_NO_PLUSPLUS_ID,
@@ -4766,6 +4771,7 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(_) => EslintNoNewWrappers::CATEGORY,
             Self::EslintNoNonoctalDecimalEscape(_) => EslintNoNonoctalDecimalEscape::CATEGORY,
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::CATEGORY,
+            Self::EslintNoOctal(_) => EslintNoOctal::CATEGORY,
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::CATEGORY,
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::CATEGORY,
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::CATEGORY,
@@ -5813,6 +5819,7 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(_) => EslintNoNewWrappers::FIX,
             Self::EslintNoNonoctalDecimalEscape(_) => EslintNoNonoctalDecimalEscape::FIX,
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::FIX,
+            Self::EslintNoOctal(_) => EslintNoOctal::FIX,
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::FIX,
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::FIX,
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::FIX,
@@ -6818,6 +6825,7 @@ impl RuleEnum {
                 EslintNoNonoctalDecimalEscape::documentation()
             }
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::documentation(),
+            Self::EslintNoOctal(_) => EslintNoOctal::documentation(),
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::documentation(),
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::documentation(),
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::documentation(),
@@ -8260,6 +8268,9 @@ impl RuleEnum {
             }
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::config_schema(generator)
                 .or_else(|| EslintNoObjCalls::schema(generator)),
+            Self::EslintNoOctal(_) => {
+                EslintNoOctal::config_schema(generator).or_else(|| EslintNoOctal::schema(generator))
+            }
             Self::EslintNoObjectConstructor(_) => {
                 EslintNoObjectConstructor::config_schema(generator)
                     .or_else(|| EslintNoObjectConstructor::schema(generator))
@@ -10563,6 +10574,7 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(_) => "eslint",
             Self::EslintNoNonoctalDecimalEscape(_) => "eslint",
             Self::EslintNoObjCalls(_) => "eslint",
+            Self::EslintNoOctal(_) => "eslint",
             Self::EslintNoObjectConstructor(_) => "eslint",
             Self::EslintNoParamReassign(_) => "eslint",
             Self::EslintNoPlusplus(_) => "eslint",
@@ -12568,6 +12580,7 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(rule) => rule.run(node, ctx),
             Self::EslintNoNonoctalDecimalEscape(rule) => rule.run(node, ctx),
             Self::EslintNoObjCalls(rule) => rule.run(node, ctx),
+            Self::EslintNoOctal(rule) => rule.run(node, ctx),
             Self::EslintNoObjectConstructor(rule) => rule.run(node, ctx),
             Self::EslintNoParamReassign(rule) => rule.run(node, ctx),
             Self::EslintNoPlusplus(rule) => rule.run(node, ctx),
@@ -13455,6 +13468,7 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(rule) => rule.run_once(ctx),
             Self::EslintNoNonoctalDecimalEscape(rule) => rule.run_once(ctx),
             Self::EslintNoObjCalls(rule) => rule.run_once(ctx),
+            Self::EslintNoOctal(rule) => rule.run_once(ctx),
             Self::EslintNoObjectConstructor(rule) => rule.run_once(ctx),
             Self::EslintNoParamReassign(rule) => rule.run_once(ctx),
             Self::EslintNoPlusplus(rule) => rule.run_once(ctx),
@@ -14345,6 +14359,7 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoNonoctalDecimalEscape(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoObjCalls(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::EslintNoOctal(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoObjectConstructor(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoParamReassign(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoPlusplus(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -15347,6 +15362,7 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(rule) => rule.should_run(ctx),
             Self::EslintNoNonoctalDecimalEscape(rule) => rule.should_run(ctx),
             Self::EslintNoObjCalls(rule) => rule.should_run(ctx),
+            Self::EslintNoOctal(rule) => rule.should_run(ctx),
             Self::EslintNoObjectConstructor(rule) => rule.should_run(ctx),
             Self::EslintNoParamReassign(rule) => rule.should_run(ctx),
             Self::EslintNoPlusplus(rule) => rule.should_run(ctx),
@@ -16237,6 +16253,7 @@ impl RuleEnum {
                 EslintNoNonoctalDecimalEscape::IS_TSGOLINT_RULE
             }
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::IS_TSGOLINT_RULE,
+            Self::EslintNoOctal(_) => EslintNoOctal::IS_TSGOLINT_RULE,
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::IS_TSGOLINT_RULE,
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::IS_TSGOLINT_RULE,
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::IS_TSGOLINT_RULE,
@@ -17487,6 +17504,7 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(_) => EslintNoNewWrappers::VERSION,
             Self::EslintNoNonoctalDecimalEscape(_) => EslintNoNonoctalDecimalEscape::VERSION,
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::VERSION,
+            Self::EslintNoOctal(_) => EslintNoOctal::VERSION,
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::VERSION,
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::VERSION,
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::VERSION,
@@ -18542,6 +18560,7 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(_) => EslintNoNewWrappers::HAS_CONFIG,
             Self::EslintNoNonoctalDecimalEscape(_) => EslintNoNonoctalDecimalEscape::HAS_CONFIG,
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::HAS_CONFIG,
+            Self::EslintNoOctal(_) => EslintNoOctal::HAS_CONFIG,
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::HAS_CONFIG,
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::HAS_CONFIG,
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::HAS_CONFIG,
@@ -19624,6 +19643,7 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(_) => EslintNoNewWrappers::INFO,
             Self::EslintNoNonoctalDecimalEscape(_) => EslintNoNonoctalDecimalEscape::INFO,
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::INFO,
+            Self::EslintNoOctal(_) => EslintNoOctal::INFO,
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::INFO,
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::INFO,
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::INFO,
@@ -20617,6 +20637,7 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(rule) => rule.types_info(),
             Self::EslintNoNonoctalDecimalEscape(rule) => rule.types_info(),
             Self::EslintNoObjCalls(rule) => rule.types_info(),
+            Self::EslintNoOctal(rule) => rule.types_info(),
             Self::EslintNoObjectConstructor(rule) => rule.types_info(),
             Self::EslintNoParamReassign(rule) => rule.types_info(),
             Self::EslintNoPlusplus(rule) => rule.types_info(),
@@ -21491,6 +21512,7 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(rule) => rule.run_info(),
             Self::EslintNoNonoctalDecimalEscape(rule) => rule.run_info(),
             Self::EslintNoObjCalls(rule) => rule.run_info(),
+            Self::EslintNoOctal(rule) => rule.run_info(),
             Self::EslintNoObjectConstructor(rule) => rule.run_info(),
             Self::EslintNoParamReassign(rule) => rule.run_info(),
             Self::EslintNoPlusplus(rule) => rule.run_info(),
@@ -22387,6 +22409,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::EslintNoNewWrappers(EslintNoNewWrappers::default()),
         RuleEnum::EslintNoNonoctalDecimalEscape(EslintNoNonoctalDecimalEscape::default()),
         RuleEnum::EslintNoObjCalls(EslintNoObjCalls::default()),
+        RuleEnum::EslintNoOctal(EslintNoOctal::default()),
         RuleEnum::EslintNoObjectConstructor(EslintNoObjectConstructor::default()),
         RuleEnum::EslintNoParamReassign(EslintNoParamReassign::default()),
         RuleEnum::EslintNoPlusplus(EslintNoPlusplus::default()),
