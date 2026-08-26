@@ -1,0 +1,18 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-unknown-parameters): Parameter `value` leaves input unparsed.
+   ╭─[no_unknown_parameters.tsx:1:23]
+ 1 │ function process(value: unknown) {}
+   ·                       ─────────
+   ╰────
+  help: Accept a named domain type and decode unknown input at its boundary.
+
+  ⚠ oxc(no-unknown-parameters): Parameter `value` leaves input unparsed.
+   ╭─[no_unknown_parameters.tsx:1:23]
+ 1 │ const process = (value: unknown) => value;
+   ·                       ─────────
+   ╰────
+  help: Accept a named domain type and decode unknown input at its boundary.
