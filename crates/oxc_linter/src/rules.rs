@@ -776,6 +776,7 @@ pub(crate) mod oxc {
     pub mod no_unknown_parameters;
     pub mod no_unknown_returns;
     pub mod no_unknown_type_aliases;
+    pub mod no_unsafe_dictionary_type;
     pub mod number_arg_out_of_range;
     pub mod only_used_in_recursion;
     pub mod require_safety_comment_for_type_assertion;
