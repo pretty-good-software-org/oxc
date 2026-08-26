@@ -248,6 +248,9 @@ fn transform_rule_and_plugin_name<'a>(
     let (rule_name, plugin_name) = match (plugin_name, rule_name) {
         ("typescript", name) if is_eslint_rule_adapted_to_typescript(name) => (name, "eslint"),
         ("sonarjs", "no-parameter-reassignment") => ("no-param-reassign", "eslint"),
+        ("sonarjs", "bitwise-operators") => ("no-bitwise", "eslint"),
+        ("sonarjs", "no-nested-conditional") => ("no-nested-ternary", "eslint"),
+        ("sonarjs", "no-primitive-wrappers") => ("no-new-wrappers", "eslint"),
         ("anti-slop", "no-reflect-apply") => ("no-reflect-apply", "oxc"),
         ("anti-slop", "no-reflect-get") => ("no-reflect-get", "oxc"),
         ("anti-slop", "no-runtime-typeof") => ("no-runtime-typeof", "oxc"),
@@ -985,6 +988,10 @@ mod test {
         assert_eq!(
             super::transform_rule_and_plugin_name("no-labels", "sonarjs"),
             ("no-labels", "eslint")
+        );
+        assert_eq!(
+            super::transform_rule_and_plugin_name("bitwise-operators", "sonarjs"),
+            ("no-bitwise", "eslint")
         );
         assert_eq!(
             super::transform_rule_and_plugin_name("cognitive-complexity", "sonarjs"),
