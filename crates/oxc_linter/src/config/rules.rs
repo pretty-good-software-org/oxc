@@ -255,6 +255,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("anti-slop", "no-conditional-empty-object-spread") => {
             ("no-conditional-empty-object-spread", "oxc")
         }
+        ("anti-slop", "no-module-mocking") => ("no-module-mocking", "oxc"),
         ("anti-slop", "no-reflect-apply") => ("no-reflect-apply", "oxc"),
         ("anti-slop", "no-reflect-get") => ("no-reflect-get", "oxc"),
         ("anti-slop", "no-runtime-typeof") => ("no-runtime-typeof", "oxc"),
