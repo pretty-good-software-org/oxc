@@ -723,20 +723,24 @@ impl NoUselessAssignment {
                 Some(AssignmentTarget::Destructuring(node_id)) if node_id == assignment_node_id => {
                     Self::destructuring_target_write_position(ctx, reference)
                 }
-                Some(AssignmentTarget::Simple(node_id)) => {
-                    let AstKind::AssignmentExpression(assignment) =
-                        ctx.nodes().get_node(node_id).kind()
-                    else {
-                        unreachable!("assignment target should be an assignment expression");
-                    };
-                    assignment.right.span().end
-                }
+                Some(
+                    AssignmentTarget::Destructuring(node_id) | AssignmentTarget::Simple(node_id),
+                ) => Self::assignment_right_end(ctx, node_id),
                 _ => node.span().start,
             }
         } else {
             node.span().start
         };
         DestructuringOperationPosition { is_target, position }
+    }
+
+    fn assignment_right_end(ctx: &LintContext, assignment_node_id: NodeId) -> u32 {
+        let AstKind::AssignmentExpression(assignment) =
+            ctx.nodes().get_node(assignment_node_id).kind()
+        else {
+            unreachable!("assignment target should be an assignment expression");
+        };
+        assignment.right.span().end
     }
 
     fn insert_destructuring_operation<'a>(
@@ -1830,6 +1834,9 @@ function useResource(unsafe: (resource: { readonly release: () => void }) => voi
         "let x = 0, y, z;
                     [y = (z = x)] = (x = 1, []);
                     console.log(y);",
+        "let x = 0, y;
+                    [x, y = ([x] = [x + 1])] = [1];
+                    console.log(x);",
     ];
 
     Tester::new(NoUselessAssignment::NAME, NoUselessAssignment::PLUGIN, pass, fail)
