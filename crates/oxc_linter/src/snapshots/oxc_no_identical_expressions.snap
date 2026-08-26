@@ -1,0 +1,18 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-identical-expressions): Correct one of the identical sub-expressions around `+`.
+   ╭─[no_identical_expressions.tsx:1:1]
+ 1 │ 1 + 1
+   · ─────
+   ╰────
+  help: Replace one side of the expression with the intended operand.
+
+  ⚠ oxc(no-identical-expressions): Correct one of the identical sub-expressions around `&&`.
+   ╭─[no_identical_expressions.tsx:1:1]
+ 1 │ left && left
+   · ────────────
+   ╰────
+  help: Replace one side of the expression with the intended operand.

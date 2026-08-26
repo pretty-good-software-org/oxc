@@ -763,6 +763,7 @@ pub(crate) mod oxc {
     pub mod no_chained_type_assertions;
     pub mod no_conditional_empty_object_spread;
     pub mod no_const_enum;
+    pub mod no_identical_expressions;
     pub mod no_known_value_widening;
     pub mod no_map_spread;
     pub mod no_module_mocking;
