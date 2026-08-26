@@ -252,6 +252,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "no-nested-conditional") => ("no-nested-ternary", "eslint"),
         ("sonarjs", "no-primitive-wrappers") => ("no-new-wrappers", "eslint"),
         ("anti-slop", "no-chained-type-assertions") => ("no-chained-type-assertions", "oxc"),
+        ("anti-slop", "no-known-value-widening") => ("no-known-value-widening", "oxc"),
         ("anti-slop", "no-conditional-empty-object-spread") => {
             ("no-conditional-empty-object-spread", "oxc")
         }
