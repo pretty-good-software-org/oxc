@@ -572,3 +572,11 @@ source: crates/oxc_linter/src/tester.rs
  3 │                     console.log(x);
    ╰────
   help: Consider removing or reusing the assigned value.
+
+  ⚠ eslint(no-useless-assignment): This assigned value is not used in subsequent statements.
+   ╭─[no_useless_assignment.tsx:1:5]
+ 1 │ let x = 0, y, z;
+   ·     ─
+ 2 │                     [y = (z = x)] = (x = 1, []);
+   ╰────
+  help: Consider removing or reusing the assigned value.

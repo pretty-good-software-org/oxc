@@ -667,7 +667,7 @@ impl NoUselessAssignment {
         for ancestor in ctx.nodes().ancestors(node.id()) {
             let AstKind::AssignmentExpression(assignment) = ancestor.kind() else { continue };
             if !assignment.left.span().contains_inclusive(node.span()) {
-                return None;
+                continue;
             }
             return Some(match &assignment.left {
                 AstAssignmentTarget::ArrayAssignmentTarget(_)
@@ -1827,6 +1827,9 @@ function useResource(unsafe: (resource: { readonly release: () => void }) => voi
         "let x = 0;
                     [x] = (x = x + 1, [2]);
                     console.log(x);",
+        "let x = 0, y, z;
+                    [y = (z = x)] = (x = 1, []);
+                    console.log(y);",
     ];
 
     Tester::new(NoUselessAssignment::NAME, NoUselessAssignment::PLUGIN, pass, fail)
