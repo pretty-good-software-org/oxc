@@ -248,14 +248,19 @@ fn transform_rule_and_plugin_name<'a>(
     let (rule_name, plugin_name) = match (plugin_name, rule_name) {
         ("typescript", name) if is_eslint_rule_adapted_to_typescript(name) => (name, "eslint"),
         ("sonarjs", "no-parameter-reassignment") => ("no-param-reassign", "eslint"),
+        ("sonarjs", "no-array-delete") => ("no-array-delete", "typescript"),
+        ("sonarjs", "prefer-regexp-exec") => ("prefer-regexp-exec", "typescript"),
         ("sonarjs", name)
             if matches!(
                 name,
-                "no-control-regex"
+                "block-scoped-var"
+                    | "no-control-regex"
                     | "no-delete-var"
                     | "no-empty-character-class"
                     | "no-fallthrough"
+                    | "no-invalid-regexp"
                     | "no-labels"
+                    | "no-misleading-character-class"
                     | "no-regex-spaces"
                     | "no-unused-vars"
                     | "no-useless-catch"
