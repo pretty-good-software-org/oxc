@@ -1,0 +1,18 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-known-value-widening): Binding `value` discards known type evidence.
+   ╭─[no_known_value_widening.tsx:1:7]
+ 1 │ const value: unknown = { name: 'Ada' };
+   ·       ─────
+   ╰────
+  help: Keep inference or use a named owner contract instead of a broad type.
+
+  ⚠ oxc(no-known-value-widening): Binding `value` discards known type evidence.
+   ╭─[no_known_value_widening.tsx:1:7]
+ 1 │ const value: object = []; 
+   ·       ─────
+   ╰────
+  help: Keep inference or use a named owner contract instead of a broad type.
