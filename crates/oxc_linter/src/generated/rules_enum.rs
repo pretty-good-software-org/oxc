@@ -412,6 +412,7 @@ pub use crate::rules::oxc::no_reflect_apply::NoReflectApply as OxcNoReflectApply
 pub use crate::rules::oxc::no_reflect_get::NoReflectGet as OxcNoReflectGet;
 pub use crate::rules::oxc::no_rest_spread_properties::NoRestSpreadProperties as OxcNoRestSpreadProperties;
 pub use crate::rules::oxc::no_runtime_typeof::NoRuntimeTypeof as OxcNoRuntimeTypeof;
+pub use crate::rules::oxc::no_shape_in_symbol_names::NoShapeInSymbolNames as OxcNoShapeInSymbolNames;
 pub use crate::rules::oxc::no_this_in_exported_function::NoThisInExportedFunction as OxcNoThisInExportedFunction;
 pub use crate::rules::oxc::no_unknown_parameters::NoUnknownParameters as OxcNoUnknownParameters;
 pub use crate::rules::oxc::no_unknown_returns::NoUnknownReturns as OxcNoUnknownReturns;
@@ -1591,6 +1592,7 @@ pub enum RuleEnum {
     OxcNoReflectGet(OxcNoReflectGet),
     OxcNoRestSpreadProperties(OxcNoRestSpreadProperties),
     OxcNoRuntimeTypeof(OxcNoRuntimeTypeof),
+    OxcNoShapeInSymbolNames(OxcNoShapeInSymbolNames),
     OxcNoThisInExportedFunction(OxcNoThisInExportedFunction),
     OxcNoUnknownParameters(OxcNoUnknownParameters),
     OxcNoUnknownReturns(OxcNoUnknownReturns),
@@ -2566,7 +2568,8 @@ const OXC_NO_REFLECT_APPLY_ID: usize = OXC_NO_OPTIONAL_CHAINING_ID + 1usize;
 const OXC_NO_REFLECT_GET_ID: usize = OXC_NO_REFLECT_APPLY_ID + 1usize;
 const OXC_NO_REST_SPREAD_PROPERTIES_ID: usize = OXC_NO_REFLECT_GET_ID + 1usize;
 const OXC_NO_RUNTIME_TYPEOF_ID: usize = OXC_NO_REST_SPREAD_PROPERTIES_ID + 1usize;
-const OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID: usize = OXC_NO_RUNTIME_TYPEOF_ID + 1usize;
+const OXC_NO_SHAPE_IN_SYMBOL_NAMES_ID: usize = OXC_NO_RUNTIME_TYPEOF_ID + 1usize;
+const OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID: usize = OXC_NO_SHAPE_IN_SYMBOL_NAMES_ID + 1usize;
 const OXC_NO_UNKNOWN_PARAMETERS_ID: usize = OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID + 1usize;
 const OXC_NO_UNKNOWN_RETURNS_ID: usize = OXC_NO_UNKNOWN_PARAMETERS_ID + 1usize;
 const OXC_NO_UNKNOWN_TYPE_ALIASES_ID: usize = OXC_NO_UNKNOWN_RETURNS_ID + 1usize;
@@ -2781,7 +2784,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 881usize] = [
+static RULE_NAMES: [&str; 882usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3466,6 +3469,7 @@ static RULE_NAMES: [&str; 881usize] = [
     OxcNoReflectGet::NAME,
     OxcNoRestSpreadProperties::NAME,
     OxcNoRuntimeTypeof::NAME,
+    OxcNoShapeInSymbolNames::NAME,
     OxcNoThisInExportedFunction::NAME,
     OxcNoUnknownParameters::NAME,
     OxcNoUnknownReturns::NAME,
@@ -4467,6 +4471,7 @@ impl RuleEnum {
             Self::OxcNoReflectGet(_) => OXC_NO_REFLECT_GET_ID,
             Self::OxcNoRestSpreadProperties(_) => OXC_NO_REST_SPREAD_PROPERTIES_ID,
             Self::OxcNoRuntimeTypeof(_) => OXC_NO_RUNTIME_TYPEOF_ID,
+            Self::OxcNoShapeInSymbolNames(_) => OXC_NO_SHAPE_IN_SYMBOL_NAMES_ID,
             Self::OxcNoThisInExportedFunction(_) => OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID,
             Self::OxcNoUnknownParameters(_) => OXC_NO_UNKNOWN_PARAMETERS_ID,
             Self::OxcNoUnknownReturns(_) => OXC_NO_UNKNOWN_RETURNS_ID,
@@ -5521,6 +5526,7 @@ impl RuleEnum {
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::CATEGORY,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::CATEGORY,
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::CATEGORY,
+            Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::CATEGORY,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::CATEGORY,
             Self::OxcNoUnknownParameters(_) => OxcNoUnknownParameters::CATEGORY,
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::CATEGORY,
@@ -6535,6 +6541,7 @@ impl RuleEnum {
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::FIX,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::FIX,
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::FIX,
+            Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::FIX,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::FIX,
             Self::OxcNoUnknownParameters(_) => OxcNoUnknownParameters::FIX,
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::FIX,
@@ -7753,6 +7760,7 @@ impl RuleEnum {
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::documentation(),
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::documentation(),
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::documentation(),
+            Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::documentation(),
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::documentation(),
             Self::OxcNoUnknownParameters(_) => OxcNoUnknownParameters::documentation(),
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::documentation(),
@@ -9997,6 +10005,8 @@ impl RuleEnum {
             }
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::config_schema(generator)
                 .or_else(|| OxcNoRuntimeTypeof::schema(generator)),
+            Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::config_schema(generator)
+                .or_else(|| OxcNoShapeInSymbolNames::schema(generator)),
             Self::OxcNoThisInExportedFunction(_) => {
                 OxcNoThisInExportedFunction::config_schema(generator)
                     .or_else(|| OxcNoThisInExportedFunction::schema(generator))
@@ -11232,6 +11242,7 @@ impl RuleEnum {
             Self::OxcNoReflectGet(_) => "oxc",
             Self::OxcNoRestSpreadProperties(_) => "oxc",
             Self::OxcNoRuntimeTypeof(_) => "oxc",
+            Self::OxcNoShapeInSymbolNames(_) => "oxc",
             Self::OxcNoThisInExportedFunction(_) => "oxc",
             Self::OxcNoUnknownParameters(_) => "oxc",
             Self::OxcNoUnknownReturns(_) => "oxc",
@@ -13248,6 +13259,7 @@ impl RuleEnum {
             Self::OxcNoReflectGet(rule) => rule.run(node, ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.run(node, ctx),
             Self::OxcNoRuntimeTypeof(rule) => rule.run(node, ctx),
+            Self::OxcNoShapeInSymbolNames(rule) => rule.run(node, ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.run(node, ctx),
             Self::OxcNoUnknownParameters(rule) => rule.run(node, ctx),
             Self::OxcNoUnknownReturns(rule) => rule.run(node, ctx),
@@ -14146,6 +14158,7 @@ impl RuleEnum {
             Self::OxcNoReflectGet(rule) => rule.run_once(ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.run_once(ctx),
             Self::OxcNoRuntimeTypeof(rule) => rule.run_once(ctx),
+            Self::OxcNoShapeInSymbolNames(rule) => rule.run_once(ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.run_once(ctx),
             Self::OxcNoUnknownParameters(rule) => rule.run_once(ctx),
             Self::OxcNoUnknownReturns(rule) => rule.run_once(ctx),
@@ -15151,6 +15164,7 @@ impl RuleEnum {
             Self::OxcNoReflectGet(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoRuntimeTypeof(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoShapeInSymbolNames(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoUnknownParameters(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoUnknownReturns(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16060,6 +16074,7 @@ impl RuleEnum {
             Self::OxcNoReflectGet(rule) => rule.should_run(ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.should_run(ctx),
             Self::OxcNoRuntimeTypeof(rule) => rule.should_run(ctx),
+            Self::OxcNoShapeInSymbolNames(rule) => rule.should_run(ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.should_run(ctx),
             Self::OxcNoUnknownParameters(rule) => rule.should_run(ctx),
             Self::OxcNoUnknownReturns(rule) => rule.should_run(ctx),
@@ -17267,6 +17282,7 @@ impl RuleEnum {
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::IS_TSGOLINT_RULE,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::IS_TSGOLINT_RULE,
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::IS_TSGOLINT_RULE,
+            Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::IS_TSGOLINT_RULE,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::IS_TSGOLINT_RULE,
             Self::OxcNoUnknownParameters(_) => OxcNoUnknownParameters::IS_TSGOLINT_RULE,
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::IS_TSGOLINT_RULE,
@@ -18374,6 +18390,7 @@ impl RuleEnum {
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::VERSION,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::VERSION,
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::VERSION,
+            Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::VERSION,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::VERSION,
             Self::OxcNoUnknownParameters(_) => OxcNoUnknownParameters::VERSION,
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::VERSION,
@@ -19468,6 +19485,7 @@ impl RuleEnum {
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::HAS_CONFIG,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::HAS_CONFIG,
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::HAS_CONFIG,
+            Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::HAS_CONFIG,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::HAS_CONFIG,
             Self::OxcNoUnknownParameters(_) => OxcNoUnknownParameters::HAS_CONFIG,
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::HAS_CONFIG,
@@ -20491,6 +20509,7 @@ impl RuleEnum {
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::INFO,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::INFO,
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::INFO,
+            Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::INFO,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::INFO,
             Self::OxcNoUnknownParameters(_) => OxcNoUnknownParameters::INFO,
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::INFO,
@@ -21391,6 +21410,7 @@ impl RuleEnum {
             Self::OxcNoReflectGet(rule) => rule.types_info(),
             Self::OxcNoRestSpreadProperties(rule) => rule.types_info(),
             Self::OxcNoRuntimeTypeof(rule) => rule.types_info(),
+            Self::OxcNoShapeInSymbolNames(rule) => rule.types_info(),
             Self::OxcNoThisInExportedFunction(rule) => rule.types_info(),
             Self::OxcNoUnknownParameters(rule) => rule.types_info(),
             Self::OxcNoUnknownReturns(rule) => rule.types_info(),
@@ -22276,6 +22296,7 @@ impl RuleEnum {
             Self::OxcNoReflectGet(rule) => rule.run_info(),
             Self::OxcNoRestSpreadProperties(rule) => rule.run_info(),
             Self::OxcNoRuntimeTypeof(rule) => rule.run_info(),
+            Self::OxcNoShapeInSymbolNames(rule) => rule.run_info(),
             Self::OxcNoThisInExportedFunction(rule) => rule.run_info(),
             Self::OxcNoUnknownParameters(rule) => rule.run_info(),
             Self::OxcNoUnknownReturns(rule) => rule.run_info(),
@@ -23287,6 +23308,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoReflectGet(OxcNoReflectGet::default()),
         RuleEnum::OxcNoRestSpreadProperties(OxcNoRestSpreadProperties::default()),
         RuleEnum::OxcNoRuntimeTypeof(OxcNoRuntimeTypeof::default()),
+        RuleEnum::OxcNoShapeInSymbolNames(OxcNoShapeInSymbolNames::default()),
         RuleEnum::OxcNoThisInExportedFunction(OxcNoThisInExportedFunction::default()),
         RuleEnum::OxcNoUnknownParameters(OxcNoUnknownParameters::default()),
         RuleEnum::OxcNoUnknownReturns(OxcNoUnknownReturns::default()),

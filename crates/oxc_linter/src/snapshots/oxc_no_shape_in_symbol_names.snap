@@ -1,0 +1,18 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-shape-in-symbol-names): Rename symbol `userShape` for its domain role.
+   ╭─[no_shape_in_symbol_names.tsx:1:7]
+ 1 │ const userShape = value;
+   ·       ─────────
+   ╰────
+  help: Use a name that describes ownership or domain meaning instead of structure.
+
+  ⚠ oxc(no-shape-in-symbol-names): Rename symbol `ShapeParser` for its domain role.
+   ╭─[no_shape_in_symbol_names.tsx:1:7]
+ 1 │ class ShapeParser {}
+   ·       ───────────
+   ╰────
+  help: Use a name that describes ownership or domain meaning instead of structure.
