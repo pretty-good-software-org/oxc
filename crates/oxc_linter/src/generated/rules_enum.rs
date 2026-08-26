@@ -401,6 +401,7 @@ pub use crate::rules::oxc::no_accumulating_spread::NoAccumulatingSpread as OxcNo
 pub use crate::rules::oxc::no_async_await::NoAsyncAwait as OxcNoAsyncAwait;
 pub use crate::rules::oxc::no_async_endpoint_handlers::NoAsyncEndpointHandlers as OxcNoAsyncEndpointHandlers;
 pub use crate::rules::oxc::no_barrel_file::NoBarrelFile as OxcNoBarrelFile;
+pub use crate::rules::oxc::no_chained_type_assertions::NoChainedTypeAssertions as OxcNoChainedTypeAssertions;
 pub use crate::rules::oxc::no_const_enum::NoConstEnum as OxcNoConstEnum;
 pub use crate::rules::oxc::no_map_spread::NoMapSpread as OxcNoMapSpread;
 pub use crate::rules::oxc::no_optional_chaining::NoOptionalChaining as OxcNoOptionalChaining;
@@ -1573,6 +1574,7 @@ pub enum RuleEnum {
     OxcNoAsyncAwait(OxcNoAsyncAwait),
     OxcNoAsyncEndpointHandlers(OxcNoAsyncEndpointHandlers),
     OxcNoBarrelFile(OxcNoBarrelFile),
+    OxcNoChainedTypeAssertions(OxcNoChainedTypeAssertions),
     OxcNoConstEnum(OxcNoConstEnum),
     OxcNoMapSpread(OxcNoMapSpread),
     OxcNoOptionalChaining(OxcNoOptionalChaining),
@@ -2541,7 +2543,8 @@ const OXC_NO_ACCUMULATING_SPREAD_ID: usize = OXC_MISSING_THROW_ID + 1usize;
 const OXC_NO_ASYNC_AWAIT_ID: usize = OXC_NO_ACCUMULATING_SPREAD_ID + 1usize;
 const OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID: usize = OXC_NO_ASYNC_AWAIT_ID + 1usize;
 const OXC_NO_BARREL_FILE_ID: usize = OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID + 1usize;
-const OXC_NO_CONST_ENUM_ID: usize = OXC_NO_BARREL_FILE_ID + 1usize;
+const OXC_NO_CHAINED_TYPE_ASSERTIONS_ID: usize = OXC_NO_BARREL_FILE_ID + 1usize;
+const OXC_NO_CONST_ENUM_ID: usize = OXC_NO_CHAINED_TYPE_ASSERTIONS_ID + 1usize;
 const OXC_NO_MAP_SPREAD_ID: usize = OXC_NO_CONST_ENUM_ID + 1usize;
 const OXC_NO_OPTIONAL_CHAINING_ID: usize = OXC_NO_MAP_SPREAD_ID + 1usize;
 const OXC_NO_REFLECT_APPLY_ID: usize = OXC_NO_OPTIONAL_CHAINING_ID + 1usize;
@@ -2760,7 +2763,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 874usize] = [
+static RULE_NAMES: [&str; 875usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3434,6 +3437,7 @@ static RULE_NAMES: [&str; 874usize] = [
     OxcNoAsyncAwait::NAME,
     OxcNoAsyncEndpointHandlers::NAME,
     OxcNoBarrelFile::NAME,
+    OxcNoChainedTypeAssertions::NAME,
     OxcNoConstEnum::NAME,
     OxcNoMapSpread::NAME,
     OxcNoOptionalChaining::NAME,
@@ -4428,6 +4432,7 @@ impl RuleEnum {
             Self::OxcNoAsyncAwait(_) => OXC_NO_ASYNC_AWAIT_ID,
             Self::OxcNoAsyncEndpointHandlers(_) => OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID,
             Self::OxcNoBarrelFile(_) => OXC_NO_BARREL_FILE_ID,
+            Self::OxcNoChainedTypeAssertions(_) => OXC_NO_CHAINED_TYPE_ASSERTIONS_ID,
             Self::OxcNoConstEnum(_) => OXC_NO_CONST_ENUM_ID,
             Self::OxcNoMapSpread(_) => OXC_NO_MAP_SPREAD_ID,
             Self::OxcNoOptionalChaining(_) => OXC_NO_OPTIONAL_CHAINING_ID,
@@ -5473,6 +5478,7 @@ impl RuleEnum {
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::CATEGORY,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::CATEGORY,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::CATEGORY,
+            Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::CATEGORY,
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::CATEGORY,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::CATEGORY,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::CATEGORY,
@@ -6480,6 +6486,7 @@ impl RuleEnum {
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::FIX,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::FIX,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::FIX,
+            Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::FIX,
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::FIX,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::FIX,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::FIX,
@@ -7689,6 +7696,7 @@ impl RuleEnum {
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::documentation(),
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::documentation(),
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::documentation(),
+            Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::documentation(),
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::documentation(),
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::documentation(),
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::documentation(),
@@ -9909,6 +9917,10 @@ impl RuleEnum {
             }
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::config_schema(generator)
                 .or_else(|| OxcNoBarrelFile::schema(generator)),
+            Self::OxcNoChainedTypeAssertions(_) => {
+                OxcNoChainedTypeAssertions::config_schema(generator)
+                    .or_else(|| OxcNoChainedTypeAssertions::schema(generator))
+            }
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::config_schema(generator)
                 .or_else(|| OxcNoConstEnum::schema(generator)),
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::config_schema(generator)
@@ -11143,6 +11155,7 @@ impl RuleEnum {
             Self::OxcNoAsyncAwait(_) => "oxc",
             Self::OxcNoAsyncEndpointHandlers(_) => "oxc",
             Self::OxcNoBarrelFile(_) => "oxc",
+            Self::OxcNoChainedTypeAssertions(_) => "oxc",
             Self::OxcNoConstEnum(_) => "oxc",
             Self::OxcNoMapSpread(_) => "oxc",
             Self::OxcNoOptionalChaining(_) => "oxc",
@@ -13152,6 +13165,7 @@ impl RuleEnum {
             Self::OxcNoAsyncAwait(rule) => rule.run(node, ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run(node, ctx),
             Self::OxcNoBarrelFile(rule) => rule.run(node, ctx),
+            Self::OxcNoChainedTypeAssertions(rule) => rule.run(node, ctx),
             Self::OxcNoConstEnum(rule) => rule.run(node, ctx),
             Self::OxcNoMapSpread(rule) => rule.run(node, ctx),
             Self::OxcNoOptionalChaining(rule) => rule.run(node, ctx),
@@ -14043,6 +14057,7 @@ impl RuleEnum {
             Self::OxcNoAsyncAwait(rule) => rule.run_once(ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run_once(ctx),
             Self::OxcNoBarrelFile(rule) => rule.run_once(ctx),
+            Self::OxcNoChainedTypeAssertions(rule) => rule.run_once(ctx),
             Self::OxcNoConstEnum(rule) => rule.run_once(ctx),
             Self::OxcNoMapSpread(rule) => rule.run_once(ctx),
             Self::OxcNoOptionalChaining(rule) => rule.run_once(ctx),
@@ -15041,6 +15056,7 @@ impl RuleEnum {
             Self::OxcNoAsyncAwait(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoBarrelFile(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoChainedTypeAssertions(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoConstEnum(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoMapSpread(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoOptionalChaining(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -15943,6 +15959,7 @@ impl RuleEnum {
             Self::OxcNoAsyncAwait(rule) => rule.should_run(ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.should_run(ctx),
             Self::OxcNoBarrelFile(rule) => rule.should_run(ctx),
+            Self::OxcNoChainedTypeAssertions(rule) => rule.should_run(ctx),
             Self::OxcNoConstEnum(rule) => rule.should_run(ctx),
             Self::OxcNoMapSpread(rule) => rule.should_run(ctx),
             Self::OxcNoOptionalChaining(rule) => rule.should_run(ctx),
@@ -17141,6 +17158,7 @@ impl RuleEnum {
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::IS_TSGOLINT_RULE,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::IS_TSGOLINT_RULE,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::IS_TSGOLINT_RULE,
+            Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::IS_TSGOLINT_RULE,
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::IS_TSGOLINT_RULE,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::IS_TSGOLINT_RULE,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::IS_TSGOLINT_RULE,
@@ -18239,6 +18257,7 @@ impl RuleEnum {
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::VERSION,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::VERSION,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::VERSION,
+            Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::VERSION,
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::VERSION,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::VERSION,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::VERSION,
@@ -19324,6 +19343,7 @@ impl RuleEnum {
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::HAS_CONFIG,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::HAS_CONFIG,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::HAS_CONFIG,
+            Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::HAS_CONFIG,
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::HAS_CONFIG,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::HAS_CONFIG,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::HAS_CONFIG,
@@ -20340,6 +20360,7 @@ impl RuleEnum {
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::INFO,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::INFO,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::INFO,
+            Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::INFO,
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::INFO,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::INFO,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::INFO,
@@ -21233,6 +21254,7 @@ impl RuleEnum {
             Self::OxcNoAsyncAwait(rule) => rule.types_info(),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.types_info(),
             Self::OxcNoBarrelFile(rule) => rule.types_info(),
+            Self::OxcNoChainedTypeAssertions(rule) => rule.types_info(),
             Self::OxcNoConstEnum(rule) => rule.types_info(),
             Self::OxcNoMapSpread(rule) => rule.types_info(),
             Self::OxcNoOptionalChaining(rule) => rule.types_info(),
@@ -22111,6 +22133,7 @@ impl RuleEnum {
             Self::OxcNoAsyncAwait(rule) => rule.run_info(),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run_info(),
             Self::OxcNoBarrelFile(rule) => rule.run_info(),
+            Self::OxcNoChainedTypeAssertions(rule) => rule.run_info(),
             Self::OxcNoConstEnum(rule) => rule.run_info(),
             Self::OxcNoMapSpread(rule) => rule.run_info(),
             Self::OxcNoOptionalChaining(rule) => rule.run_info(),
@@ -23115,6 +23138,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoAsyncAwait(OxcNoAsyncAwait::default()),
         RuleEnum::OxcNoAsyncEndpointHandlers(OxcNoAsyncEndpointHandlers::default()),
         RuleEnum::OxcNoBarrelFile(OxcNoBarrelFile::default()),
+        RuleEnum::OxcNoChainedTypeAssertions(OxcNoChainedTypeAssertions::default()),
         RuleEnum::OxcNoConstEnum(OxcNoConstEnum::default()),
         RuleEnum::OxcNoMapSpread(OxcNoMapSpread::default()),
         RuleEnum::OxcNoOptionalChaining(OxcNoOptionalChaining::default()),

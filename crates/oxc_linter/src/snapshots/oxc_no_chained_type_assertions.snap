@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-chained-type-assertions): Avoid chained TypeScript assertions.
+   ╭─[no_chained_type_assertions.tsx:1:15]
+ 1 │ const value = input as unknown as User;
+   ·               ────────────────
+   ╰────
+  help: Use one named type or validate the value at its boundary.
