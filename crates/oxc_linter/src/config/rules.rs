@@ -245,9 +245,25 @@ fn transform_rule_and_plugin_name<'a>(
     rule_name: &'a str,
     plugin_name: &'a str,
 ) -> (&'a str, &'a str) {
-    let plugin_name = match plugin_name {
-        "typescript" if is_eslint_rule_adapted_to_typescript(rule_name) => "eslint",
-        _ => plugin_name,
+    let (rule_name, plugin_name) = match (plugin_name, rule_name) {
+        ("typescript", name) if is_eslint_rule_adapted_to_typescript(name) => (name, "eslint"),
+        ("sonarjs", "no-parameter-reassignment") => ("no-param-reassign", "eslint"),
+        ("sonarjs", name)
+            if matches!(
+                name,
+                "no-control-regex"
+                    | "no-delete-var"
+                    | "no-empty-character-class"
+                    | "no-fallthrough"
+                    | "no-labels"
+                    | "no-regex-spaces"
+                    | "no-unused-vars"
+                    | "no-useless-catch"
+            ) =>
+        {
+            (name, "eslint")
+        }
+        _ => (rule_name, plugin_name),
     };
 
     (rule_name, plugin_name)
@@ -949,6 +965,22 @@ mod test {
 
         assert!(result.is_ok());
         assert!(rules.is_empty());
+    }
+
+    #[test]
+    fn test_sonarjs_aliases_to_native_rules() {
+        assert_eq!(
+            super::transform_rule_and_plugin_name("no-parameter-reassignment", "sonarjs"),
+            ("no-param-reassign", "eslint")
+        );
+        assert_eq!(
+            super::transform_rule_and_plugin_name("no-labels", "sonarjs"),
+            ("no-labels", "eslint")
+        );
+        assert_eq!(
+            super::transform_rule_and_plugin_name("cognitive-complexity", "sonarjs"),
+            ("cognitive-complexity", "sonarjs")
+        );
     }
 
     #[test]
