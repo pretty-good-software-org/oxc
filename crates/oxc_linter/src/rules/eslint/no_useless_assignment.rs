@@ -252,8 +252,8 @@ impl Rule for NoUselessAssignment {
                 }
 
                 if pending_destructuring_operations.is_none()
-                    && let Some(AssignmentTarget::Destructuring(assignment_node_id)) =
-                        Self::get_assignment_target(ctx, reference)
+                    && let Some(assignment_node_id) =
+                        Self::get_enclosing_destructuring_assignment_target(ctx, reference)
                 {
                     let mut operations = SmallVec::new();
                     Self::insert_destructuring_operation(
@@ -272,26 +272,12 @@ impl Rule for NoUselessAssignment {
                 if let Some((assignment_node_id, _)) = pending_destructuring_operations.as_ref() {
                     let assignment_node_id = *assignment_node_id;
                     let reference_node = ctx.nodes().get_node(reference.node_id());
-                    if !ctx
+                    if ctx
                         .nodes()
                         .get_node(assignment_node_id)
                         .span()
                         .contains_inclusive(reference_node.span())
                     {
-                        let (_, mut operations) = pending_destructuring_operations
-                            .take()
-                            .expect("destructuring operations should be pending");
-                        Self::flush_destructuring_operations(
-                            ctx,
-                            graph,
-                            &mut cfg_ops,
-                            &mut operations,
-                            compact_idx,
-                            var_decl,
-                            decl_node,
-                            &mut tracked_symbols[compact_idx as usize],
-                        );
-                    } else {
                         let (_, operations) = pending_destructuring_operations
                             .as_mut()
                             .expect("destructuring operations should be pending");
@@ -306,6 +292,19 @@ impl Rule for NoUselessAssignment {
                         );
                         continue;
                     }
+                    let (_, mut operations) = pending_destructuring_operations
+                        .take()
+                        .expect("destructuring operations should be pending");
+                    Self::flush_destructuring_operations(
+                        ctx,
+                        graph,
+                        &mut cfg_ops,
+                        &mut operations,
+                        compact_idx,
+                        var_decl,
+                        decl_node,
+                        &mut tracked_symbols[compact_idx as usize],
+                    );
                 }
 
                 if reference.is_write() {
@@ -679,6 +678,31 @@ impl NoUselessAssignment {
         }
 
         None
+    }
+
+    fn get_enclosing_destructuring_assignment_target(
+        ctx: &LintContext,
+        reference: &Reference,
+    ) -> Option<NodeId> {
+        let node = ctx.nodes().get_node(reference.node_id());
+        if !matches!(node.kind(), AstKind::IdentifierReference(_)) {
+            return None;
+        }
+
+        let mut enclosing = None;
+        for ancestor in ctx.nodes().ancestors(node.id()) {
+            let AstKind::AssignmentExpression(assignment) = ancestor.kind() else { continue };
+            if assignment.left.span().contains_inclusive(node.span())
+                && matches!(
+                    &assignment.left,
+                    AstAssignmentTarget::ArrayAssignmentTarget(_)
+                        | AstAssignmentTarget::ObjectAssignmentTarget(_)
+                )
+            {
+                enclosing = Some(ancestor.id());
+            }
+        }
+        enclosing
     }
 
     fn is_in_assignment_target(
@@ -1836,6 +1860,9 @@ function useResource(unsafe: (resource: { readonly release: () => void }) => voi
                     console.log(y);",
         "let x = 0, y;
                     [x, y = ([x] = [x + 1])] = [1];
+                    console.log(x);",
+        "let x = 0, y;
+                    [y = ([x] = [x])] = (x = 1, []);
                     console.log(x);",
     ];
 
