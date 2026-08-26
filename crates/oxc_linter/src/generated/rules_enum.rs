@@ -404,6 +404,7 @@ pub use crate::rules::oxc::no_barrel_file::NoBarrelFile as OxcNoBarrelFile;
 pub use crate::rules::oxc::no_const_enum::NoConstEnum as OxcNoConstEnum;
 pub use crate::rules::oxc::no_map_spread::NoMapSpread as OxcNoMapSpread;
 pub use crate::rules::oxc::no_optional_chaining::NoOptionalChaining as OxcNoOptionalChaining;
+pub use crate::rules::oxc::no_reflect_apply::NoReflectApply as OxcNoReflectApply;
 pub use crate::rules::oxc::no_reflect_get::NoReflectGet as OxcNoReflectGet;
 pub use crate::rules::oxc::no_rest_spread_properties::NoRestSpreadProperties as OxcNoRestSpreadProperties;
 pub use crate::rules::oxc::no_this_in_exported_function::NoThisInExportedFunction as OxcNoThisInExportedFunction;
@@ -1574,6 +1575,7 @@ pub enum RuleEnum {
     OxcNoConstEnum(OxcNoConstEnum),
     OxcNoMapSpread(OxcNoMapSpread),
     OxcNoOptionalChaining(OxcNoOptionalChaining),
+    OxcNoReflectApply(OxcNoReflectApply),
     OxcNoReflectGet(OxcNoReflectGet),
     OxcNoRestSpreadProperties(OxcNoRestSpreadProperties),
     OxcNoThisInExportedFunction(OxcNoThisInExportedFunction),
@@ -2540,7 +2542,8 @@ const OXC_NO_BARREL_FILE_ID: usize = OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID + 1usize;
 const OXC_NO_CONST_ENUM_ID: usize = OXC_NO_BARREL_FILE_ID + 1usize;
 const OXC_NO_MAP_SPREAD_ID: usize = OXC_NO_CONST_ENUM_ID + 1usize;
 const OXC_NO_OPTIONAL_CHAINING_ID: usize = OXC_NO_MAP_SPREAD_ID + 1usize;
-const OXC_NO_REFLECT_GET_ID: usize = OXC_NO_OPTIONAL_CHAINING_ID + 1usize;
+const OXC_NO_REFLECT_APPLY_ID: usize = OXC_NO_OPTIONAL_CHAINING_ID + 1usize;
+const OXC_NO_REFLECT_GET_ID: usize = OXC_NO_REFLECT_APPLY_ID + 1usize;
 const OXC_NO_REST_SPREAD_PROPERTIES_ID: usize = OXC_NO_REFLECT_GET_ID + 1usize;
 const OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID: usize = OXC_NO_REST_SPREAD_PROPERTIES_ID + 1usize;
 const OXC_NUMBER_ARG_OUT_OF_RANGE_ID: usize = OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID + 1usize;
@@ -2754,7 +2757,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 872usize] = [
+static RULE_NAMES: [&str; 873usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3431,6 +3434,7 @@ static RULE_NAMES: [&str; 872usize] = [
     OxcNoConstEnum::NAME,
     OxcNoMapSpread::NAME,
     OxcNoOptionalChaining::NAME,
+    OxcNoReflectApply::NAME,
     OxcNoReflectGet::NAME,
     OxcNoRestSpreadProperties::NAME,
     OxcNoThisInExportedFunction::NAME,
@@ -4423,6 +4427,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(_) => OXC_NO_CONST_ENUM_ID,
             Self::OxcNoMapSpread(_) => OXC_NO_MAP_SPREAD_ID,
             Self::OxcNoOptionalChaining(_) => OXC_NO_OPTIONAL_CHAINING_ID,
+            Self::OxcNoReflectApply(_) => OXC_NO_REFLECT_APPLY_ID,
             Self::OxcNoReflectGet(_) => OXC_NO_REFLECT_GET_ID,
             Self::OxcNoRestSpreadProperties(_) => OXC_NO_REST_SPREAD_PROPERTIES_ID,
             Self::OxcNoThisInExportedFunction(_) => OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID,
@@ -5466,6 +5471,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::CATEGORY,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::CATEGORY,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::CATEGORY,
+            Self::OxcNoReflectApply(_) => OxcNoReflectApply::CATEGORY,
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::CATEGORY,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::CATEGORY,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::CATEGORY,
@@ -6471,6 +6477,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::FIX,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::FIX,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::FIX,
+            Self::OxcNoReflectApply(_) => OxcNoReflectApply::FIX,
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::FIX,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::FIX,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::FIX,
@@ -7678,6 +7685,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::documentation(),
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::documentation(),
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::documentation(),
+            Self::OxcNoReflectApply(_) => OxcNoReflectApply::documentation(),
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::documentation(),
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::documentation(),
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::documentation(),
@@ -9899,6 +9907,8 @@ impl RuleEnum {
                 .or_else(|| OxcNoMapSpread::schema(generator)),
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::config_schema(generator)
                 .or_else(|| OxcNoOptionalChaining::schema(generator)),
+            Self::OxcNoReflectApply(_) => OxcNoReflectApply::config_schema(generator)
+                .or_else(|| OxcNoReflectApply::schema(generator)),
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::config_schema(generator)
                 .or_else(|| OxcNoReflectGet::schema(generator)),
             Self::OxcNoRestSpreadProperties(_) => {
@@ -11126,6 +11136,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(_) => "oxc",
             Self::OxcNoMapSpread(_) => "oxc",
             Self::OxcNoOptionalChaining(_) => "oxc",
+            Self::OxcNoReflectApply(_) => "oxc",
             Self::OxcNoReflectGet(_) => "oxc",
             Self::OxcNoRestSpreadProperties(_) => "oxc",
             Self::OxcNoThisInExportedFunction(_) => "oxc",
@@ -13133,6 +13144,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(rule) => rule.run(node, ctx),
             Self::OxcNoMapSpread(rule) => rule.run(node, ctx),
             Self::OxcNoOptionalChaining(rule) => rule.run(node, ctx),
+            Self::OxcNoReflectApply(rule) => rule.run(node, ctx),
             Self::OxcNoReflectGet(rule) => rule.run(node, ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.run(node, ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.run(node, ctx),
@@ -14022,6 +14034,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(rule) => rule.run_once(ctx),
             Self::OxcNoMapSpread(rule) => rule.run_once(ctx),
             Self::OxcNoOptionalChaining(rule) => rule.run_once(ctx),
+            Self::OxcNoReflectApply(rule) => rule.run_once(ctx),
             Self::OxcNoReflectGet(rule) => rule.run_once(ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.run_once(ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.run_once(ctx),
@@ -15018,6 +15031,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoMapSpread(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoOptionalChaining(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoReflectApply(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoReflectGet(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -15918,6 +15932,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(rule) => rule.should_run(ctx),
             Self::OxcNoMapSpread(rule) => rule.should_run(ctx),
             Self::OxcNoOptionalChaining(rule) => rule.should_run(ctx),
+            Self::OxcNoReflectApply(rule) => rule.should_run(ctx),
             Self::OxcNoReflectGet(rule) => rule.should_run(ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.should_run(ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.should_run(ctx),
@@ -17114,6 +17129,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::IS_TSGOLINT_RULE,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::IS_TSGOLINT_RULE,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::IS_TSGOLINT_RULE,
+            Self::OxcNoReflectApply(_) => OxcNoReflectApply::IS_TSGOLINT_RULE,
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::IS_TSGOLINT_RULE,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::IS_TSGOLINT_RULE,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::IS_TSGOLINT_RULE,
@@ -18210,6 +18226,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::VERSION,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::VERSION,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::VERSION,
+            Self::OxcNoReflectApply(_) => OxcNoReflectApply::VERSION,
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::VERSION,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::VERSION,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::VERSION,
@@ -19293,6 +19310,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::HAS_CONFIG,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::HAS_CONFIG,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::HAS_CONFIG,
+            Self::OxcNoReflectApply(_) => OxcNoReflectApply::HAS_CONFIG,
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::HAS_CONFIG,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::HAS_CONFIG,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::HAS_CONFIG,
@@ -20307,6 +20325,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::INFO,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::INFO,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::INFO,
+            Self::OxcNoReflectApply(_) => OxcNoReflectApply::INFO,
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::INFO,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::INFO,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::INFO,
@@ -21198,6 +21217,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(rule) => rule.types_info(),
             Self::OxcNoMapSpread(rule) => rule.types_info(),
             Self::OxcNoOptionalChaining(rule) => rule.types_info(),
+            Self::OxcNoReflectApply(rule) => rule.types_info(),
             Self::OxcNoReflectGet(rule) => rule.types_info(),
             Self::OxcNoRestSpreadProperties(rule) => rule.types_info(),
             Self::OxcNoThisInExportedFunction(rule) => rule.types_info(),
@@ -22074,6 +22094,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(rule) => rule.run_info(),
             Self::OxcNoMapSpread(rule) => rule.run_info(),
             Self::OxcNoOptionalChaining(rule) => rule.run_info(),
+            Self::OxcNoReflectApply(rule) => rule.run_info(),
             Self::OxcNoReflectGet(rule) => rule.run_info(),
             Self::OxcNoRestSpreadProperties(rule) => rule.run_info(),
             Self::OxcNoThisInExportedFunction(rule) => rule.run_info(),
@@ -23076,6 +23097,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoConstEnum(OxcNoConstEnum::default()),
         RuleEnum::OxcNoMapSpread(OxcNoMapSpread::default()),
         RuleEnum::OxcNoOptionalChaining(OxcNoOptionalChaining::default()),
+        RuleEnum::OxcNoReflectApply(OxcNoReflectApply::default()),
         RuleEnum::OxcNoReflectGet(OxcNoReflectGet::default()),
         RuleEnum::OxcNoRestSpreadProperties(OxcNoRestSpreadProperties::default()),
         RuleEnum::OxcNoThisInExportedFunction(OxcNoThisInExportedFunction::default()),
