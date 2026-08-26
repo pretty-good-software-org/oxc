@@ -412,6 +412,7 @@ pub use crate::rules::oxc::no_reflect_get::NoReflectGet as OxcNoReflectGet;
 pub use crate::rules::oxc::no_rest_spread_properties::NoRestSpreadProperties as OxcNoRestSpreadProperties;
 pub use crate::rules::oxc::no_runtime_typeof::NoRuntimeTypeof as OxcNoRuntimeTypeof;
 pub use crate::rules::oxc::no_this_in_exported_function::NoThisInExportedFunction as OxcNoThisInExportedFunction;
+pub use crate::rules::oxc::no_unknown_type_aliases::NoUnknownTypeAliases as OxcNoUnknownTypeAliases;
 pub use crate::rules::oxc::number_arg_out_of_range::NumberArgOutOfRange as OxcNumberArgOutOfRange;
 pub use crate::rules::oxc::only_used_in_recursion::OnlyUsedInRecursion as OxcOnlyUsedInRecursion;
 pub use crate::rules::oxc::uninvoked_array_callback::UninvokedArrayCallback as OxcUninvokedArrayCallback;
@@ -1587,6 +1588,7 @@ pub enum RuleEnum {
     OxcNoRestSpreadProperties(OxcNoRestSpreadProperties),
     OxcNoRuntimeTypeof(OxcNoRuntimeTypeof),
     OxcNoThisInExportedFunction(OxcNoThisInExportedFunction),
+    OxcNoUnknownTypeAliases(OxcNoUnknownTypeAliases),
     OxcNumberArgOutOfRange(OxcNumberArgOutOfRange),
     OxcOnlyUsedInRecursion(OxcOnlyUsedInRecursion),
     OxcUninvokedArrayCallback(OxcUninvokedArrayCallback),
@@ -2558,7 +2560,8 @@ const OXC_NO_REFLECT_GET_ID: usize = OXC_NO_REFLECT_APPLY_ID + 1usize;
 const OXC_NO_REST_SPREAD_PROPERTIES_ID: usize = OXC_NO_REFLECT_GET_ID + 1usize;
 const OXC_NO_RUNTIME_TYPEOF_ID: usize = OXC_NO_REST_SPREAD_PROPERTIES_ID + 1usize;
 const OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID: usize = OXC_NO_RUNTIME_TYPEOF_ID + 1usize;
-const OXC_NUMBER_ARG_OUT_OF_RANGE_ID: usize = OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID + 1usize;
+const OXC_NO_UNKNOWN_TYPE_ALIASES_ID: usize = OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID + 1usize;
+const OXC_NUMBER_ARG_OUT_OF_RANGE_ID: usize = OXC_NO_UNKNOWN_TYPE_ALIASES_ID + 1usize;
 const OXC_ONLY_USED_IN_RECURSION_ID: usize = OXC_NUMBER_ARG_OUT_OF_RANGE_ID + 1usize;
 const OXC_UNINVOKED_ARRAY_CALLBACK_ID: usize = OXC_ONLY_USED_IN_RECURSION_ID + 1usize;
 const NEXTJS_GOOGLE_FONT_DISPLAY_ID: usize = OXC_UNINVOKED_ARRAY_CALLBACK_ID + 1usize;
@@ -2769,7 +2772,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 877usize] = [
+static RULE_NAMES: [&str; 878usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3454,6 +3457,7 @@ static RULE_NAMES: [&str; 877usize] = [
     OxcNoRestSpreadProperties::NAME,
     OxcNoRuntimeTypeof::NAME,
     OxcNoThisInExportedFunction::NAME,
+    OxcNoUnknownTypeAliases::NAME,
     OxcNumberArgOutOfRange::NAME,
     OxcOnlyUsedInRecursion::NAME,
     OxcUninvokedArrayCallback::NAME,
@@ -4451,6 +4455,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(_) => OXC_NO_REST_SPREAD_PROPERTIES_ID,
             Self::OxcNoRuntimeTypeof(_) => OXC_NO_RUNTIME_TYPEOF_ID,
             Self::OxcNoThisInExportedFunction(_) => OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID,
+            Self::OxcNoUnknownTypeAliases(_) => OXC_NO_UNKNOWN_TYPE_ALIASES_ID,
             Self::OxcNumberArgOutOfRange(_) => OXC_NUMBER_ARG_OUT_OF_RANGE_ID,
             Self::OxcOnlyUsedInRecursion(_) => OXC_ONLY_USED_IN_RECURSION_ID,
             Self::OxcUninvokedArrayCallback(_) => OXC_UNINVOKED_ARRAY_CALLBACK_ID,
@@ -5501,6 +5506,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::CATEGORY,
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::CATEGORY,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::CATEGORY,
+            Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::CATEGORY,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::CATEGORY,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::CATEGORY,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::CATEGORY,
@@ -6511,6 +6517,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::FIX,
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::FIX,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::FIX,
+            Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::FIX,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::FIX,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::FIX,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::FIX,
@@ -7725,6 +7732,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::documentation(),
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::documentation(),
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::documentation(),
+            Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::documentation(),
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::documentation(),
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::documentation(),
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::documentation(),
@@ -9967,6 +9975,8 @@ impl RuleEnum {
                 OxcNoThisInExportedFunction::config_schema(generator)
                     .or_else(|| OxcNoThisInExportedFunction::schema(generator))
             }
+            Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::config_schema(generator)
+                .or_else(|| OxcNoUnknownTypeAliases::schema(generator)),
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::config_schema(generator)
                 .or_else(|| OxcNumberArgOutOfRange::schema(generator)),
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::config_schema(generator)
@@ -11192,6 +11202,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(_) => "oxc",
             Self::OxcNoRuntimeTypeof(_) => "oxc",
             Self::OxcNoThisInExportedFunction(_) => "oxc",
+            Self::OxcNoUnknownTypeAliases(_) => "oxc",
             Self::OxcNumberArgOutOfRange(_) => "oxc",
             Self::OxcOnlyUsedInRecursion(_) => "oxc",
             Self::OxcUninvokedArrayCallback(_) => "oxc",
@@ -13204,6 +13215,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(rule) => rule.run(node, ctx),
             Self::OxcNoRuntimeTypeof(rule) => rule.run(node, ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.run(node, ctx),
+            Self::OxcNoUnknownTypeAliases(rule) => rule.run(node, ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run(node, ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run(node, ctx),
             Self::OxcUninvokedArrayCallback(rule) => rule.run(node, ctx),
@@ -14098,6 +14110,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(rule) => rule.run_once(ctx),
             Self::OxcNoRuntimeTypeof(rule) => rule.run_once(ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.run_once(ctx),
+            Self::OxcNoUnknownTypeAliases(rule) => rule.run_once(ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_once(ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_once(ctx),
             Self::OxcUninvokedArrayCallback(rule) => rule.run_once(ctx),
@@ -15099,6 +15112,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoRuntimeTypeof(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoUnknownTypeAliases(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcUninvokedArrayCallback(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16004,6 +16018,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(rule) => rule.should_run(ctx),
             Self::OxcNoRuntimeTypeof(rule) => rule.should_run(ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.should_run(ctx),
+            Self::OxcNoUnknownTypeAliases(rule) => rule.should_run(ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.should_run(ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.should_run(ctx),
             Self::OxcUninvokedArrayCallback(rule) => rule.should_run(ctx),
@@ -17207,6 +17222,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::IS_TSGOLINT_RULE,
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::IS_TSGOLINT_RULE,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::IS_TSGOLINT_RULE,
+            Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::IS_TSGOLINT_RULE,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::IS_TSGOLINT_RULE,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::IS_TSGOLINT_RULE,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::IS_TSGOLINT_RULE,
@@ -18310,6 +18326,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::VERSION,
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::VERSION,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::VERSION,
+            Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::VERSION,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::VERSION,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::VERSION,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::VERSION,
@@ -19400,6 +19417,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::HAS_CONFIG,
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::HAS_CONFIG,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::HAS_CONFIG,
+            Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::HAS_CONFIG,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::HAS_CONFIG,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::HAS_CONFIG,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::HAS_CONFIG,
@@ -20419,6 +20437,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::INFO,
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::INFO,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::INFO,
+            Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::INFO,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::INFO,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::INFO,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::INFO,
@@ -21315,6 +21334,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(rule) => rule.types_info(),
             Self::OxcNoRuntimeTypeof(rule) => rule.types_info(),
             Self::OxcNoThisInExportedFunction(rule) => rule.types_info(),
+            Self::OxcNoUnknownTypeAliases(rule) => rule.types_info(),
             Self::OxcNumberArgOutOfRange(rule) => rule.types_info(),
             Self::OxcOnlyUsedInRecursion(rule) => rule.types_info(),
             Self::OxcUninvokedArrayCallback(rule) => rule.types_info(),
@@ -22196,6 +22216,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(rule) => rule.run_info(),
             Self::OxcNoRuntimeTypeof(rule) => rule.run_info(),
             Self::OxcNoThisInExportedFunction(rule) => rule.run_info(),
+            Self::OxcNoUnknownTypeAliases(rule) => rule.run_info(),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_info(),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_info(),
             Self::OxcUninvokedArrayCallback(rule) => rule.run_info(),
@@ -23203,6 +23224,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoRestSpreadProperties(OxcNoRestSpreadProperties::default()),
         RuleEnum::OxcNoRuntimeTypeof(OxcNoRuntimeTypeof::default()),
         RuleEnum::OxcNoThisInExportedFunction(OxcNoThisInExportedFunction::default()),
+        RuleEnum::OxcNoUnknownTypeAliases(OxcNoUnknownTypeAliases::default()),
         RuleEnum::OxcNumberArgOutOfRange(OxcNumberArgOutOfRange::default()),
         RuleEnum::OxcOnlyUsedInRecursion(OxcOnlyUsedInRecursion::default()),
         RuleEnum::OxcUninvokedArrayCallback(OxcUninvokedArrayCallback::default()),
