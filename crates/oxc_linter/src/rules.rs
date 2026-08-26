@@ -766,6 +766,7 @@ pub(crate) mod oxc {
     pub mod no_reflect_apply;
     pub mod no_reflect_get;
     pub mod no_rest_spread_properties;
+    pub mod no_runtime_typeof;
     pub mod no_this_in_exported_function;
     pub mod number_arg_out_of_range;
     pub mod only_used_in_recursion;
