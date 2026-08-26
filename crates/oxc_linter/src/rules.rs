@@ -773,6 +773,7 @@ pub(crate) mod oxc {
     pub mod no_runtime_typeof;
     pub mod no_this_in_exported_function;
     pub mod no_unknown_parameters;
+    pub mod no_unknown_returns;
     pub mod no_unknown_type_aliases;
     pub mod number_arg_out_of_range;
     pub mod only_used_in_recursion;
