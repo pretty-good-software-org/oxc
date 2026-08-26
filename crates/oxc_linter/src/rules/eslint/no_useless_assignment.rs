@@ -139,11 +139,8 @@ enum AssignmentTarget {
     Destructuring(NodeId),
 }
 
-#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
-struct DestructuringOperationPosition {
-    is_target: bool,
-    position: u32,
-}
+#[derive(Clone, PartialEq, Eq, PartialOrd, Ord)]
+struct DestructuringOperationPosition(SmallVec<[u32; 4]>);
 
 type PendingDestructuringOperations<'a> =
     (NodeId, SmallVec<[(&'a Reference, DestructuringOperationPosition); 2]>);
@@ -705,19 +702,6 @@ impl NoUselessAssignment {
         enclosing
     }
 
-    fn is_in_assignment_target(
-        ctx: &LintContext,
-        assignment_node_id: NodeId,
-        reference: &Reference,
-    ) -> bool {
-        let AstKind::AssignmentExpression(assignment) =
-            ctx.nodes().get_node(assignment_node_id).kind()
-        else {
-            return false;
-        };
-        assignment.left.span().contains_inclusive(ctx.nodes().get_node(reference.node_id()).span())
-    }
-
     fn destructuring_target_write_position(ctx: &LintContext, reference: &Reference) -> u32 {
         let node = ctx.nodes().get_node(reference.node_id());
         for ancestor in ctx.nodes().ancestors(node.id()) {
@@ -741,21 +725,43 @@ impl NoUselessAssignment {
         assignment_node_id: NodeId,
     ) -> DestructuringOperationPosition {
         let node = ctx.nodes().get_node(reference.node_id());
-        let is_target = Self::is_in_assignment_target(ctx, assignment_node_id, reference);
-        let position = if reference.is_write() {
+        // Each nested assignment contributes its source position and a phase:
+        // RHS first, then target. This preserves sibling source order while
+        // recursively modeling assignment evaluation order.
+        let mut assignment_path = SmallVec::<[(NodeId, bool); 4]>::new();
+        for ancestor in ctx.nodes().ancestors(node.id()) {
+            let AstKind::AssignmentExpression(assignment) = ancestor.kind() else { continue };
+            let is_target = assignment.left.span().contains_inclusive(node.span());
+            if !is_target && !assignment.right.span().contains_inclusive(node.span()) {
+                continue;
+            }
+            assignment_path.push((ancestor.id(), is_target));
+            if ancestor.id() == assignment_node_id {
+                break;
+            }
+        }
+
+        let mut position = SmallVec::new();
+        for (node_id, is_target) in assignment_path.iter().rev() {
+            if *node_id != assignment_node_id {
+                position.push(ctx.nodes().get_node(*node_id).span().start);
+            }
+            position.push(u32::from(*is_target));
+        }
+
+        let reference_position = if reference.is_write() {
             match Self::get_assignment_target(ctx, reference) {
-                Some(AssignmentTarget::Destructuring(node_id)) if node_id == assignment_node_id => {
+                Some(AssignmentTarget::Destructuring(_)) => {
                     Self::destructuring_target_write_position(ctx, reference)
                 }
-                Some(
-                    AssignmentTarget::Destructuring(node_id) | AssignmentTarget::Simple(node_id),
-                ) => Self::assignment_right_end(ctx, node_id),
+                Some(AssignmentTarget::Simple(node_id)) => Self::assignment_right_end(ctx, node_id),
                 _ => node.span().start,
             }
         } else {
             node.span().start
         };
-        DestructuringOperationPosition { is_target, position }
+        position.push(reference_position);
+        DestructuringOperationPosition(position)
     }
 
     fn assignment_right_end(ctx: &LintContext, assignment_node_id: NodeId) -> u32 {
@@ -773,7 +779,7 @@ impl NoUselessAssignment {
         position: DestructuringOperationPosition,
     ) {
         let index =
-            operations.partition_point(|(_, operation_position)| *operation_position <= position);
+            operations.partition_point(|(_, operation_position)| operation_position <= &position);
         operations.insert(index, (reference, position));
     }
 
@@ -1864,6 +1870,9 @@ function useResource(unsafe: (resource: { readonly release: () => void }) => voi
         "let x = 0, y;
                     [y = ([x] = [x])] = (x = 1, []);
                     console.log(x);",
+        "let x = 0, y, z;
+                    ({ [({ [x]: z } = (x = 1, {}), 0)]: y } = {});
+                    console.log(y);",
     ];
 
     Tester::new(NoUselessAssignment::NAME, NoUselessAssignment::PLUGIN, pass, fail)
