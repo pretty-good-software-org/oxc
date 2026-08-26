@@ -263,6 +263,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("anti-slop", "no-reflect-apply") => ("no-reflect-apply", "oxc"),
         ("anti-slop", "no-reflect-get") => ("no-reflect-get", "oxc"),
         ("anti-slop", "no-runtime-typeof") => ("no-runtime-typeof", "oxc"),
+        ("anti-slop", "no-shape-in-symbol-names") => ("no-shape-in-symbol-names", "oxc"),
         ("pgs-oxlint-compat", "no-octal") => ("no-octal", "eslint"),
         ("sonarjs", "no-array-delete") => ("no-array-delete", "typescript"),
         ("sonarjs", "prefer-regexp-exec") => ("prefer-regexp-exec", "typescript"),
