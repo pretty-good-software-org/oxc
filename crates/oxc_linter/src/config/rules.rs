@@ -251,6 +251,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "bitwise-operators") => ("no-bitwise", "eslint"),
         ("sonarjs", "no-nested-conditional") => ("no-nested-ternary", "eslint"),
         ("sonarjs", "no-primitive-wrappers") => ("no-new-wrappers", "eslint"),
+        ("anti-slop", "no-chained-type-assertions") => ("no-chained-type-assertions", "oxc"),
         ("anti-slop", "no-reflect-apply") => ("no-reflect-apply", "oxc"),
         ("anti-slop", "no-reflect-get") => ("no-reflect-get", "oxc"),
         ("anti-slop", "no-runtime-typeof") => ("no-runtime-typeof", "oxc"),
@@ -996,6 +997,10 @@ mod test {
         assert_eq!(
             super::transform_rule_and_plugin_name("cognitive-complexity", "sonarjs"),
             ("cognitive-complexity", "sonarjs")
+        );
+        assert_eq!(
+            super::transform_rule_and_plugin_name("no-chained-type-assertions", "anti-slop"),
+            ("no-chained-type-assertions", "oxc")
         );
         assert_eq!(
             super::transform_rule_and_plugin_name("no-reflect-get", "anti-slop"),
