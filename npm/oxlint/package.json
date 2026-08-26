@@ -1,5 +1,5 @@
 {
-  "name": "oxlint",
+  "name": "@pretty-good-software-org/oxlint",
   "version": "1.80.0",
   "description": "Linter for the JavaScript Oxidation Compiler",
   "keywords": [
@@ -16,11 +16,12 @@
   "author": "Boshen and oxc contributors",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oxc-project/oxc",
+    "url": "git+https://github.com/pretty-good-software-org/oxc",
     "directory": "npm/oxlint"
   },
-  "funding": {
-    "url": "https://github.com/sponsors/oxc-project"
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   },
   "bin": {
     "oxlint": "bin/oxlint"
