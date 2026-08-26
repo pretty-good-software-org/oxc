@@ -418,6 +418,7 @@ pub use crate::rules::oxc::no_unknown_parameters::NoUnknownParameters as OxcNoUn
 pub use crate::rules::oxc::no_unknown_returns::NoUnknownReturns as OxcNoUnknownReturns;
 pub use crate::rules::oxc::no_unknown_type_aliases::NoUnknownTypeAliases as OxcNoUnknownTypeAliases;
 pub use crate::rules::oxc::no_unsafe_dictionary_type::NoUnsafeDictionaryType as OxcNoUnsafeDictionaryType;
+pub use crate::rules::oxc::no_widen_then_assert::NoWidenThenAssert as OxcNoWidenThenAssert;
 pub use crate::rules::oxc::number_arg_out_of_range::NumberArgOutOfRange as OxcNumberArgOutOfRange;
 pub use crate::rules::oxc::only_used_in_recursion::OnlyUsedInRecursion as OxcOnlyUsedInRecursion;
 pub use crate::rules::oxc::require_safety_comment_for_type_assertion::RequireSafetyCommentForTypeAssertion as OxcRequireSafetyCommentForTypeAssertion;
@@ -1600,6 +1601,7 @@ pub enum RuleEnum {
     OxcNoUnknownReturns(OxcNoUnknownReturns),
     OxcNoUnknownTypeAliases(OxcNoUnknownTypeAliases),
     OxcNoUnsafeDictionaryType(OxcNoUnsafeDictionaryType),
+    OxcNoWidenThenAssert(OxcNoWidenThenAssert),
     OxcNumberArgOutOfRange(OxcNumberArgOutOfRange),
     OxcOnlyUsedInRecursion(OxcOnlyUsedInRecursion),
     OxcRequireSafetyCommentForTypeAssertion(OxcRequireSafetyCommentForTypeAssertion),
@@ -2578,7 +2580,8 @@ const OXC_NO_UNKNOWN_PARAMETERS_ID: usize = OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID 
 const OXC_NO_UNKNOWN_RETURNS_ID: usize = OXC_NO_UNKNOWN_PARAMETERS_ID + 1usize;
 const OXC_NO_UNKNOWN_TYPE_ALIASES_ID: usize = OXC_NO_UNKNOWN_RETURNS_ID + 1usize;
 const OXC_NO_UNSAFE_DICTIONARY_TYPE_ID: usize = OXC_NO_UNKNOWN_TYPE_ALIASES_ID + 1usize;
-const OXC_NUMBER_ARG_OUT_OF_RANGE_ID: usize = OXC_NO_UNSAFE_DICTIONARY_TYPE_ID + 1usize;
+const OXC_NO_WIDEN_THEN_ASSERT_ID: usize = OXC_NO_UNSAFE_DICTIONARY_TYPE_ID + 1usize;
+const OXC_NUMBER_ARG_OUT_OF_RANGE_ID: usize = OXC_NO_WIDEN_THEN_ASSERT_ID + 1usize;
 const OXC_ONLY_USED_IN_RECURSION_ID: usize = OXC_NUMBER_ARG_OUT_OF_RANGE_ID + 1usize;
 const OXC_REQUIRE_SAFETY_COMMENT_FOR_TYPE_ASSERTION_ID: usize =
     OXC_ONLY_USED_IN_RECURSION_ID + 1usize;
@@ -2792,7 +2795,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 884usize] = [
+static RULE_NAMES: [&str; 885usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3483,6 +3486,7 @@ static RULE_NAMES: [&str; 884usize] = [
     OxcNoUnknownReturns::NAME,
     OxcNoUnknownTypeAliases::NAME,
     OxcNoUnsafeDictionaryType::NAME,
+    OxcNoWidenThenAssert::NAME,
     OxcNumberArgOutOfRange::NAME,
     OxcOnlyUsedInRecursion::NAME,
     OxcRequireSafetyCommentForTypeAssertion::NAME,
@@ -4487,6 +4491,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OXC_NO_UNKNOWN_RETURNS_ID,
             Self::OxcNoUnknownTypeAliases(_) => OXC_NO_UNKNOWN_TYPE_ALIASES_ID,
             Self::OxcNoUnsafeDictionaryType(_) => OXC_NO_UNSAFE_DICTIONARY_TYPE_ID,
+            Self::OxcNoWidenThenAssert(_) => OXC_NO_WIDEN_THEN_ASSERT_ID,
             Self::OxcNumberArgOutOfRange(_) => OXC_NUMBER_ARG_OUT_OF_RANGE_ID,
             Self::OxcOnlyUsedInRecursion(_) => OXC_ONLY_USED_IN_RECURSION_ID,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
@@ -5546,6 +5551,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::CATEGORY,
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::CATEGORY,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::CATEGORY,
+            Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::CATEGORY,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::CATEGORY,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::CATEGORY,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
@@ -6565,6 +6571,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::FIX,
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::FIX,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::FIX,
+            Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::FIX,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::FIX,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::FIX,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
@@ -7788,6 +7795,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::documentation(),
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::documentation(),
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::documentation(),
+            Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::documentation(),
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::documentation(),
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::documentation(),
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
@@ -10047,6 +10055,8 @@ impl RuleEnum {
                 OxcNoUnsafeDictionaryType::config_schema(generator)
                     .or_else(|| OxcNoUnsafeDictionaryType::schema(generator))
             }
+            Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::config_schema(generator)
+                .or_else(|| OxcNoWidenThenAssert::schema(generator)),
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::config_schema(generator)
                 .or_else(|| OxcNumberArgOutOfRange::schema(generator)),
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::config_schema(generator)
@@ -11282,6 +11292,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => "oxc",
             Self::OxcNoUnknownTypeAliases(_) => "oxc",
             Self::OxcNoUnsafeDictionaryType(_) => "oxc",
+            Self::OxcNoWidenThenAssert(_) => "oxc",
             Self::OxcNumberArgOutOfRange(_) => "oxc",
             Self::OxcOnlyUsedInRecursion(_) => "oxc",
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => "oxc",
@@ -13301,6 +13312,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(rule) => rule.run(node, ctx),
             Self::OxcNoUnknownTypeAliases(rule) => rule.run(node, ctx),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.run(node, ctx),
+            Self::OxcNoWidenThenAssert(rule) => rule.run(node, ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run(node, ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run(node, ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.run(node, ctx),
@@ -14202,6 +14214,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(rule) => rule.run_once(ctx),
             Self::OxcNoUnknownTypeAliases(rule) => rule.run_once(ctx),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.run_once(ctx),
+            Self::OxcNoWidenThenAssert(rule) => rule.run_once(ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_once(ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_once(ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.run_once(ctx),
@@ -15210,6 +15223,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoUnknownTypeAliases(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoWidenThenAssert(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => {
@@ -16124,6 +16138,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(rule) => rule.should_run(ctx),
             Self::OxcNoUnknownTypeAliases(rule) => rule.should_run(ctx),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.should_run(ctx),
+            Self::OxcNoWidenThenAssert(rule) => rule.should_run(ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.should_run(ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.should_run(ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.should_run(ctx),
@@ -17334,6 +17349,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::IS_TSGOLINT_RULE,
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::IS_TSGOLINT_RULE,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::IS_TSGOLINT_RULE,
+            Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::IS_TSGOLINT_RULE,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::IS_TSGOLINT_RULE,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::IS_TSGOLINT_RULE,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
@@ -18446,6 +18462,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::VERSION,
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::VERSION,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::VERSION,
+            Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::VERSION,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::VERSION,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::VERSION,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
@@ -19545,6 +19562,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::HAS_CONFIG,
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::HAS_CONFIG,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::HAS_CONFIG,
+            Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::HAS_CONFIG,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::HAS_CONFIG,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::HAS_CONFIG,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
@@ -20573,6 +20591,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::INFO,
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::INFO,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::INFO,
+            Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::INFO,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::INFO,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::INFO,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
@@ -21478,6 +21497,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(rule) => rule.types_info(),
             Self::OxcNoUnknownTypeAliases(rule) => rule.types_info(),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.types_info(),
+            Self::OxcNoWidenThenAssert(rule) => rule.types_info(),
             Self::OxcNumberArgOutOfRange(rule) => rule.types_info(),
             Self::OxcOnlyUsedInRecursion(rule) => rule.types_info(),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.types_info(),
@@ -22366,6 +22386,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(rule) => rule.run_info(),
             Self::OxcNoUnknownTypeAliases(rule) => rule.run_info(),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.run_info(),
+            Self::OxcNoWidenThenAssert(rule) => rule.run_info(),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_info(),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_info(),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.run_info(),
@@ -23380,6 +23401,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoUnknownReturns(OxcNoUnknownReturns::default()),
         RuleEnum::OxcNoUnknownTypeAliases(OxcNoUnknownTypeAliases::default()),
         RuleEnum::OxcNoUnsafeDictionaryType(OxcNoUnsafeDictionaryType::default()),
+        RuleEnum::OxcNoWidenThenAssert(OxcNoWidenThenAssert::default()),
         RuleEnum::OxcNumberArgOutOfRange(OxcNumberArgOutOfRange::default()),
         RuleEnum::OxcOnlyUsedInRecursion(OxcOnlyUsedInRecursion::default()),
         RuleEnum::OxcRequireSafetyCommentForTypeAssertion(
