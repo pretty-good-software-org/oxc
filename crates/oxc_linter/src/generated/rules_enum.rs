@@ -404,6 +404,7 @@ pub use crate::rules::oxc::no_barrel_file::NoBarrelFile as OxcNoBarrelFile;
 pub use crate::rules::oxc::no_const_enum::NoConstEnum as OxcNoConstEnum;
 pub use crate::rules::oxc::no_map_spread::NoMapSpread as OxcNoMapSpread;
 pub use crate::rules::oxc::no_optional_chaining::NoOptionalChaining as OxcNoOptionalChaining;
+pub use crate::rules::oxc::no_reflect_get::NoReflectGet as OxcNoReflectGet;
 pub use crate::rules::oxc::no_rest_spread_properties::NoRestSpreadProperties as OxcNoRestSpreadProperties;
 pub use crate::rules::oxc::no_this_in_exported_function::NoThisInExportedFunction as OxcNoThisInExportedFunction;
 pub use crate::rules::oxc::number_arg_out_of_range::NumberArgOutOfRange as OxcNumberArgOutOfRange;
@@ -1025,8 +1026,8 @@ pub enum RuleEnum {
     EslintNoNewWrappers(EslintNoNewWrappers),
     EslintNoNonoctalDecimalEscape(EslintNoNonoctalDecimalEscape),
     EslintNoObjCalls(EslintNoObjCalls),
-    EslintNoOctal(EslintNoOctal),
     EslintNoObjectConstructor(EslintNoObjectConstructor),
+    EslintNoOctal(EslintNoOctal),
     EslintNoParamReassign(EslintNoParamReassign),
     EslintNoPlusplus(EslintNoPlusplus),
     EslintNoPromiseExecutorReturn(EslintNoPromiseExecutorReturn),
@@ -1573,6 +1574,7 @@ pub enum RuleEnum {
     OxcNoConstEnum(OxcNoConstEnum),
     OxcNoMapSpread(OxcNoMapSpread),
     OxcNoOptionalChaining(OxcNoOptionalChaining),
+    OxcNoReflectGet(OxcNoReflectGet),
     OxcNoRestSpreadProperties(OxcNoRestSpreadProperties),
     OxcNoThisInExportedFunction(OxcNoThisInExportedFunction),
     OxcNumberArgOutOfRange(OxcNumberArgOutOfRange),
@@ -1905,9 +1907,9 @@ const ESLINT_NO_NEW_NATIVE_NONCONSTRUCTOR_ID: usize = ESLINT_NO_NEW_FUNC_ID + 1u
 const ESLINT_NO_NEW_WRAPPERS_ID: usize = ESLINT_NO_NEW_NATIVE_NONCONSTRUCTOR_ID + 1usize;
 const ESLINT_NO_NONOCTAL_DECIMAL_ESCAPE_ID: usize = ESLINT_NO_NEW_WRAPPERS_ID + 1usize;
 const ESLINT_NO_OBJ_CALLS_ID: usize = ESLINT_NO_NONOCTAL_DECIMAL_ESCAPE_ID + 1usize;
-const ESLINT_NO_OCTAL_ID: usize = ESLINT_NO_OBJ_CALLS_ID + 1usize;
-const ESLINT_NO_OBJECT_CONSTRUCTOR_ID: usize = ESLINT_NO_OCTAL_ID + 1usize;
-const ESLINT_NO_PARAM_REASSIGN_ID: usize = ESLINT_NO_OBJECT_CONSTRUCTOR_ID + 1usize;
+const ESLINT_NO_OBJECT_CONSTRUCTOR_ID: usize = ESLINT_NO_OBJ_CALLS_ID + 1usize;
+const ESLINT_NO_OCTAL_ID: usize = ESLINT_NO_OBJECT_CONSTRUCTOR_ID + 1usize;
+const ESLINT_NO_PARAM_REASSIGN_ID: usize = ESLINT_NO_OCTAL_ID + 1usize;
 const ESLINT_NO_PLUSPLUS_ID: usize = ESLINT_NO_PARAM_REASSIGN_ID + 1usize;
 const ESLINT_NO_PROMISE_EXECUTOR_RETURN_ID: usize = ESLINT_NO_PLUSPLUS_ID + 1usize;
 const ESLINT_NO_PROTO_ID: usize = ESLINT_NO_PROMISE_EXECUTOR_RETURN_ID + 1usize;
@@ -2538,7 +2540,8 @@ const OXC_NO_BARREL_FILE_ID: usize = OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID + 1usize;
 const OXC_NO_CONST_ENUM_ID: usize = OXC_NO_BARREL_FILE_ID + 1usize;
 const OXC_NO_MAP_SPREAD_ID: usize = OXC_NO_CONST_ENUM_ID + 1usize;
 const OXC_NO_OPTIONAL_CHAINING_ID: usize = OXC_NO_MAP_SPREAD_ID + 1usize;
-const OXC_NO_REST_SPREAD_PROPERTIES_ID: usize = OXC_NO_OPTIONAL_CHAINING_ID + 1usize;
+const OXC_NO_REFLECT_GET_ID: usize = OXC_NO_OPTIONAL_CHAINING_ID + 1usize;
+const OXC_NO_REST_SPREAD_PROPERTIES_ID: usize = OXC_NO_REFLECT_GET_ID + 1usize;
 const OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID: usize = OXC_NO_REST_SPREAD_PROPERTIES_ID + 1usize;
 const OXC_NUMBER_ARG_OUT_OF_RANGE_ID: usize = OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID + 1usize;
 const OXC_ONLY_USED_IN_RECURSION_ID: usize = OXC_NUMBER_ARG_OUT_OF_RANGE_ID + 1usize;
@@ -2751,7 +2754,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 871usize] = [
+static RULE_NAMES: [&str; 872usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -2886,8 +2889,8 @@ static RULE_NAMES: [&str; 871usize] = [
     EslintNoNewWrappers::NAME,
     EslintNoNonoctalDecimalEscape::NAME,
     EslintNoObjCalls::NAME,
-    EslintNoOctal::NAME,
     EslintNoObjectConstructor::NAME,
+    EslintNoOctal::NAME,
     EslintNoParamReassign::NAME,
     EslintNoPlusplus::NAME,
     EslintNoPromiseExecutorReturn::NAME,
@@ -3428,6 +3431,7 @@ static RULE_NAMES: [&str; 871usize] = [
     OxcNoConstEnum::NAME,
     OxcNoMapSpread::NAME,
     OxcNoOptionalChaining::NAME,
+    OxcNoReflectGet::NAME,
     OxcNoRestSpreadProperties::NAME,
     OxcNoThisInExportedFunction::NAME,
     OxcNumberArgOutOfRange::NAME,
@@ -3763,8 +3767,8 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(_) => ESLINT_NO_NEW_WRAPPERS_ID,
             Self::EslintNoNonoctalDecimalEscape(_) => ESLINT_NO_NONOCTAL_DECIMAL_ESCAPE_ID,
             Self::EslintNoObjCalls(_) => ESLINT_NO_OBJ_CALLS_ID,
-            Self::EslintNoOctal(_) => ESLINT_NO_OCTAL_ID,
             Self::EslintNoObjectConstructor(_) => ESLINT_NO_OBJECT_CONSTRUCTOR_ID,
+            Self::EslintNoOctal(_) => ESLINT_NO_OCTAL_ID,
             Self::EslintNoParamReassign(_) => ESLINT_NO_PARAM_REASSIGN_ID,
             Self::EslintNoPlusplus(_) => ESLINT_NO_PLUSPLUS_ID,
             Self::EslintNoPromiseExecutorReturn(_) => ESLINT_NO_PROMISE_EXECUTOR_RETURN_ID,
@@ -4419,6 +4423,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(_) => OXC_NO_CONST_ENUM_ID,
             Self::OxcNoMapSpread(_) => OXC_NO_MAP_SPREAD_ID,
             Self::OxcNoOptionalChaining(_) => OXC_NO_OPTIONAL_CHAINING_ID,
+            Self::OxcNoReflectGet(_) => OXC_NO_REFLECT_GET_ID,
             Self::OxcNoRestSpreadProperties(_) => OXC_NO_REST_SPREAD_PROPERTIES_ID,
             Self::OxcNoThisInExportedFunction(_) => OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID,
             Self::OxcNumberArgOutOfRange(_) => OXC_NUMBER_ARG_OUT_OF_RANGE_ID,
@@ -4771,8 +4776,8 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(_) => EslintNoNewWrappers::CATEGORY,
             Self::EslintNoNonoctalDecimalEscape(_) => EslintNoNonoctalDecimalEscape::CATEGORY,
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::CATEGORY,
-            Self::EslintNoOctal(_) => EslintNoOctal::CATEGORY,
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::CATEGORY,
+            Self::EslintNoOctal(_) => EslintNoOctal::CATEGORY,
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::CATEGORY,
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::CATEGORY,
             Self::EslintNoPromiseExecutorReturn(_) => EslintNoPromiseExecutorReturn::CATEGORY,
@@ -5461,6 +5466,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::CATEGORY,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::CATEGORY,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::CATEGORY,
+            Self::OxcNoReflectGet(_) => OxcNoReflectGet::CATEGORY,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::CATEGORY,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::CATEGORY,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::CATEGORY,
@@ -5819,8 +5825,8 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(_) => EslintNoNewWrappers::FIX,
             Self::EslintNoNonoctalDecimalEscape(_) => EslintNoNonoctalDecimalEscape::FIX,
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::FIX,
-            Self::EslintNoOctal(_) => EslintNoOctal::FIX,
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::FIX,
+            Self::EslintNoOctal(_) => EslintNoOctal::FIX,
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::FIX,
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::FIX,
             Self::EslintNoPromiseExecutorReturn(_) => EslintNoPromiseExecutorReturn::FIX,
@@ -6465,6 +6471,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::FIX,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::FIX,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::FIX,
+            Self::OxcNoReflectGet(_) => OxcNoReflectGet::FIX,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::FIX,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::FIX,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::FIX,
@@ -6825,8 +6832,8 @@ impl RuleEnum {
                 EslintNoNonoctalDecimalEscape::documentation()
             }
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::documentation(),
-            Self::EslintNoOctal(_) => EslintNoOctal::documentation(),
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::documentation(),
+            Self::EslintNoOctal(_) => EslintNoOctal::documentation(),
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::documentation(),
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::documentation(),
             Self::EslintNoPromiseExecutorReturn(_) => {
@@ -7671,6 +7678,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::documentation(),
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::documentation(),
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::documentation(),
+            Self::OxcNoReflectGet(_) => OxcNoReflectGet::documentation(),
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::documentation(),
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::documentation(),
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::documentation(),
@@ -8268,12 +8276,12 @@ impl RuleEnum {
             }
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::config_schema(generator)
                 .or_else(|| EslintNoObjCalls::schema(generator)),
-            Self::EslintNoOctal(_) => {
-                EslintNoOctal::config_schema(generator).or_else(|| EslintNoOctal::schema(generator))
-            }
             Self::EslintNoObjectConstructor(_) => {
                 EslintNoObjectConstructor::config_schema(generator)
                     .or_else(|| EslintNoObjectConstructor::schema(generator))
+            }
+            Self::EslintNoOctal(_) => {
+                EslintNoOctal::config_schema(generator).or_else(|| EslintNoOctal::schema(generator))
             }
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::config_schema(generator)
                 .or_else(|| EslintNoParamReassign::schema(generator)),
@@ -9891,6 +9899,8 @@ impl RuleEnum {
                 .or_else(|| OxcNoMapSpread::schema(generator)),
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::config_schema(generator)
                 .or_else(|| OxcNoOptionalChaining::schema(generator)),
+            Self::OxcNoReflectGet(_) => OxcNoReflectGet::config_schema(generator)
+                .or_else(|| OxcNoReflectGet::schema(generator)),
             Self::OxcNoRestSpreadProperties(_) => {
                 OxcNoRestSpreadProperties::config_schema(generator)
                     .or_else(|| OxcNoRestSpreadProperties::schema(generator))
@@ -10574,8 +10584,8 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(_) => "eslint",
             Self::EslintNoNonoctalDecimalEscape(_) => "eslint",
             Self::EslintNoObjCalls(_) => "eslint",
-            Self::EslintNoOctal(_) => "eslint",
             Self::EslintNoObjectConstructor(_) => "eslint",
+            Self::EslintNoOctal(_) => "eslint",
             Self::EslintNoParamReassign(_) => "eslint",
             Self::EslintNoPlusplus(_) => "eslint",
             Self::EslintNoPromiseExecutorReturn(_) => "eslint",
@@ -11116,6 +11126,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(_) => "oxc",
             Self::OxcNoMapSpread(_) => "oxc",
             Self::OxcNoOptionalChaining(_) => "oxc",
+            Self::OxcNoReflectGet(_) => "oxc",
             Self::OxcNoRestSpreadProperties(_) => "oxc",
             Self::OxcNoThisInExportedFunction(_) => "oxc",
             Self::OxcNumberArgOutOfRange(_) => "oxc",
@@ -12580,8 +12591,8 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(rule) => rule.run(node, ctx),
             Self::EslintNoNonoctalDecimalEscape(rule) => rule.run(node, ctx),
             Self::EslintNoObjCalls(rule) => rule.run(node, ctx),
-            Self::EslintNoOctal(rule) => rule.run(node, ctx),
             Self::EslintNoObjectConstructor(rule) => rule.run(node, ctx),
+            Self::EslintNoOctal(rule) => rule.run(node, ctx),
             Self::EslintNoParamReassign(rule) => rule.run(node, ctx),
             Self::EslintNoPlusplus(rule) => rule.run(node, ctx),
             Self::EslintNoPromiseExecutorReturn(rule) => rule.run(node, ctx),
@@ -13122,6 +13133,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(rule) => rule.run(node, ctx),
             Self::OxcNoMapSpread(rule) => rule.run(node, ctx),
             Self::OxcNoOptionalChaining(rule) => rule.run(node, ctx),
+            Self::OxcNoReflectGet(rule) => rule.run(node, ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.run(node, ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.run(node, ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run(node, ctx),
@@ -13468,8 +13480,8 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(rule) => rule.run_once(ctx),
             Self::EslintNoNonoctalDecimalEscape(rule) => rule.run_once(ctx),
             Self::EslintNoObjCalls(rule) => rule.run_once(ctx),
-            Self::EslintNoOctal(rule) => rule.run_once(ctx),
             Self::EslintNoObjectConstructor(rule) => rule.run_once(ctx),
+            Self::EslintNoOctal(rule) => rule.run_once(ctx),
             Self::EslintNoParamReassign(rule) => rule.run_once(ctx),
             Self::EslintNoPlusplus(rule) => rule.run_once(ctx),
             Self::EslintNoPromiseExecutorReturn(rule) => rule.run_once(ctx),
@@ -14010,6 +14022,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(rule) => rule.run_once(ctx),
             Self::OxcNoMapSpread(rule) => rule.run_once(ctx),
             Self::OxcNoOptionalChaining(rule) => rule.run_once(ctx),
+            Self::OxcNoReflectGet(rule) => rule.run_once(ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.run_once(ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.run_once(ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_once(ctx),
@@ -14359,8 +14372,8 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoNonoctalDecimalEscape(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoObjCalls(rule) => rule.run_on_jest_node(jest_node, ctx),
-            Self::EslintNoOctal(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoObjectConstructor(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::EslintNoOctal(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoParamReassign(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoPlusplus(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoPromiseExecutorReturn(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -15005,6 +15018,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoMapSpread(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoOptionalChaining(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoReflectGet(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -15362,8 +15376,8 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(rule) => rule.should_run(ctx),
             Self::EslintNoNonoctalDecimalEscape(rule) => rule.should_run(ctx),
             Self::EslintNoObjCalls(rule) => rule.should_run(ctx),
-            Self::EslintNoOctal(rule) => rule.should_run(ctx),
             Self::EslintNoObjectConstructor(rule) => rule.should_run(ctx),
+            Self::EslintNoOctal(rule) => rule.should_run(ctx),
             Self::EslintNoParamReassign(rule) => rule.should_run(ctx),
             Self::EslintNoPlusplus(rule) => rule.should_run(ctx),
             Self::EslintNoPromiseExecutorReturn(rule) => rule.should_run(ctx),
@@ -15904,6 +15918,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(rule) => rule.should_run(ctx),
             Self::OxcNoMapSpread(rule) => rule.should_run(ctx),
             Self::OxcNoOptionalChaining(rule) => rule.should_run(ctx),
+            Self::OxcNoReflectGet(rule) => rule.should_run(ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.should_run(ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.should_run(ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.should_run(ctx),
@@ -16253,8 +16268,8 @@ impl RuleEnum {
                 EslintNoNonoctalDecimalEscape::IS_TSGOLINT_RULE
             }
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::IS_TSGOLINT_RULE,
-            Self::EslintNoOctal(_) => EslintNoOctal::IS_TSGOLINT_RULE,
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::IS_TSGOLINT_RULE,
+            Self::EslintNoOctal(_) => EslintNoOctal::IS_TSGOLINT_RULE,
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::IS_TSGOLINT_RULE,
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::IS_TSGOLINT_RULE,
             Self::EslintNoPromiseExecutorReturn(_) => {
@@ -17099,6 +17114,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::IS_TSGOLINT_RULE,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::IS_TSGOLINT_RULE,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::IS_TSGOLINT_RULE,
+            Self::OxcNoReflectGet(_) => OxcNoReflectGet::IS_TSGOLINT_RULE,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::IS_TSGOLINT_RULE,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::IS_TSGOLINT_RULE,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::IS_TSGOLINT_RULE,
@@ -17504,8 +17520,8 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(_) => EslintNoNewWrappers::VERSION,
             Self::EslintNoNonoctalDecimalEscape(_) => EslintNoNonoctalDecimalEscape::VERSION,
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::VERSION,
-            Self::EslintNoOctal(_) => EslintNoOctal::VERSION,
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::VERSION,
+            Self::EslintNoOctal(_) => EslintNoOctal::VERSION,
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::VERSION,
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::VERSION,
             Self::EslintNoPromiseExecutorReturn(_) => EslintNoPromiseExecutorReturn::VERSION,
@@ -18194,6 +18210,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::VERSION,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::VERSION,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::VERSION,
+            Self::OxcNoReflectGet(_) => OxcNoReflectGet::VERSION,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::VERSION,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::VERSION,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::VERSION,
@@ -18560,8 +18577,8 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(_) => EslintNoNewWrappers::HAS_CONFIG,
             Self::EslintNoNonoctalDecimalEscape(_) => EslintNoNonoctalDecimalEscape::HAS_CONFIG,
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::HAS_CONFIG,
-            Self::EslintNoOctal(_) => EslintNoOctal::HAS_CONFIG,
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::HAS_CONFIG,
+            Self::EslintNoOctal(_) => EslintNoOctal::HAS_CONFIG,
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::HAS_CONFIG,
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::HAS_CONFIG,
             Self::EslintNoPromiseExecutorReturn(_) => EslintNoPromiseExecutorReturn::HAS_CONFIG,
@@ -19276,6 +19293,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::HAS_CONFIG,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::HAS_CONFIG,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::HAS_CONFIG,
+            Self::OxcNoReflectGet(_) => OxcNoReflectGet::HAS_CONFIG,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::HAS_CONFIG,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::HAS_CONFIG,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::HAS_CONFIG,
@@ -19643,8 +19661,8 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(_) => EslintNoNewWrappers::INFO,
             Self::EslintNoNonoctalDecimalEscape(_) => EslintNoNonoctalDecimalEscape::INFO,
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::INFO,
-            Self::EslintNoOctal(_) => EslintNoOctal::INFO,
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::INFO,
+            Self::EslintNoOctal(_) => EslintNoOctal::INFO,
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::INFO,
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::INFO,
             Self::EslintNoPromiseExecutorReturn(_) => EslintNoPromiseExecutorReturn::INFO,
@@ -20289,6 +20307,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::INFO,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::INFO,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::INFO,
+            Self::OxcNoReflectGet(_) => OxcNoReflectGet::INFO,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::INFO,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::INFO,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::INFO,
@@ -20637,8 +20656,8 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(rule) => rule.types_info(),
             Self::EslintNoNonoctalDecimalEscape(rule) => rule.types_info(),
             Self::EslintNoObjCalls(rule) => rule.types_info(),
-            Self::EslintNoOctal(rule) => rule.types_info(),
             Self::EslintNoObjectConstructor(rule) => rule.types_info(),
+            Self::EslintNoOctal(rule) => rule.types_info(),
             Self::EslintNoParamReassign(rule) => rule.types_info(),
             Self::EslintNoPlusplus(rule) => rule.types_info(),
             Self::EslintNoPromiseExecutorReturn(rule) => rule.types_info(),
@@ -21179,6 +21198,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(rule) => rule.types_info(),
             Self::OxcNoMapSpread(rule) => rule.types_info(),
             Self::OxcNoOptionalChaining(rule) => rule.types_info(),
+            Self::OxcNoReflectGet(rule) => rule.types_info(),
             Self::OxcNoRestSpreadProperties(rule) => rule.types_info(),
             Self::OxcNoThisInExportedFunction(rule) => rule.types_info(),
             Self::OxcNumberArgOutOfRange(rule) => rule.types_info(),
@@ -21512,8 +21532,8 @@ impl RuleEnum {
             Self::EslintNoNewWrappers(rule) => rule.run_info(),
             Self::EslintNoNonoctalDecimalEscape(rule) => rule.run_info(),
             Self::EslintNoObjCalls(rule) => rule.run_info(),
-            Self::EslintNoOctal(rule) => rule.run_info(),
             Self::EslintNoObjectConstructor(rule) => rule.run_info(),
+            Self::EslintNoOctal(rule) => rule.run_info(),
             Self::EslintNoParamReassign(rule) => rule.run_info(),
             Self::EslintNoPlusplus(rule) => rule.run_info(),
             Self::EslintNoPromiseExecutorReturn(rule) => rule.run_info(),
@@ -22054,6 +22074,7 @@ impl RuleEnum {
             Self::OxcNoConstEnum(rule) => rule.run_info(),
             Self::OxcNoMapSpread(rule) => rule.run_info(),
             Self::OxcNoOptionalChaining(rule) => rule.run_info(),
+            Self::OxcNoReflectGet(rule) => rule.run_info(),
             Self::OxcNoRestSpreadProperties(rule) => rule.run_info(),
             Self::OxcNoThisInExportedFunction(rule) => rule.run_info(),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_info(),
@@ -22409,8 +22430,8 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::EslintNoNewWrappers(EslintNoNewWrappers::default()),
         RuleEnum::EslintNoNonoctalDecimalEscape(EslintNoNonoctalDecimalEscape::default()),
         RuleEnum::EslintNoObjCalls(EslintNoObjCalls::default()),
-        RuleEnum::EslintNoOctal(EslintNoOctal::default()),
         RuleEnum::EslintNoObjectConstructor(EslintNoObjectConstructor::default()),
+        RuleEnum::EslintNoOctal(EslintNoOctal::default()),
         RuleEnum::EslintNoParamReassign(EslintNoParamReassign::default()),
         RuleEnum::EslintNoPlusplus(EslintNoPlusplus::default()),
         RuleEnum::EslintNoPromiseExecutorReturn(EslintNoPromiseExecutorReturn::default()),
@@ -23055,6 +23076,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoConstEnum(OxcNoConstEnum::default()),
         RuleEnum::OxcNoMapSpread(OxcNoMapSpread::default()),
         RuleEnum::OxcNoOptionalChaining(OxcNoOptionalChaining::default()),
+        RuleEnum::OxcNoReflectGet(OxcNoReflectGet::default()),
         RuleEnum::OxcNoRestSpreadProperties(OxcNoRestSpreadProperties::default()),
         RuleEnum::OxcNoThisInExportedFunction(OxcNoThisInExportedFunction::default()),
         RuleEnum::OxcNumberArgOutOfRange(OxcNumberArgOutOfRange::default()),

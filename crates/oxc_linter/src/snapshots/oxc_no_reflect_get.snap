@@ -1,0 +1,18 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-reflect-get): Avoid `Reflect.get`.
+   ╭─[no_reflect_get.tsx:1:1]
+ 1 │ Reflect.get(value, key)
+   · ───────────────────────
+   ╰────
+  help: Use typed property access or parse dynamic input into a domain type.
+
+  ⚠ oxc(no-reflect-get): Avoid `Reflect.get`.
+   ╭─[no_reflect_get.tsx:1:1]
+ 1 │ Reflect["get"](value, key)
+   · ──────────────────────────
+   ╰────
+  help: Use typed property access or parse dynamic input into a domain type.

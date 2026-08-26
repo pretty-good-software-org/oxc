@@ -763,6 +763,7 @@ pub(crate) mod oxc {
     pub mod no_const_enum;
     pub mod no_map_spread;
     pub mod no_optional_chaining;
+    pub mod no_reflect_get;
     pub mod no_rest_spread_properties;
     pub mod no_this_in_exported_function;
     pub mod number_arg_out_of_range;
