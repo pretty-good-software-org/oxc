@@ -36,7 +36,7 @@ use crate::{
     node::{Ancestry, AstNodeStore, AstNodeStoreKind},
     scoping::{Bindings, Scoping},
     stats::Stats,
-    unresolved_stack::UnresolvedReferences,
+    unresolved_stack::{UnresolvedReference, UnresolvedReferences},
 };
 #[cfg(feature = "jsdoc")]
 use oxc_jsdoc::JSDocBuilder;
@@ -610,9 +610,13 @@ impl<'a> SemanticBuilder<'a> {
         name: Ident<'a>,
         reference: Reference,
     ) -> ReferenceId {
-        let scope_id = reference.scope_id();
+        let lookup_scope_id = reference.scope_id();
         let reference_id = self.scoping.create_reference(reference);
-        self.unresolved_references.push(name, reference_id, scope_id);
+        self.unresolved_references.push(UnresolvedReference {
+            name,
+            reference_id,
+            lookup_scope_id,
+        });
         reference_id
     }
 
@@ -642,9 +646,8 @@ impl<'a> SemanticBuilder<'a> {
     /// and reference creation is a simple Vec push instead of a hashmap insert.
     fn resolve_all_references(&mut self) {
         let refs = self.unresolved_references.take();
-        for (name, reference_id, resolution_start_scope_id) in refs {
-            if !self.walk_up_resolve_reference(name, reference_id, resolution_start_scope_id, None)
-            {
+        for UnresolvedReference { name, reference_id, lookup_scope_id } in refs {
+            if !self.walk_up_resolve_reference(name, reference_id, lookup_scope_id, None) {
                 self.scoping.add_root_unresolved_reference(name, reference_id);
             }
         }
@@ -752,30 +755,24 @@ impl<'a> SemanticBuilder<'a> {
         }
         let mut write_idx = checkpoint;
         for read_idx in checkpoint..end {
-            let (name, reference_id, resolution_start_scope_id) =
-                self.unresolved_references.get(read_idx);
+            let mut unresolved = self.unresolved_references.get(read_idx);
 
             // Parameter decorators are visited in an outer class scope. Leave those references
             // for final resolution because the current function is not on their scope chain.
-            let is_in_current_scope = resolution_start_scope_id == self.current_scope_id
+            let is_in_current_scope = unresolved.lookup_scope_id == self.current_scope_id
                 || self
                     .scoping
-                    .scope_is_descendant_of(resolution_start_scope_id, self.current_scope_id);
+                    .scope_is_descendant_of(unresolved.lookup_scope_id, self.current_scope_id);
             if !is_in_current_scope {
-                self.unresolved_references.set(
-                    write_idx,
-                    name,
-                    reference_id,
-                    resolution_start_scope_id,
-                );
+                self.unresolved_references.set(write_idx, unresolved);
                 write_idx += 1;
                 continue;
             }
 
             if self.walk_up_resolve_reference(
-                name,
-                reference_id,
-                resolution_start_scope_id,
+                unresolved.name,
+                unresolved.reference_id,
+                unresolved.lookup_scope_id,
                 Some(self.current_scope_id),
             ) {
                 continue;
@@ -783,11 +780,11 @@ impl<'a> SemanticBuilder<'a> {
 
             // Skip this function body during final resolution. An enclosing parameter checkpoint
             // may still resolve the reference before advancing the boundary again.
-            let parent_scope_id = self
+            unresolved.lookup_scope_id = self
                 .scoping
                 .scope_parent_id(self.current_scope_id)
                 .expect("function and catch parameter scopes always have a parent");
-            self.unresolved_references.set(write_idx, name, reference_id, parent_scope_id);
+            self.unresolved_references.set(write_idx, unresolved);
             write_idx += 1;
         }
         self.unresolved_references.truncate(write_idx);
