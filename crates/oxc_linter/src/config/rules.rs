@@ -250,6 +250,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "no-parameter-reassignment") => ("no-param-reassign", "eslint"),
         ("anti-slop", "no-reflect-apply") => ("no-reflect-apply", "oxc"),
         ("anti-slop", "no-reflect-get") => ("no-reflect-get", "oxc"),
+        ("anti-slop", "no-runtime-typeof") => ("no-runtime-typeof", "oxc"),
         ("sonarjs", "no-array-delete") => ("no-array-delete", "typescript"),
         ("sonarjs", "prefer-regexp-exec") => ("prefer-regexp-exec", "typescript"),
         ("sonarjs", name)
@@ -991,6 +992,10 @@ mod test {
         assert_eq!(
             super::transform_rule_and_plugin_name("no-reflect-get", "anti-slop"),
             ("no-reflect-get", "oxc")
+        );
+        assert_eq!(
+            super::transform_rule_and_plugin_name("no-runtime-typeof", "anti-slop"),
+            ("no-runtime-typeof", "oxc")
         );
     }
 
