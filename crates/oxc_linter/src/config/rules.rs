@@ -260,6 +260,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("anti-slop", "no-unknown-parameters") => ("no-unknown-parameters", "oxc"),
         ("anti-slop", "no-unknown-returns") => ("no-unknown-returns", "oxc"),
         ("anti-slop", "no-unsafe-dictionary-type") => ("no-unsafe-dictionary-type", "oxc"),
+        ("anti-slop", "no-widen-then-assert") => ("no-widen-then-assert", "oxc"),
         ("anti-slop", "no-unknown-type-aliases") => ("no-unknown-type-aliases", "oxc"),
         ("anti-slop", "no-reflect-apply") => ("no-reflect-apply", "oxc"),
         ("anti-slop", "no-reflect-get") => ("no-reflect-get", "oxc"),
