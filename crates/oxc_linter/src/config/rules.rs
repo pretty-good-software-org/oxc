@@ -256,6 +256,7 @@ fn transform_rule_and_plugin_name<'a>(
             ("no-conditional-empty-object-spread", "oxc")
         }
         ("anti-slop", "no-module-mocking") => ("no-module-mocking", "oxc"),
+        ("anti-slop", "no-object-parameters") => ("no-object-parameters", "oxc"),
         ("anti-slop", "no-unknown-parameters") => ("no-unknown-parameters", "oxc"),
         ("anti-slop", "no-unknown-type-aliases") => ("no-unknown-type-aliases", "oxc"),
         ("anti-slop", "no-reflect-apply") => ("no-reflect-apply", "oxc"),
