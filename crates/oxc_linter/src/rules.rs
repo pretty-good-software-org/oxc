@@ -764,6 +764,7 @@ pub(crate) mod oxc {
     pub mod no_conditional_empty_object_spread;
     pub mod no_const_enum;
     pub mod no_map_spread;
+    pub mod no_module_mocking;
     pub mod no_optional_chaining;
     pub mod no_reflect_apply;
     pub mod no_reflect_get;
