@@ -252,6 +252,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "no-commented-code") => ("no-commented-code", "oxc"),
         ("sonarjs", "no-hardcoded-ip") => ("no-hardcoded-ip", "oxc"),
         ("sonarjs", "no-hardcoded-passwords") => ("no-hardcoded-passwords", "oxc"),
+        ("sonarjs", "no-hardcoded-secrets") => ("no-hardcoded-secrets", "oxc"),
         ("sonarjs", "fixme-tag" | "todo-tag") => ("no-warning-comments", "eslint"),
         ("sonarjs", "no-identical-expressions") => ("no-identical-expressions", "oxc"),
         ("sonarjs", "bitwise-operators") => ("no-bitwise", "eslint"),
