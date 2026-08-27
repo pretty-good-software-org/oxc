@@ -425,6 +425,7 @@ pub use crate::rules::oxc::no_unknown_parameters::NoUnknownParameters as OxcNoUn
 pub use crate::rules::oxc::no_unknown_returns::NoUnknownReturns as OxcNoUnknownReturns;
 pub use crate::rules::oxc::no_unknown_type_aliases::NoUnknownTypeAliases as OxcNoUnknownTypeAliases;
 pub use crate::rules::oxc::no_unsafe_dictionary_type::NoUnsafeDictionaryType as OxcNoUnsafeDictionaryType;
+pub use crate::rules::oxc::no_unverified_certificate::NoUnverifiedCertificate as OxcNoUnverifiedCertificate;
 pub use crate::rules::oxc::no_weak_cipher::NoWeakCipher as OxcNoWeakCipher;
 pub use crate::rules::oxc::no_weak_ssl::NoWeakSsl as OxcNoWeakSsl;
 pub use crate::rules::oxc::no_widen_then_assert::NoWidenThenAssert as OxcNoWidenThenAssert;
@@ -1617,6 +1618,7 @@ pub enum RuleEnum {
     OxcNoUnknownReturns(OxcNoUnknownReturns),
     OxcNoUnknownTypeAliases(OxcNoUnknownTypeAliases),
     OxcNoUnsafeDictionaryType(OxcNoUnsafeDictionaryType),
+    OxcNoUnverifiedCertificate(OxcNoUnverifiedCertificate),
     OxcNoWeakCipher(OxcNoWeakCipher),
     OxcNoWeakSsl(OxcNoWeakSsl),
     OxcNoWidenThenAssert(OxcNoWidenThenAssert),
@@ -2605,7 +2607,8 @@ const OXC_NO_UNKNOWN_PARAMETERS_ID: usize = OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID 
 const OXC_NO_UNKNOWN_RETURNS_ID: usize = OXC_NO_UNKNOWN_PARAMETERS_ID + 1usize;
 const OXC_NO_UNKNOWN_TYPE_ALIASES_ID: usize = OXC_NO_UNKNOWN_RETURNS_ID + 1usize;
 const OXC_NO_UNSAFE_DICTIONARY_TYPE_ID: usize = OXC_NO_UNKNOWN_TYPE_ALIASES_ID + 1usize;
-const OXC_NO_WEAK_CIPHER_ID: usize = OXC_NO_UNSAFE_DICTIONARY_TYPE_ID + 1usize;
+const OXC_NO_UNVERIFIED_CERTIFICATE_ID: usize = OXC_NO_UNSAFE_DICTIONARY_TYPE_ID + 1usize;
+const OXC_NO_WEAK_CIPHER_ID: usize = OXC_NO_UNVERIFIED_CERTIFICATE_ID + 1usize;
 const OXC_NO_WEAK_SSL_ID: usize = OXC_NO_WEAK_CIPHER_ID + 1usize;
 const OXC_NO_WIDEN_THEN_ASSERT_ID: usize = OXC_NO_WEAK_SSL_ID + 1usize;
 const OXC_NUMBER_ARG_OUT_OF_RANGE_ID: usize = OXC_NO_WIDEN_THEN_ASSERT_ID + 1usize;
@@ -2822,7 +2825,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 894usize] = [
+static RULE_NAMES: [&str; 895usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3520,6 +3523,7 @@ static RULE_NAMES: [&str; 894usize] = [
     OxcNoUnknownReturns::NAME,
     OxcNoUnknownTypeAliases::NAME,
     OxcNoUnsafeDictionaryType::NAME,
+    OxcNoUnverifiedCertificate::NAME,
     OxcNoWeakCipher::NAME,
     OxcNoWeakSsl::NAME,
     OxcNoWidenThenAssert::NAME,
@@ -4534,6 +4538,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OXC_NO_UNKNOWN_RETURNS_ID,
             Self::OxcNoUnknownTypeAliases(_) => OXC_NO_UNKNOWN_TYPE_ALIASES_ID,
             Self::OxcNoUnsafeDictionaryType(_) => OXC_NO_UNSAFE_DICTIONARY_TYPE_ID,
+            Self::OxcNoUnverifiedCertificate(_) => OXC_NO_UNVERIFIED_CERTIFICATE_ID,
             Self::OxcNoWeakCipher(_) => OXC_NO_WEAK_CIPHER_ID,
             Self::OxcNoWeakSsl(_) => OXC_NO_WEAK_SSL_ID,
             Self::OxcNoWidenThenAssert(_) => OXC_NO_WIDEN_THEN_ASSERT_ID,
@@ -5603,6 +5608,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::CATEGORY,
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::CATEGORY,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::CATEGORY,
+            Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::CATEGORY,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::CATEGORY,
             Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::CATEGORY,
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::CATEGORY,
@@ -6632,6 +6638,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::FIX,
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::FIX,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::FIX,
+            Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::FIX,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::FIX,
             Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::FIX,
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::FIX,
@@ -7865,6 +7872,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::documentation(),
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::documentation(),
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::documentation(),
+            Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::documentation(),
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::documentation(),
             Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::documentation(),
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::documentation(),
@@ -10143,6 +10151,10 @@ impl RuleEnum {
                 OxcNoUnsafeDictionaryType::config_schema(generator)
                     .or_else(|| OxcNoUnsafeDictionaryType::schema(generator))
             }
+            Self::OxcNoUnverifiedCertificate(_) => {
+                OxcNoUnverifiedCertificate::config_schema(generator)
+                    .or_else(|| OxcNoUnverifiedCertificate::schema(generator))
+            }
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::config_schema(generator)
                 .or_else(|| OxcNoWeakCipher::schema(generator)),
             Self::OxcNoWeakSsl(_) => {
@@ -11392,6 +11404,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => "oxc",
             Self::OxcNoUnknownTypeAliases(_) => "oxc",
             Self::OxcNoUnsafeDictionaryType(_) => "oxc",
+            Self::OxcNoUnverifiedCertificate(_) => "oxc",
             Self::OxcNoWeakCipher(_) => "oxc",
             Self::OxcNoWeakSsl(_) => "oxc",
             Self::OxcNoWidenThenAssert(_) => "oxc",
@@ -13424,6 +13437,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(rule) => rule.run(node, ctx),
             Self::OxcNoUnknownTypeAliases(rule) => rule.run(node, ctx),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.run(node, ctx),
+            Self::OxcNoUnverifiedCertificate(rule) => rule.run(node, ctx),
             Self::OxcNoWeakCipher(rule) => rule.run(node, ctx),
             Self::OxcNoWeakSsl(rule) => rule.run(node, ctx),
             Self::OxcNoWidenThenAssert(rule) => rule.run(node, ctx),
@@ -14335,6 +14349,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(rule) => rule.run_once(ctx),
             Self::OxcNoUnknownTypeAliases(rule) => rule.run_once(ctx),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.run_once(ctx),
+            Self::OxcNoUnverifiedCertificate(rule) => rule.run_once(ctx),
             Self::OxcNoWeakCipher(rule) => rule.run_once(ctx),
             Self::OxcNoWeakSsl(rule) => rule.run_once(ctx),
             Self::OxcNoWidenThenAssert(rule) => rule.run_once(ctx),
@@ -15353,6 +15368,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoUnknownTypeAliases(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoUnverifiedCertificate(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoWeakCipher(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoWeakSsl(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoWidenThenAssert(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16277,6 +16293,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(rule) => rule.should_run(ctx),
             Self::OxcNoUnknownTypeAliases(rule) => rule.should_run(ctx),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.should_run(ctx),
+            Self::OxcNoUnverifiedCertificate(rule) => rule.should_run(ctx),
             Self::OxcNoWeakCipher(rule) => rule.should_run(ctx),
             Self::OxcNoWeakSsl(rule) => rule.should_run(ctx),
             Self::OxcNoWidenThenAssert(rule) => rule.should_run(ctx),
@@ -17497,6 +17514,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::IS_TSGOLINT_RULE,
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::IS_TSGOLINT_RULE,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::IS_TSGOLINT_RULE,
+            Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::IS_TSGOLINT_RULE,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::IS_TSGOLINT_RULE,
             Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::IS_TSGOLINT_RULE,
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::IS_TSGOLINT_RULE,
@@ -18619,6 +18637,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::VERSION,
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::VERSION,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::VERSION,
+            Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::VERSION,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::VERSION,
             Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::VERSION,
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::VERSION,
@@ -19728,6 +19747,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::HAS_CONFIG,
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::HAS_CONFIG,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::HAS_CONFIG,
+            Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::HAS_CONFIG,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::HAS_CONFIG,
             Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::HAS_CONFIG,
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::HAS_CONFIG,
@@ -20766,6 +20786,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::INFO,
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::INFO,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::INFO,
+            Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::INFO,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::INFO,
             Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::INFO,
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::INFO,
@@ -21681,6 +21702,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(rule) => rule.types_info(),
             Self::OxcNoUnknownTypeAliases(rule) => rule.types_info(),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.types_info(),
+            Self::OxcNoUnverifiedCertificate(rule) => rule.types_info(),
             Self::OxcNoWeakCipher(rule) => rule.types_info(),
             Self::OxcNoWeakSsl(rule) => rule.types_info(),
             Self::OxcNoWidenThenAssert(rule) => rule.types_info(),
@@ -22579,6 +22601,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(rule) => rule.run_info(),
             Self::OxcNoUnknownTypeAliases(rule) => rule.run_info(),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.run_info(),
+            Self::OxcNoUnverifiedCertificate(rule) => rule.run_info(),
             Self::OxcNoWeakCipher(rule) => rule.run_info(),
             Self::OxcNoWeakSsl(rule) => rule.run_info(),
             Self::OxcNoWidenThenAssert(rule) => rule.run_info(),
@@ -23603,6 +23626,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoUnknownReturns(OxcNoUnknownReturns::default()),
         RuleEnum::OxcNoUnknownTypeAliases(OxcNoUnknownTypeAliases::default()),
         RuleEnum::OxcNoUnsafeDictionaryType(OxcNoUnsafeDictionaryType::default()),
+        RuleEnum::OxcNoUnverifiedCertificate(OxcNoUnverifiedCertificate::default()),
         RuleEnum::OxcNoWeakCipher(OxcNoWeakCipher::default()),
         RuleEnum::OxcNoWeakSsl(OxcNoWeakSsl::default()),
         RuleEnum::OxcNoWidenThenAssert(OxcNoWidenThenAssert::default()),
