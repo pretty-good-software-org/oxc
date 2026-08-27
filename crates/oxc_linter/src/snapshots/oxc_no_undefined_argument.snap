@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-undefined-argument): Do not pass `undefined` explicitly as an argument.
+   ╭─[no_undefined_argument.tsx:1:6]
+ 1 │ call(undefined);
+   ·      ─────────
+   ╰────
+  help: Omit the argument or pass a deliberate value.

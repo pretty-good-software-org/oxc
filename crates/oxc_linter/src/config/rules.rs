@@ -263,6 +263,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "no-unverified-hostname" | "unverified-hostname") => {
             ("no-unverified-hostname", "oxc")
         }
+        ("sonarjs", "no-undefined-argument") => ("no-undefined-argument", "oxc"),
         ("sonarjs", "fixme-tag" | "todo-tag") => ("no-warning-comments", "eslint"),
         ("sonarjs", "no-identical-expressions") => ("no-identical-expressions", "oxc"),
         ("sonarjs", "bitwise-operators") => ("no-bitwise", "eslint"),
