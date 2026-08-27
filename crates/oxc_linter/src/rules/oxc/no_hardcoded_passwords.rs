@@ -2,6 +2,7 @@ use cow_utils::CowUtils;
 use oxc_ast::AstKind;
 use oxc_diagnostics::OxcDiagnostic;
 use oxc_macros::declare_oxc_lint;
+use oxc_span::GetSpan;
 use schemars::JsonSchema;
 use serde::Deserialize;
 
@@ -54,16 +55,35 @@ impl Rule for NoHardcodedPasswords {
         let AstKind::StringLiteral(literal) = node.kind() else {
             return;
         };
-        let Some(binding) = (match ctx.nodes().parent_node(node.id()).kind() {
-            AstKind::VariableDeclarator(declarator) => declarator.id.get_identifier_name(),
+        let parent = ctx.nodes().parent_node(node.id());
+        let binding = match parent.kind() {
+            AstKind::VariableDeclarator(declarator) => {
+                declarator.id.get_identifier_name().map(|name| name.to_string())
+            }
+            AstKind::AssignmentExpression(assignment) => {
+                Some(ctx.source_range(assignment.left.span()).to_string())
+            }
+            AstKind::ObjectProperty(property) => {
+                Some(ctx.source_range(property.key.span()).to_string())
+            }
+            AstKind::PropertyDefinition(property) => {
+                Some(ctx.source_range(property.key.span()).to_string())
+            }
             _ => None,
-        }) else {
-            return;
         };
-        let binding = binding.cow_to_ascii_lowercase();
-        if self.0.password_words.iter().any(|word| {
-            binding.contains(word.cow_to_ascii_lowercase().as_ref()) && !literal.value.is_empty()
-        }) {
+        let binding = binding.map(|binding| binding.cow_to_ascii_lowercase().into_owned());
+        let assigned_to_password = binding.is_some_and(|binding| {
+            self.0
+                .password_words
+                .iter()
+                .any(|word| binding.contains(word.cow_to_ascii_lowercase().as_ref()))
+        });
+        let value = literal.value.cow_to_ascii_lowercase();
+        let embedded_password = self.0.password_words.iter().any(|word| {
+            let pattern = format!("{}=", word.cow_to_ascii_lowercase());
+            value.contains(pattern.as_str())
+        });
+        if !literal.value.is_empty() && (assigned_to_password || embedded_password) {
             ctx.diagnostic(
                 OxcDiagnostic::warn("Do not hard-code a password.")
                     .with_help("Use a secret manager or environment variable.")
