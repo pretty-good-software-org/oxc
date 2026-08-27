@@ -402,6 +402,7 @@ pub use crate::rules::oxc::no_async_await::NoAsyncAwait as OxcNoAsyncAwait;
 pub use crate::rules::oxc::no_async_endpoint_handlers::NoAsyncEndpointHandlers as OxcNoAsyncEndpointHandlers;
 pub use crate::rules::oxc::no_barrel_file::NoBarrelFile as OxcNoBarrelFile;
 pub use crate::rules::oxc::no_chained_type_assertions::NoChainedTypeAssertions as OxcNoChainedTypeAssertions;
+pub use crate::rules::oxc::no_commented_code::NoCommentedCode as OxcNoCommentedCode;
 pub use crate::rules::oxc::no_conditional_empty_object_spread::NoConditionalEmptyObjectSpread as OxcNoConditionalEmptyObjectSpread;
 pub use crate::rules::oxc::no_const_enum::NoConstEnum as OxcNoConstEnum;
 pub use crate::rules::oxc::no_identical_expressions::NoIdenticalExpressions as OxcNoIdenticalExpressions;
@@ -1587,6 +1588,7 @@ pub enum RuleEnum {
     OxcNoAsyncEndpointHandlers(OxcNoAsyncEndpointHandlers),
     OxcNoBarrelFile(OxcNoBarrelFile),
     OxcNoChainedTypeAssertions(OxcNoChainedTypeAssertions),
+    OxcNoCommentedCode(OxcNoCommentedCode),
     OxcNoConditionalEmptyObjectSpread(OxcNoConditionalEmptyObjectSpread),
     OxcNoConstEnum(OxcNoConstEnum),
     OxcNoIdenticalExpressions(OxcNoIdenticalExpressions),
@@ -2568,7 +2570,8 @@ const OXC_NO_ASYNC_AWAIT_ID: usize = OXC_NO_ACCUMULATING_SPREAD_ID + 1usize;
 const OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID: usize = OXC_NO_ASYNC_AWAIT_ID + 1usize;
 const OXC_NO_BARREL_FILE_ID: usize = OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID + 1usize;
 const OXC_NO_CHAINED_TYPE_ASSERTIONS_ID: usize = OXC_NO_BARREL_FILE_ID + 1usize;
-const OXC_NO_CONDITIONAL_EMPTY_OBJECT_SPREAD_ID: usize = OXC_NO_CHAINED_TYPE_ASSERTIONS_ID + 1usize;
+const OXC_NO_COMMENTED_CODE_ID: usize = OXC_NO_CHAINED_TYPE_ASSERTIONS_ID + 1usize;
+const OXC_NO_CONDITIONAL_EMPTY_OBJECT_SPREAD_ID: usize = OXC_NO_COMMENTED_CODE_ID + 1usize;
 const OXC_NO_CONST_ENUM_ID: usize = OXC_NO_CONDITIONAL_EMPTY_OBJECT_SPREAD_ID + 1usize;
 const OXC_NO_IDENTICAL_EXPRESSIONS_ID: usize = OXC_NO_CONST_ENUM_ID + 1usize;
 const OXC_NO_KNOWN_VALUE_WIDENING_ID: usize = OXC_NO_IDENTICAL_EXPRESSIONS_ID + 1usize;
@@ -2801,7 +2804,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 887usize] = [
+static RULE_NAMES: [&str; 888usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3476,6 +3479,7 @@ static RULE_NAMES: [&str; 887usize] = [
     OxcNoAsyncEndpointHandlers::NAME,
     OxcNoBarrelFile::NAME,
     OxcNoChainedTypeAssertions::NAME,
+    OxcNoCommentedCode::NAME,
     OxcNoConditionalEmptyObjectSpread::NAME,
     OxcNoConstEnum::NAME,
     OxcNoIdenticalExpressions::NAME,
@@ -4483,6 +4487,7 @@ impl RuleEnum {
             Self::OxcNoAsyncEndpointHandlers(_) => OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID,
             Self::OxcNoBarrelFile(_) => OXC_NO_BARREL_FILE_ID,
             Self::OxcNoChainedTypeAssertions(_) => OXC_NO_CHAINED_TYPE_ASSERTIONS_ID,
+            Self::OxcNoCommentedCode(_) => OXC_NO_COMMENTED_CODE_ID,
             Self::OxcNoConditionalEmptyObjectSpread(_) => OXC_NO_CONDITIONAL_EMPTY_OBJECT_SPREAD_ID,
             Self::OxcNoConstEnum(_) => OXC_NO_CONST_ENUM_ID,
             Self::OxcNoIdenticalExpressions(_) => OXC_NO_IDENTICAL_EXPRESSIONS_ID,
@@ -5543,6 +5548,7 @@ impl RuleEnum {
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::CATEGORY,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::CATEGORY,
             Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::CATEGORY,
+            Self::OxcNoCommentedCode(_) => OxcNoCommentedCode::CATEGORY,
             Self::OxcNoConditionalEmptyObjectSpread(_) => {
                 OxcNoConditionalEmptyObjectSpread::CATEGORY
             }
@@ -6567,6 +6573,7 @@ impl RuleEnum {
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::FIX,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::FIX,
             Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::FIX,
+            Self::OxcNoCommentedCode(_) => OxcNoCommentedCode::FIX,
             Self::OxcNoConditionalEmptyObjectSpread(_) => OxcNoConditionalEmptyObjectSpread::FIX,
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::FIX,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::FIX,
@@ -7791,6 +7798,7 @@ impl RuleEnum {
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::documentation(),
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::documentation(),
             Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::documentation(),
+            Self::OxcNoCommentedCode(_) => OxcNoCommentedCode::documentation(),
             Self::OxcNoConditionalEmptyObjectSpread(_) => {
                 OxcNoConditionalEmptyObjectSpread::documentation()
             }
@@ -10031,6 +10039,8 @@ impl RuleEnum {
                 OxcNoChainedTypeAssertions::config_schema(generator)
                     .or_else(|| OxcNoChainedTypeAssertions::schema(generator))
             }
+            Self::OxcNoCommentedCode(_) => OxcNoCommentedCode::config_schema(generator)
+                .or_else(|| OxcNoCommentedCode::schema(generator)),
             Self::OxcNoConditionalEmptyObjectSpread(_) => {
                 OxcNoConditionalEmptyObjectSpread::config_schema(generator)
                     .or_else(|| OxcNoConditionalEmptyObjectSpread::schema(generator))
@@ -11298,6 +11308,7 @@ impl RuleEnum {
             Self::OxcNoAsyncEndpointHandlers(_) => "oxc",
             Self::OxcNoBarrelFile(_) => "oxc",
             Self::OxcNoChainedTypeAssertions(_) => "oxc",
+            Self::OxcNoCommentedCode(_) => "oxc",
             Self::OxcNoConditionalEmptyObjectSpread(_) => "oxc",
             Self::OxcNoConstEnum(_) => "oxc",
             Self::OxcNoIdenticalExpressions(_) => "oxc",
@@ -13320,6 +13331,7 @@ impl RuleEnum {
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run(node, ctx),
             Self::OxcNoBarrelFile(rule) => rule.run(node, ctx),
             Self::OxcNoChainedTypeAssertions(rule) => rule.run(node, ctx),
+            Self::OxcNoCommentedCode(rule) => rule.run(node, ctx),
             Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.run(node, ctx),
             Self::OxcNoConstEnum(rule) => rule.run(node, ctx),
             Self::OxcNoIdenticalExpressions(rule) => rule.run(node, ctx),
@@ -14224,6 +14236,7 @@ impl RuleEnum {
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run_once(ctx),
             Self::OxcNoBarrelFile(rule) => rule.run_once(ctx),
             Self::OxcNoChainedTypeAssertions(rule) => rule.run_once(ctx),
+            Self::OxcNoCommentedCode(rule) => rule.run_once(ctx),
             Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.run_once(ctx),
             Self::OxcNoConstEnum(rule) => rule.run_once(ctx),
             Self::OxcNoIdenticalExpressions(rule) => rule.run_once(ctx),
@@ -15235,6 +15248,7 @@ impl RuleEnum {
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoBarrelFile(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoChainedTypeAssertions(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoCommentedCode(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoConstEnum(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoIdenticalExpressions(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16152,6 +16166,7 @@ impl RuleEnum {
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.should_run(ctx),
             Self::OxcNoBarrelFile(rule) => rule.should_run(ctx),
             Self::OxcNoChainedTypeAssertions(rule) => rule.should_run(ctx),
+            Self::OxcNoCommentedCode(rule) => rule.should_run(ctx),
             Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.should_run(ctx),
             Self::OxcNoConstEnum(rule) => rule.should_run(ctx),
             Self::OxcNoIdenticalExpressions(rule) => rule.should_run(ctx),
@@ -17363,6 +17378,7 @@ impl RuleEnum {
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::IS_TSGOLINT_RULE,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::IS_TSGOLINT_RULE,
             Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::IS_TSGOLINT_RULE,
+            Self::OxcNoCommentedCode(_) => OxcNoCommentedCode::IS_TSGOLINT_RULE,
             Self::OxcNoConditionalEmptyObjectSpread(_) => {
                 OxcNoConditionalEmptyObjectSpread::IS_TSGOLINT_RULE
             }
@@ -18478,6 +18494,7 @@ impl RuleEnum {
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::VERSION,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::VERSION,
             Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::VERSION,
+            Self::OxcNoCommentedCode(_) => OxcNoCommentedCode::VERSION,
             Self::OxcNoConditionalEmptyObjectSpread(_) => {
                 OxcNoConditionalEmptyObjectSpread::VERSION
             }
@@ -19580,6 +19597,7 @@ impl RuleEnum {
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::HAS_CONFIG,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::HAS_CONFIG,
             Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::HAS_CONFIG,
+            Self::OxcNoCommentedCode(_) => OxcNoCommentedCode::HAS_CONFIG,
             Self::OxcNoConditionalEmptyObjectSpread(_) => {
                 OxcNoConditionalEmptyObjectSpread::HAS_CONFIG
             }
@@ -20613,6 +20631,7 @@ impl RuleEnum {
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::INFO,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::INFO,
             Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::INFO,
+            Self::OxcNoCommentedCode(_) => OxcNoCommentedCode::INFO,
             Self::OxcNoConditionalEmptyObjectSpread(_) => OxcNoConditionalEmptyObjectSpread::INFO,
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::INFO,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::INFO,
@@ -21521,6 +21540,7 @@ impl RuleEnum {
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.types_info(),
             Self::OxcNoBarrelFile(rule) => rule.types_info(),
             Self::OxcNoChainedTypeAssertions(rule) => rule.types_info(),
+            Self::OxcNoCommentedCode(rule) => rule.types_info(),
             Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.types_info(),
             Self::OxcNoConstEnum(rule) => rule.types_info(),
             Self::OxcNoIdenticalExpressions(rule) => rule.types_info(),
@@ -22412,6 +22432,7 @@ impl RuleEnum {
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run_info(),
             Self::OxcNoBarrelFile(rule) => rule.run_info(),
             Self::OxcNoChainedTypeAssertions(rule) => rule.run_info(),
+            Self::OxcNoCommentedCode(rule) => rule.run_info(),
             Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.run_info(),
             Self::OxcNoConstEnum(rule) => rule.run_info(),
             Self::OxcNoIdenticalExpressions(rule) => rule.run_info(),
@@ -23429,6 +23450,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoAsyncEndpointHandlers(OxcNoAsyncEndpointHandlers::default()),
         RuleEnum::OxcNoBarrelFile(OxcNoBarrelFile::default()),
         RuleEnum::OxcNoChainedTypeAssertions(OxcNoChainedTypeAssertions::default()),
+        RuleEnum::OxcNoCommentedCode(OxcNoCommentedCode::default()),
         RuleEnum::OxcNoConditionalEmptyObjectSpread(OxcNoConditionalEmptyObjectSpread::default()),
         RuleEnum::OxcNoConstEnum(OxcNoConstEnum::default()),
         RuleEnum::OxcNoIdenticalExpressions(OxcNoIdenticalExpressions::default()),
