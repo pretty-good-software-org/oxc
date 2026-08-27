@@ -49,7 +49,7 @@ impl Rule for NoOctal {
         let AstKind::NumericLiteral(literal) = node.kind() else {
             return;
         };
-        let Some(raw) = literal.raw.as_ref().map(|raw| raw.as_str()) else {
+        let Some(raw) = literal.raw.as_ref().map(oxc_str::Str::as_str) else {
             return;
         };
         if is_legacy_octal(raw) {

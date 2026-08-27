@@ -45,7 +45,7 @@ impl Rule for NoShapeInSymbolNames {
             AstKind::PrivateIdentifier(identifier) => (identifier.name.as_str(), identifier.span),
             _ => return,
         };
-        if name.to_ascii_lowercase().contains("shape") {
+        if name.as_bytes().windows(5).any(|window| window.eq_ignore_ascii_case(b"shape")) {
             ctx.diagnostic(no_shape_in_symbol_names_diagnostic(span, name));
         }
     }

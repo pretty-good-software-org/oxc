@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use rustc_hash::FxHashMap;
 
 use oxc_ast::{
     AstKind,
@@ -45,7 +45,7 @@ declare_oxc_lint!(
 
 impl Rule for NoUnknownTypeAliases {
     fn run_once(&self, ctx: &LintContext) {
-        let aliases: HashMap<String, &TSTypeAliasDeclaration<'_>> = ctx
+        let aliases: FxHashMap<String, &TSTypeAliasDeclaration<'_>> = ctx
             .nodes()
             .iter()
             .filter_map(|node| match node.kind() {
@@ -70,7 +70,7 @@ impl Rule for NoUnknownTypeAliases {
 
 fn resolves_to_unknown<'a>(
     type_annotation: &'a TSType<'a>,
-    aliases: &HashMap<String, &TSTypeAliasDeclaration<'a>>,
+    aliases: &FxHashMap<String, &TSTypeAliasDeclaration<'a>>,
     visited: &mut Vec<String>,
 ) -> bool {
     match type_annotation {

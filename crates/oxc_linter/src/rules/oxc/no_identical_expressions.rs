@@ -90,7 +90,7 @@ fn is_relevant_binary_operator(operator: BinaryOperator) -> bool {
 
 fn is_one_shift(operator: BinaryOperator, left: &Expression<'_>) -> bool {
     operator == BinaryOperator::ShiftLeft
-        && matches!(left, Expression::NumericLiteral(literal) if literal.value == 1.0)
+        && matches!(left, Expression::NumericLiteral(literal) if literal.value.to_bits() == 1.0f64.to_bits())
 }
 
 fn binary_operator_text(operator: BinaryOperator) -> &'static str {
