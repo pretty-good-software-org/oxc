@@ -173,7 +173,7 @@ impl TryFrom<&str> for LintPlugins {
                 Ok(LintPlugins::TYPESCRIPT)
             }
             // deepscan for backwards compatibility. Those rules have been moved into oxc
-            "oxc" | "deepscan" => Ok(LintPlugins::OXC),
+            "oxc" | "deepscan" | "sonarjs" => Ok(LintPlugins::OXC),
             // import-x has the same rules but better performance
             "import" | "import-x" => Ok(LintPlugins::IMPORT),
             "jsdoc" => Ok(LintPlugins::JSDOC),
