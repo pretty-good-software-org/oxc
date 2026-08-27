@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-global-this): Avoid direct use of `globalThis`.
+   ╭─[no_global_this.tsx:1:1]
+ 1 │ globalThis.value;
+   · ──────────
+   ╰────
+  help: Use an explicit platform dependency instead.
