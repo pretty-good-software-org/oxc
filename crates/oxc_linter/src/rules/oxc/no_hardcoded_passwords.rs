@@ -28,7 +28,7 @@ impl Default for Config {
 }
 
 #[derive(Debug, Clone, Default)]
-pub struct NoHardcodedPasswords(Config);
+pub struct NoHardcodedPasswords(Box<Config>);
 
 declare_oxc_lint!(
     /// ### What it does
@@ -47,7 +47,7 @@ impl Rule for NoHardcodedPasswords {
         if value.is_null() {
             return Ok(Self::default());
         }
-        Ok(Self(serde_json::from_value(value)?))
+        Ok(Self(Box::new(serde_json::from_value(value)?)))
     }
 
     fn run<'a>(&self, node: &AstNode<'a>, ctx: &LintContext<'a>) {
