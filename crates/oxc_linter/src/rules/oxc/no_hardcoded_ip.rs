@@ -1,8 +1,8 @@
-use lazy_regex::regex;
 use oxc_ast::AstKind;
 use oxc_diagnostics::OxcDiagnostic;
 use oxc_macros::declare_oxc_lint;
 use oxc_span::{GetSpan, Span};
+use std::net::IpAddr;
 
 use crate::{AstNode, context::LintContext, rule::Rule};
 
@@ -47,12 +47,20 @@ impl Rule for NoHardcodedIp {
 }
 
 fn is_ipv4(value: &str) -> bool {
-    let pattern = regex!(r"(?:^|[^\d])((?:\d{1,3}\.){3}\d{1,3})(?:$|[^\d])");
-    pattern.captures(value).is_some_and(|captures| {
-        captures
-            .get(1)
-            .is_some_and(|ip| ip.as_str().split('.').all(|part| part.parse::<u8>().is_ok()))
-    })
+    let ip = value
+        .split_once('/')
+        .filter(|(_, mask)| mask.chars().all(|character| character.is_ascii_digit()))
+        .map_or(value, |(ip, _)| ip);
+    if matches!(ip, "255.255.255.255" | "::" | "::1")
+        || ip.starts_with("127.")
+        || ip.starts_with("0.")
+        || ip.starts_with("192.0.2.")
+        || ip.starts_with("198.51.100.")
+        || ip.starts_with("203.0.113.")
+    {
+        return false;
+    }
+    ip.parse::<IpAddr>().is_ok()
 }
 
 #[test]
@@ -62,7 +70,7 @@ fn test() {
         NoHardcodedIp::NAME,
         NoHardcodedIp::PLUGIN,
         vec![r#"const host = "service.internal";"#, r#"const host = "999.1.1.1";"#],
-        vec![r#"const host = "192.168.0.1";"#, r#"const url = "https://10.0.0.1/api";"#],
+        vec![r#"const host = "192.168.0.1";"#, r#"const host = "10.0.0.1/24";"#],
     )
     .test_and_snapshot();
 }
