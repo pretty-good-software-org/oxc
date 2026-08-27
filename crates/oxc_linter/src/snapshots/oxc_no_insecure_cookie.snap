@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-insecure-cookie): Do not set a browser cookie without the Secure attribute.
+   ╭─[no_insecure_cookie.tsx:1:1]
+ 1 │ document.cookie = "session=abc";
+   · ───────────────────────────────
+   ╰────
+  help: Add `Secure` to the cookie attributes.

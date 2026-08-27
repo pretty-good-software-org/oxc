@@ -769,6 +769,7 @@ pub(crate) mod oxc {
     pub mod no_hardcoded_passwords;
     pub mod no_hardcoded_secrets;
     pub mod no_identical_expressions;
+    pub mod no_insecure_cookie;
     pub mod no_known_value_widening;
     pub mod no_map_spread;
     pub mod no_module_mocking;
