@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-hardcoded-ip): Do not hard-code an IP address.
+   ╭─[no_hardcoded_ip.tsx:1:14]
+ 1 │ const host = "192.168.0.1";
+   ·              ─────────────
+   ╰────
+  help: Use configuration or a named service instead of embedding an IP address.

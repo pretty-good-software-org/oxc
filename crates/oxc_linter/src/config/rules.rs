@@ -249,6 +249,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("typescript", name) if is_eslint_rule_adapted_to_typescript(name) => (name, "eslint"),
         ("sonarjs", "no-parameter-reassignment") => ("no-param-reassign", "eslint"),
         ("sonarjs", "no-commented-code") => ("no-commented-code", "oxc"),
+        ("sonarjs", "no-hardcoded-ip") => ("no-hardcoded-ip", "oxc"),
         ("sonarjs", "fixme-tag" | "todo-tag") => ("no-warning-comments", "eslint"),
         ("sonarjs", "no-identical-expressions") => ("no-identical-expressions", "oxc"),
         ("sonarjs", "bitwise-operators") => ("no-bitwise", "eslint"),
