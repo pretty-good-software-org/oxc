@@ -426,6 +426,7 @@ pub use crate::rules::oxc::no_unknown_returns::NoUnknownReturns as OxcNoUnknownR
 pub use crate::rules::oxc::no_unknown_type_aliases::NoUnknownTypeAliases as OxcNoUnknownTypeAliases;
 pub use crate::rules::oxc::no_unsafe_dictionary_type::NoUnsafeDictionaryType as OxcNoUnsafeDictionaryType;
 pub use crate::rules::oxc::no_weak_cipher::NoWeakCipher as OxcNoWeakCipher;
+pub use crate::rules::oxc::no_weak_ssl::NoWeakSsl as OxcNoWeakSsl;
 pub use crate::rules::oxc::no_widen_then_assert::NoWidenThenAssert as OxcNoWidenThenAssert;
 pub use crate::rules::oxc::number_arg_out_of_range::NumberArgOutOfRange as OxcNumberArgOutOfRange;
 pub use crate::rules::oxc::only_used_in_recursion::OnlyUsedInRecursion as OxcOnlyUsedInRecursion;
@@ -1617,6 +1618,7 @@ pub enum RuleEnum {
     OxcNoUnknownTypeAliases(OxcNoUnknownTypeAliases),
     OxcNoUnsafeDictionaryType(OxcNoUnsafeDictionaryType),
     OxcNoWeakCipher(OxcNoWeakCipher),
+    OxcNoWeakSsl(OxcNoWeakSsl),
     OxcNoWidenThenAssert(OxcNoWidenThenAssert),
     OxcNumberArgOutOfRange(OxcNumberArgOutOfRange),
     OxcOnlyUsedInRecursion(OxcOnlyUsedInRecursion),
@@ -2604,7 +2606,8 @@ const OXC_NO_UNKNOWN_RETURNS_ID: usize = OXC_NO_UNKNOWN_PARAMETERS_ID + 1usize;
 const OXC_NO_UNKNOWN_TYPE_ALIASES_ID: usize = OXC_NO_UNKNOWN_RETURNS_ID + 1usize;
 const OXC_NO_UNSAFE_DICTIONARY_TYPE_ID: usize = OXC_NO_UNKNOWN_TYPE_ALIASES_ID + 1usize;
 const OXC_NO_WEAK_CIPHER_ID: usize = OXC_NO_UNSAFE_DICTIONARY_TYPE_ID + 1usize;
-const OXC_NO_WIDEN_THEN_ASSERT_ID: usize = OXC_NO_WEAK_CIPHER_ID + 1usize;
+const OXC_NO_WEAK_SSL_ID: usize = OXC_NO_WEAK_CIPHER_ID + 1usize;
+const OXC_NO_WIDEN_THEN_ASSERT_ID: usize = OXC_NO_WEAK_SSL_ID + 1usize;
 const OXC_NUMBER_ARG_OUT_OF_RANGE_ID: usize = OXC_NO_WIDEN_THEN_ASSERT_ID + 1usize;
 const OXC_ONLY_USED_IN_RECURSION_ID: usize = OXC_NUMBER_ARG_OUT_OF_RANGE_ID + 1usize;
 const OXC_REQUIRE_SAFETY_COMMENT_FOR_TYPE_ASSERTION_ID: usize =
@@ -2819,7 +2822,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 893usize] = [
+static RULE_NAMES: [&str; 894usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3518,6 +3521,7 @@ static RULE_NAMES: [&str; 893usize] = [
     OxcNoUnknownTypeAliases::NAME,
     OxcNoUnsafeDictionaryType::NAME,
     OxcNoWeakCipher::NAME,
+    OxcNoWeakSsl::NAME,
     OxcNoWidenThenAssert::NAME,
     OxcNumberArgOutOfRange::NAME,
     OxcOnlyUsedInRecursion::NAME,
@@ -4531,6 +4535,7 @@ impl RuleEnum {
             Self::OxcNoUnknownTypeAliases(_) => OXC_NO_UNKNOWN_TYPE_ALIASES_ID,
             Self::OxcNoUnsafeDictionaryType(_) => OXC_NO_UNSAFE_DICTIONARY_TYPE_ID,
             Self::OxcNoWeakCipher(_) => OXC_NO_WEAK_CIPHER_ID,
+            Self::OxcNoWeakSsl(_) => OXC_NO_WEAK_SSL_ID,
             Self::OxcNoWidenThenAssert(_) => OXC_NO_WIDEN_THEN_ASSERT_ID,
             Self::OxcNumberArgOutOfRange(_) => OXC_NUMBER_ARG_OUT_OF_RANGE_ID,
             Self::OxcOnlyUsedInRecursion(_) => OXC_ONLY_USED_IN_RECURSION_ID,
@@ -5599,6 +5604,7 @@ impl RuleEnum {
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::CATEGORY,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::CATEGORY,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::CATEGORY,
+            Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::CATEGORY,
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::CATEGORY,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::CATEGORY,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::CATEGORY,
@@ -6627,6 +6633,7 @@ impl RuleEnum {
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::FIX,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::FIX,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::FIX,
+            Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::FIX,
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::FIX,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::FIX,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::FIX,
@@ -7859,6 +7866,7 @@ impl RuleEnum {
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::documentation(),
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::documentation(),
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::documentation(),
+            Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::documentation(),
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::documentation(),
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::documentation(),
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::documentation(),
@@ -10137,6 +10145,9 @@ impl RuleEnum {
             }
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::config_schema(generator)
                 .or_else(|| OxcNoWeakCipher::schema(generator)),
+            Self::OxcNoWeakSsl(_) => {
+                OxcNoWeakSsl::config_schema(generator).or_else(|| OxcNoWeakSsl::schema(generator))
+            }
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::config_schema(generator)
                 .or_else(|| OxcNoWidenThenAssert::schema(generator)),
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::config_schema(generator)
@@ -11382,6 +11393,7 @@ impl RuleEnum {
             Self::OxcNoUnknownTypeAliases(_) => "oxc",
             Self::OxcNoUnsafeDictionaryType(_) => "oxc",
             Self::OxcNoWeakCipher(_) => "oxc",
+            Self::OxcNoWeakSsl(_) => "oxc",
             Self::OxcNoWidenThenAssert(_) => "oxc",
             Self::OxcNumberArgOutOfRange(_) => "oxc",
             Self::OxcOnlyUsedInRecursion(_) => "oxc",
@@ -13413,6 +13425,7 @@ impl RuleEnum {
             Self::OxcNoUnknownTypeAliases(rule) => rule.run(node, ctx),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.run(node, ctx),
             Self::OxcNoWeakCipher(rule) => rule.run(node, ctx),
+            Self::OxcNoWeakSsl(rule) => rule.run(node, ctx),
             Self::OxcNoWidenThenAssert(rule) => rule.run(node, ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run(node, ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run(node, ctx),
@@ -14323,6 +14336,7 @@ impl RuleEnum {
             Self::OxcNoUnknownTypeAliases(rule) => rule.run_once(ctx),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.run_once(ctx),
             Self::OxcNoWeakCipher(rule) => rule.run_once(ctx),
+            Self::OxcNoWeakSsl(rule) => rule.run_once(ctx),
             Self::OxcNoWidenThenAssert(rule) => rule.run_once(ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_once(ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_once(ctx),
@@ -15340,6 +15354,7 @@ impl RuleEnum {
             Self::OxcNoUnknownTypeAliases(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoWeakCipher(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoWeakSsl(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoWidenThenAssert(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16263,6 +16278,7 @@ impl RuleEnum {
             Self::OxcNoUnknownTypeAliases(rule) => rule.should_run(ctx),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.should_run(ctx),
             Self::OxcNoWeakCipher(rule) => rule.should_run(ctx),
+            Self::OxcNoWeakSsl(rule) => rule.should_run(ctx),
             Self::OxcNoWidenThenAssert(rule) => rule.should_run(ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.should_run(ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.should_run(ctx),
@@ -17482,6 +17498,7 @@ impl RuleEnum {
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::IS_TSGOLINT_RULE,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::IS_TSGOLINT_RULE,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::IS_TSGOLINT_RULE,
+            Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::IS_TSGOLINT_RULE,
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::IS_TSGOLINT_RULE,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::IS_TSGOLINT_RULE,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::IS_TSGOLINT_RULE,
@@ -18603,6 +18620,7 @@ impl RuleEnum {
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::VERSION,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::VERSION,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::VERSION,
+            Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::VERSION,
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::VERSION,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::VERSION,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::VERSION,
@@ -19711,6 +19729,7 @@ impl RuleEnum {
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::HAS_CONFIG,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::HAS_CONFIG,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::HAS_CONFIG,
+            Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::HAS_CONFIG,
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::HAS_CONFIG,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::HAS_CONFIG,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::HAS_CONFIG,
@@ -20748,6 +20767,7 @@ impl RuleEnum {
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::INFO,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::INFO,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::INFO,
+            Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::INFO,
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::INFO,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::INFO,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::INFO,
@@ -21662,6 +21682,7 @@ impl RuleEnum {
             Self::OxcNoUnknownTypeAliases(rule) => rule.types_info(),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.types_info(),
             Self::OxcNoWeakCipher(rule) => rule.types_info(),
+            Self::OxcNoWeakSsl(rule) => rule.types_info(),
             Self::OxcNoWidenThenAssert(rule) => rule.types_info(),
             Self::OxcNumberArgOutOfRange(rule) => rule.types_info(),
             Self::OxcOnlyUsedInRecursion(rule) => rule.types_info(),
@@ -22559,6 +22580,7 @@ impl RuleEnum {
             Self::OxcNoUnknownTypeAliases(rule) => rule.run_info(),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.run_info(),
             Self::OxcNoWeakCipher(rule) => rule.run_info(),
+            Self::OxcNoWeakSsl(rule) => rule.run_info(),
             Self::OxcNoWidenThenAssert(rule) => rule.run_info(),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_info(),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_info(),
@@ -23582,6 +23604,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoUnknownTypeAliases(OxcNoUnknownTypeAliases::default()),
         RuleEnum::OxcNoUnsafeDictionaryType(OxcNoUnsafeDictionaryType::default()),
         RuleEnum::OxcNoWeakCipher(OxcNoWeakCipher::default()),
+        RuleEnum::OxcNoWeakSsl(OxcNoWeakSsl::default()),
         RuleEnum::OxcNoWidenThenAssert(OxcNoWidenThenAssert::default()),
         RuleEnum::OxcNumberArgOutOfRange(OxcNumberArgOutOfRange::default()),
         RuleEnum::OxcOnlyUsedInRecursion(OxcOnlyUsedInRecursion::default()),

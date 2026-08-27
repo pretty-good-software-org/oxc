@@ -4531,6 +4531,12 @@ impl RuleRunner for crate::rules::oxc::no_weak_cipher::NoWeakCipher {
     const RUN_FUNCTIONS: RuleRunFunctionsImplemented = RuleRunFunctionsImplemented::Run;
 }
 
+impl RuleRunner for crate::rules::oxc::no_weak_ssl::NoWeakSsl {
+    const NODE_TYPES: Option<&AstTypesBitset> =
+        Some(&AstTypesBitset::from_types(&[AstType::StringLiteral]));
+    const RUN_FUNCTIONS: RuleRunFunctionsImplemented = RuleRunFunctionsImplemented::Run;
+}
+
 impl RuleRunner for crate::rules::oxc::no_widen_then_assert::NoWidenThenAssert {
     const NODE_TYPES: Option<&AstTypesBitset> =
         Some(&AstTypesBitset::from_types(&[AstType::TSAsExpression, AstType::TSTypeAssertion]));

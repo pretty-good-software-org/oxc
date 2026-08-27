@@ -1,0 +1,18 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-weak-ssl): Do not use an obsolete SSL or TLS protocol version.
+   ╭─[no_weak_ssl.tsx:1:17]
+ 1 │ const version = "TLSv1.1";
+   ·                 ─────────
+   ╰────
+  help: Require TLS 1.2 or newer.
+
+  ⚠ oxc(no-weak-ssl): Do not use an obsolete SSL or TLS protocol version.
+   ╭─[no_weak_ssl.tsx:1:17]
+ 1 │ const version = "SSLv3";
+   ·                 ───────
+   ╰────
+  help: Require TLS 1.2 or newer.

@@ -785,6 +785,7 @@ pub(crate) mod oxc {
     pub mod no_unknown_type_aliases;
     pub mod no_unsafe_dictionary_type;
     pub mod no_weak_cipher;
+    pub mod no_weak_ssl;
     pub mod no_widen_then_assert;
     pub mod number_arg_out_of_range;
     pub mod only_used_in_recursion;
