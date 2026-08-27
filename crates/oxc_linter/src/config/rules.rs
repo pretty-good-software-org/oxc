@@ -248,6 +248,7 @@ fn transform_rule_and_plugin_name<'a>(
     let (rule_name, plugin_name) = match (plugin_name, rule_name) {
         ("typescript", name) if is_eslint_rule_adapted_to_typescript(name) => (name, "eslint"),
         ("sonarjs", "no-parameter-reassignment") => ("no-param-reassign", "eslint"),
+        ("sonarjs", "no-commented-code") => ("no-commented-code", "oxc"),
         ("sonarjs", "no-identical-expressions") => ("no-identical-expressions", "oxc"),
         ("sonarjs", "bitwise-operators") => ("no-bitwise", "eslint"),
         ("sonarjs", "no-nested-conditional") => ("no-nested-ternary", "eslint"),
