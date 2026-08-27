@@ -70,7 +70,11 @@ fn is_likely_code(content: &str) -> bool {
         ]
         .iter()
         .any(|prefix| line.starts_with(prefix));
-        starts_like_code && (line.contains(';') || line.ends_with('{') || line.ends_with('}'))
+        starts_like_code
+            && (line.contains(';')
+                || (line.starts_with("function ") || line.starts_with("class "))
+                    && line.contains('{')
+                    && line.contains('}'))
     })
 }
 
