@@ -249,6 +249,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("typescript", name) if is_eslint_rule_adapted_to_typescript(name) => (name, "eslint"),
         ("sonarjs", "no-parameter-reassignment") => ("no-param-reassign", "eslint"),
         ("sonarjs", "no-commented-code") => ("no-commented-code", "oxc"),
+        ("sonarjs", "fixme-tag" | "todo-tag") => ("no-warning-comments", "eslint"),
         ("sonarjs", "no-identical-expressions") => ("no-identical-expressions", "oxc"),
         ("sonarjs", "bitwise-operators") => ("no-bitwise", "eslint"),
         ("sonarjs", "no-nested-conditional") => ("no-nested-ternary", "eslint"),
@@ -717,6 +718,11 @@ pub fn normalize_rule_name(name: &str) -> String {
 
 pub(super) fn unalias_plugin_name(plugin_name: &str, rule_name: &str) -> (String, String) {
     let normalized = super::plugins::normalize_plugin_name(plugin_name);
+    if normalized == "sonarjs" {
+        let (rule_name, plugin_name) = transform_rule_and_plugin_name(rule_name, "sonarjs");
+        let plugin_name = if plugin_name == "sonarjs" { "oxc" } else { plugin_name };
+        return (plugin_name.to_string(), rule_name.to_string());
+    }
     let plugin_name = match normalized.as_ref() {
         // e.g. "@next/google-font-display", "@next/next/google-font-display"
         "@next" | "@next/next" => "nextjs".to_string(),
