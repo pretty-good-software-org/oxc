@@ -9,3 +9,10 @@ assertion_line: 505
    ·              ─────────────
    ╰────
   help: Use configuration or a named service instead of embedding an IP address.
+
+  ⚠ oxc(no-hardcoded-ip): Do not hard-code an IP address.
+   ╭─[no_hardcoded_ip.tsx:1:13]
+ 1 │ const url = "https://10.0.0.1/api";
+   ·             ──────────────────────
+   ╰────
+  help: Use configuration or a named service instead of embedding an IP address.

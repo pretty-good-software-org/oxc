@@ -47,8 +47,12 @@ impl Rule for NoHardcodedIp {
 }
 
 fn is_ipv4(value: &str) -> bool {
-    let pattern = regex!(r"\b(?:\d{1,3}\.){3}\d{1,3}\b");
-    pattern.is_match(value) && value.split('.').all(|part| part.parse::<u8>().is_ok())
+    let pattern = regex!(r"(?:^|[^\d])((?:\d{1,3}\.){3}\d{1,3})(?:$|[^\d])");
+    pattern.captures(value).is_some_and(|captures| {
+        captures
+            .get(1)
+            .is_some_and(|ip| ip.as_str().split('.').all(|part| part.parse::<u8>().is_ok()))
+    })
 }
 
 #[test]
@@ -58,7 +62,7 @@ fn test() {
         NoHardcodedIp::NAME,
         NoHardcodedIp::PLUGIN,
         vec![r#"const host = "service.internal";"#, r#"const host = "999.1.1.1";"#],
-        vec![r#"const host = "192.168.0.1";"#],
+        vec![r#"const host = "192.168.0.1";"#, r#"const url = "https://10.0.0.1/api";"#],
     )
     .test_and_snapshot();
 }
