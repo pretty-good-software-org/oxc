@@ -406,6 +406,7 @@ pub use crate::rules::oxc::no_commented_code::NoCommentedCode as OxcNoCommentedC
 pub use crate::rules::oxc::no_conditional_empty_object_spread::NoConditionalEmptyObjectSpread as OxcNoConditionalEmptyObjectSpread;
 pub use crate::rules::oxc::no_const_enum::NoConstEnum as OxcNoConstEnum;
 pub use crate::rules::oxc::no_hardcoded_ip::NoHardcodedIp as OxcNoHardcodedIp;
+pub use crate::rules::oxc::no_hardcoded_passwords::NoHardcodedPasswords as OxcNoHardcodedPasswords;
 pub use crate::rules::oxc::no_identical_expressions::NoIdenticalExpressions as OxcNoIdenticalExpressions;
 pub use crate::rules::oxc::no_known_value_widening::NoKnownValueWidening as OxcNoKnownValueWidening;
 pub use crate::rules::oxc::no_map_spread::NoMapSpread as OxcNoMapSpread;
@@ -1593,6 +1594,7 @@ pub enum RuleEnum {
     OxcNoConditionalEmptyObjectSpread(OxcNoConditionalEmptyObjectSpread),
     OxcNoConstEnum(OxcNoConstEnum),
     OxcNoHardcodedIp(OxcNoHardcodedIp),
+    OxcNoHardcodedPasswords(OxcNoHardcodedPasswords),
     OxcNoIdenticalExpressions(OxcNoIdenticalExpressions),
     OxcNoKnownValueWidening(OxcNoKnownValueWidening),
     OxcNoMapSpread(OxcNoMapSpread),
@@ -2576,7 +2578,8 @@ const OXC_NO_COMMENTED_CODE_ID: usize = OXC_NO_CHAINED_TYPE_ASSERTIONS_ID + 1usi
 const OXC_NO_CONDITIONAL_EMPTY_OBJECT_SPREAD_ID: usize = OXC_NO_COMMENTED_CODE_ID + 1usize;
 const OXC_NO_CONST_ENUM_ID: usize = OXC_NO_CONDITIONAL_EMPTY_OBJECT_SPREAD_ID + 1usize;
 const OXC_NO_HARDCODED_IP_ID: usize = OXC_NO_CONST_ENUM_ID + 1usize;
-const OXC_NO_IDENTICAL_EXPRESSIONS_ID: usize = OXC_NO_HARDCODED_IP_ID + 1usize;
+const OXC_NO_HARDCODED_PASSWORDS_ID: usize = OXC_NO_HARDCODED_IP_ID + 1usize;
+const OXC_NO_IDENTICAL_EXPRESSIONS_ID: usize = OXC_NO_HARDCODED_PASSWORDS_ID + 1usize;
 const OXC_NO_KNOWN_VALUE_WIDENING_ID: usize = OXC_NO_IDENTICAL_EXPRESSIONS_ID + 1usize;
 const OXC_NO_MAP_SPREAD_ID: usize = OXC_NO_KNOWN_VALUE_WIDENING_ID + 1usize;
 const OXC_NO_MODULE_MOCKING_ID: usize = OXC_NO_MAP_SPREAD_ID + 1usize;
@@ -2807,7 +2810,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 889usize] = [
+static RULE_NAMES: [&str; 890usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3486,6 +3489,7 @@ static RULE_NAMES: [&str; 889usize] = [
     OxcNoConditionalEmptyObjectSpread::NAME,
     OxcNoConstEnum::NAME,
     OxcNoHardcodedIp::NAME,
+    OxcNoHardcodedPasswords::NAME,
     OxcNoIdenticalExpressions::NAME,
     OxcNoKnownValueWidening::NAME,
     OxcNoMapSpread::NAME,
@@ -4495,6 +4499,7 @@ impl RuleEnum {
             Self::OxcNoConditionalEmptyObjectSpread(_) => OXC_NO_CONDITIONAL_EMPTY_OBJECT_SPREAD_ID,
             Self::OxcNoConstEnum(_) => OXC_NO_CONST_ENUM_ID,
             Self::OxcNoHardcodedIp(_) => OXC_NO_HARDCODED_IP_ID,
+            Self::OxcNoHardcodedPasswords(_) => OXC_NO_HARDCODED_PASSWORDS_ID,
             Self::OxcNoIdenticalExpressions(_) => OXC_NO_IDENTICAL_EXPRESSIONS_ID,
             Self::OxcNoKnownValueWidening(_) => OXC_NO_KNOWN_VALUE_WIDENING_ID,
             Self::OxcNoMapSpread(_) => OXC_NO_MAP_SPREAD_ID,
@@ -5559,6 +5564,7 @@ impl RuleEnum {
             }
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::CATEGORY,
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::CATEGORY,
+            Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::CATEGORY,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::CATEGORY,
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::CATEGORY,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::CATEGORY,
@@ -6583,6 +6589,7 @@ impl RuleEnum {
             Self::OxcNoConditionalEmptyObjectSpread(_) => OxcNoConditionalEmptyObjectSpread::FIX,
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::FIX,
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::FIX,
+            Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::FIX,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::FIX,
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::FIX,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::FIX,
@@ -7811,6 +7818,7 @@ impl RuleEnum {
             }
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::documentation(),
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::documentation(),
+            Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::documentation(),
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::documentation(),
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::documentation(),
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::documentation(),
@@ -10057,6 +10065,8 @@ impl RuleEnum {
                 .or_else(|| OxcNoConstEnum::schema(generator)),
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::config_schema(generator)
                 .or_else(|| OxcNoHardcodedIp::schema(generator)),
+            Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::config_schema(generator)
+                .or_else(|| OxcNoHardcodedPasswords::schema(generator)),
             Self::OxcNoIdenticalExpressions(_) => {
                 OxcNoIdenticalExpressions::config_schema(generator)
                     .or_else(|| OxcNoIdenticalExpressions::schema(generator))
@@ -11322,6 +11332,7 @@ impl RuleEnum {
             Self::OxcNoConditionalEmptyObjectSpread(_) => "oxc",
             Self::OxcNoConstEnum(_) => "oxc",
             Self::OxcNoHardcodedIp(_) => "oxc",
+            Self::OxcNoHardcodedPasswords(_) => "oxc",
             Self::OxcNoIdenticalExpressions(_) => "oxc",
             Self::OxcNoKnownValueWidening(_) => "oxc",
             Self::OxcNoMapSpread(_) => "oxc",
@@ -12437,6 +12448,9 @@ impl RuleEnum {
             Self::OxcNoBarrelFile(_) => {
                 Ok(Self::OxcNoBarrelFile(OxcNoBarrelFile::from_configuration(value)?))
             }
+            Self::OxcNoHardcodedPasswords(_) => Ok(Self::OxcNoHardcodedPasswords(
+                OxcNoHardcodedPasswords::from_configuration(value)?,
+            )),
             Self::OxcNoMapSpread(_) => {
                 Ok(Self::OxcNoMapSpread(OxcNoMapSpread::from_configuration(value)?))
             }
@@ -13346,6 +13360,7 @@ impl RuleEnum {
             Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.run(node, ctx),
             Self::OxcNoConstEnum(rule) => rule.run(node, ctx),
             Self::OxcNoHardcodedIp(rule) => rule.run(node, ctx),
+            Self::OxcNoHardcodedPasswords(rule) => rule.run(node, ctx),
             Self::OxcNoIdenticalExpressions(rule) => rule.run(node, ctx),
             Self::OxcNoKnownValueWidening(rule) => rule.run(node, ctx),
             Self::OxcNoMapSpread(rule) => rule.run(node, ctx),
@@ -14252,6 +14267,7 @@ impl RuleEnum {
             Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.run_once(ctx),
             Self::OxcNoConstEnum(rule) => rule.run_once(ctx),
             Self::OxcNoHardcodedIp(rule) => rule.run_once(ctx),
+            Self::OxcNoHardcodedPasswords(rule) => rule.run_once(ctx),
             Self::OxcNoIdenticalExpressions(rule) => rule.run_once(ctx),
             Self::OxcNoKnownValueWidening(rule) => rule.run_once(ctx),
             Self::OxcNoMapSpread(rule) => rule.run_once(ctx),
@@ -15265,6 +15281,7 @@ impl RuleEnum {
             Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoConstEnum(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoHardcodedIp(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoHardcodedPasswords(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoIdenticalExpressions(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoKnownValueWidening(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoMapSpread(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16184,6 +16201,7 @@ impl RuleEnum {
             Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.should_run(ctx),
             Self::OxcNoConstEnum(rule) => rule.should_run(ctx),
             Self::OxcNoHardcodedIp(rule) => rule.should_run(ctx),
+            Self::OxcNoHardcodedPasswords(rule) => rule.should_run(ctx),
             Self::OxcNoIdenticalExpressions(rule) => rule.should_run(ctx),
             Self::OxcNoKnownValueWidening(rule) => rule.should_run(ctx),
             Self::OxcNoMapSpread(rule) => rule.should_run(ctx),
@@ -17399,6 +17417,7 @@ impl RuleEnum {
             }
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::IS_TSGOLINT_RULE,
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::IS_TSGOLINT_RULE,
+            Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::IS_TSGOLINT_RULE,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::IS_TSGOLINT_RULE,
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::IS_TSGOLINT_RULE,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::IS_TSGOLINT_RULE,
@@ -18516,6 +18535,7 @@ impl RuleEnum {
             }
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::VERSION,
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::VERSION,
+            Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::VERSION,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::VERSION,
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::VERSION,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::VERSION,
@@ -19620,6 +19640,7 @@ impl RuleEnum {
             }
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::HAS_CONFIG,
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::HAS_CONFIG,
+            Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::HAS_CONFIG,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::HAS_CONFIG,
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::HAS_CONFIG,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::HAS_CONFIG,
@@ -20653,6 +20674,7 @@ impl RuleEnum {
             Self::OxcNoConditionalEmptyObjectSpread(_) => OxcNoConditionalEmptyObjectSpread::INFO,
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::INFO,
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::INFO,
+            Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::INFO,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::INFO,
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::INFO,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::INFO,
@@ -21563,6 +21585,7 @@ impl RuleEnum {
             Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.types_info(),
             Self::OxcNoConstEnum(rule) => rule.types_info(),
             Self::OxcNoHardcodedIp(rule) => rule.types_info(),
+            Self::OxcNoHardcodedPasswords(rule) => rule.types_info(),
             Self::OxcNoIdenticalExpressions(rule) => rule.types_info(),
             Self::OxcNoKnownValueWidening(rule) => rule.types_info(),
             Self::OxcNoMapSpread(rule) => rule.types_info(),
@@ -22456,6 +22479,7 @@ impl RuleEnum {
             Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.run_info(),
             Self::OxcNoConstEnum(rule) => rule.run_info(),
             Self::OxcNoHardcodedIp(rule) => rule.run_info(),
+            Self::OxcNoHardcodedPasswords(rule) => rule.run_info(),
             Self::OxcNoIdenticalExpressions(rule) => rule.run_info(),
             Self::OxcNoKnownValueWidening(rule) => rule.run_info(),
             Self::OxcNoMapSpread(rule) => rule.run_info(),
@@ -23475,6 +23499,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoConditionalEmptyObjectSpread(OxcNoConditionalEmptyObjectSpread::default()),
         RuleEnum::OxcNoConstEnum(OxcNoConstEnum::default()),
         RuleEnum::OxcNoHardcodedIp(OxcNoHardcodedIp::default()),
+        RuleEnum::OxcNoHardcodedPasswords(OxcNoHardcodedPasswords::default()),
         RuleEnum::OxcNoIdenticalExpressions(OxcNoIdenticalExpressions::default()),
         RuleEnum::OxcNoKnownValueWidening(OxcNoKnownValueWidening::default()),
         RuleEnum::OxcNoMapSpread(OxcNoMapSpread::default()),

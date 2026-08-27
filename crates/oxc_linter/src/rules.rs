@@ -765,6 +765,7 @@ pub(crate) mod oxc {
     pub mod no_conditional_empty_object_spread;
     pub mod no_const_enum;
     pub mod no_hardcoded_ip;
+    pub mod no_hardcoded_passwords;
     pub mod no_identical_expressions;
     pub mod no_known_value_widening;
     pub mod no_map_spread;
