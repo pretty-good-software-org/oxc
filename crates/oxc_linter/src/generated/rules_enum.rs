@@ -415,6 +415,7 @@ pub use crate::rules::oxc::no_map_spread::NoMapSpread as OxcNoMapSpread;
 pub use crate::rules::oxc::no_module_mocking::NoModuleMocking as OxcNoModuleMocking;
 pub use crate::rules::oxc::no_object_parameters::NoObjectParameters as OxcNoObjectParameters;
 pub use crate::rules::oxc::no_optional_chaining::NoOptionalChaining as OxcNoOptionalChaining;
+pub use crate::rules::oxc::no_os_command_from_path::NoOsCommandFromPath as OxcNoOsCommandFromPath;
 pub use crate::rules::oxc::no_reflect_apply::NoReflectApply as OxcNoReflectApply;
 pub use crate::rules::oxc::no_reflect_get::NoReflectGet as OxcNoReflectGet;
 pub use crate::rules::oxc::no_rest_spread_properties::NoRestSpreadProperties as OxcNoRestSpreadProperties;
@@ -1609,6 +1610,7 @@ pub enum RuleEnum {
     OxcNoModuleMocking(OxcNoModuleMocking),
     OxcNoObjectParameters(OxcNoObjectParameters),
     OxcNoOptionalChaining(OxcNoOptionalChaining),
+    OxcNoOsCommandFromPath(OxcNoOsCommandFromPath),
     OxcNoReflectApply(OxcNoReflectApply),
     OxcNoReflectGet(OxcNoReflectGet),
     OxcNoRestSpreadProperties(OxcNoRestSpreadProperties),
@@ -2599,7 +2601,8 @@ const OXC_NO_MAP_SPREAD_ID: usize = OXC_NO_KNOWN_VALUE_WIDENING_ID + 1usize;
 const OXC_NO_MODULE_MOCKING_ID: usize = OXC_NO_MAP_SPREAD_ID + 1usize;
 const OXC_NO_OBJECT_PARAMETERS_ID: usize = OXC_NO_MODULE_MOCKING_ID + 1usize;
 const OXC_NO_OPTIONAL_CHAINING_ID: usize = OXC_NO_OBJECT_PARAMETERS_ID + 1usize;
-const OXC_NO_REFLECT_APPLY_ID: usize = OXC_NO_OPTIONAL_CHAINING_ID + 1usize;
+const OXC_NO_OS_COMMAND_FROM_PATH_ID: usize = OXC_NO_OPTIONAL_CHAINING_ID + 1usize;
+const OXC_NO_REFLECT_APPLY_ID: usize = OXC_NO_OS_COMMAND_FROM_PATH_ID + 1usize;
 const OXC_NO_REFLECT_GET_ID: usize = OXC_NO_REFLECT_APPLY_ID + 1usize;
 const OXC_NO_REST_SPREAD_PROPERTIES_ID: usize = OXC_NO_REFLECT_GET_ID + 1usize;
 const OXC_NO_RUNTIME_TYPEOF_ID: usize = OXC_NO_REST_SPREAD_PROPERTIES_ID + 1usize;
@@ -2828,7 +2831,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 896usize] = [
+static RULE_NAMES: [&str; 897usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3516,6 +3519,7 @@ static RULE_NAMES: [&str; 896usize] = [
     OxcNoModuleMocking::NAME,
     OxcNoObjectParameters::NAME,
     OxcNoOptionalChaining::NAME,
+    OxcNoOsCommandFromPath::NAME,
     OxcNoReflectApply::NAME,
     OxcNoReflectGet::NAME,
     OxcNoRestSpreadProperties::NAME,
@@ -4532,6 +4536,7 @@ impl RuleEnum {
             Self::OxcNoModuleMocking(_) => OXC_NO_MODULE_MOCKING_ID,
             Self::OxcNoObjectParameters(_) => OXC_NO_OBJECT_PARAMETERS_ID,
             Self::OxcNoOptionalChaining(_) => OXC_NO_OPTIONAL_CHAINING_ID,
+            Self::OxcNoOsCommandFromPath(_) => OXC_NO_OS_COMMAND_FROM_PATH_ID,
             Self::OxcNoReflectApply(_) => OXC_NO_REFLECT_APPLY_ID,
             Self::OxcNoReflectGet(_) => OXC_NO_REFLECT_GET_ID,
             Self::OxcNoRestSpreadProperties(_) => OXC_NO_REST_SPREAD_PROPERTIES_ID,
@@ -5603,6 +5608,7 @@ impl RuleEnum {
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::CATEGORY,
             Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::CATEGORY,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::CATEGORY,
+            Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::CATEGORY,
             Self::OxcNoReflectApply(_) => OxcNoReflectApply::CATEGORY,
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::CATEGORY,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::CATEGORY,
@@ -6634,6 +6640,7 @@ impl RuleEnum {
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::FIX,
             Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::FIX,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::FIX,
+            Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::FIX,
             Self::OxcNoReflectApply(_) => OxcNoReflectApply::FIX,
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::FIX,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::FIX,
@@ -7869,6 +7876,7 @@ impl RuleEnum {
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::documentation(),
             Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::documentation(),
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::documentation(),
+            Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::documentation(),
             Self::OxcNoReflectApply(_) => OxcNoReflectApply::documentation(),
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::documentation(),
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::documentation(),
@@ -10133,6 +10141,8 @@ impl RuleEnum {
                 .or_else(|| OxcNoObjectParameters::schema(generator)),
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::config_schema(generator)
                 .or_else(|| OxcNoOptionalChaining::schema(generator)),
+            Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::config_schema(generator)
+                .or_else(|| OxcNoOsCommandFromPath::schema(generator)),
             Self::OxcNoReflectApply(_) => OxcNoReflectApply::config_schema(generator)
                 .or_else(|| OxcNoReflectApply::schema(generator)),
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::config_schema(generator)
@@ -11404,6 +11414,7 @@ impl RuleEnum {
             Self::OxcNoModuleMocking(_) => "oxc",
             Self::OxcNoObjectParameters(_) => "oxc",
             Self::OxcNoOptionalChaining(_) => "oxc",
+            Self::OxcNoOsCommandFromPath(_) => "oxc",
             Self::OxcNoReflectApply(_) => "oxc",
             Self::OxcNoReflectGet(_) => "oxc",
             Self::OxcNoRestSpreadProperties(_) => "oxc",
@@ -13438,6 +13449,7 @@ impl RuleEnum {
             Self::OxcNoModuleMocking(rule) => rule.run(node, ctx),
             Self::OxcNoObjectParameters(rule) => rule.run(node, ctx),
             Self::OxcNoOptionalChaining(rule) => rule.run(node, ctx),
+            Self::OxcNoOsCommandFromPath(rule) => rule.run(node, ctx),
             Self::OxcNoReflectApply(rule) => rule.run(node, ctx),
             Self::OxcNoReflectGet(rule) => rule.run(node, ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.run(node, ctx),
@@ -14351,6 +14363,7 @@ impl RuleEnum {
             Self::OxcNoModuleMocking(rule) => rule.run_once(ctx),
             Self::OxcNoObjectParameters(rule) => rule.run_once(ctx),
             Self::OxcNoOptionalChaining(rule) => rule.run_once(ctx),
+            Self::OxcNoOsCommandFromPath(rule) => rule.run_once(ctx),
             Self::OxcNoReflectApply(rule) => rule.run_once(ctx),
             Self::OxcNoReflectGet(rule) => rule.run_once(ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.run_once(ctx),
@@ -15371,6 +15384,7 @@ impl RuleEnum {
             Self::OxcNoModuleMocking(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoObjectParameters(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoOptionalChaining(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoOsCommandFromPath(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoReflectApply(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoReflectGet(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16297,6 +16311,7 @@ impl RuleEnum {
             Self::OxcNoModuleMocking(rule) => rule.should_run(ctx),
             Self::OxcNoObjectParameters(rule) => rule.should_run(ctx),
             Self::OxcNoOptionalChaining(rule) => rule.should_run(ctx),
+            Self::OxcNoOsCommandFromPath(rule) => rule.should_run(ctx),
             Self::OxcNoReflectApply(rule) => rule.should_run(ctx),
             Self::OxcNoReflectGet(rule) => rule.should_run(ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.should_run(ctx),
@@ -17519,6 +17534,7 @@ impl RuleEnum {
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::IS_TSGOLINT_RULE,
             Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::IS_TSGOLINT_RULE,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::IS_TSGOLINT_RULE,
+            Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::IS_TSGOLINT_RULE,
             Self::OxcNoReflectApply(_) => OxcNoReflectApply::IS_TSGOLINT_RULE,
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::IS_TSGOLINT_RULE,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::IS_TSGOLINT_RULE,
@@ -18643,6 +18659,7 @@ impl RuleEnum {
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::VERSION,
             Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::VERSION,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::VERSION,
+            Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::VERSION,
             Self::OxcNoReflectApply(_) => OxcNoReflectApply::VERSION,
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::VERSION,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::VERSION,
@@ -19754,6 +19771,7 @@ impl RuleEnum {
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::HAS_CONFIG,
             Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::HAS_CONFIG,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::HAS_CONFIG,
+            Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::HAS_CONFIG,
             Self::OxcNoReflectApply(_) => OxcNoReflectApply::HAS_CONFIG,
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::HAS_CONFIG,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::HAS_CONFIG,
@@ -20794,6 +20812,7 @@ impl RuleEnum {
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::INFO,
             Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::INFO,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::INFO,
+            Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::INFO,
             Self::OxcNoReflectApply(_) => OxcNoReflectApply::INFO,
             Self::OxcNoReflectGet(_) => OxcNoReflectGet::INFO,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::INFO,
@@ -21711,6 +21730,7 @@ impl RuleEnum {
             Self::OxcNoModuleMocking(rule) => rule.types_info(),
             Self::OxcNoObjectParameters(rule) => rule.types_info(),
             Self::OxcNoOptionalChaining(rule) => rule.types_info(),
+            Self::OxcNoOsCommandFromPath(rule) => rule.types_info(),
             Self::OxcNoReflectApply(rule) => rule.types_info(),
             Self::OxcNoReflectGet(rule) => rule.types_info(),
             Self::OxcNoRestSpreadProperties(rule) => rule.types_info(),
@@ -22611,6 +22631,7 @@ impl RuleEnum {
             Self::OxcNoModuleMocking(rule) => rule.run_info(),
             Self::OxcNoObjectParameters(rule) => rule.run_info(),
             Self::OxcNoOptionalChaining(rule) => rule.run_info(),
+            Self::OxcNoOsCommandFromPath(rule) => rule.run_info(),
             Self::OxcNoReflectApply(rule) => rule.run_info(),
             Self::OxcNoReflectGet(rule) => rule.run_info(),
             Self::OxcNoRestSpreadProperties(rule) => rule.run_info(),
@@ -23637,6 +23658,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoModuleMocking(OxcNoModuleMocking::default()),
         RuleEnum::OxcNoObjectParameters(OxcNoObjectParameters::default()),
         RuleEnum::OxcNoOptionalChaining(OxcNoOptionalChaining::default()),
+        RuleEnum::OxcNoOsCommandFromPath(OxcNoOsCommandFromPath::default()),
         RuleEnum::OxcNoReflectApply(OxcNoReflectApply::default()),
         RuleEnum::OxcNoReflectGet(OxcNoReflectGet::default()),
         RuleEnum::OxcNoRestSpreadProperties(OxcNoRestSpreadProperties::default()),
