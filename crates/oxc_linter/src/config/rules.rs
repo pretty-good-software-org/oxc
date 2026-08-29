@@ -250,6 +250,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "no-parameter-reassignment") => ("no-param-reassign", "eslint"),
         ("sonarjs", "no-async-constructor") => ("no-async-constructor", "oxc"),
         ("sonarjs", "no-clear-text-protocols") => ("no-clear-text-protocols", "oxc"),
+        ("sonarjs", "no-collection-size-mischeck") => ("no-collection-size-mischeck", "oxc"),
         ("sonarjs", "no-commented-code") => ("no-commented-code", "oxc"),
         ("sonarjs", "no-global-this") => ("no-global-this", "oxc"),
         ("sonarjs", "no-hardcoded-ip") => ("no-hardcoded-ip", "oxc"),
