@@ -768,6 +768,7 @@ pub(crate) mod oxc {
     pub mod no_commented_code;
     pub mod no_conditional_empty_object_spread;
     pub mod no_const_enum;
+    pub mod no_equals_in_for_termination;
     pub mod no_global_this;
     pub mod no_hardcoded_ip;
     pub mod no_hardcoded_passwords;
