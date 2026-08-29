@@ -1,6 +1,7 @@
 use oxc_ast::AstKind;
 use oxc_diagnostics::OxcDiagnostic;
 use oxc_macros::declare_oxc_lint;
+use oxc_span::GetSpan;
 
 use crate::{AstNode, context::LintContext, rule::Rule, utils::is_same_expression};
 
@@ -21,6 +22,21 @@ declare_oxc_lint!(
 
 impl Rule for NoDuplicatedBranches {
     fn run<'a>(&self, node: &AstNode<'a>, ctx: &LintContext<'a>) {
+        if let AstKind::IfStatement(statement) = node.kind() {
+            let Some(alternate) = &statement.alternate else {
+                return;
+            };
+            if ctx.source_range(statement.consequent.span()).trim()
+                == ctx.source_range(alternate.span()).trim()
+            {
+                ctx.diagnostic(
+                    OxcDiagnostic::warn("Remove the duplicated conditional branch.")
+                        .with_help("Keep one branch or replace it with the intended alternative.")
+                        .with_label(statement.span),
+                );
+            }
+            return;
+        }
         let AstKind::ConditionalExpression(expression) = node.kind() else {
             return;
         };
@@ -41,7 +57,10 @@ fn test() {
         NoDuplicatedBranches::NAME,
         NoDuplicatedBranches::PLUGIN,
         vec!["const result = condition ? left : right;"],
-        vec!["const result = condition ? value : value;"],
+        vec![
+            "const result = condition ? value : value;",
+            "if (condition) { value(); } else { value(); }",
+        ],
     )
     .test_and_snapshot();
 }

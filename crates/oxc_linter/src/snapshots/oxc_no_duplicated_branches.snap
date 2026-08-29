@@ -9,3 +9,10 @@ assertion_line: 505
    ·                ─────────────────────────
    ╰────
   help: Keep one branch or replace it with the intended alternative.
+
+  ⚠ oxc(no-duplicated-branches): Remove the duplicated conditional branch.
+   ╭─[no_duplicated_branches.tsx:1:1]
+ 1 │ if (condition) { value(); } else { value(); }
+   · ─────────────────────────────────────────────
+   ╰────
+  help: Keep one branch or replace it with the intended alternative.
