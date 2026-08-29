@@ -6,8 +6,8 @@ use std::net::IpAddr;
 
 use crate::{AstNode, context::LintContext, rule::Rule};
 
-fn diagnostic(span: Span) -> OxcDiagnostic {
-    OxcDiagnostic::warn("Do not hard-code an IP address.")
+fn diagnostic(value: &str, span: Span) -> OxcDiagnostic {
+    OxcDiagnostic::warn(format!("Make sure using a hardcoded IP address {value} is safe here."))
         .with_help("Use configuration or a named service instead of embedding an IP address.")
         .with_label(span)
 }
@@ -41,7 +41,7 @@ impl Rule for NoHardcodedIp {
             _ => return,
         };
         if is_ipv4(expression) {
-            ctx.diagnostic(diagnostic(node.span()));
+            ctx.diagnostic(diagnostic(expression, node.span()));
         }
     }
 }
