@@ -251,6 +251,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "no-async-constructor") => ("no-async-constructor", "oxc"),
         ("sonarjs", "constructor-for-side-effects") => ("constructor-for-side-effects", "oxc"),
         ("sonarjs", "no-empty-group") => ("no-empty-group", "oxc"),
+        ("sonarjs", "no-empty-alternatives") => ("no-empty-alternatives", "oxc"),
         ("sonarjs", "no-equals-in-for-termination") => ("no-equals-in-for-termination", "oxc"),
         ("sonarjs", "no-case-label-in-switch") => ("no-case-label-in-switch", "oxc"),
         ("sonarjs", "no-clear-text-protocols") => ("no-clear-text-protocols", "oxc"),

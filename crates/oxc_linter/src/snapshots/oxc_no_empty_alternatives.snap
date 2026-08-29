@@ -1,0 +1,18 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-empty-alternatives): Remove the empty regular-expression alternative.
+   ╭─[no_empty_alternatives.tsx:1:17]
+ 1 │ const pattern = /value|/;
+   ·                 ────────
+   ╰────
+  help: Replace the empty alternative with the intended pattern.
+
+  ⚠ oxc(no-empty-alternatives): Remove the empty regular-expression alternative.
+   ╭─[no_empty_alternatives.tsx:1:17]
+ 1 │ const pattern = /(|value)/;
+   ·                 ──────────
+   ╰────
+  help: Replace the empty alternative with the intended pattern.
