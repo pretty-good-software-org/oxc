@@ -262,6 +262,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "no-hardcoded-passwords") => ("no-hardcoded-passwords", "oxc"),
         ("sonarjs", "no-hardcoded-secrets") => ("no-hardcoded-secrets", "oxc"),
         ("sonarjs", "insecure-cookie" | "no-insecure-cookie") => ("no-insecure-cookie", "oxc"),
+        ("sonarjs", "no-inverted-boolean-check") => ("no-inverted-boolean-check", "oxc"),
         ("sonarjs", "no-weak-cipher") => ("no-weak-cipher", "oxc"),
         ("sonarjs", "no-weak-ssl" | "weak-ssl") => ("no-weak-ssl", "oxc"),
         ("sonarjs", "no-unverified-certificate" | "unverified-certificate") => {

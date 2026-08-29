@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-inverted-boolean-check): Use the opposite operator `!==` instead.
+   ╭─[no_inverted_boolean_check.tsx:1:5]
+ 1 │ if (!(value === expected)) {}
+   ·     ─────────────────────
+   ╰────
+  help: Invert the comparison operator rather than the whole expression.
