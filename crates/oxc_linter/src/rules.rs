@@ -784,6 +784,7 @@ pub(crate) mod oxc {
     pub mod no_module_mocking;
     pub mod no_nested_assignment;
     pub mod no_nested_functions;
+    pub mod no_nested_template_literals;
     pub mod no_object_parameters;
     pub mod no_optional_chaining;
     pub mod no_os_command_from_path;

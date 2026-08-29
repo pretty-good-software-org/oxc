@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-nested-template-literals): Do not nest template literals.
+   ╭─[no_nested_template_literals.tsx:1:18]
+ 1 │ const value = `${`${prefix}${suffix}`}`;
+   ·                  ────────────────────
+   ╰────
+  help: Extract the inner template or simplify the interpolation.
