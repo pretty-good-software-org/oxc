@@ -758,6 +758,7 @@ pub(crate) mod oxc {
     pub mod missing_throw;
     pub mod no_accumulating_spread;
     pub mod no_async_await;
+    pub mod no_async_constructor;
     pub mod no_async_endpoint_handlers;
     pub mod no_barrel_file;
     pub mod no_chained_type_assertions;
