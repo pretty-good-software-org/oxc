@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-nested-assignment): Do not nest assignments.
+   ╭─[no_nested_assignment.tsx:1:29]
+ 1 │ let left; let right; left = right = 1;
+   ·                             ─────────
+   ╰────
+  help: Split the assignments into separate statements.

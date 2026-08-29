@@ -419,6 +419,7 @@ pub use crate::rules::oxc::no_insecure_cookie::NoInsecureCookie as OxcNoInsecure
 pub use crate::rules::oxc::no_known_value_widening::NoKnownValueWidening as OxcNoKnownValueWidening;
 pub use crate::rules::oxc::no_map_spread::NoMapSpread as OxcNoMapSpread;
 pub use crate::rules::oxc::no_module_mocking::NoModuleMocking as OxcNoModuleMocking;
+pub use crate::rules::oxc::no_nested_assignment::NoNestedAssignment as OxcNoNestedAssignment;
 pub use crate::rules::oxc::no_object_parameters::NoObjectParameters as OxcNoObjectParameters;
 pub use crate::rules::oxc::no_optional_chaining::NoOptionalChaining as OxcNoOptionalChaining;
 pub use crate::rules::oxc::no_os_command_from_path::NoOsCommandFromPath as OxcNoOsCommandFromPath;
@@ -1621,6 +1622,7 @@ pub enum RuleEnum {
     OxcNoKnownValueWidening(OxcNoKnownValueWidening),
     OxcNoMapSpread(OxcNoMapSpread),
     OxcNoModuleMocking(OxcNoModuleMocking),
+    OxcNoNestedAssignment(OxcNoNestedAssignment),
     OxcNoObjectParameters(OxcNoObjectParameters),
     OxcNoOptionalChaining(OxcNoOptionalChaining),
     OxcNoOsCommandFromPath(OxcNoOsCommandFromPath),
@@ -2619,7 +2621,8 @@ const OXC_NO_INSECURE_COOKIE_ID: usize = OXC_NO_IDENTICAL_EXPRESSIONS_ID + 1usiz
 const OXC_NO_KNOWN_VALUE_WIDENING_ID: usize = OXC_NO_INSECURE_COOKIE_ID + 1usize;
 const OXC_NO_MAP_SPREAD_ID: usize = OXC_NO_KNOWN_VALUE_WIDENING_ID + 1usize;
 const OXC_NO_MODULE_MOCKING_ID: usize = OXC_NO_MAP_SPREAD_ID + 1usize;
-const OXC_NO_OBJECT_PARAMETERS_ID: usize = OXC_NO_MODULE_MOCKING_ID + 1usize;
+const OXC_NO_NESTED_ASSIGNMENT_ID: usize = OXC_NO_MODULE_MOCKING_ID + 1usize;
+const OXC_NO_OBJECT_PARAMETERS_ID: usize = OXC_NO_NESTED_ASSIGNMENT_ID + 1usize;
 const OXC_NO_OPTIONAL_CHAINING_ID: usize = OXC_NO_OBJECT_PARAMETERS_ID + 1usize;
 const OXC_NO_OS_COMMAND_FROM_PATH_ID: usize = OXC_NO_OPTIONAL_CHAINING_ID + 1usize;
 const OXC_NO_REFLECT_APPLY_ID: usize = OXC_NO_OS_COMMAND_FROM_PATH_ID + 1usize;
@@ -2852,7 +2855,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 904usize] = [
+static RULE_NAMES: [&str; 905usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3544,6 +3547,7 @@ static RULE_NAMES: [&str; 904usize] = [
     OxcNoKnownValueWidening::NAME,
     OxcNoMapSpread::NAME,
     OxcNoModuleMocking::NAME,
+    OxcNoNestedAssignment::NAME,
     OxcNoObjectParameters::NAME,
     OxcNoOptionalChaining::NAME,
     OxcNoOsCommandFromPath::NAME,
@@ -4568,6 +4572,7 @@ impl RuleEnum {
             Self::OxcNoKnownValueWidening(_) => OXC_NO_KNOWN_VALUE_WIDENING_ID,
             Self::OxcNoMapSpread(_) => OXC_NO_MAP_SPREAD_ID,
             Self::OxcNoModuleMocking(_) => OXC_NO_MODULE_MOCKING_ID,
+            Self::OxcNoNestedAssignment(_) => OXC_NO_NESTED_ASSIGNMENT_ID,
             Self::OxcNoObjectParameters(_) => OXC_NO_OBJECT_PARAMETERS_ID,
             Self::OxcNoOptionalChaining(_) => OXC_NO_OPTIONAL_CHAINING_ID,
             Self::OxcNoOsCommandFromPath(_) => OXC_NO_OS_COMMAND_FROM_PATH_ID,
@@ -5647,6 +5652,7 @@ impl RuleEnum {
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::CATEGORY,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::CATEGORY,
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::CATEGORY,
+            Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::CATEGORY,
             Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::CATEGORY,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::CATEGORY,
             Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::CATEGORY,
@@ -6686,6 +6692,7 @@ impl RuleEnum {
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::FIX,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::FIX,
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::FIX,
+            Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::FIX,
             Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::FIX,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::FIX,
             Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::FIX,
@@ -7929,6 +7936,7 @@ impl RuleEnum {
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::documentation(),
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::documentation(),
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::documentation(),
+            Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::documentation(),
             Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::documentation(),
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::documentation(),
             Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::documentation(),
@@ -10209,6 +10217,8 @@ impl RuleEnum {
                 .or_else(|| OxcNoMapSpread::schema(generator)),
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::config_schema(generator)
                 .or_else(|| OxcNoModuleMocking::schema(generator)),
+            Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::config_schema(generator)
+                .or_else(|| OxcNoNestedAssignment::schema(generator)),
             Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::config_schema(generator)
                 .or_else(|| OxcNoObjectParameters::schema(generator)),
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::config_schema(generator)
@@ -11492,6 +11502,7 @@ impl RuleEnum {
             Self::OxcNoKnownValueWidening(_) => "oxc",
             Self::OxcNoMapSpread(_) => "oxc",
             Self::OxcNoModuleMocking(_) => "oxc",
+            Self::OxcNoNestedAssignment(_) => "oxc",
             Self::OxcNoObjectParameters(_) => "oxc",
             Self::OxcNoOptionalChaining(_) => "oxc",
             Self::OxcNoOsCommandFromPath(_) => "oxc",
@@ -13534,6 +13545,7 @@ impl RuleEnum {
             Self::OxcNoKnownValueWidening(rule) => rule.run(node, ctx),
             Self::OxcNoMapSpread(rule) => rule.run(node, ctx),
             Self::OxcNoModuleMocking(rule) => rule.run(node, ctx),
+            Self::OxcNoNestedAssignment(rule) => rule.run(node, ctx),
             Self::OxcNoObjectParameters(rule) => rule.run(node, ctx),
             Self::OxcNoOptionalChaining(rule) => rule.run(node, ctx),
             Self::OxcNoOsCommandFromPath(rule) => rule.run(node, ctx),
@@ -14455,6 +14467,7 @@ impl RuleEnum {
             Self::OxcNoKnownValueWidening(rule) => rule.run_once(ctx),
             Self::OxcNoMapSpread(rule) => rule.run_once(ctx),
             Self::OxcNoModuleMocking(rule) => rule.run_once(ctx),
+            Self::OxcNoNestedAssignment(rule) => rule.run_once(ctx),
             Self::OxcNoObjectParameters(rule) => rule.run_once(ctx),
             Self::OxcNoOptionalChaining(rule) => rule.run_once(ctx),
             Self::OxcNoOsCommandFromPath(rule) => rule.run_once(ctx),
@@ -15483,6 +15496,7 @@ impl RuleEnum {
             Self::OxcNoKnownValueWidening(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoMapSpread(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoModuleMocking(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoNestedAssignment(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoObjectParameters(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoOptionalChaining(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoOsCommandFromPath(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16417,6 +16431,7 @@ impl RuleEnum {
             Self::OxcNoKnownValueWidening(rule) => rule.should_run(ctx),
             Self::OxcNoMapSpread(rule) => rule.should_run(ctx),
             Self::OxcNoModuleMocking(rule) => rule.should_run(ctx),
+            Self::OxcNoNestedAssignment(rule) => rule.should_run(ctx),
             Self::OxcNoObjectParameters(rule) => rule.should_run(ctx),
             Self::OxcNoOptionalChaining(rule) => rule.should_run(ctx),
             Self::OxcNoOsCommandFromPath(rule) => rule.should_run(ctx),
@@ -17647,6 +17662,7 @@ impl RuleEnum {
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::IS_TSGOLINT_RULE,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::IS_TSGOLINT_RULE,
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::IS_TSGOLINT_RULE,
+            Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::IS_TSGOLINT_RULE,
             Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::IS_TSGOLINT_RULE,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::IS_TSGOLINT_RULE,
             Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::IS_TSGOLINT_RULE,
@@ -18779,6 +18795,7 @@ impl RuleEnum {
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::VERSION,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::VERSION,
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::VERSION,
+            Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::VERSION,
             Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::VERSION,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::VERSION,
             Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::VERSION,
@@ -19898,6 +19915,7 @@ impl RuleEnum {
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::HAS_CONFIG,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::HAS_CONFIG,
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::HAS_CONFIG,
+            Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::HAS_CONFIG,
             Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::HAS_CONFIG,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::HAS_CONFIG,
             Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::HAS_CONFIG,
@@ -20946,6 +20964,7 @@ impl RuleEnum {
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::INFO,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::INFO,
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::INFO,
+            Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::INFO,
             Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::INFO,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::INFO,
             Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::INFO,
@@ -21871,6 +21890,7 @@ impl RuleEnum {
             Self::OxcNoKnownValueWidening(rule) => rule.types_info(),
             Self::OxcNoMapSpread(rule) => rule.types_info(),
             Self::OxcNoModuleMocking(rule) => rule.types_info(),
+            Self::OxcNoNestedAssignment(rule) => rule.types_info(),
             Self::OxcNoObjectParameters(rule) => rule.types_info(),
             Self::OxcNoOptionalChaining(rule) => rule.types_info(),
             Self::OxcNoOsCommandFromPath(rule) => rule.types_info(),
@@ -22779,6 +22799,7 @@ impl RuleEnum {
             Self::OxcNoKnownValueWidening(rule) => rule.run_info(),
             Self::OxcNoMapSpread(rule) => rule.run_info(),
             Self::OxcNoModuleMocking(rule) => rule.run_info(),
+            Self::OxcNoNestedAssignment(rule) => rule.run_info(),
             Self::OxcNoObjectParameters(rule) => rule.run_info(),
             Self::OxcNoOptionalChaining(rule) => rule.run_info(),
             Self::OxcNoOsCommandFromPath(rule) => rule.run_info(),
@@ -23813,6 +23834,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoKnownValueWidening(OxcNoKnownValueWidening::default()),
         RuleEnum::OxcNoMapSpread(OxcNoMapSpread::default()),
         RuleEnum::OxcNoModuleMocking(OxcNoModuleMocking::default()),
+        RuleEnum::OxcNoNestedAssignment(OxcNoNestedAssignment::default()),
         RuleEnum::OxcNoObjectParameters(OxcNoObjectParameters::default()),
         RuleEnum::OxcNoOptionalChaining(OxcNoOptionalChaining::default()),
         RuleEnum::OxcNoOsCommandFromPath(OxcNoOsCommandFromPath::default()),
