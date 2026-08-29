@@ -752,6 +752,7 @@ pub(crate) mod oxc {
     pub mod bad_replace_all_arg;
     pub mod branches_sharing_code;
     pub mod const_comparisons;
+    pub mod constructor_for_side_effects;
     pub mod double_comparisons;
     pub mod erasing_op;
     pub mod misrefactored_assign_op;

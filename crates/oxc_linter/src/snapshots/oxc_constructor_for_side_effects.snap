@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(constructor-for-side-effects): Do not use a constructor only for its side effects.
+   ╭─[constructor_for_side_effects.tsx:1:1]
+ 1 │ new Thing();
+   · ───────────
+   ╰────
+  help: Assign the constructed value or call an explicit initialization method.
