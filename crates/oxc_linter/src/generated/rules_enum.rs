@@ -402,6 +402,7 @@ pub use crate::rules::oxc::no_async_await::NoAsyncAwait as OxcNoAsyncAwait;
 pub use crate::rules::oxc::no_async_constructor::NoAsyncConstructor as OxcNoAsyncConstructor;
 pub use crate::rules::oxc::no_async_endpoint_handlers::NoAsyncEndpointHandlers as OxcNoAsyncEndpointHandlers;
 pub use crate::rules::oxc::no_barrel_file::NoBarrelFile as OxcNoBarrelFile;
+pub use crate::rules::oxc::no_case_label_in_switch::NoCaseLabelInSwitch as OxcNoCaseLabelInSwitch;
 pub use crate::rules::oxc::no_chained_type_assertions::NoChainedTypeAssertions as OxcNoChainedTypeAssertions;
 pub use crate::rules::oxc::no_clear_text_protocols::NoClearTextProtocols as OxcNoClearTextProtocols;
 pub use crate::rules::oxc::no_collection_size_mischeck::NoCollectionSizeMischeck as OxcNoCollectionSizeMischeck;
@@ -1602,6 +1603,7 @@ pub enum RuleEnum {
     OxcNoAsyncConstructor(OxcNoAsyncConstructor),
     OxcNoAsyncEndpointHandlers(OxcNoAsyncEndpointHandlers),
     OxcNoBarrelFile(OxcNoBarrelFile),
+    OxcNoCaseLabelInSwitch(OxcNoCaseLabelInSwitch),
     OxcNoChainedTypeAssertions(OxcNoChainedTypeAssertions),
     OxcNoClearTextProtocols(OxcNoClearTextProtocols),
     OxcNoCollectionSizeMischeck(OxcNoCollectionSizeMischeck),
@@ -2598,7 +2600,8 @@ const OXC_NO_ASYNC_AWAIT_ID: usize = OXC_NO_ACCUMULATING_SPREAD_ID + 1usize;
 const OXC_NO_ASYNC_CONSTRUCTOR_ID: usize = OXC_NO_ASYNC_AWAIT_ID + 1usize;
 const OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID: usize = OXC_NO_ASYNC_CONSTRUCTOR_ID + 1usize;
 const OXC_NO_BARREL_FILE_ID: usize = OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID + 1usize;
-const OXC_NO_CHAINED_TYPE_ASSERTIONS_ID: usize = OXC_NO_BARREL_FILE_ID + 1usize;
+const OXC_NO_CASE_LABEL_IN_SWITCH_ID: usize = OXC_NO_BARREL_FILE_ID + 1usize;
+const OXC_NO_CHAINED_TYPE_ASSERTIONS_ID: usize = OXC_NO_CASE_LABEL_IN_SWITCH_ID + 1usize;
 const OXC_NO_CLEAR_TEXT_PROTOCOLS_ID: usize = OXC_NO_CHAINED_TYPE_ASSERTIONS_ID + 1usize;
 const OXC_NO_COLLECTION_SIZE_MISCHECK_ID: usize = OXC_NO_CLEAR_TEXT_PROTOCOLS_ID + 1usize;
 const OXC_NO_COMMENTED_CODE_ID: usize = OXC_NO_COLLECTION_SIZE_MISCHECK_ID + 1usize;
@@ -2846,7 +2849,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 902usize] = [
+static RULE_NAMES: [&str; 903usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3521,6 +3524,7 @@ static RULE_NAMES: [&str; 902usize] = [
     OxcNoAsyncConstructor::NAME,
     OxcNoAsyncEndpointHandlers::NAME,
     OxcNoBarrelFile::NAME,
+    OxcNoCaseLabelInSwitch::NAME,
     OxcNoChainedTypeAssertions::NAME,
     OxcNoClearTextProtocols::NAME,
     OxcNoCollectionSizeMischeck::NAME,
@@ -4543,6 +4547,7 @@ impl RuleEnum {
             Self::OxcNoAsyncConstructor(_) => OXC_NO_ASYNC_CONSTRUCTOR_ID,
             Self::OxcNoAsyncEndpointHandlers(_) => OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID,
             Self::OxcNoBarrelFile(_) => OXC_NO_BARREL_FILE_ID,
+            Self::OxcNoCaseLabelInSwitch(_) => OXC_NO_CASE_LABEL_IN_SWITCH_ID,
             Self::OxcNoChainedTypeAssertions(_) => OXC_NO_CHAINED_TYPE_ASSERTIONS_ID,
             Self::OxcNoClearTextProtocols(_) => OXC_NO_CLEAR_TEXT_PROTOCOLS_ID,
             Self::OxcNoCollectionSizeMischeck(_) => OXC_NO_COLLECTION_SIZE_MISCHECK_ID,
@@ -5618,6 +5623,7 @@ impl RuleEnum {
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::CATEGORY,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::CATEGORY,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::CATEGORY,
+            Self::OxcNoCaseLabelInSwitch(_) => OxcNoCaseLabelInSwitch::CATEGORY,
             Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::CATEGORY,
             Self::OxcNoClearTextProtocols(_) => OxcNoClearTextProtocols::CATEGORY,
             Self::OxcNoCollectionSizeMischeck(_) => OxcNoCollectionSizeMischeck::CATEGORY,
@@ -6657,6 +6663,7 @@ impl RuleEnum {
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::FIX,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::FIX,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::FIX,
+            Self::OxcNoCaseLabelInSwitch(_) => OxcNoCaseLabelInSwitch::FIX,
             Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::FIX,
             Self::OxcNoClearTextProtocols(_) => OxcNoClearTextProtocols::FIX,
             Self::OxcNoCollectionSizeMischeck(_) => OxcNoCollectionSizeMischeck::FIX,
@@ -7896,6 +7903,7 @@ impl RuleEnum {
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::documentation(),
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::documentation(),
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::documentation(),
+            Self::OxcNoCaseLabelInSwitch(_) => OxcNoCaseLabelInSwitch::documentation(),
             Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::documentation(),
             Self::OxcNoClearTextProtocols(_) => OxcNoClearTextProtocols::documentation(),
             Self::OxcNoCollectionSizeMischeck(_) => OxcNoCollectionSizeMischeck::documentation(),
@@ -10149,6 +10157,8 @@ impl RuleEnum {
             }
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::config_schema(generator)
                 .or_else(|| OxcNoBarrelFile::schema(generator)),
+            Self::OxcNoCaseLabelInSwitch(_) => OxcNoCaseLabelInSwitch::config_schema(generator)
+                .or_else(|| OxcNoCaseLabelInSwitch::schema(generator)),
             Self::OxcNoChainedTypeAssertions(_) => {
                 OxcNoChainedTypeAssertions::config_schema(generator)
                     .or_else(|| OxcNoChainedTypeAssertions::schema(generator))
@@ -11453,6 +11463,7 @@ impl RuleEnum {
             Self::OxcNoAsyncConstructor(_) => "oxc",
             Self::OxcNoAsyncEndpointHandlers(_) => "oxc",
             Self::OxcNoBarrelFile(_) => "oxc",
+            Self::OxcNoCaseLabelInSwitch(_) => "oxc",
             Self::OxcNoChainedTypeAssertions(_) => "oxc",
             Self::OxcNoClearTextProtocols(_) => "oxc",
             Self::OxcNoCollectionSizeMischeck(_) => "oxc",
@@ -13493,6 +13504,7 @@ impl RuleEnum {
             Self::OxcNoAsyncConstructor(rule) => rule.run(node, ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run(node, ctx),
             Self::OxcNoBarrelFile(rule) => rule.run(node, ctx),
+            Self::OxcNoCaseLabelInSwitch(rule) => rule.run(node, ctx),
             Self::OxcNoChainedTypeAssertions(rule) => rule.run(node, ctx),
             Self::OxcNoClearTextProtocols(rule) => rule.run(node, ctx),
             Self::OxcNoCollectionSizeMischeck(rule) => rule.run(node, ctx),
@@ -14412,6 +14424,7 @@ impl RuleEnum {
             Self::OxcNoAsyncConstructor(rule) => rule.run_once(ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run_once(ctx),
             Self::OxcNoBarrelFile(rule) => rule.run_once(ctx),
+            Self::OxcNoCaseLabelInSwitch(rule) => rule.run_once(ctx),
             Self::OxcNoChainedTypeAssertions(rule) => rule.run_once(ctx),
             Self::OxcNoClearTextProtocols(rule) => rule.run_once(ctx),
             Self::OxcNoCollectionSizeMischeck(rule) => rule.run_once(ctx),
@@ -15438,6 +15451,7 @@ impl RuleEnum {
             Self::OxcNoAsyncConstructor(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoBarrelFile(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoCaseLabelInSwitch(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoChainedTypeAssertions(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoClearTextProtocols(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoCollectionSizeMischeck(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16370,6 +16384,7 @@ impl RuleEnum {
             Self::OxcNoAsyncConstructor(rule) => rule.should_run(ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.should_run(ctx),
             Self::OxcNoBarrelFile(rule) => rule.should_run(ctx),
+            Self::OxcNoCaseLabelInSwitch(rule) => rule.should_run(ctx),
             Self::OxcNoChainedTypeAssertions(rule) => rule.should_run(ctx),
             Self::OxcNoClearTextProtocols(rule) => rule.should_run(ctx),
             Self::OxcNoCollectionSizeMischeck(rule) => rule.should_run(ctx),
@@ -17596,6 +17611,7 @@ impl RuleEnum {
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::IS_TSGOLINT_RULE,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::IS_TSGOLINT_RULE,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::IS_TSGOLINT_RULE,
+            Self::OxcNoCaseLabelInSwitch(_) => OxcNoCaseLabelInSwitch::IS_TSGOLINT_RULE,
             Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::IS_TSGOLINT_RULE,
             Self::OxcNoClearTextProtocols(_) => OxcNoClearTextProtocols::IS_TSGOLINT_RULE,
             Self::OxcNoCollectionSizeMischeck(_) => OxcNoCollectionSizeMischeck::IS_TSGOLINT_RULE,
@@ -18726,6 +18742,7 @@ impl RuleEnum {
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::VERSION,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::VERSION,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::VERSION,
+            Self::OxcNoCaseLabelInSwitch(_) => OxcNoCaseLabelInSwitch::VERSION,
             Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::VERSION,
             Self::OxcNoClearTextProtocols(_) => OxcNoClearTextProtocols::VERSION,
             Self::OxcNoCollectionSizeMischeck(_) => OxcNoCollectionSizeMischeck::VERSION,
@@ -19843,6 +19860,7 @@ impl RuleEnum {
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::HAS_CONFIG,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::HAS_CONFIG,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::HAS_CONFIG,
+            Self::OxcNoCaseLabelInSwitch(_) => OxcNoCaseLabelInSwitch::HAS_CONFIG,
             Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::HAS_CONFIG,
             Self::OxcNoClearTextProtocols(_) => OxcNoClearTextProtocols::HAS_CONFIG,
             Self::OxcNoCollectionSizeMischeck(_) => OxcNoCollectionSizeMischeck::HAS_CONFIG,
@@ -20891,6 +20909,7 @@ impl RuleEnum {
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::INFO,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::INFO,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::INFO,
+            Self::OxcNoCaseLabelInSwitch(_) => OxcNoCaseLabelInSwitch::INFO,
             Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::INFO,
             Self::OxcNoClearTextProtocols(_) => OxcNoClearTextProtocols::INFO,
             Self::OxcNoCollectionSizeMischeck(_) => OxcNoCollectionSizeMischeck::INFO,
@@ -21814,6 +21833,7 @@ impl RuleEnum {
             Self::OxcNoAsyncConstructor(rule) => rule.types_info(),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.types_info(),
             Self::OxcNoBarrelFile(rule) => rule.types_info(),
+            Self::OxcNoCaseLabelInSwitch(rule) => rule.types_info(),
             Self::OxcNoChainedTypeAssertions(rule) => rule.types_info(),
             Self::OxcNoClearTextProtocols(rule) => rule.types_info(),
             Self::OxcNoCollectionSizeMischeck(rule) => rule.types_info(),
@@ -22720,6 +22740,7 @@ impl RuleEnum {
             Self::OxcNoAsyncConstructor(rule) => rule.run_info(),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run_info(),
             Self::OxcNoBarrelFile(rule) => rule.run_info(),
+            Self::OxcNoCaseLabelInSwitch(rule) => rule.run_info(),
             Self::OxcNoChainedTypeAssertions(rule) => rule.run_info(),
             Self::OxcNoClearTextProtocols(rule) => rule.run_info(),
             Self::OxcNoCollectionSizeMischeck(rule) => rule.run_info(),
@@ -23752,6 +23773,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoAsyncConstructor(OxcNoAsyncConstructor::default()),
         RuleEnum::OxcNoAsyncEndpointHandlers(OxcNoAsyncEndpointHandlers::default()),
         RuleEnum::OxcNoBarrelFile(OxcNoBarrelFile::default()),
+        RuleEnum::OxcNoCaseLabelInSwitch(OxcNoCaseLabelInSwitch::default()),
         RuleEnum::OxcNoChainedTypeAssertions(OxcNoChainedTypeAssertions::default()),
         RuleEnum::OxcNoClearTextProtocols(OxcNoClearTextProtocols::default()),
         RuleEnum::OxcNoCollectionSizeMischeck(OxcNoCollectionSizeMischeck::default()),

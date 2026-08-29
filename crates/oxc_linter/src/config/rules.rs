@@ -249,6 +249,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("typescript", name) if is_eslint_rule_adapted_to_typescript(name) => (name, "eslint"),
         ("sonarjs", "no-parameter-reassignment") => ("no-param-reassign", "eslint"),
         ("sonarjs", "no-async-constructor") => ("no-async-constructor", "oxc"),
+        ("sonarjs", "no-case-label-in-switch") => ("no-case-label-in-switch", "oxc"),
         ("sonarjs", "no-clear-text-protocols") => ("no-clear-text-protocols", "oxc"),
         ("sonarjs", "no-collection-size-mischeck") => ("no-collection-size-mischeck", "oxc"),
         ("sonarjs", "no-commented-code") => ("no-commented-code", "oxc"),
