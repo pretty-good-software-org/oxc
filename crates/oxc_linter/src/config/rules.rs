@@ -258,6 +258,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "no-hardcoded-ip") => ("no-hardcoded-ip", "oxc"),
         ("sonarjs", "no-os-command-from-path") => ("no-os-command-from-path", "oxc"),
         ("sonarjs", "no-nested-assignment") => ("no-nested-assignment", "oxc"),
+        ("sonarjs", "no-duplicated-branches") => ("no-duplicated-branches", "oxc"),
         ("sonarjs", "no-hardcoded-passwords") => ("no-hardcoded-passwords", "oxc"),
         ("sonarjs", "no-hardcoded-secrets") => ("no-hardcoded-secrets", "oxc"),
         ("sonarjs", "insecure-cookie" | "no-insecure-cookie") => ("no-insecure-cookie", "oxc"),
