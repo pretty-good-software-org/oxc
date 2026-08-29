@@ -410,6 +410,7 @@ pub use crate::rules::oxc::no_collection_size_mischeck::NoCollectionSizeMischeck
 pub use crate::rules::oxc::no_commented_code::NoCommentedCode as OxcNoCommentedCode;
 pub use crate::rules::oxc::no_conditional_empty_object_spread::NoConditionalEmptyObjectSpread as OxcNoConditionalEmptyObjectSpread;
 pub use crate::rules::oxc::no_const_enum::NoConstEnum as OxcNoConstEnum;
+pub use crate::rules::oxc::no_duplicate_in_composite::NoDuplicateInComposite as OxcNoDuplicateInComposite;
 pub use crate::rules::oxc::no_duplicated_branches::NoDuplicatedBranches as OxcNoDuplicatedBranches;
 pub use crate::rules::oxc::no_equals_in_for_termination::NoEqualsInForTermination as OxcNoEqualsInForTermination;
 pub use crate::rules::oxc::no_global_this::NoGlobalThis as OxcNoGlobalThis;
@@ -1617,6 +1618,7 @@ pub enum RuleEnum {
     OxcNoCommentedCode(OxcNoCommentedCode),
     OxcNoConditionalEmptyObjectSpread(OxcNoConditionalEmptyObjectSpread),
     OxcNoConstEnum(OxcNoConstEnum),
+    OxcNoDuplicateInComposite(OxcNoDuplicateInComposite),
     OxcNoDuplicatedBranches(OxcNoDuplicatedBranches),
     OxcNoEqualsInForTermination(OxcNoEqualsInForTermination),
     OxcNoGlobalThis(OxcNoGlobalThis),
@@ -2620,7 +2622,8 @@ const OXC_NO_COLLECTION_SIZE_MISCHECK_ID: usize = OXC_NO_CLEAR_TEXT_PROTOCOLS_ID
 const OXC_NO_COMMENTED_CODE_ID: usize = OXC_NO_COLLECTION_SIZE_MISCHECK_ID + 1usize;
 const OXC_NO_CONDITIONAL_EMPTY_OBJECT_SPREAD_ID: usize = OXC_NO_COMMENTED_CODE_ID + 1usize;
 const OXC_NO_CONST_ENUM_ID: usize = OXC_NO_CONDITIONAL_EMPTY_OBJECT_SPREAD_ID + 1usize;
-const OXC_NO_DUPLICATED_BRANCHES_ID: usize = OXC_NO_CONST_ENUM_ID + 1usize;
+const OXC_NO_DUPLICATE_IN_COMPOSITE_ID: usize = OXC_NO_CONST_ENUM_ID + 1usize;
+const OXC_NO_DUPLICATED_BRANCHES_ID: usize = OXC_NO_DUPLICATE_IN_COMPOSITE_ID + 1usize;
 const OXC_NO_EQUALS_IN_FOR_TERMINATION_ID: usize = OXC_NO_DUPLICATED_BRANCHES_ID + 1usize;
 const OXC_NO_GLOBAL_THIS_ID: usize = OXC_NO_EQUALS_IN_FOR_TERMINATION_ID + 1usize;
 const OXC_NO_HARDCODED_IP_ID: usize = OXC_NO_GLOBAL_THIS_ID + 1usize;
@@ -2867,7 +2870,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 909usize] = [
+static RULE_NAMES: [&str; 910usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3550,6 +3553,7 @@ static RULE_NAMES: [&str; 909usize] = [
     OxcNoCommentedCode::NAME,
     OxcNoConditionalEmptyObjectSpread::NAME,
     OxcNoConstEnum::NAME,
+    OxcNoDuplicateInComposite::NAME,
     OxcNoDuplicatedBranches::NAME,
     OxcNoEqualsInForTermination::NAME,
     OxcNoGlobalThis::NAME,
@@ -4579,6 +4583,7 @@ impl RuleEnum {
             Self::OxcNoCommentedCode(_) => OXC_NO_COMMENTED_CODE_ID,
             Self::OxcNoConditionalEmptyObjectSpread(_) => OXC_NO_CONDITIONAL_EMPTY_OBJECT_SPREAD_ID,
             Self::OxcNoConstEnum(_) => OXC_NO_CONST_ENUM_ID,
+            Self::OxcNoDuplicateInComposite(_) => OXC_NO_DUPLICATE_IN_COMPOSITE_ID,
             Self::OxcNoDuplicatedBranches(_) => OXC_NO_DUPLICATED_BRANCHES_ID,
             Self::OxcNoEqualsInForTermination(_) => OXC_NO_EQUALS_IN_FOR_TERMINATION_ID,
             Self::OxcNoGlobalThis(_) => OXC_NO_GLOBAL_THIS_ID,
@@ -5663,6 +5668,7 @@ impl RuleEnum {
                 OxcNoConditionalEmptyObjectSpread::CATEGORY
             }
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::CATEGORY,
+            Self::OxcNoDuplicateInComposite(_) => OxcNoDuplicateInComposite::CATEGORY,
             Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::CATEGORY,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::CATEGORY,
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::CATEGORY,
@@ -6707,6 +6713,7 @@ impl RuleEnum {
             Self::OxcNoCommentedCode(_) => OxcNoCommentedCode::FIX,
             Self::OxcNoConditionalEmptyObjectSpread(_) => OxcNoConditionalEmptyObjectSpread::FIX,
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::FIX,
+            Self::OxcNoDuplicateInComposite(_) => OxcNoDuplicateInComposite::FIX,
             Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::FIX,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::FIX,
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::FIX,
@@ -7955,6 +7962,7 @@ impl RuleEnum {
                 OxcNoConditionalEmptyObjectSpread::documentation()
             }
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::documentation(),
+            Self::OxcNoDuplicateInComposite(_) => OxcNoDuplicateInComposite::documentation(),
             Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::documentation(),
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::documentation(),
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::documentation(),
@@ -10229,6 +10237,10 @@ impl RuleEnum {
             }
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::config_schema(generator)
                 .or_else(|| OxcNoConstEnum::schema(generator)),
+            Self::OxcNoDuplicateInComposite(_) => {
+                OxcNoDuplicateInComposite::config_schema(generator)
+                    .or_else(|| OxcNoDuplicateInComposite::schema(generator))
+            }
             Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::config_schema(generator)
                 .or_else(|| OxcNoDuplicatedBranches::schema(generator)),
             Self::OxcNoEqualsInForTermination(_) => {
@@ -11537,6 +11549,7 @@ impl RuleEnum {
             Self::OxcNoCommentedCode(_) => "oxc",
             Self::OxcNoConditionalEmptyObjectSpread(_) => "oxc",
             Self::OxcNoConstEnum(_) => "oxc",
+            Self::OxcNoDuplicateInComposite(_) => "oxc",
             Self::OxcNoDuplicatedBranches(_) => "oxc",
             Self::OxcNoEqualsInForTermination(_) => "oxc",
             Self::OxcNoGlobalThis(_) => "oxc",
@@ -13584,6 +13597,7 @@ impl RuleEnum {
             Self::OxcNoCommentedCode(rule) => rule.run(node, ctx),
             Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.run(node, ctx),
             Self::OxcNoConstEnum(rule) => rule.run(node, ctx),
+            Self::OxcNoDuplicateInComposite(rule) => rule.run(node, ctx),
             Self::OxcNoDuplicatedBranches(rule) => rule.run(node, ctx),
             Self::OxcNoEqualsInForTermination(rule) => rule.run(node, ctx),
             Self::OxcNoGlobalThis(rule) => rule.run(node, ctx),
@@ -14510,6 +14524,7 @@ impl RuleEnum {
             Self::OxcNoCommentedCode(rule) => rule.run_once(ctx),
             Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.run_once(ctx),
             Self::OxcNoConstEnum(rule) => rule.run_once(ctx),
+            Self::OxcNoDuplicateInComposite(rule) => rule.run_once(ctx),
             Self::OxcNoDuplicatedBranches(rule) => rule.run_once(ctx),
             Self::OxcNoEqualsInForTermination(rule) => rule.run_once(ctx),
             Self::OxcNoGlobalThis(rule) => rule.run_once(ctx),
@@ -15543,6 +15558,7 @@ impl RuleEnum {
             Self::OxcNoCommentedCode(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoConstEnum(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoDuplicateInComposite(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoDuplicatedBranches(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoEqualsInForTermination(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoGlobalThis(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16482,6 +16498,7 @@ impl RuleEnum {
             Self::OxcNoCommentedCode(rule) => rule.should_run(ctx),
             Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.should_run(ctx),
             Self::OxcNoConstEnum(rule) => rule.should_run(ctx),
+            Self::OxcNoDuplicateInComposite(rule) => rule.should_run(ctx),
             Self::OxcNoDuplicatedBranches(rule) => rule.should_run(ctx),
             Self::OxcNoEqualsInForTermination(rule) => rule.should_run(ctx),
             Self::OxcNoGlobalThis(rule) => rule.should_run(ctx),
@@ -17717,6 +17734,7 @@ impl RuleEnum {
                 OxcNoConditionalEmptyObjectSpread::IS_TSGOLINT_RULE
             }
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::IS_TSGOLINT_RULE,
+            Self::OxcNoDuplicateInComposite(_) => OxcNoDuplicateInComposite::IS_TSGOLINT_RULE,
             Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::IS_TSGOLINT_RULE,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::IS_TSGOLINT_RULE,
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::IS_TSGOLINT_RULE,
@@ -18854,6 +18872,7 @@ impl RuleEnum {
                 OxcNoConditionalEmptyObjectSpread::VERSION
             }
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::VERSION,
+            Self::OxcNoDuplicateInComposite(_) => OxcNoDuplicateInComposite::VERSION,
             Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::VERSION,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::VERSION,
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::VERSION,
@@ -19978,6 +19997,7 @@ impl RuleEnum {
                 OxcNoConditionalEmptyObjectSpread::HAS_CONFIG
             }
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::HAS_CONFIG,
+            Self::OxcNoDuplicateInComposite(_) => OxcNoDuplicateInComposite::HAS_CONFIG,
             Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::HAS_CONFIG,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::HAS_CONFIG,
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::HAS_CONFIG,
@@ -21031,6 +21051,7 @@ impl RuleEnum {
             Self::OxcNoCommentedCode(_) => OxcNoCommentedCode::INFO,
             Self::OxcNoConditionalEmptyObjectSpread(_) => OxcNoConditionalEmptyObjectSpread::INFO,
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::INFO,
+            Self::OxcNoDuplicateInComposite(_) => OxcNoDuplicateInComposite::INFO,
             Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::INFO,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::INFO,
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::INFO,
@@ -21961,6 +21982,7 @@ impl RuleEnum {
             Self::OxcNoCommentedCode(rule) => rule.types_info(),
             Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.types_info(),
             Self::OxcNoConstEnum(rule) => rule.types_info(),
+            Self::OxcNoDuplicateInComposite(rule) => rule.types_info(),
             Self::OxcNoDuplicatedBranches(rule) => rule.types_info(),
             Self::OxcNoEqualsInForTermination(rule) => rule.types_info(),
             Self::OxcNoGlobalThis(rule) => rule.types_info(),
@@ -22874,6 +22896,7 @@ impl RuleEnum {
             Self::OxcNoCommentedCode(rule) => rule.run_info(),
             Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.run_info(),
             Self::OxcNoConstEnum(rule) => rule.run_info(),
+            Self::OxcNoDuplicateInComposite(rule) => rule.run_info(),
             Self::OxcNoDuplicatedBranches(rule) => rule.run_info(),
             Self::OxcNoEqualsInForTermination(rule) => rule.run_info(),
             Self::OxcNoGlobalThis(rule) => rule.run_info(),
@@ -23913,6 +23936,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoCommentedCode(OxcNoCommentedCode::default()),
         RuleEnum::OxcNoConditionalEmptyObjectSpread(OxcNoConditionalEmptyObjectSpread::default()),
         RuleEnum::OxcNoConstEnum(OxcNoConstEnum::default()),
+        RuleEnum::OxcNoDuplicateInComposite(OxcNoDuplicateInComposite::default()),
         RuleEnum::OxcNoDuplicatedBranches(OxcNoDuplicatedBranches::default()),
         RuleEnum::OxcNoEqualsInForTermination(OxcNoEqualsInForTermination::default()),
         RuleEnum::OxcNoGlobalThis(OxcNoGlobalThis::default()),

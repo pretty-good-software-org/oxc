@@ -769,6 +769,7 @@ pub(crate) mod oxc {
     pub mod no_commented_code;
     pub mod no_conditional_empty_object_spread;
     pub mod no_const_enum;
+    pub mod no_duplicate_in_composite;
     pub mod no_duplicated_branches;
     pub mod no_equals_in_for_termination;
     pub mod no_global_this;

@@ -1,0 +1,18 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-duplicate-in-composite): Remove this duplicated composite type member.
+   ╭─[no_duplicate_in_composite.tsx:1:32]
+ 1 │ type Value = string | number | string;
+   ·                                ──────
+   ╰────
+  help: Remove the duplicate or replace it with another type.
+
+  ⚠ oxc(no-duplicate-in-composite): Remove this duplicated composite type member.
+   ╭─[no_duplicate_in_composite.tsx:1:22]
+ 1 │ type Value = A & B & A;
+   ·                      ─
+   ╰────
+  help: Remove the duplicate or replace it with another type.
