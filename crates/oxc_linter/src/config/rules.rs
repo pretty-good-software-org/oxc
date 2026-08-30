@@ -282,6 +282,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "fixme-tag" | "todo-tag") => ("no-warning-comments", "eslint"),
         ("sonarjs", "no-identical-expressions") => ("no-identical-expressions", "oxc"),
         ("sonarjs", "bitwise-operators") => ("no-bitwise", "eslint"),
+        ("sonarjs", "code-eval") => ("no-eval", "eslint"),
         ("sonarjs", "no-nested-conditional") => ("no-nested-ternary", "eslint"),
         ("sonarjs", "no-primitive-wrappers") => ("no-new-wrappers", "eslint"),
         ("anti-slop", "no-chained-type-assertions") => ("no-chained-type-assertions", "oxc"),
