@@ -1,0 +1,18 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-exclusive-tests): Remove the exclusive test modifier.
+   ╭─[no_exclusive_tests.tsx:1:1]
+ 1 │ it.only('works', testFn)
+   · ───────
+   ╰────
+  help: Use the ordinary test function so the complete suite runs.
+
+  ⚠ oxc(no-exclusive-tests): Remove the exclusive test modifier.
+   ╭─[no_exclusive_tests.tsx:1:1]
+ 1 │ describe.only('suite', testFn)
+   · ─────────────
+   ╰────
+  help: Use the ordinary test function so the complete suite runs.

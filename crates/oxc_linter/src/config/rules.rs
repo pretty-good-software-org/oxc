@@ -291,6 +291,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "in-operator-type-error") => ("in-operator-type-error", "oxc"),
         ("sonarjs", "label-position") => ("label-position", "oxc"),
         ("sonarjs", "link-with-target-blank") => ("link-with-target-blank", "oxc"),
+        ("sonarjs", "no-exclusive-tests") => ("no-exclusive-tests", "oxc"),
         ("sonarjs", "no-identical-conditions") => ("no-identical-conditions", "oxc"),
         ("sonarjs", "no-identical-expressions") => ("no-identical-expressions", "oxc"),
         ("sonarjs", "bitwise-operators") => ("no-bitwise", "eslint"),

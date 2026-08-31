@@ -425,6 +425,7 @@ pub use crate::rules::oxc::no_duplicated_branches::NoDuplicatedBranches as OxcNo
 pub use crate::rules::oxc::no_empty_alternatives::NoEmptyAlternatives as OxcNoEmptyAlternatives;
 pub use crate::rules::oxc::no_empty_group::NoEmptyGroup as OxcNoEmptyGroup;
 pub use crate::rules::oxc::no_equals_in_for_termination::NoEqualsInForTermination as OxcNoEqualsInForTermination;
+pub use crate::rules::oxc::no_exclusive_tests::NoExclusiveTests as OxcNoExclusiveTests;
 pub use crate::rules::oxc::no_global_this::NoGlobalThis as OxcNoGlobalThis;
 pub use crate::rules::oxc::no_hardcoded_ip::NoHardcodedIp as OxcNoHardcodedIp;
 pub use crate::rules::oxc::no_hardcoded_passwords::NoHardcodedPasswords as OxcNoHardcodedPasswords;
@@ -1649,6 +1650,7 @@ pub enum RuleEnum {
     OxcNoEmptyAlternatives(OxcNoEmptyAlternatives),
     OxcNoEmptyGroup(OxcNoEmptyGroup),
     OxcNoEqualsInForTermination(OxcNoEqualsInForTermination),
+    OxcNoExclusiveTests(OxcNoExclusiveTests),
     OxcNoGlobalThis(OxcNoGlobalThis),
     OxcNoHardcodedIp(OxcNoHardcodedIp),
     OxcNoHardcodedPasswords(OxcNoHardcodedPasswords),
@@ -2669,7 +2671,8 @@ const OXC_NO_DUPLICATED_BRANCHES_ID: usize = OXC_NO_DUPLICATE_IN_COMPOSITE_ID + 
 const OXC_NO_EMPTY_ALTERNATIVES_ID: usize = OXC_NO_DUPLICATED_BRANCHES_ID + 1usize;
 const OXC_NO_EMPTY_GROUP_ID: usize = OXC_NO_EMPTY_ALTERNATIVES_ID + 1usize;
 const OXC_NO_EQUALS_IN_FOR_TERMINATION_ID: usize = OXC_NO_EMPTY_GROUP_ID + 1usize;
-const OXC_NO_GLOBAL_THIS_ID: usize = OXC_NO_EQUALS_IN_FOR_TERMINATION_ID + 1usize;
+const OXC_NO_EXCLUSIVE_TESTS_ID: usize = OXC_NO_EQUALS_IN_FOR_TERMINATION_ID + 1usize;
+const OXC_NO_GLOBAL_THIS_ID: usize = OXC_NO_EXCLUSIVE_TESTS_ID + 1usize;
 const OXC_NO_HARDCODED_IP_ID: usize = OXC_NO_GLOBAL_THIS_ID + 1usize;
 const OXC_NO_HARDCODED_PASSWORDS_ID: usize = OXC_NO_HARDCODED_IP_ID + 1usize;
 const OXC_NO_HARDCODED_SECRETS_ID: usize = OXC_NO_HARDCODED_PASSWORDS_ID + 1usize;
@@ -2918,7 +2921,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 926usize] = [
+static RULE_NAMES: [&str; 927usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3616,6 +3619,7 @@ static RULE_NAMES: [&str; 926usize] = [
     OxcNoEmptyAlternatives::NAME,
     OxcNoEmptyGroup::NAME,
     OxcNoEqualsInForTermination::NAME,
+    OxcNoExclusiveTests::NAME,
     OxcNoGlobalThis::NAME,
     OxcNoHardcodedIp::NAME,
     OxcNoHardcodedPasswords::NAME,
@@ -4662,6 +4666,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAlternatives(_) => OXC_NO_EMPTY_ALTERNATIVES_ID,
             Self::OxcNoEmptyGroup(_) => OXC_NO_EMPTY_GROUP_ID,
             Self::OxcNoEqualsInForTermination(_) => OXC_NO_EQUALS_IN_FOR_TERMINATION_ID,
+            Self::OxcNoExclusiveTests(_) => OXC_NO_EXCLUSIVE_TESTS_ID,
             Self::OxcNoGlobalThis(_) => OXC_NO_GLOBAL_THIS_ID,
             Self::OxcNoHardcodedIp(_) => OXC_NO_HARDCODED_IP_ID,
             Self::OxcNoHardcodedPasswords(_) => OXC_NO_HARDCODED_PASSWORDS_ID,
@@ -5763,6 +5768,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::CATEGORY,
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::CATEGORY,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::CATEGORY,
+            Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::CATEGORY,
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::CATEGORY,
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::CATEGORY,
             Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::CATEGORY,
@@ -6824,6 +6830,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::FIX,
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::FIX,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::FIX,
+            Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::FIX,
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::FIX,
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::FIX,
             Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::FIX,
@@ -8095,6 +8102,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::documentation(),
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::documentation(),
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::documentation(),
+            Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::documentation(),
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::documentation(),
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::documentation(),
             Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::documentation(),
@@ -10414,6 +10422,8 @@ impl RuleEnum {
                 OxcNoEqualsInForTermination::config_schema(generator)
                     .or_else(|| OxcNoEqualsInForTermination::schema(generator))
             }
+            Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::config_schema(generator)
+                .or_else(|| OxcNoExclusiveTests::schema(generator)),
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::config_schema(generator)
                 .or_else(|| OxcNoGlobalThis::schema(generator)),
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::config_schema(generator)
@@ -11741,6 +11751,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAlternatives(_) => "oxc",
             Self::OxcNoEmptyGroup(_) => "oxc",
             Self::OxcNoEqualsInForTermination(_) => "oxc",
+            Self::OxcNoExclusiveTests(_) => "oxc",
             Self::OxcNoGlobalThis(_) => "oxc",
             Self::OxcNoHardcodedIp(_) => "oxc",
             Self::OxcNoHardcodedPasswords(_) => "oxc",
@@ -13814,6 +13825,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAlternatives(rule) => rule.run(node, ctx),
             Self::OxcNoEmptyGroup(rule) => rule.run(node, ctx),
             Self::OxcNoEqualsInForTermination(rule) => rule.run(node, ctx),
+            Self::OxcNoExclusiveTests(rule) => rule.run(node, ctx),
             Self::OxcNoGlobalThis(rule) => rule.run(node, ctx),
             Self::OxcNoHardcodedIp(rule) => rule.run(node, ctx),
             Self::OxcNoHardcodedPasswords(rule) => rule.run(node, ctx),
@@ -14757,6 +14769,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAlternatives(rule) => rule.run_once(ctx),
             Self::OxcNoEmptyGroup(rule) => rule.run_once(ctx),
             Self::OxcNoEqualsInForTermination(rule) => rule.run_once(ctx),
+            Self::OxcNoExclusiveTests(rule) => rule.run_once(ctx),
             Self::OxcNoGlobalThis(rule) => rule.run_once(ctx),
             Self::OxcNoHardcodedIp(rule) => rule.run_once(ctx),
             Self::OxcNoHardcodedPasswords(rule) => rule.run_once(ctx),
@@ -15807,6 +15820,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAlternatives(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoEmptyGroup(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoEqualsInForTermination(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoExclusiveTests(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoGlobalThis(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoHardcodedIp(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoHardcodedPasswords(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16763,6 +16777,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAlternatives(rule) => rule.should_run(ctx),
             Self::OxcNoEmptyGroup(rule) => rule.should_run(ctx),
             Self::OxcNoEqualsInForTermination(rule) => rule.should_run(ctx),
+            Self::OxcNoExclusiveTests(rule) => rule.should_run(ctx),
             Self::OxcNoGlobalThis(rule) => rule.should_run(ctx),
             Self::OxcNoHardcodedIp(rule) => rule.should_run(ctx),
             Self::OxcNoHardcodedPasswords(rule) => rule.should_run(ctx),
@@ -18021,6 +18036,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::IS_TSGOLINT_RULE,
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::IS_TSGOLINT_RULE,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::IS_TSGOLINT_RULE,
+            Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::IS_TSGOLINT_RULE,
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::IS_TSGOLINT_RULE,
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::IS_TSGOLINT_RULE,
             Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::IS_TSGOLINT_RULE,
@@ -19175,6 +19191,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::VERSION,
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::VERSION,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::VERSION,
+            Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::VERSION,
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::VERSION,
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::VERSION,
             Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::VERSION,
@@ -20316,6 +20333,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::HAS_CONFIG,
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::HAS_CONFIG,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::HAS_CONFIG,
+            Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::HAS_CONFIG,
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::HAS_CONFIG,
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::HAS_CONFIG,
             Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::HAS_CONFIG,
@@ -21386,6 +21404,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::INFO,
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::INFO,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::INFO,
+            Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::INFO,
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::INFO,
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::INFO,
             Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::INFO,
@@ -22333,6 +22352,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAlternatives(rule) => rule.types_info(),
             Self::OxcNoEmptyGroup(rule) => rule.types_info(),
             Self::OxcNoEqualsInForTermination(rule) => rule.types_info(),
+            Self::OxcNoExclusiveTests(rule) => rule.types_info(),
             Self::OxcNoGlobalThis(rule) => rule.types_info(),
             Self::OxcNoHardcodedIp(rule) => rule.types_info(),
             Self::OxcNoHardcodedPasswords(rule) => rule.types_info(),
@@ -23263,6 +23283,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAlternatives(rule) => rule.run_info(),
             Self::OxcNoEmptyGroup(rule) => rule.run_info(),
             Self::OxcNoEqualsInForTermination(rule) => rule.run_info(),
+            Self::OxcNoExclusiveTests(rule) => rule.run_info(),
             Self::OxcNoGlobalThis(rule) => rule.run_info(),
             Self::OxcNoHardcodedIp(rule) => rule.run_info(),
             Self::OxcNoHardcodedPasswords(rule) => rule.run_info(),
@@ -24319,6 +24340,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoEmptyAlternatives(OxcNoEmptyAlternatives::default()),
         RuleEnum::OxcNoEmptyGroup(OxcNoEmptyGroup::default()),
         RuleEnum::OxcNoEqualsInForTermination(OxcNoEqualsInForTermination::default()),
+        RuleEnum::OxcNoExclusiveTests(OxcNoExclusiveTests::default()),
         RuleEnum::OxcNoGlobalThis(OxcNoGlobalThis::default()),
         RuleEnum::OxcNoHardcodedIp(OxcNoHardcodedIp::default()),
         RuleEnum::OxcNoHardcodedPasswords(OxcNoHardcodedPasswords::default()),
