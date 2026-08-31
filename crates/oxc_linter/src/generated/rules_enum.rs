@@ -488,6 +488,7 @@ pub use crate::rules::oxc::require_safety_comment_for_type_assertion::RequireSaf
 pub use crate::rules::oxc::single_char_in_character_classes::SingleCharInCharacterClasses as OxcSingleCharInCharacterClasses;
 pub use crate::rules::oxc::single_character_alternation::SingleCharacterAlternation as OxcSingleCharacterAlternation;
 pub use crate::rules::oxc::uninvoked_array_callback::UninvokedArrayCallback as OxcUninvokedArrayCallback;
+pub use crate::rules::oxc::unused_import::UnusedImport as OxcUnusedImport;
 pub use crate::rules::oxc::unused_named_groups::UnusedNamedGroups as OxcUnusedNamedGroups;
 pub use crate::rules::oxc::void_use::VoidUse as OxcVoidUse;
 pub use crate::rules::promise::always_return::AlwaysReturn as PromiseAlwaysReturn;
@@ -1738,6 +1739,7 @@ pub enum RuleEnum {
     OxcSingleCharInCharacterClasses(OxcSingleCharInCharacterClasses),
     OxcSingleCharacterAlternation(OxcSingleCharacterAlternation),
     OxcUninvokedArrayCallback(OxcUninvokedArrayCallback),
+    OxcUnusedImport(OxcUnusedImport),
     OxcUnusedNamedGroups(OxcUnusedNamedGroups),
     OxcVoidUse(OxcVoidUse),
     NextjsGoogleFontDisplay(NextjsGoogleFontDisplay),
@@ -2785,7 +2787,8 @@ const OXC_SINGLE_CHAR_IN_CHARACTER_CLASSES_ID: usize =
     OXC_REQUIRE_SAFETY_COMMENT_FOR_TYPE_ASSERTION_ID + 1usize;
 const OXC_SINGLE_CHARACTER_ALTERNATION_ID: usize = OXC_SINGLE_CHAR_IN_CHARACTER_CLASSES_ID + 1usize;
 const OXC_UNINVOKED_ARRAY_CALLBACK_ID: usize = OXC_SINGLE_CHARACTER_ALTERNATION_ID + 1usize;
-const OXC_UNUSED_NAMED_GROUPS_ID: usize = OXC_UNINVOKED_ARRAY_CALLBACK_ID + 1usize;
+const OXC_UNUSED_IMPORT_ID: usize = OXC_UNINVOKED_ARRAY_CALLBACK_ID + 1usize;
+const OXC_UNUSED_NAMED_GROUPS_ID: usize = OXC_UNUSED_IMPORT_ID + 1usize;
 const OXC_VOID_USE_ID: usize = OXC_UNUSED_NAMED_GROUPS_ID + 1usize;
 const NEXTJS_GOOGLE_FONT_DISPLAY_ID: usize = OXC_VOID_USE_ID + 1usize;
 const NEXTJS_GOOGLE_FONT_PRECONNECT_ID: usize = NEXTJS_GOOGLE_FONT_DISPLAY_ID + 1usize;
@@ -2995,7 +2998,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 952usize] = [
+static RULE_NAMES: [&str; 953usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3756,6 +3759,7 @@ static RULE_NAMES: [&str; 952usize] = [
     OxcSingleCharInCharacterClasses::NAME,
     OxcSingleCharacterAlternation::NAME,
     OxcUninvokedArrayCallback::NAME,
+    OxcUnusedImport::NAME,
     OxcUnusedNamedGroups::NAME,
     OxcVoidUse::NAME,
     NextjsGoogleFontDisplay::NAME,
@@ -4830,6 +4834,7 @@ impl RuleEnum {
             Self::OxcSingleCharInCharacterClasses(_) => OXC_SINGLE_CHAR_IN_CHARACTER_CLASSES_ID,
             Self::OxcSingleCharacterAlternation(_) => OXC_SINGLE_CHARACTER_ALTERNATION_ID,
             Self::OxcUninvokedArrayCallback(_) => OXC_UNINVOKED_ARRAY_CALLBACK_ID,
+            Self::OxcUnusedImport(_) => OXC_UNUSED_IMPORT_ID,
             Self::OxcUnusedNamedGroups(_) => OXC_UNUSED_NAMED_GROUPS_ID,
             Self::OxcVoidUse(_) => OXC_VOID_USE_ID,
             Self::NextjsGoogleFontDisplay(_) => NEXTJS_GOOGLE_FONT_DISPLAY_ID,
@@ -5957,6 +5962,7 @@ impl RuleEnum {
             Self::OxcSingleCharInCharacterClasses(_) => OxcSingleCharInCharacterClasses::CATEGORY,
             Self::OxcSingleCharacterAlternation(_) => OxcSingleCharacterAlternation::CATEGORY,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::CATEGORY,
+            Self::OxcUnusedImport(_) => OxcUnusedImport::CATEGORY,
             Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::CATEGORY,
             Self::OxcVoidUse(_) => OxcVoidUse::CATEGORY,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::CATEGORY,
@@ -7044,6 +7050,7 @@ impl RuleEnum {
             Self::OxcSingleCharInCharacterClasses(_) => OxcSingleCharInCharacterClasses::FIX,
             Self::OxcSingleCharacterAlternation(_) => OxcSingleCharacterAlternation::FIX,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::FIX,
+            Self::OxcUnusedImport(_) => OxcUnusedImport::FIX,
             Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::FIX,
             Self::OxcVoidUse(_) => OxcVoidUse::FIX,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::FIX,
@@ -8345,6 +8352,7 @@ impl RuleEnum {
                 OxcSingleCharacterAlternation::documentation()
             }
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::documentation(),
+            Self::OxcUnusedImport(_) => OxcUnusedImport::documentation(),
             Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::documentation(),
             Self::OxcVoidUse(_) => OxcVoidUse::documentation(),
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::documentation(),
@@ -10776,6 +10784,8 @@ impl RuleEnum {
                 OxcUninvokedArrayCallback::config_schema(generator)
                     .or_else(|| OxcUninvokedArrayCallback::schema(generator))
             }
+            Self::OxcUnusedImport(_) => OxcUnusedImport::config_schema(generator)
+                .or_else(|| OxcUnusedImport::schema(generator)),
             Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::config_schema(generator)
                 .or_else(|| OxcUnusedNamedGroups::schema(generator)),
             Self::OxcVoidUse(_) => {
@@ -12074,6 +12084,7 @@ impl RuleEnum {
             Self::OxcSingleCharInCharacterClasses(_) => "oxc",
             Self::OxcSingleCharacterAlternation(_) => "oxc",
             Self::OxcUninvokedArrayCallback(_) => "oxc",
+            Self::OxcUnusedImport(_) => "oxc",
             Self::OxcUnusedNamedGroups(_) => "oxc",
             Self::OxcVoidUse(_) => "oxc",
             Self::NextjsGoogleFontDisplay(_) => "nextjs",
@@ -14173,6 +14184,7 @@ impl RuleEnum {
             Self::OxcSingleCharInCharacterClasses(rule) => rule.run(node, ctx),
             Self::OxcSingleCharacterAlternation(rule) => rule.run(node, ctx),
             Self::OxcUninvokedArrayCallback(rule) => rule.run(node, ctx),
+            Self::OxcUnusedImport(rule) => rule.run(node, ctx),
             Self::OxcUnusedNamedGroups(rule) => rule.run(node, ctx),
             Self::OxcVoidUse(rule) => rule.run(node, ctx),
             Self::NextjsGoogleFontDisplay(rule) => rule.run(node, ctx),
@@ -15142,6 +15154,7 @@ impl RuleEnum {
             Self::OxcSingleCharInCharacterClasses(rule) => rule.run_once(ctx),
             Self::OxcSingleCharacterAlternation(rule) => rule.run_once(ctx),
             Self::OxcUninvokedArrayCallback(rule) => rule.run_once(ctx),
+            Self::OxcUnusedImport(rule) => rule.run_once(ctx),
             Self::OxcUnusedNamedGroups(rule) => rule.run_once(ctx),
             Self::OxcVoidUse(rule) => rule.run_once(ctx),
             Self::NextjsGoogleFontDisplay(rule) => rule.run_once(ctx),
@@ -16220,6 +16233,7 @@ impl RuleEnum {
             Self::OxcSingleCharInCharacterClasses(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcSingleCharacterAlternation(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcUninvokedArrayCallback(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcUnusedImport(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcUnusedNamedGroups(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcVoidUse(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::NextjsGoogleFontDisplay(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -17200,6 +17214,7 @@ impl RuleEnum {
             Self::OxcSingleCharInCharacterClasses(rule) => rule.should_run(ctx),
             Self::OxcSingleCharacterAlternation(rule) => rule.should_run(ctx),
             Self::OxcUninvokedArrayCallback(rule) => rule.should_run(ctx),
+            Self::OxcUnusedImport(rule) => rule.should_run(ctx),
             Self::OxcUnusedNamedGroups(rule) => rule.should_run(ctx),
             Self::OxcVoidUse(rule) => rule.should_run(ctx),
             Self::NextjsGoogleFontDisplay(rule) => rule.should_run(ctx),
@@ -18490,6 +18505,7 @@ impl RuleEnum {
                 OxcSingleCharacterAlternation::IS_TSGOLINT_RULE
             }
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::IS_TSGOLINT_RULE,
+            Self::OxcUnusedImport(_) => OxcUnusedImport::IS_TSGOLINT_RULE,
             Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::IS_TSGOLINT_RULE,
             Self::OxcVoidUse(_) => OxcVoidUse::IS_TSGOLINT_RULE,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::IS_TSGOLINT_RULE,
@@ -19670,6 +19686,7 @@ impl RuleEnum {
             Self::OxcSingleCharInCharacterClasses(_) => OxcSingleCharInCharacterClasses::VERSION,
             Self::OxcSingleCharacterAlternation(_) => OxcSingleCharacterAlternation::VERSION,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::VERSION,
+            Self::OxcUnusedImport(_) => OxcUnusedImport::VERSION,
             Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::VERSION,
             Self::OxcVoidUse(_) => OxcVoidUse::VERSION,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::VERSION,
@@ -20837,6 +20854,7 @@ impl RuleEnum {
             Self::OxcSingleCharInCharacterClasses(_) => OxcSingleCharInCharacterClasses::HAS_CONFIG,
             Self::OxcSingleCharacterAlternation(_) => OxcSingleCharacterAlternation::HAS_CONFIG,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::HAS_CONFIG,
+            Self::OxcUnusedImport(_) => OxcUnusedImport::HAS_CONFIG,
             Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::HAS_CONFIG,
             Self::OxcVoidUse(_) => OxcVoidUse::HAS_CONFIG,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::HAS_CONFIG,
@@ -21933,6 +21951,7 @@ impl RuleEnum {
             Self::OxcSingleCharInCharacterClasses(_) => OxcSingleCharInCharacterClasses::INFO,
             Self::OxcSingleCharacterAlternation(_) => OxcSingleCharacterAlternation::INFO,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::INFO,
+            Self::OxcUnusedImport(_) => OxcUnusedImport::INFO,
             Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::INFO,
             Self::OxcVoidUse(_) => OxcVoidUse::INFO,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::INFO,
@@ -22904,6 +22923,7 @@ impl RuleEnum {
             Self::OxcSingleCharInCharacterClasses(rule) => rule.types_info(),
             Self::OxcSingleCharacterAlternation(rule) => rule.types_info(),
             Self::OxcUninvokedArrayCallback(rule) => rule.types_info(),
+            Self::OxcUnusedImport(rule) => rule.types_info(),
             Self::OxcUnusedNamedGroups(rule) => rule.types_info(),
             Self::OxcVoidUse(rule) => rule.types_info(),
             Self::NextjsGoogleFontDisplay(rule) => rule.types_info(),
@@ -23860,6 +23880,7 @@ impl RuleEnum {
             Self::OxcSingleCharInCharacterClasses(rule) => rule.run_info(),
             Self::OxcSingleCharacterAlternation(rule) => rule.run_info(),
             Self::OxcUninvokedArrayCallback(rule) => rule.run_info(),
+            Self::OxcUnusedImport(rule) => rule.run_info(),
             Self::OxcUnusedNamedGroups(rule) => rule.run_info(),
             Self::OxcVoidUse(rule) => rule.run_info(),
             Self::NextjsGoogleFontDisplay(rule) => rule.run_info(),
@@ -24944,6 +24965,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcSingleCharInCharacterClasses(OxcSingleCharInCharacterClasses::default()),
         RuleEnum::OxcSingleCharacterAlternation(OxcSingleCharacterAlternation::default()),
         RuleEnum::OxcUninvokedArrayCallback(OxcUninvokedArrayCallback::default()),
+        RuleEnum::OxcUnusedImport(OxcUnusedImport::default()),
         RuleEnum::OxcUnusedNamedGroups(OxcUnusedNamedGroups::default()),
         RuleEnum::OxcVoidUse(OxcVoidUse::default()),
         RuleEnum::NextjsGoogleFontDisplay(NextjsGoogleFontDisplay::default()),
