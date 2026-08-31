@@ -264,6 +264,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "no-global-this") => ("no-global-this", "oxc"),
         ("sonarjs", "no-hardcoded-ip") => ("no-hardcoded-ip", "oxc"),
         ("sonarjs", "no-os-command-from-path") => ("no-os-command-from-path", "oxc"),
+        ("sonarjs", "max-switch-cases") => ("max-switch-cases", "oxc"),
         ("sonarjs", "no-small-switch") => ("no-small-switch", "oxc"),
         ("sonarjs", "no-nested-assignment") => ("no-nested-assignment", "oxc"),
         ("sonarjs", "no-nested-functions") => ("no-nested-functions", "oxc"),
