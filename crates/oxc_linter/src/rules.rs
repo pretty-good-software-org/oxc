@@ -793,6 +793,7 @@ pub(crate) mod oxc {
     pub mod no_identical_expressions;
     pub mod no_ignored_exceptions;
     pub mod no_insecure_cookie;
+    pub mod no_internal_api_use;
     pub mod no_inverted_boolean_check;
     pub mod no_known_value_widening;
     pub mod no_literal_call;

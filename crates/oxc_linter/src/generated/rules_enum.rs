@@ -434,6 +434,7 @@ pub use crate::rules::oxc::no_identical_conditions::NoIdenticalConditions as Oxc
 pub use crate::rules::oxc::no_identical_expressions::NoIdenticalExpressions as OxcNoIdenticalExpressions;
 pub use crate::rules::oxc::no_ignored_exceptions::NoIgnoredExceptions as OxcNoIgnoredExceptions;
 pub use crate::rules::oxc::no_insecure_cookie::NoInsecureCookie as OxcNoInsecureCookie;
+pub use crate::rules::oxc::no_internal_api_use::NoInternalApiUse as OxcNoInternalApiUse;
 pub use crate::rules::oxc::no_inverted_boolean_check::NoInvertedBooleanCheck as OxcNoInvertedBooleanCheck;
 pub use crate::rules::oxc::no_known_value_widening::NoKnownValueWidening as OxcNoKnownValueWidening;
 pub use crate::rules::oxc::no_literal_call::NoLiteralCall as OxcNoLiteralCall;
@@ -1669,6 +1670,7 @@ pub enum RuleEnum {
     OxcNoIdenticalExpressions(OxcNoIdenticalExpressions),
     OxcNoIgnoredExceptions(OxcNoIgnoredExceptions),
     OxcNoInsecureCookie(OxcNoInsecureCookie),
+    OxcNoInternalApiUse(OxcNoInternalApiUse),
     OxcNoInvertedBooleanCheck(OxcNoInvertedBooleanCheck),
     OxcNoKnownValueWidening(OxcNoKnownValueWidening),
     OxcNoLiteralCall(OxcNoLiteralCall),
@@ -2700,7 +2702,8 @@ const OXC_NO_IDENTICAL_CONDITIONS_ID: usize = OXC_NO_HARDCODED_SECRETS_ID + 1usi
 const OXC_NO_IDENTICAL_EXPRESSIONS_ID: usize = OXC_NO_IDENTICAL_CONDITIONS_ID + 1usize;
 const OXC_NO_IGNORED_EXCEPTIONS_ID: usize = OXC_NO_IDENTICAL_EXPRESSIONS_ID + 1usize;
 const OXC_NO_INSECURE_COOKIE_ID: usize = OXC_NO_IGNORED_EXCEPTIONS_ID + 1usize;
-const OXC_NO_INVERTED_BOOLEAN_CHECK_ID: usize = OXC_NO_INSECURE_COOKIE_ID + 1usize;
+const OXC_NO_INTERNAL_API_USE_ID: usize = OXC_NO_INSECURE_COOKIE_ID + 1usize;
+const OXC_NO_INVERTED_BOOLEAN_CHECK_ID: usize = OXC_NO_INTERNAL_API_USE_ID + 1usize;
 const OXC_NO_KNOWN_VALUE_WIDENING_ID: usize = OXC_NO_INVERTED_BOOLEAN_CHECK_ID + 1usize;
 const OXC_NO_LITERAL_CALL_ID: usize = OXC_NO_KNOWN_VALUE_WIDENING_ID + 1usize;
 const OXC_NO_MAP_SPREAD_ID: usize = OXC_NO_LITERAL_CALL_ID + 1usize;
@@ -2950,7 +2953,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 937usize] = [
+static RULE_NAMES: [&str; 938usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3657,6 +3660,7 @@ static RULE_NAMES: [&str; 937usize] = [
     OxcNoIdenticalExpressions::NAME,
     OxcNoIgnoredExceptions::NAME,
     OxcNoInsecureCookie::NAME,
+    OxcNoInternalApiUse::NAME,
     OxcNoInvertedBooleanCheck::NAME,
     OxcNoKnownValueWidening::NAME,
     OxcNoLiteralCall::NAME,
@@ -4714,6 +4718,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalExpressions(_) => OXC_NO_IDENTICAL_EXPRESSIONS_ID,
             Self::OxcNoIgnoredExceptions(_) => OXC_NO_IGNORED_EXCEPTIONS_ID,
             Self::OxcNoInsecureCookie(_) => OXC_NO_INSECURE_COOKIE_ID,
+            Self::OxcNoInternalApiUse(_) => OXC_NO_INTERNAL_API_USE_ID,
             Self::OxcNoInvertedBooleanCheck(_) => OXC_NO_INVERTED_BOOLEAN_CHECK_ID,
             Self::OxcNoKnownValueWidening(_) => OXC_NO_KNOWN_VALUE_WIDENING_ID,
             Self::OxcNoLiteralCall(_) => OXC_NO_LITERAL_CALL_ID,
@@ -5826,6 +5831,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::CATEGORY,
             Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::CATEGORY,
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::CATEGORY,
+            Self::OxcNoInternalApiUse(_) => OxcNoInternalApiUse::CATEGORY,
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::CATEGORY,
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::CATEGORY,
             Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::CATEGORY,
@@ -6898,6 +6904,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::FIX,
             Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::FIX,
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::FIX,
+            Self::OxcNoInternalApiUse(_) => OxcNoInternalApiUse::FIX,
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::FIX,
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::FIX,
             Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::FIX,
@@ -8180,6 +8187,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::documentation(),
             Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::documentation(),
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::documentation(),
+            Self::OxcNoInternalApiUse(_) => OxcNoInternalApiUse::documentation(),
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::documentation(),
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::documentation(),
             Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::documentation(),
@@ -10525,6 +10533,8 @@ impl RuleEnum {
                 .or_else(|| OxcNoIgnoredExceptions::schema(generator)),
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::config_schema(generator)
                 .or_else(|| OxcNoInsecureCookie::schema(generator)),
+            Self::OxcNoInternalApiUse(_) => OxcNoInternalApiUse::config_schema(generator)
+                .or_else(|| OxcNoInternalApiUse::schema(generator)),
             Self::OxcNoInvertedBooleanCheck(_) => {
                 OxcNoInvertedBooleanCheck::config_schema(generator)
                     .or_else(|| OxcNoInvertedBooleanCheck::schema(generator))
@@ -11867,6 +11877,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalExpressions(_) => "oxc",
             Self::OxcNoIgnoredExceptions(_) => "oxc",
             Self::OxcNoInsecureCookie(_) => "oxc",
+            Self::OxcNoInternalApiUse(_) => "oxc",
             Self::OxcNoInvertedBooleanCheck(_) => "oxc",
             Self::OxcNoKnownValueWidening(_) => "oxc",
             Self::OxcNoLiteralCall(_) => "oxc",
@@ -13951,6 +13962,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalExpressions(rule) => rule.run(node, ctx),
             Self::OxcNoIgnoredExceptions(rule) => rule.run(node, ctx),
             Self::OxcNoInsecureCookie(rule) => rule.run(node, ctx),
+            Self::OxcNoInternalApiUse(rule) => rule.run(node, ctx),
             Self::OxcNoInvertedBooleanCheck(rule) => rule.run(node, ctx),
             Self::OxcNoKnownValueWidening(rule) => rule.run(node, ctx),
             Self::OxcNoLiteralCall(rule) => rule.run(node, ctx),
@@ -14905,6 +14917,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalExpressions(rule) => rule.run_once(ctx),
             Self::OxcNoIgnoredExceptions(rule) => rule.run_once(ctx),
             Self::OxcNoInsecureCookie(rule) => rule.run_once(ctx),
+            Self::OxcNoInternalApiUse(rule) => rule.run_once(ctx),
             Self::OxcNoInvertedBooleanCheck(rule) => rule.run_once(ctx),
             Self::OxcNoKnownValueWidening(rule) => rule.run_once(ctx),
             Self::OxcNoLiteralCall(rule) => rule.run_once(ctx),
@@ -15966,6 +15979,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalExpressions(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoIgnoredExceptions(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoInsecureCookie(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoInternalApiUse(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoInvertedBooleanCheck(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoKnownValueWidening(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoLiteralCall(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16933,6 +16947,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalExpressions(rule) => rule.should_run(ctx),
             Self::OxcNoIgnoredExceptions(rule) => rule.should_run(ctx),
             Self::OxcNoInsecureCookie(rule) => rule.should_run(ctx),
+            Self::OxcNoInternalApiUse(rule) => rule.should_run(ctx),
             Self::OxcNoInvertedBooleanCheck(rule) => rule.should_run(ctx),
             Self::OxcNoKnownValueWidening(rule) => rule.should_run(ctx),
             Self::OxcNoLiteralCall(rule) => rule.should_run(ctx),
@@ -18202,6 +18217,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::IS_TSGOLINT_RULE,
             Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::IS_TSGOLINT_RULE,
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::IS_TSGOLINT_RULE,
+            Self::OxcNoInternalApiUse(_) => OxcNoInternalApiUse::IS_TSGOLINT_RULE,
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::IS_TSGOLINT_RULE,
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::IS_TSGOLINT_RULE,
             Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::IS_TSGOLINT_RULE,
@@ -19371,6 +19387,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::VERSION,
             Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::VERSION,
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::VERSION,
+            Self::OxcNoInternalApiUse(_) => OxcNoInternalApiUse::VERSION,
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::VERSION,
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::VERSION,
             Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::VERSION,
@@ -20523,6 +20540,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::HAS_CONFIG,
             Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::HAS_CONFIG,
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::HAS_CONFIG,
+            Self::OxcNoInternalApiUse(_) => OxcNoInternalApiUse::HAS_CONFIG,
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::HAS_CONFIG,
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::HAS_CONFIG,
             Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::HAS_CONFIG,
@@ -21604,6 +21622,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::INFO,
             Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::INFO,
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::INFO,
+            Self::OxcNoInternalApiUse(_) => OxcNoInternalApiUse::INFO,
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::INFO,
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::INFO,
             Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::INFO,
@@ -22562,6 +22581,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalExpressions(rule) => rule.types_info(),
             Self::OxcNoIgnoredExceptions(rule) => rule.types_info(),
             Self::OxcNoInsecureCookie(rule) => rule.types_info(),
+            Self::OxcNoInternalApiUse(rule) => rule.types_info(),
             Self::OxcNoInvertedBooleanCheck(rule) => rule.types_info(),
             Self::OxcNoKnownValueWidening(rule) => rule.types_info(),
             Self::OxcNoLiteralCall(rule) => rule.types_info(),
@@ -23503,6 +23523,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalExpressions(rule) => rule.run_info(),
             Self::OxcNoIgnoredExceptions(rule) => rule.run_info(),
             Self::OxcNoInsecureCookie(rule) => rule.run_info(),
+            Self::OxcNoInternalApiUse(rule) => rule.run_info(),
             Self::OxcNoInvertedBooleanCheck(rule) => rule.run_info(),
             Self::OxcNoKnownValueWidening(rule) => rule.run_info(),
             Self::OxcNoLiteralCall(rule) => rule.run_info(),
@@ -24570,6 +24591,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoIdenticalExpressions(OxcNoIdenticalExpressions::default()),
         RuleEnum::OxcNoIgnoredExceptions(OxcNoIgnoredExceptions::default()),
         RuleEnum::OxcNoInsecureCookie(OxcNoInsecureCookie::default()),
+        RuleEnum::OxcNoInternalApiUse(OxcNoInternalApiUse::default()),
         RuleEnum::OxcNoInvertedBooleanCheck(OxcNoInvertedBooleanCheck::default()),
         RuleEnum::OxcNoKnownValueWidening(OxcNoKnownValueWidening::default()),
         RuleEnum::OxcNoLiteralCall(OxcNoLiteralCall::default()),
