@@ -383,6 +383,7 @@ pub use crate::rules::node::no_process_env::NoProcessEnv as NodeNoProcessEnv;
 pub use crate::rules::node::no_sync::NoSync as NodeNoSync;
 pub use crate::rules::node::no_top_level_await::NoTopLevelAwait as NodeNoTopLevelAwait;
 pub use crate::rules::oxc::approx_constant::ApproxConstant as OxcApproxConstant;
+pub use crate::rules::oxc::array_callback_without_return::ArrayCallbackWithoutReturn as OxcArrayCallbackWithoutReturn;
 pub use crate::rules::oxc::bad_array_method_on_arguments::BadArrayMethodOnArguments as OxcBadArrayMethodOnArguments;
 pub use crate::rules::oxc::bad_bitwise_operator::BadBitwiseOperator as OxcBadBitwiseOperator;
 pub use crate::rules::oxc::bad_char_at_comparison::BadCharAtComparison as OxcBadCharAtComparison;
@@ -1596,6 +1597,7 @@ pub enum RuleEnum {
     JsxA11YScope(JsxA11YScope),
     JsxA11YTabindexNoPositive(JsxA11YTabindexNoPositive),
     OxcApproxConstant(OxcApproxConstant),
+    OxcArrayCallbackWithoutReturn(OxcArrayCallbackWithoutReturn),
     OxcBadArrayMethodOnArguments(OxcBadArrayMethodOnArguments),
     OxcBadBitwiseOperator(OxcBadBitwiseOperator),
     OxcBadCharAtComparison(OxcBadCharAtComparison),
@@ -2605,7 +2607,8 @@ const JSX_A_11_Y_ROLE_SUPPORTS_ARIA_PROPS_ID: usize =
 const JSX_A_11_Y_SCOPE_ID: usize = JSX_A_11_Y_ROLE_SUPPORTS_ARIA_PROPS_ID + 1usize;
 const JSX_A_11_Y_TABINDEX_NO_POSITIVE_ID: usize = JSX_A_11_Y_SCOPE_ID + 1usize;
 const OXC_APPROX_CONSTANT_ID: usize = JSX_A_11_Y_TABINDEX_NO_POSITIVE_ID + 1usize;
-const OXC_BAD_ARRAY_METHOD_ON_ARGUMENTS_ID: usize = OXC_APPROX_CONSTANT_ID + 1usize;
+const OXC_ARRAY_CALLBACK_WITHOUT_RETURN_ID: usize = OXC_APPROX_CONSTANT_ID + 1usize;
+const OXC_BAD_ARRAY_METHOD_ON_ARGUMENTS_ID: usize = OXC_ARRAY_CALLBACK_WITHOUT_RETURN_ID + 1usize;
 const OXC_BAD_BITWISE_OPERATOR_ID: usize = OXC_BAD_ARRAY_METHOD_ON_ARGUMENTS_ID + 1usize;
 const OXC_BAD_CHAR_AT_COMPARISON_ID: usize = OXC_BAD_BITWISE_OPERATOR_ID + 1usize;
 const OXC_BAD_COMPARISON_SEQUENCE_ID: usize = OXC_BAD_CHAR_AT_COMPARISON_ID + 1usize;
@@ -2885,7 +2888,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 915usize] = [
+static RULE_NAMES: [&str; 916usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3541,6 +3544,7 @@ static RULE_NAMES: [&str; 915usize] = [
     JsxA11YScope::NAME,
     JsxA11YTabindexNoPositive::NAME,
     OxcApproxConstant::NAME,
+    OxcArrayCallbackWithoutReturn::NAME,
     OxcBadArrayMethodOnArguments::NAME,
     OxcBadBitwiseOperator::NAME,
     OxcBadCharAtComparison::NAME,
@@ -4576,6 +4580,7 @@ impl RuleEnum {
             Self::JsxA11YScope(_) => JSX_A_11_Y_SCOPE_ID,
             Self::JsxA11YTabindexNoPositive(_) => JSX_A_11_Y_TABINDEX_NO_POSITIVE_ID,
             Self::OxcApproxConstant(_) => OXC_APPROX_CONSTANT_ID,
+            Self::OxcArrayCallbackWithoutReturn(_) => OXC_ARRAY_CALLBACK_WITHOUT_RETURN_ID,
             Self::OxcBadArrayMethodOnArguments(_) => OXC_BAD_ARRAY_METHOD_ON_ARGUMENTS_ID,
             Self::OxcBadBitwiseOperator(_) => OXC_BAD_BITWISE_OPERATOR_ID,
             Self::OxcBadCharAtComparison(_) => OXC_BAD_CHAR_AT_COMPARISON_ID,
@@ -5664,6 +5669,7 @@ impl RuleEnum {
             Self::JsxA11YScope(_) => JsxA11YScope::CATEGORY,
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::CATEGORY,
             Self::OxcApproxConstant(_) => OxcApproxConstant::CATEGORY,
+            Self::OxcArrayCallbackWithoutReturn(_) => OxcArrayCallbackWithoutReturn::CATEGORY,
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::CATEGORY,
             Self::OxcBadBitwiseOperator(_) => OxcBadBitwiseOperator::CATEGORY,
             Self::OxcBadCharAtComparison(_) => OxcBadCharAtComparison::CATEGORY,
@@ -6716,6 +6722,7 @@ impl RuleEnum {
             Self::JsxA11YScope(_) => JsxA11YScope::FIX,
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::FIX,
             Self::OxcApproxConstant(_) => OxcApproxConstant::FIX,
+            Self::OxcArrayCallbackWithoutReturn(_) => OxcArrayCallbackWithoutReturn::FIX,
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::FIX,
             Self::OxcBadBitwiseOperator(_) => OxcBadBitwiseOperator::FIX,
             Self::OxcBadCharAtComparison(_) => OxcBadCharAtComparison::FIX,
@@ -7966,6 +7973,9 @@ impl RuleEnum {
             Self::JsxA11YScope(_) => JsxA11YScope::documentation(),
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::documentation(),
             Self::OxcApproxConstant(_) => OxcApproxConstant::documentation(),
+            Self::OxcArrayCallbackWithoutReturn(_) => {
+                OxcArrayCallbackWithoutReturn::documentation()
+            }
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::documentation(),
             Self::OxcBadBitwiseOperator(_) => OxcBadBitwiseOperator::documentation(),
             Self::OxcBadCharAtComparison(_) => OxcBadCharAtComparison::documentation(),
@@ -10210,6 +10220,10 @@ impl RuleEnum {
             }
             Self::OxcApproxConstant(_) => OxcApproxConstant::config_schema(generator)
                 .or_else(|| OxcApproxConstant::schema(generator)),
+            Self::OxcArrayCallbackWithoutReturn(_) => {
+                OxcArrayCallbackWithoutReturn::config_schema(generator)
+                    .or_else(|| OxcArrayCallbackWithoutReturn::schema(generator))
+            }
             Self::OxcBadArrayMethodOnArguments(_) => {
                 OxcBadArrayMethodOnArguments::config_schema(generator)
                     .or_else(|| OxcBadArrayMethodOnArguments::schema(generator))
@@ -11578,6 +11592,7 @@ impl RuleEnum {
             Self::JsxA11YScope(_) => "jsx_a11y",
             Self::JsxA11YTabindexNoPositive(_) => "jsx_a11y",
             Self::OxcApproxConstant(_) => "oxc",
+            Self::OxcArrayCallbackWithoutReturn(_) => "oxc",
             Self::OxcBadArrayMethodOnArguments(_) => "oxc",
             Self::OxcBadBitwiseOperator(_) => "oxc",
             Self::OxcBadCharAtComparison(_) => "oxc",
@@ -13634,6 +13649,7 @@ impl RuleEnum {
             Self::JsxA11YScope(rule) => rule.run(node, ctx),
             Self::JsxA11YTabindexNoPositive(rule) => rule.run(node, ctx),
             Self::OxcApproxConstant(rule) => rule.run(node, ctx),
+            Self::OxcArrayCallbackWithoutReturn(rule) => rule.run(node, ctx),
             Self::OxcBadArrayMethodOnArguments(rule) => rule.run(node, ctx),
             Self::OxcBadBitwiseOperator(rule) => rule.run(node, ctx),
             Self::OxcBadCharAtComparison(rule) => rule.run(node, ctx),
@@ -14566,6 +14582,7 @@ impl RuleEnum {
             Self::JsxA11YScope(rule) => rule.run_once(ctx),
             Self::JsxA11YTabindexNoPositive(rule) => rule.run_once(ctx),
             Self::OxcApproxConstant(rule) => rule.run_once(ctx),
+            Self::OxcArrayCallbackWithoutReturn(rule) => rule.run_once(ctx),
             Self::OxcBadArrayMethodOnArguments(rule) => rule.run_once(ctx),
             Self::OxcBadBitwiseOperator(rule) => rule.run_once(ctx),
             Self::OxcBadCharAtComparison(rule) => rule.run_once(ctx),
@@ -15605,6 +15622,7 @@ impl RuleEnum {
             Self::JsxA11YScope(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::JsxA11YTabindexNoPositive(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcApproxConstant(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcArrayCallbackWithoutReturn(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcBadArrayMethodOnArguments(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcBadBitwiseOperator(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcBadCharAtComparison(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16550,6 +16568,7 @@ impl RuleEnum {
             Self::JsxA11YScope(rule) => rule.should_run(ctx),
             Self::JsxA11YTabindexNoPositive(rule) => rule.should_run(ctx),
             Self::OxcApproxConstant(rule) => rule.should_run(ctx),
+            Self::OxcArrayCallbackWithoutReturn(rule) => rule.should_run(ctx),
             Self::OxcBadArrayMethodOnArguments(rule) => rule.should_run(ctx),
             Self::OxcBadBitwiseOperator(rule) => rule.should_run(ctx),
             Self::OxcBadCharAtComparison(rule) => rule.should_run(ctx),
@@ -17787,6 +17806,9 @@ impl RuleEnum {
             Self::JsxA11YScope(_) => JsxA11YScope::IS_TSGOLINT_RULE,
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::IS_TSGOLINT_RULE,
             Self::OxcApproxConstant(_) => OxcApproxConstant::IS_TSGOLINT_RULE,
+            Self::OxcArrayCallbackWithoutReturn(_) => {
+                OxcArrayCallbackWithoutReturn::IS_TSGOLINT_RULE
+            }
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::IS_TSGOLINT_RULE,
             Self::OxcBadBitwiseOperator(_) => OxcBadBitwiseOperator::IS_TSGOLINT_RULE,
             Self::OxcBadCharAtComparison(_) => OxcBadCharAtComparison::IS_TSGOLINT_RULE,
@@ -18934,6 +18956,7 @@ impl RuleEnum {
             Self::JsxA11YScope(_) => JsxA11YScope::VERSION,
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::VERSION,
             Self::OxcApproxConstant(_) => OxcApproxConstant::VERSION,
+            Self::OxcArrayCallbackWithoutReturn(_) => OxcArrayCallbackWithoutReturn::VERSION,
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::VERSION,
             Self::OxcBadBitwiseOperator(_) => OxcBadBitwiseOperator::VERSION,
             Self::OxcBadCharAtComparison(_) => OxcBadCharAtComparison::VERSION,
@@ -20064,6 +20087,7 @@ impl RuleEnum {
             Self::JsxA11YScope(_) => JsxA11YScope::HAS_CONFIG,
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::HAS_CONFIG,
             Self::OxcApproxConstant(_) => OxcApproxConstant::HAS_CONFIG,
+            Self::OxcArrayCallbackWithoutReturn(_) => OxcArrayCallbackWithoutReturn::HAS_CONFIG,
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::HAS_CONFIG,
             Self::OxcBadBitwiseOperator(_) => OxcBadBitwiseOperator::HAS_CONFIG,
             Self::OxcBadCharAtComparison(_) => OxcBadCharAtComparison::HAS_CONFIG,
@@ -21125,6 +21149,7 @@ impl RuleEnum {
             Self::JsxA11YScope(_) => JsxA11YScope::INFO,
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::INFO,
             Self::OxcApproxConstant(_) => OxcApproxConstant::INFO,
+            Self::OxcArrayCallbackWithoutReturn(_) => OxcArrayCallbackWithoutReturn::INFO,
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::INFO,
             Self::OxcBadBitwiseOperator(_) => OxcBadBitwiseOperator::INFO,
             Self::OxcBadCharAtComparison(_) => OxcBadCharAtComparison::INFO,
@@ -22061,6 +22086,7 @@ impl RuleEnum {
             Self::JsxA11YScope(rule) => rule.types_info(),
             Self::JsxA11YTabindexNoPositive(rule) => rule.types_info(),
             Self::OxcApproxConstant(rule) => rule.types_info(),
+            Self::OxcArrayCallbackWithoutReturn(rule) => rule.types_info(),
             Self::OxcBadArrayMethodOnArguments(rule) => rule.types_info(),
             Self::OxcBadBitwiseOperator(rule) => rule.types_info(),
             Self::OxcBadCharAtComparison(rule) => rule.types_info(),
@@ -22980,6 +23006,7 @@ impl RuleEnum {
             Self::JsxA11YScope(rule) => rule.run_info(),
             Self::JsxA11YTabindexNoPositive(rule) => rule.run_info(),
             Self::OxcApproxConstant(rule) => rule.run_info(),
+            Self::OxcArrayCallbackWithoutReturn(rule) => rule.run_info(),
             Self::OxcBadArrayMethodOnArguments(rule) => rule.run_info(),
             Self::OxcBadBitwiseOperator(rule) => rule.run_info(),
             Self::OxcBadCharAtComparison(rule) => rule.run_info(),
@@ -24025,6 +24052,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::JsxA11YScope(JsxA11YScope::default()),
         RuleEnum::JsxA11YTabindexNoPositive(JsxA11YTabindexNoPositive::default()),
         RuleEnum::OxcApproxConstant(OxcApproxConstant::default()),
+        RuleEnum::OxcArrayCallbackWithoutReturn(OxcArrayCallbackWithoutReturn::default()),
         RuleEnum::OxcBadArrayMethodOnArguments(OxcBadArrayMethodOnArguments::default()),
         RuleEnum::OxcBadBitwiseOperator(OxcBadBitwiseOperator::default()),
         RuleEnum::OxcBadCharAtComparison(OxcBadCharAtComparison::default()),

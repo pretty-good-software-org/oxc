@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(array-callback-without-return): Return a value from the `map` callback.
+   ╭─[array_callback_without_return.tsx:1:11]
+ 1 │ items.map((item) => { log(item); });
+   ·           ────────────────────────
+   ╰────
+  help: Return the value that the array operation should use.

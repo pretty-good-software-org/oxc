@@ -742,6 +742,7 @@ pub(crate) mod jsx_a11y {
 
 pub(crate) mod oxc {
     pub mod approx_constant;
+    pub mod array_callback_without_return;
     pub mod bad_array_method_on_arguments;
     pub mod bad_bitwise_operator;
     pub mod bad_char_at_comparison;
