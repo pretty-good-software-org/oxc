@@ -4720,6 +4720,12 @@ impl RuleRunner for crate::rules::oxc::no_undefined_argument::NoUndefinedArgumen
     const RUN_FUNCTIONS: RuleRunFunctionsImplemented = RuleRunFunctionsImplemented::Run;
 }
 
+impl RuleRunner for crate::rules::oxc::no_uniq_key::NoUniqKey {
+    const NODE_TYPES: Option<&AstTypesBitset> =
+        Some(&AstTypesBitset::from_types(&[AstType::JSXAttribute]));
+    const RUN_FUNCTIONS: RuleRunFunctionsImplemented = RuleRunFunctionsImplemented::Run;
+}
+
 impl RuleRunner for crate::rules::oxc::no_unknown_parameters::NoUnknownParameters {
     const NODE_TYPES: Option<&AstTypesBitset> =
         Some(&AstTypesBitset::from_types(&[AstType::FormalParameters]));
