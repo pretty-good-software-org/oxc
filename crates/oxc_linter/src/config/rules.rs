@@ -290,6 +290,7 @@ fn transform_rule_and_plugin_name<'a>(
         }
         ("sonarjs", "unused-import") => ("unused-import", "oxc"),
         ("sonarjs", "unused-named-groups") => ("unused-named-groups", "oxc"),
+        ("sonarjs", "use-type-alias") => ("use-type-alias", "oxc"),
         ("sonarjs", "void-use") => ("void-use", "oxc"),
         ("sonarjs", "no-weak-keys") => ("no-weak-keys", "oxc"),
         ("sonarjs", "no-unverified-certificate" | "unverified-certificate") => {

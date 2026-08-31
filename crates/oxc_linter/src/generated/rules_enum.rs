@@ -492,6 +492,7 @@ pub use crate::rules::oxc::single_character_alternation::SingleCharacterAlternat
 pub use crate::rules::oxc::uninvoked_array_callback::UninvokedArrayCallback as OxcUninvokedArrayCallback;
 pub use crate::rules::oxc::unused_import::UnusedImport as OxcUnusedImport;
 pub use crate::rules::oxc::unused_named_groups::UnusedNamedGroups as OxcUnusedNamedGroups;
+pub use crate::rules::oxc::use_type_alias::UseTypeAlias as OxcUseTypeAlias;
 pub use crate::rules::oxc::void_use::VoidUse as OxcVoidUse;
 pub use crate::rules::promise::always_return::AlwaysReturn as PromiseAlwaysReturn;
 pub use crate::rules::promise::avoid_new::AvoidNew as PromiseAvoidNew;
@@ -1745,6 +1746,7 @@ pub enum RuleEnum {
     OxcUninvokedArrayCallback(OxcUninvokedArrayCallback),
     OxcUnusedImport(OxcUnusedImport),
     OxcUnusedNamedGroups(OxcUnusedNamedGroups),
+    OxcUseTypeAlias(OxcUseTypeAlias),
     OxcVoidUse(OxcVoidUse),
     NextjsGoogleFontDisplay(NextjsGoogleFontDisplay),
     NextjsGoogleFontPreconnect(NextjsGoogleFontPreconnect),
@@ -2795,7 +2797,8 @@ const OXC_SINGLE_CHARACTER_ALTERNATION_ID: usize = OXC_SINGLE_CHAR_IN_CHARACTER_
 const OXC_UNINVOKED_ARRAY_CALLBACK_ID: usize = OXC_SINGLE_CHARACTER_ALTERNATION_ID + 1usize;
 const OXC_UNUSED_IMPORT_ID: usize = OXC_UNINVOKED_ARRAY_CALLBACK_ID + 1usize;
 const OXC_UNUSED_NAMED_GROUPS_ID: usize = OXC_UNUSED_IMPORT_ID + 1usize;
-const OXC_VOID_USE_ID: usize = OXC_UNUSED_NAMED_GROUPS_ID + 1usize;
+const OXC_USE_TYPE_ALIAS_ID: usize = OXC_UNUSED_NAMED_GROUPS_ID + 1usize;
+const OXC_VOID_USE_ID: usize = OXC_USE_TYPE_ALIAS_ID + 1usize;
 const NEXTJS_GOOGLE_FONT_DISPLAY_ID: usize = OXC_VOID_USE_ID + 1usize;
 const NEXTJS_GOOGLE_FONT_PRECONNECT_ID: usize = NEXTJS_GOOGLE_FONT_DISPLAY_ID + 1usize;
 const NEXTJS_INLINE_SCRIPT_ID_ID: usize = NEXTJS_GOOGLE_FONT_PRECONNECT_ID + 1usize;
@@ -3004,7 +3007,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 955usize] = [
+static RULE_NAMES: [&str; 956usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3769,6 +3772,7 @@ static RULE_NAMES: [&str; 955usize] = [
     OxcUninvokedArrayCallback::NAME,
     OxcUnusedImport::NAME,
     OxcUnusedNamedGroups::NAME,
+    OxcUseTypeAlias::NAME,
     OxcVoidUse::NAME,
     NextjsGoogleFontDisplay::NAME,
     NextjsGoogleFontPreconnect::NAME,
@@ -4846,6 +4850,7 @@ impl RuleEnum {
             Self::OxcUninvokedArrayCallback(_) => OXC_UNINVOKED_ARRAY_CALLBACK_ID,
             Self::OxcUnusedImport(_) => OXC_UNUSED_IMPORT_ID,
             Self::OxcUnusedNamedGroups(_) => OXC_UNUSED_NAMED_GROUPS_ID,
+            Self::OxcUseTypeAlias(_) => OXC_USE_TYPE_ALIAS_ID,
             Self::OxcVoidUse(_) => OXC_VOID_USE_ID,
             Self::NextjsGoogleFontDisplay(_) => NEXTJS_GOOGLE_FONT_DISPLAY_ID,
             Self::NextjsGoogleFontPreconnect(_) => NEXTJS_GOOGLE_FONT_PRECONNECT_ID,
@@ -5976,6 +5981,7 @@ impl RuleEnum {
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::CATEGORY,
             Self::OxcUnusedImport(_) => OxcUnusedImport::CATEGORY,
             Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::CATEGORY,
+            Self::OxcUseTypeAlias(_) => OxcUseTypeAlias::CATEGORY,
             Self::OxcVoidUse(_) => OxcVoidUse::CATEGORY,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::CATEGORY,
             Self::NextjsGoogleFontPreconnect(_) => NextjsGoogleFontPreconnect::CATEGORY,
@@ -7066,6 +7072,7 @@ impl RuleEnum {
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::FIX,
             Self::OxcUnusedImport(_) => OxcUnusedImport::FIX,
             Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::FIX,
+            Self::OxcUseTypeAlias(_) => OxcUseTypeAlias::FIX,
             Self::OxcVoidUse(_) => OxcVoidUse::FIX,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::FIX,
             Self::NextjsGoogleFontPreconnect(_) => NextjsGoogleFontPreconnect::FIX,
@@ -8370,6 +8377,7 @@ impl RuleEnum {
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::documentation(),
             Self::OxcUnusedImport(_) => OxcUnusedImport::documentation(),
             Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::documentation(),
+            Self::OxcUseTypeAlias(_) => OxcUseTypeAlias::documentation(),
             Self::OxcVoidUse(_) => OxcVoidUse::documentation(),
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::documentation(),
             Self::NextjsGoogleFontPreconnect(_) => NextjsGoogleFontPreconnect::documentation(),
@@ -10809,6 +10817,8 @@ impl RuleEnum {
                 .or_else(|| OxcUnusedImport::schema(generator)),
             Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::config_schema(generator)
                 .or_else(|| OxcUnusedNamedGroups::schema(generator)),
+            Self::OxcUseTypeAlias(_) => OxcUseTypeAlias::config_schema(generator)
+                .or_else(|| OxcUseTypeAlias::schema(generator)),
             Self::OxcVoidUse(_) => {
                 OxcVoidUse::config_schema(generator).or_else(|| OxcVoidUse::schema(generator))
             }
@@ -12109,6 +12119,7 @@ impl RuleEnum {
             Self::OxcUninvokedArrayCallback(_) => "oxc",
             Self::OxcUnusedImport(_) => "oxc",
             Self::OxcUnusedNamedGroups(_) => "oxc",
+            Self::OxcUseTypeAlias(_) => "oxc",
             Self::OxcVoidUse(_) => "oxc",
             Self::NextjsGoogleFontDisplay(_) => "nextjs",
             Self::NextjsGoogleFontPreconnect(_) => "nextjs",
@@ -14211,6 +14222,7 @@ impl RuleEnum {
             Self::OxcUninvokedArrayCallback(rule) => rule.run(node, ctx),
             Self::OxcUnusedImport(rule) => rule.run(node, ctx),
             Self::OxcUnusedNamedGroups(rule) => rule.run(node, ctx),
+            Self::OxcUseTypeAlias(rule) => rule.run(node, ctx),
             Self::OxcVoidUse(rule) => rule.run(node, ctx),
             Self::NextjsGoogleFontDisplay(rule) => rule.run(node, ctx),
             Self::NextjsGoogleFontPreconnect(rule) => rule.run(node, ctx),
@@ -15183,6 +15195,7 @@ impl RuleEnum {
             Self::OxcUninvokedArrayCallback(rule) => rule.run_once(ctx),
             Self::OxcUnusedImport(rule) => rule.run_once(ctx),
             Self::OxcUnusedNamedGroups(rule) => rule.run_once(ctx),
+            Self::OxcUseTypeAlias(rule) => rule.run_once(ctx),
             Self::OxcVoidUse(rule) => rule.run_once(ctx),
             Self::NextjsGoogleFontDisplay(rule) => rule.run_once(ctx),
             Self::NextjsGoogleFontPreconnect(rule) => rule.run_once(ctx),
@@ -16264,6 +16277,7 @@ impl RuleEnum {
             Self::OxcUninvokedArrayCallback(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcUnusedImport(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcUnusedNamedGroups(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcUseTypeAlias(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcVoidUse(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::NextjsGoogleFontDisplay(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::NextjsGoogleFontPreconnect(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -17247,6 +17261,7 @@ impl RuleEnum {
             Self::OxcUninvokedArrayCallback(rule) => rule.should_run(ctx),
             Self::OxcUnusedImport(rule) => rule.should_run(ctx),
             Self::OxcUnusedNamedGroups(rule) => rule.should_run(ctx),
+            Self::OxcUseTypeAlias(rule) => rule.should_run(ctx),
             Self::OxcVoidUse(rule) => rule.should_run(ctx),
             Self::NextjsGoogleFontDisplay(rule) => rule.should_run(ctx),
             Self::NextjsGoogleFontPreconnect(rule) => rule.should_run(ctx),
@@ -18540,6 +18555,7 @@ impl RuleEnum {
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::IS_TSGOLINT_RULE,
             Self::OxcUnusedImport(_) => OxcUnusedImport::IS_TSGOLINT_RULE,
             Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::IS_TSGOLINT_RULE,
+            Self::OxcUseTypeAlias(_) => OxcUseTypeAlias::IS_TSGOLINT_RULE,
             Self::OxcVoidUse(_) => OxcVoidUse::IS_TSGOLINT_RULE,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::IS_TSGOLINT_RULE,
             Self::NextjsGoogleFontPreconnect(_) => NextjsGoogleFontPreconnect::IS_TSGOLINT_RULE,
@@ -19723,6 +19739,7 @@ impl RuleEnum {
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::VERSION,
             Self::OxcUnusedImport(_) => OxcUnusedImport::VERSION,
             Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::VERSION,
+            Self::OxcUseTypeAlias(_) => OxcUseTypeAlias::VERSION,
             Self::OxcVoidUse(_) => OxcVoidUse::VERSION,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::VERSION,
             Self::NextjsGoogleFontPreconnect(_) => NextjsGoogleFontPreconnect::VERSION,
@@ -20893,6 +20910,7 @@ impl RuleEnum {
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::HAS_CONFIG,
             Self::OxcUnusedImport(_) => OxcUnusedImport::HAS_CONFIG,
             Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::HAS_CONFIG,
+            Self::OxcUseTypeAlias(_) => OxcUseTypeAlias::HAS_CONFIG,
             Self::OxcVoidUse(_) => OxcVoidUse::HAS_CONFIG,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::HAS_CONFIG,
             Self::NextjsGoogleFontPreconnect(_) => NextjsGoogleFontPreconnect::HAS_CONFIG,
@@ -21992,6 +22010,7 @@ impl RuleEnum {
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::INFO,
             Self::OxcUnusedImport(_) => OxcUnusedImport::INFO,
             Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::INFO,
+            Self::OxcUseTypeAlias(_) => OxcUseTypeAlias::INFO,
             Self::OxcVoidUse(_) => OxcVoidUse::INFO,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::INFO,
             Self::NextjsGoogleFontPreconnect(_) => NextjsGoogleFontPreconnect::INFO,
@@ -22966,6 +22985,7 @@ impl RuleEnum {
             Self::OxcUninvokedArrayCallback(rule) => rule.types_info(),
             Self::OxcUnusedImport(rule) => rule.types_info(),
             Self::OxcUnusedNamedGroups(rule) => rule.types_info(),
+            Self::OxcUseTypeAlias(rule) => rule.types_info(),
             Self::OxcVoidUse(rule) => rule.types_info(),
             Self::NextjsGoogleFontDisplay(rule) => rule.types_info(),
             Self::NextjsGoogleFontPreconnect(rule) => rule.types_info(),
@@ -23925,6 +23945,7 @@ impl RuleEnum {
             Self::OxcUninvokedArrayCallback(rule) => rule.run_info(),
             Self::OxcUnusedImport(rule) => rule.run_info(),
             Self::OxcUnusedNamedGroups(rule) => rule.run_info(),
+            Self::OxcUseTypeAlias(rule) => rule.run_info(),
             Self::OxcVoidUse(rule) => rule.run_info(),
             Self::NextjsGoogleFontDisplay(rule) => rule.run_info(),
             Self::NextjsGoogleFontPreconnect(rule) => rule.run_info(),
@@ -25012,6 +25033,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcUninvokedArrayCallback(OxcUninvokedArrayCallback::default()),
         RuleEnum::OxcUnusedImport(OxcUnusedImport::default()),
         RuleEnum::OxcUnusedNamedGroups(OxcUnusedNamedGroups::default()),
+        RuleEnum::OxcUseTypeAlias(OxcUseTypeAlias::default()),
         RuleEnum::OxcVoidUse(OxcVoidUse::default()),
         RuleEnum::NextjsGoogleFontDisplay(NextjsGoogleFontDisplay::default()),
         RuleEnum::NextjsGoogleFontPreconnect(NextjsGoogleFontPreconnect::default()),

@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(use-type-alias): Replace this union type with a type alias.
+   ╭─[use_type_alias.tsx:1:12]
+ 1 │ let value: string | number | boolean = input;
+   ·            ─────────────────────────
+   ╰────
+  help: Name the composed type and reuse the alias.

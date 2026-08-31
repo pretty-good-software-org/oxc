@@ -851,6 +851,7 @@ pub(crate) mod oxc {
     pub mod uninvoked_array_callback;
     pub mod unused_import;
     pub mod unused_named_groups;
+    pub mod use_type_alias;
     pub mod void_use;
 }
 
