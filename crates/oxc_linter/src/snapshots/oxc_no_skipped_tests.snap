@@ -1,0 +1,18 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-skipped-tests): Remove the skipped test modifier.
+   ╭─[no_skipped_tests.tsx:1:1]
+ 1 │ it.skip('works', testFn)
+   · ───────
+   ╰────
+  help: Restore the test or remove it from the test suite.
+
+  ⚠ oxc(no-skipped-tests): Remove the skipped test modifier.
+   ╭─[no_skipped_tests.tsx:1:1]
+ 1 │ describe.skip('suite', testFn)
+   · ─────────────
+   ╰────
+  help: Restore the test or remove it from the test suite.

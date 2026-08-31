@@ -452,6 +452,7 @@ pub use crate::rules::oxc::no_reflect_get::NoReflectGet as OxcNoReflectGet;
 pub use crate::rules::oxc::no_rest_spread_properties::NoRestSpreadProperties as OxcNoRestSpreadProperties;
 pub use crate::rules::oxc::no_runtime_typeof::NoRuntimeTypeof as OxcNoRuntimeTypeof;
 pub use crate::rules::oxc::no_shape_in_symbol_names::NoShapeInSymbolNames as OxcNoShapeInSymbolNames;
+pub use crate::rules::oxc::no_skipped_tests::NoSkippedTests as OxcNoSkippedTests;
 pub use crate::rules::oxc::no_small_switch::NoSmallSwitch as OxcNoSmallSwitch;
 pub use crate::rules::oxc::no_this_in_exported_function::NoThisInExportedFunction as OxcNoThisInExportedFunction;
 pub use crate::rules::oxc::no_undefined_argument::NoUndefinedArgument as OxcNoUndefinedArgument;
@@ -1688,6 +1689,7 @@ pub enum RuleEnum {
     OxcNoRestSpreadProperties(OxcNoRestSpreadProperties),
     OxcNoRuntimeTypeof(OxcNoRuntimeTypeof),
     OxcNoShapeInSymbolNames(OxcNoShapeInSymbolNames),
+    OxcNoSkippedTests(OxcNoSkippedTests),
     OxcNoSmallSwitch(OxcNoSmallSwitch),
     OxcNoThisInExportedFunction(OxcNoThisInExportedFunction),
     OxcNoUndefinedArgument(OxcNoUndefinedArgument),
@@ -2720,7 +2722,8 @@ const OXC_NO_REFLECT_GET_ID: usize = OXC_NO_REFLECT_APPLY_ID + 1usize;
 const OXC_NO_REST_SPREAD_PROPERTIES_ID: usize = OXC_NO_REFLECT_GET_ID + 1usize;
 const OXC_NO_RUNTIME_TYPEOF_ID: usize = OXC_NO_REST_SPREAD_PROPERTIES_ID + 1usize;
 const OXC_NO_SHAPE_IN_SYMBOL_NAMES_ID: usize = OXC_NO_RUNTIME_TYPEOF_ID + 1usize;
-const OXC_NO_SMALL_SWITCH_ID: usize = OXC_NO_SHAPE_IN_SYMBOL_NAMES_ID + 1usize;
+const OXC_NO_SKIPPED_TESTS_ID: usize = OXC_NO_SHAPE_IN_SYMBOL_NAMES_ID + 1usize;
+const OXC_NO_SMALL_SWITCH_ID: usize = OXC_NO_SKIPPED_TESTS_ID + 1usize;
 const OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID: usize = OXC_NO_SMALL_SWITCH_ID + 1usize;
 const OXC_NO_UNDEFINED_ARGUMENT_ID: usize = OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID + 1usize;
 const OXC_NO_UNKNOWN_PARAMETERS_ID: usize = OXC_NO_UNDEFINED_ARGUMENT_ID + 1usize;
@@ -2953,7 +2956,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 938usize] = [
+static RULE_NAMES: [&str; 939usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3678,6 +3681,7 @@ static RULE_NAMES: [&str; 938usize] = [
     OxcNoRestSpreadProperties::NAME,
     OxcNoRuntimeTypeof::NAME,
     OxcNoShapeInSymbolNames::NAME,
+    OxcNoSkippedTests::NAME,
     OxcNoSmallSwitch::NAME,
     OxcNoThisInExportedFunction::NAME,
     OxcNoUndefinedArgument::NAME,
@@ -4736,6 +4740,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(_) => OXC_NO_REST_SPREAD_PROPERTIES_ID,
             Self::OxcNoRuntimeTypeof(_) => OXC_NO_RUNTIME_TYPEOF_ID,
             Self::OxcNoShapeInSymbolNames(_) => OXC_NO_SHAPE_IN_SYMBOL_NAMES_ID,
+            Self::OxcNoSkippedTests(_) => OXC_NO_SKIPPED_TESTS_ID,
             Self::OxcNoSmallSwitch(_) => OXC_NO_SMALL_SWITCH_ID,
             Self::OxcNoThisInExportedFunction(_) => OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID,
             Self::OxcNoUndefinedArgument(_) => OXC_NO_UNDEFINED_ARGUMENT_ID,
@@ -5849,6 +5854,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::CATEGORY,
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::CATEGORY,
             Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::CATEGORY,
+            Self::OxcNoSkippedTests(_) => OxcNoSkippedTests::CATEGORY,
             Self::OxcNoSmallSwitch(_) => OxcNoSmallSwitch::CATEGORY,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::CATEGORY,
             Self::OxcNoUndefinedArgument(_) => OxcNoUndefinedArgument::CATEGORY,
@@ -6922,6 +6928,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::FIX,
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::FIX,
             Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::FIX,
+            Self::OxcNoSkippedTests(_) => OxcNoSkippedTests::FIX,
             Self::OxcNoSmallSwitch(_) => OxcNoSmallSwitch::FIX,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::FIX,
             Self::OxcNoUndefinedArgument(_) => OxcNoUndefinedArgument::FIX,
@@ -8205,6 +8212,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::documentation(),
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::documentation(),
             Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::documentation(),
+            Self::OxcNoSkippedTests(_) => OxcNoSkippedTests::documentation(),
             Self::OxcNoSmallSwitch(_) => OxcNoSmallSwitch::documentation(),
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::documentation(),
             Self::OxcNoUndefinedArgument(_) => OxcNoUndefinedArgument::documentation(),
@@ -10575,6 +10583,8 @@ impl RuleEnum {
                 .or_else(|| OxcNoRuntimeTypeof::schema(generator)),
             Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::config_schema(generator)
                 .or_else(|| OxcNoShapeInSymbolNames::schema(generator)),
+            Self::OxcNoSkippedTests(_) => OxcNoSkippedTests::config_schema(generator)
+                .or_else(|| OxcNoSkippedTests::schema(generator)),
             Self::OxcNoSmallSwitch(_) => OxcNoSmallSwitch::config_schema(generator)
                 .or_else(|| OxcNoSmallSwitch::schema(generator)),
             Self::OxcNoThisInExportedFunction(_) => {
@@ -11895,6 +11905,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(_) => "oxc",
             Self::OxcNoRuntimeTypeof(_) => "oxc",
             Self::OxcNoShapeInSymbolNames(_) => "oxc",
+            Self::OxcNoSkippedTests(_) => "oxc",
             Self::OxcNoSmallSwitch(_) => "oxc",
             Self::OxcNoThisInExportedFunction(_) => "oxc",
             Self::OxcNoUndefinedArgument(_) => "oxc",
@@ -13980,6 +13991,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(rule) => rule.run(node, ctx),
             Self::OxcNoRuntimeTypeof(rule) => rule.run(node, ctx),
             Self::OxcNoShapeInSymbolNames(rule) => rule.run(node, ctx),
+            Self::OxcNoSkippedTests(rule) => rule.run(node, ctx),
             Self::OxcNoSmallSwitch(rule) => rule.run(node, ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.run(node, ctx),
             Self::OxcNoUndefinedArgument(rule) => rule.run(node, ctx),
@@ -14935,6 +14947,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(rule) => rule.run_once(ctx),
             Self::OxcNoRuntimeTypeof(rule) => rule.run_once(ctx),
             Self::OxcNoShapeInSymbolNames(rule) => rule.run_once(ctx),
+            Self::OxcNoSkippedTests(rule) => rule.run_once(ctx),
             Self::OxcNoSmallSwitch(rule) => rule.run_once(ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.run_once(ctx),
             Self::OxcNoUndefinedArgument(rule) => rule.run_once(ctx),
@@ -15997,6 +16010,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoRuntimeTypeof(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoShapeInSymbolNames(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoSkippedTests(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoSmallSwitch(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoUndefinedArgument(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16965,6 +16979,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(rule) => rule.should_run(ctx),
             Self::OxcNoRuntimeTypeof(rule) => rule.should_run(ctx),
             Self::OxcNoShapeInSymbolNames(rule) => rule.should_run(ctx),
+            Self::OxcNoSkippedTests(rule) => rule.should_run(ctx),
             Self::OxcNoSmallSwitch(rule) => rule.should_run(ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.should_run(ctx),
             Self::OxcNoUndefinedArgument(rule) => rule.should_run(ctx),
@@ -18235,6 +18250,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::IS_TSGOLINT_RULE,
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::IS_TSGOLINT_RULE,
             Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::IS_TSGOLINT_RULE,
+            Self::OxcNoSkippedTests(_) => OxcNoSkippedTests::IS_TSGOLINT_RULE,
             Self::OxcNoSmallSwitch(_) => OxcNoSmallSwitch::IS_TSGOLINT_RULE,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::IS_TSGOLINT_RULE,
             Self::OxcNoUndefinedArgument(_) => OxcNoUndefinedArgument::IS_TSGOLINT_RULE,
@@ -19405,6 +19421,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::VERSION,
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::VERSION,
             Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::VERSION,
+            Self::OxcNoSkippedTests(_) => OxcNoSkippedTests::VERSION,
             Self::OxcNoSmallSwitch(_) => OxcNoSmallSwitch::VERSION,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::VERSION,
             Self::OxcNoUndefinedArgument(_) => OxcNoUndefinedArgument::VERSION,
@@ -20558,6 +20575,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::HAS_CONFIG,
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::HAS_CONFIG,
             Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::HAS_CONFIG,
+            Self::OxcNoSkippedTests(_) => OxcNoSkippedTests::HAS_CONFIG,
             Self::OxcNoSmallSwitch(_) => OxcNoSmallSwitch::HAS_CONFIG,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::HAS_CONFIG,
             Self::OxcNoUndefinedArgument(_) => OxcNoUndefinedArgument::HAS_CONFIG,
@@ -21640,6 +21658,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::INFO,
             Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::INFO,
             Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::INFO,
+            Self::OxcNoSkippedTests(_) => OxcNoSkippedTests::INFO,
             Self::OxcNoSmallSwitch(_) => OxcNoSmallSwitch::INFO,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::INFO,
             Self::OxcNoUndefinedArgument(_) => OxcNoUndefinedArgument::INFO,
@@ -22599,6 +22618,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(rule) => rule.types_info(),
             Self::OxcNoRuntimeTypeof(rule) => rule.types_info(),
             Self::OxcNoShapeInSymbolNames(rule) => rule.types_info(),
+            Self::OxcNoSkippedTests(rule) => rule.types_info(),
             Self::OxcNoSmallSwitch(rule) => rule.types_info(),
             Self::OxcNoThisInExportedFunction(rule) => rule.types_info(),
             Self::OxcNoUndefinedArgument(rule) => rule.types_info(),
@@ -23541,6 +23561,7 @@ impl RuleEnum {
             Self::OxcNoRestSpreadProperties(rule) => rule.run_info(),
             Self::OxcNoRuntimeTypeof(rule) => rule.run_info(),
             Self::OxcNoShapeInSymbolNames(rule) => rule.run_info(),
+            Self::OxcNoSkippedTests(rule) => rule.run_info(),
             Self::OxcNoSmallSwitch(rule) => rule.run_info(),
             Self::OxcNoThisInExportedFunction(rule) => rule.run_info(),
             Self::OxcNoUndefinedArgument(rule) => rule.run_info(),
@@ -24609,6 +24630,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoRestSpreadProperties(OxcNoRestSpreadProperties::default()),
         RuleEnum::OxcNoRuntimeTypeof(OxcNoRuntimeTypeof::default()),
         RuleEnum::OxcNoShapeInSymbolNames(OxcNoShapeInSymbolNames::default()),
+        RuleEnum::OxcNoSkippedTests(OxcNoSkippedTests::default()),
         RuleEnum::OxcNoSmallSwitch(OxcNoSmallSwitch::default()),
         RuleEnum::OxcNoThisInExportedFunction(OxcNoThisInExportedFunction::default()),
         RuleEnum::OxcNoUndefinedArgument(OxcNoUndefinedArgument::default()),
