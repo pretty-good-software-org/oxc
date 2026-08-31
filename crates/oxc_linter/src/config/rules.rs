@@ -287,6 +287,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "single-char-in-character-classes") => {
             ("single-char-in-character-classes", "oxc")
         }
+        ("sonarjs", "unused-named-groups") => ("unused-named-groups", "oxc"),
         ("sonarjs", "no-unverified-certificate" | "unverified-certificate") => {
             ("no-unverified-certificate", "oxc")
         }

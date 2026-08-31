@@ -844,6 +844,7 @@ pub(crate) mod oxc {
     pub mod single_char_in_character_classes;
     pub mod single_character_alternation;
     pub mod uninvoked_array_callback;
+    pub mod unused_named_groups;
 }
 
 /// <https://github.com/vercel/next.js/tree/canary/packages/eslint-plugin-next>
