@@ -424,6 +424,7 @@ pub use crate::rules::oxc::no_duplicate_in_composite::NoDuplicateInComposite as 
 pub use crate::rules::oxc::no_duplicated_branches::NoDuplicatedBranches as OxcNoDuplicatedBranches;
 pub use crate::rules::oxc::no_empty_after_reluctant::NoEmptyAfterReluctant as OxcNoEmptyAfterReluctant;
 pub use crate::rules::oxc::no_empty_alternatives::NoEmptyAlternatives as OxcNoEmptyAlternatives;
+pub use crate::rules::oxc::no_empty_collection::NoEmptyCollection as OxcNoEmptyCollection;
 pub use crate::rules::oxc::no_empty_group::NoEmptyGroup as OxcNoEmptyGroup;
 pub use crate::rules::oxc::no_empty_test_file::NoEmptyTestFile as OxcNoEmptyTestFile;
 pub use crate::rules::oxc::no_equals_in_for_termination::NoEqualsInForTermination as OxcNoEqualsInForTermination;
@@ -1670,6 +1671,7 @@ pub enum RuleEnum {
     OxcNoDuplicatedBranches(OxcNoDuplicatedBranches),
     OxcNoEmptyAfterReluctant(OxcNoEmptyAfterReluctant),
     OxcNoEmptyAlternatives(OxcNoEmptyAlternatives),
+    OxcNoEmptyCollection(OxcNoEmptyCollection),
     OxcNoEmptyGroup(OxcNoEmptyGroup),
     OxcNoEmptyTestFile(OxcNoEmptyTestFile),
     OxcNoEqualsInForTermination(OxcNoEqualsInForTermination),
@@ -2712,7 +2714,8 @@ const OXC_NO_DUPLICATE_IN_COMPOSITE_ID: usize = OXC_NO_CONST_ENUM_ID + 1usize;
 const OXC_NO_DUPLICATED_BRANCHES_ID: usize = OXC_NO_DUPLICATE_IN_COMPOSITE_ID + 1usize;
 const OXC_NO_EMPTY_AFTER_RELUCTANT_ID: usize = OXC_NO_DUPLICATED_BRANCHES_ID + 1usize;
 const OXC_NO_EMPTY_ALTERNATIVES_ID: usize = OXC_NO_EMPTY_AFTER_RELUCTANT_ID + 1usize;
-const OXC_NO_EMPTY_GROUP_ID: usize = OXC_NO_EMPTY_ALTERNATIVES_ID + 1usize;
+const OXC_NO_EMPTY_COLLECTION_ID: usize = OXC_NO_EMPTY_ALTERNATIVES_ID + 1usize;
+const OXC_NO_EMPTY_GROUP_ID: usize = OXC_NO_EMPTY_COLLECTION_ID + 1usize;
 const OXC_NO_EMPTY_TEST_FILE_ID: usize = OXC_NO_EMPTY_GROUP_ID + 1usize;
 const OXC_NO_EQUALS_IN_FOR_TERMINATION_ID: usize = OXC_NO_EMPTY_TEST_FILE_ID + 1usize;
 const OXC_NO_EXCLUSIVE_TESTS_ID: usize = OXC_NO_EQUALS_IN_FOR_TERMINATION_ID + 1usize;
@@ -2983,7 +2986,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 948usize] = [
+static RULE_NAMES: [&str; 949usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3680,6 +3683,7 @@ static RULE_NAMES: [&str; 948usize] = [
     OxcNoDuplicatedBranches::NAME,
     OxcNoEmptyAfterReluctant::NAME,
     OxcNoEmptyAlternatives::NAME,
+    OxcNoEmptyCollection::NAME,
     OxcNoEmptyGroup::NAME,
     OxcNoEmptyTestFile::NAME,
     OxcNoEqualsInForTermination::NAME,
@@ -4748,6 +4752,7 @@ impl RuleEnum {
             Self::OxcNoDuplicatedBranches(_) => OXC_NO_DUPLICATED_BRANCHES_ID,
             Self::OxcNoEmptyAfterReluctant(_) => OXC_NO_EMPTY_AFTER_RELUCTANT_ID,
             Self::OxcNoEmptyAlternatives(_) => OXC_NO_EMPTY_ALTERNATIVES_ID,
+            Self::OxcNoEmptyCollection(_) => OXC_NO_EMPTY_COLLECTION_ID,
             Self::OxcNoEmptyGroup(_) => OXC_NO_EMPTY_GROUP_ID,
             Self::OxcNoEmptyTestFile(_) => OXC_NO_EMPTY_TEST_FILE_ID,
             Self::OxcNoEqualsInForTermination(_) => OXC_NO_EQUALS_IN_FOR_TERMINATION_ID,
@@ -5871,6 +5876,7 @@ impl RuleEnum {
             Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::CATEGORY,
             Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::CATEGORY,
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::CATEGORY,
+            Self::OxcNoEmptyCollection(_) => OxcNoEmptyCollection::CATEGORY,
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::CATEGORY,
             Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::CATEGORY,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::CATEGORY,
@@ -6954,6 +6960,7 @@ impl RuleEnum {
             Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::FIX,
             Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::FIX,
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::FIX,
+            Self::OxcNoEmptyCollection(_) => OxcNoEmptyCollection::FIX,
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::FIX,
             Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::FIX,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::FIX,
@@ -8247,6 +8254,7 @@ impl RuleEnum {
             Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::documentation(),
             Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::documentation(),
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::documentation(),
+            Self::OxcNoEmptyCollection(_) => OxcNoEmptyCollection::documentation(),
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::documentation(),
             Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::documentation(),
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::documentation(),
@@ -10589,6 +10597,8 @@ impl RuleEnum {
                 .or_else(|| OxcNoEmptyAfterReluctant::schema(generator)),
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::config_schema(generator)
                 .or_else(|| OxcNoEmptyAlternatives::schema(generator)),
+            Self::OxcNoEmptyCollection(_) => OxcNoEmptyCollection::config_schema(generator)
+                .or_else(|| OxcNoEmptyCollection::schema(generator)),
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::config_schema(generator)
                 .or_else(|| OxcNoEmptyGroup::schema(generator)),
             Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::config_schema(generator)
@@ -11969,6 +11979,7 @@ impl RuleEnum {
             Self::OxcNoDuplicatedBranches(_) => "oxc",
             Self::OxcNoEmptyAfterReluctant(_) => "oxc",
             Self::OxcNoEmptyAlternatives(_) => "oxc",
+            Self::OxcNoEmptyCollection(_) => "oxc",
             Self::OxcNoEmptyGroup(_) => "oxc",
             Self::OxcNoEmptyTestFile(_) => "oxc",
             Self::OxcNoEqualsInForTermination(_) => "oxc",
@@ -14064,6 +14075,7 @@ impl RuleEnum {
             Self::OxcNoDuplicatedBranches(rule) => rule.run(node, ctx),
             Self::OxcNoEmptyAfterReluctant(rule) => rule.run(node, ctx),
             Self::OxcNoEmptyAlternatives(rule) => rule.run(node, ctx),
+            Self::OxcNoEmptyCollection(rule) => rule.run(node, ctx),
             Self::OxcNoEmptyGroup(rule) => rule.run(node, ctx),
             Self::OxcNoEmptyTestFile(rule) => rule.run(node, ctx),
             Self::OxcNoEqualsInForTermination(rule) => rule.run(node, ctx),
@@ -15029,6 +15041,7 @@ impl RuleEnum {
             Self::OxcNoDuplicatedBranches(rule) => rule.run_once(ctx),
             Self::OxcNoEmptyAfterReluctant(rule) => rule.run_once(ctx),
             Self::OxcNoEmptyAlternatives(rule) => rule.run_once(ctx),
+            Self::OxcNoEmptyCollection(rule) => rule.run_once(ctx),
             Self::OxcNoEmptyGroup(rule) => rule.run_once(ctx),
             Self::OxcNoEmptyTestFile(rule) => rule.run_once(ctx),
             Self::OxcNoEqualsInForTermination(rule) => rule.run_once(ctx),
@@ -16101,6 +16114,7 @@ impl RuleEnum {
             Self::OxcNoDuplicatedBranches(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoEmptyAfterReluctant(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoEmptyAlternatives(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoEmptyCollection(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoEmptyGroup(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoEmptyTestFile(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoEqualsInForTermination(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -17079,6 +17093,7 @@ impl RuleEnum {
             Self::OxcNoDuplicatedBranches(rule) => rule.should_run(ctx),
             Self::OxcNoEmptyAfterReluctant(rule) => rule.should_run(ctx),
             Self::OxcNoEmptyAlternatives(rule) => rule.should_run(ctx),
+            Self::OxcNoEmptyCollection(rule) => rule.should_run(ctx),
             Self::OxcNoEmptyGroup(rule) => rule.should_run(ctx),
             Self::OxcNoEmptyTestFile(rule) => rule.should_run(ctx),
             Self::OxcNoEqualsInForTermination(rule) => rule.should_run(ctx),
@@ -18359,6 +18374,7 @@ impl RuleEnum {
             Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::IS_TSGOLINT_RULE,
             Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::IS_TSGOLINT_RULE,
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::IS_TSGOLINT_RULE,
+            Self::OxcNoEmptyCollection(_) => OxcNoEmptyCollection::IS_TSGOLINT_RULE,
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::IS_TSGOLINT_RULE,
             Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::IS_TSGOLINT_RULE,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::IS_TSGOLINT_RULE,
@@ -19539,6 +19555,7 @@ impl RuleEnum {
             Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::VERSION,
             Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::VERSION,
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::VERSION,
+            Self::OxcNoEmptyCollection(_) => OxcNoEmptyCollection::VERSION,
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::VERSION,
             Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::VERSION,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::VERSION,
@@ -20702,6 +20719,7 @@ impl RuleEnum {
             Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::HAS_CONFIG,
             Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::HAS_CONFIG,
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::HAS_CONFIG,
+            Self::OxcNoEmptyCollection(_) => OxcNoEmptyCollection::HAS_CONFIG,
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::HAS_CONFIG,
             Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::HAS_CONFIG,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::HAS_CONFIG,
@@ -21794,6 +21812,7 @@ impl RuleEnum {
             Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::INFO,
             Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::INFO,
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::INFO,
+            Self::OxcNoEmptyCollection(_) => OxcNoEmptyCollection::INFO,
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::INFO,
             Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::INFO,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::INFO,
@@ -22763,6 +22782,7 @@ impl RuleEnum {
             Self::OxcNoDuplicatedBranches(rule) => rule.types_info(),
             Self::OxcNoEmptyAfterReluctant(rule) => rule.types_info(),
             Self::OxcNoEmptyAlternatives(rule) => rule.types_info(),
+            Self::OxcNoEmptyCollection(rule) => rule.types_info(),
             Self::OxcNoEmptyGroup(rule) => rule.types_info(),
             Self::OxcNoEmptyTestFile(rule) => rule.types_info(),
             Self::OxcNoEqualsInForTermination(rule) => rule.types_info(),
@@ -23715,6 +23735,7 @@ impl RuleEnum {
             Self::OxcNoDuplicatedBranches(rule) => rule.run_info(),
             Self::OxcNoEmptyAfterReluctant(rule) => rule.run_info(),
             Self::OxcNoEmptyAlternatives(rule) => rule.run_info(),
+            Self::OxcNoEmptyCollection(rule) => rule.run_info(),
             Self::OxcNoEmptyGroup(rule) => rule.run_info(),
             Self::OxcNoEmptyTestFile(rule) => rule.run_info(),
             Self::OxcNoEqualsInForTermination(rule) => rule.run_info(),
@@ -24793,6 +24814,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoDuplicatedBranches(OxcNoDuplicatedBranches::default()),
         RuleEnum::OxcNoEmptyAfterReluctant(OxcNoEmptyAfterReluctant::default()),
         RuleEnum::OxcNoEmptyAlternatives(OxcNoEmptyAlternatives::default()),
+        RuleEnum::OxcNoEmptyCollection(OxcNoEmptyCollection::default()),
         RuleEnum::OxcNoEmptyGroup(OxcNoEmptyGroup::default()),
         RuleEnum::OxcNoEmptyTestFile(OxcNoEmptyTestFile::default()),
         RuleEnum::OxcNoEqualsInForTermination(OxcNoEqualsInForTermination::default()),
