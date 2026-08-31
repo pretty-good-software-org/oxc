@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-identical-conditions): Remove or change this duplicated condition.
+   ╭─[no_identical_conditions.tsx:1:28]
+ 1 │ if (first) one(); else if (first) two();
+   ·                            ─────
+   ╰────
+  help: Each conditional branch should test a distinct condition.

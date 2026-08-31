@@ -425,6 +425,7 @@ pub use crate::rules::oxc::no_global_this::NoGlobalThis as OxcNoGlobalThis;
 pub use crate::rules::oxc::no_hardcoded_ip::NoHardcodedIp as OxcNoHardcodedIp;
 pub use crate::rules::oxc::no_hardcoded_passwords::NoHardcodedPasswords as OxcNoHardcodedPasswords;
 pub use crate::rules::oxc::no_hardcoded_secrets::NoHardcodedSecrets as OxcNoHardcodedSecrets;
+pub use crate::rules::oxc::no_identical_conditions::NoIdenticalConditions as OxcNoIdenticalConditions;
 pub use crate::rules::oxc::no_identical_expressions::NoIdenticalExpressions as OxcNoIdenticalExpressions;
 pub use crate::rules::oxc::no_insecure_cookie::NoInsecureCookie as OxcNoInsecureCookie;
 pub use crate::rules::oxc::no_inverted_boolean_check::NoInvertedBooleanCheck as OxcNoInvertedBooleanCheck;
@@ -1644,6 +1645,7 @@ pub enum RuleEnum {
     OxcNoHardcodedIp(OxcNoHardcodedIp),
     OxcNoHardcodedPasswords(OxcNoHardcodedPasswords),
     OxcNoHardcodedSecrets(OxcNoHardcodedSecrets),
+    OxcNoIdenticalConditions(OxcNoIdenticalConditions),
     OxcNoIdenticalExpressions(OxcNoIdenticalExpressions),
     OxcNoInsecureCookie(OxcNoInsecureCookie),
     OxcNoInvertedBooleanCheck(OxcNoInvertedBooleanCheck),
@@ -2659,7 +2661,8 @@ const OXC_NO_GLOBAL_THIS_ID: usize = OXC_NO_EQUALS_IN_FOR_TERMINATION_ID + 1usiz
 const OXC_NO_HARDCODED_IP_ID: usize = OXC_NO_GLOBAL_THIS_ID + 1usize;
 const OXC_NO_HARDCODED_PASSWORDS_ID: usize = OXC_NO_HARDCODED_IP_ID + 1usize;
 const OXC_NO_HARDCODED_SECRETS_ID: usize = OXC_NO_HARDCODED_PASSWORDS_ID + 1usize;
-const OXC_NO_IDENTICAL_EXPRESSIONS_ID: usize = OXC_NO_HARDCODED_SECRETS_ID + 1usize;
+const OXC_NO_IDENTICAL_CONDITIONS_ID: usize = OXC_NO_HARDCODED_SECRETS_ID + 1usize;
+const OXC_NO_IDENTICAL_EXPRESSIONS_ID: usize = OXC_NO_IDENTICAL_CONDITIONS_ID + 1usize;
 const OXC_NO_INSECURE_COOKIE_ID: usize = OXC_NO_IDENTICAL_EXPRESSIONS_ID + 1usize;
 const OXC_NO_INVERTED_BOOLEAN_CHECK_ID: usize = OXC_NO_INSECURE_COOKIE_ID + 1usize;
 const OXC_NO_KNOWN_VALUE_WIDENING_ID: usize = OXC_NO_INVERTED_BOOLEAN_CHECK_ID + 1usize;
@@ -2903,7 +2906,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 921usize] = [
+static RULE_NAMES: [&str; 922usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3601,6 +3604,7 @@ static RULE_NAMES: [&str; 921usize] = [
     OxcNoHardcodedIp::NAME,
     OxcNoHardcodedPasswords::NAME,
     OxcNoHardcodedSecrets::NAME,
+    OxcNoIdenticalConditions::NAME,
     OxcNoIdenticalExpressions::NAME,
     OxcNoInsecureCookie::NAME,
     OxcNoInvertedBooleanCheck::NAME,
@@ -4642,6 +4646,7 @@ impl RuleEnum {
             Self::OxcNoHardcodedIp(_) => OXC_NO_HARDCODED_IP_ID,
             Self::OxcNoHardcodedPasswords(_) => OXC_NO_HARDCODED_PASSWORDS_ID,
             Self::OxcNoHardcodedSecrets(_) => OXC_NO_HARDCODED_SECRETS_ID,
+            Self::OxcNoIdenticalConditions(_) => OXC_NO_IDENTICAL_CONDITIONS_ID,
             Self::OxcNoIdenticalExpressions(_) => OXC_NO_IDENTICAL_EXPRESSIONS_ID,
             Self::OxcNoInsecureCookie(_) => OXC_NO_INSECURE_COOKIE_ID,
             Self::OxcNoInvertedBooleanCheck(_) => OXC_NO_INVERTED_BOOLEAN_CHECK_ID,
@@ -5738,6 +5743,7 @@ impl RuleEnum {
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::CATEGORY,
             Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::CATEGORY,
             Self::OxcNoHardcodedSecrets(_) => OxcNoHardcodedSecrets::CATEGORY,
+            Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::CATEGORY,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::CATEGORY,
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::CATEGORY,
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::CATEGORY,
@@ -6794,6 +6800,7 @@ impl RuleEnum {
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::FIX,
             Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::FIX,
             Self::OxcNoHardcodedSecrets(_) => OxcNoHardcodedSecrets::FIX,
+            Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::FIX,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::FIX,
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::FIX,
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::FIX,
@@ -8058,6 +8065,7 @@ impl RuleEnum {
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::documentation(),
             Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::documentation(),
             Self::OxcNoHardcodedSecrets(_) => OxcNoHardcodedSecrets::documentation(),
+            Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::documentation(),
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::documentation(),
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::documentation(),
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::documentation(),
@@ -10370,6 +10378,8 @@ impl RuleEnum {
                 .or_else(|| OxcNoHardcodedPasswords::schema(generator)),
             Self::OxcNoHardcodedSecrets(_) => OxcNoHardcodedSecrets::config_schema(generator)
                 .or_else(|| OxcNoHardcodedSecrets::schema(generator)),
+            Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::config_schema(generator)
+                .or_else(|| OxcNoIdenticalConditions::schema(generator)),
             Self::OxcNoIdenticalExpressions(_) => {
                 OxcNoIdenticalExpressions::config_schema(generator)
                     .or_else(|| OxcNoIdenticalExpressions::schema(generator))
@@ -11687,6 +11697,7 @@ impl RuleEnum {
             Self::OxcNoHardcodedIp(_) => "oxc",
             Self::OxcNoHardcodedPasswords(_) => "oxc",
             Self::OxcNoHardcodedSecrets(_) => "oxc",
+            Self::OxcNoIdenticalConditions(_) => "oxc",
             Self::OxcNoIdenticalExpressions(_) => "oxc",
             Self::OxcNoInsecureCookie(_) => "oxc",
             Self::OxcNoInvertedBooleanCheck(_) => "oxc",
@@ -13755,6 +13766,7 @@ impl RuleEnum {
             Self::OxcNoHardcodedIp(rule) => rule.run(node, ctx),
             Self::OxcNoHardcodedPasswords(rule) => rule.run(node, ctx),
             Self::OxcNoHardcodedSecrets(rule) => rule.run(node, ctx),
+            Self::OxcNoIdenticalConditions(rule) => rule.run(node, ctx),
             Self::OxcNoIdenticalExpressions(rule) => rule.run(node, ctx),
             Self::OxcNoInsecureCookie(rule) => rule.run(node, ctx),
             Self::OxcNoInvertedBooleanCheck(rule) => rule.run(node, ctx),
@@ -14693,6 +14705,7 @@ impl RuleEnum {
             Self::OxcNoHardcodedIp(rule) => rule.run_once(ctx),
             Self::OxcNoHardcodedPasswords(rule) => rule.run_once(ctx),
             Self::OxcNoHardcodedSecrets(rule) => rule.run_once(ctx),
+            Self::OxcNoIdenticalConditions(rule) => rule.run_once(ctx),
             Self::OxcNoIdenticalExpressions(rule) => rule.run_once(ctx),
             Self::OxcNoInsecureCookie(rule) => rule.run_once(ctx),
             Self::OxcNoInvertedBooleanCheck(rule) => rule.run_once(ctx),
@@ -15738,6 +15751,7 @@ impl RuleEnum {
             Self::OxcNoHardcodedIp(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoHardcodedPasswords(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoHardcodedSecrets(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoIdenticalConditions(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoIdenticalExpressions(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoInsecureCookie(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoInvertedBooleanCheck(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16689,6 +16703,7 @@ impl RuleEnum {
             Self::OxcNoHardcodedIp(rule) => rule.should_run(ctx),
             Self::OxcNoHardcodedPasswords(rule) => rule.should_run(ctx),
             Self::OxcNoHardcodedSecrets(rule) => rule.should_run(ctx),
+            Self::OxcNoIdenticalConditions(rule) => rule.should_run(ctx),
             Self::OxcNoIdenticalExpressions(rule) => rule.should_run(ctx),
             Self::OxcNoInsecureCookie(rule) => rule.should_run(ctx),
             Self::OxcNoInvertedBooleanCheck(rule) => rule.should_run(ctx),
@@ -17940,6 +17955,7 @@ impl RuleEnum {
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::IS_TSGOLINT_RULE,
             Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::IS_TSGOLINT_RULE,
             Self::OxcNoHardcodedSecrets(_) => OxcNoHardcodedSecrets::IS_TSGOLINT_RULE,
+            Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::IS_TSGOLINT_RULE,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::IS_TSGOLINT_RULE,
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::IS_TSGOLINT_RULE,
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::IS_TSGOLINT_RULE,
@@ -19089,6 +19105,7 @@ impl RuleEnum {
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::VERSION,
             Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::VERSION,
             Self::OxcNoHardcodedSecrets(_) => OxcNoHardcodedSecrets::VERSION,
+            Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::VERSION,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::VERSION,
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::VERSION,
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::VERSION,
@@ -20225,6 +20242,7 @@ impl RuleEnum {
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::HAS_CONFIG,
             Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::HAS_CONFIG,
             Self::OxcNoHardcodedSecrets(_) => OxcNoHardcodedSecrets::HAS_CONFIG,
+            Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::HAS_CONFIG,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::HAS_CONFIG,
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::HAS_CONFIG,
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::HAS_CONFIG,
@@ -21290,6 +21308,7 @@ impl RuleEnum {
             Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::INFO,
             Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::INFO,
             Self::OxcNoHardcodedSecrets(_) => OxcNoHardcodedSecrets::INFO,
+            Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::INFO,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::INFO,
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::INFO,
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::INFO,
@@ -22232,6 +22251,7 @@ impl RuleEnum {
             Self::OxcNoHardcodedIp(rule) => rule.types_info(),
             Self::OxcNoHardcodedPasswords(rule) => rule.types_info(),
             Self::OxcNoHardcodedSecrets(rule) => rule.types_info(),
+            Self::OxcNoIdenticalConditions(rule) => rule.types_info(),
             Self::OxcNoIdenticalExpressions(rule) => rule.types_info(),
             Self::OxcNoInsecureCookie(rule) => rule.types_info(),
             Self::OxcNoInvertedBooleanCheck(rule) => rule.types_info(),
@@ -23157,6 +23177,7 @@ impl RuleEnum {
             Self::OxcNoHardcodedIp(rule) => rule.run_info(),
             Self::OxcNoHardcodedPasswords(rule) => rule.run_info(),
             Self::OxcNoHardcodedSecrets(rule) => rule.run_info(),
+            Self::OxcNoIdenticalConditions(rule) => rule.run_info(),
             Self::OxcNoIdenticalExpressions(rule) => rule.run_info(),
             Self::OxcNoInsecureCookie(rule) => rule.run_info(),
             Self::OxcNoInvertedBooleanCheck(rule) => rule.run_info(),
@@ -24208,6 +24229,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoHardcodedIp(OxcNoHardcodedIp::default()),
         RuleEnum::OxcNoHardcodedPasswords(OxcNoHardcodedPasswords::default()),
         RuleEnum::OxcNoHardcodedSecrets(OxcNoHardcodedSecrets::default()),
+        RuleEnum::OxcNoIdenticalConditions(OxcNoIdenticalConditions::default()),
         RuleEnum::OxcNoIdenticalExpressions(OxcNoIdenticalExpressions::default()),
         RuleEnum::OxcNoInsecureCookie(OxcNoInsecureCookie::default()),
         RuleEnum::OxcNoInvertedBooleanCheck(OxcNoInvertedBooleanCheck::default()),
