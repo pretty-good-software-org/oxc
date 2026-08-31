@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-redundant-optional): Remove either the `?` marker or the explicit `undefined` type.
+   ╭─[no_redundant_optional.tsx:1:15]
+ 1 │ type User = { name?: string | undefined };
+   ·               ─────────────────────────
+   ╰────
+  help: Keep one representation of optionality.

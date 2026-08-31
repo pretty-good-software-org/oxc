@@ -813,6 +813,7 @@ pub(crate) mod oxc {
     pub mod no_os_command_from_path;
     pub mod no_redundant_boolean;
     pub mod no_redundant_jump;
+    pub mod no_redundant_optional;
     pub mod no_reflect_apply;
     pub mod no_reflect_get;
     pub mod no_rest_spread_properties;
