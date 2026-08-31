@@ -754,6 +754,7 @@ pub(crate) mod oxc {
     pub mod bad_replace_all_arg;
     pub mod branches_sharing_code;
     pub mod class_name;
+    pub mod concise_regex;
     pub mod const_comparisons;
     pub mod constructor_for_side_effects;
     pub mod different_types_comparison;
