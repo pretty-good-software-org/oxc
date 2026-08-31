@@ -313,6 +313,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("anti-slop", "no-unknown-parameters") => ("no-unknown-parameters", "oxc"),
         ("anti-slop", "no-unknown-returns") => ("no-unknown-returns", "oxc"),
         ("sonarjs", "no-unsafe-unzip") => ("no-unsafe-unzip", "oxc"),
+        ("sonarjs", "no-unthrown-error") => ("no-unthrown-error", "oxc"),
         ("sonarjs", "no-literal-call") => ("no-literal-call", "oxc"),
         ("anti-slop", "no-unsafe-dictionary-type") => ("no-unsafe-dictionary-type", "oxc"),
         ("anti-slop", "no-widen-then-assert") => ("no-widen-then-assert", "oxc"),
