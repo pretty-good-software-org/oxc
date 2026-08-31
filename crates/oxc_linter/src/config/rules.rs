@@ -315,6 +315,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("anti-slop", "no-object-parameters") => ("no-object-parameters", "oxc"),
         ("anti-slop", "no-unknown-parameters") => ("no-unknown-parameters", "oxc"),
         ("anti-slop", "no-unknown-returns") => ("no-unknown-returns", "oxc"),
+        ("sonarjs", "no-empty-after-reluctant") => ("no-empty-after-reluctant", "oxc"),
         ("sonarjs", "no-unsafe-unzip") => ("no-unsafe-unzip", "oxc"),
         ("sonarjs", "no-unthrown-error") => ("no-unthrown-error", "oxc"),
         ("sonarjs", "no-literal-call") => ("no-literal-call", "oxc"),

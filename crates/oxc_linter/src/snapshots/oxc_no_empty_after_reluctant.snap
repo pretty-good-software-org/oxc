@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-empty-after-reluctant): Fix this reluctant quantifier that will only ever match one repetition.
+   ╭─[no_empty_after_reluctant.tsx:1:1]
+ 1 │ /a*?/
+   · ─────
+   ╰────
+  help: Remove the reluctant modifier or add a following expression that requires it.
