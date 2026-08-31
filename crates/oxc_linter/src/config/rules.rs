@@ -260,6 +260,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "no-clear-text-protocols") => ("no-clear-text-protocols", "oxc"),
         ("sonarjs", "no-collection-size-mischeck") => ("no-collection-size-mischeck", "oxc"),
         ("sonarjs", "no-commented-code") => ("no-commented-code", "oxc"),
+        ("sonarjs", "generator-without-yield") => ("generator-without-yield", "oxc"),
         ("sonarjs", "no-global-this") => ("no-global-this", "oxc"),
         ("sonarjs", "no-hardcoded-ip") => ("no-hardcoded-ip", "oxc"),
         ("sonarjs", "no-os-command-from-path") => ("no-os-command-from-path", "oxc"),

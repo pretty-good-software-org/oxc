@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(generator-without-yield): Remove the generator modifier or add a yield statement.
+   ╭─[generator_without_yield.tsx:1:1]
+ 1 │ function* values() { return 1; }
+   · ────────────────────────────────
+   ╰────
+  help: A generator should yield values or be an ordinary function.
