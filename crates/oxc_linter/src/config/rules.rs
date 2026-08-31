@@ -251,6 +251,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "array-callback-without-return") => ("array-callback-without-return", "oxc"),
         ("sonarjs", "class-name") => ("class-name", "oxc"),
         ("sonarjs", "no-all-duplicated-branches") => ("no-all-duplicated-branches", "oxc"),
+        ("sonarjs", "no-angular-bypass-sanitization") => ("no-angular-bypass-sanitization", "oxc"),
         ("sonarjs", "no-async-constructor") => ("no-async-constructor", "oxc"),
         ("sonarjs", "constructor-for-side-effects") => ("constructor-for-side-effects", "oxc"),
         ("sonarjs", "no-empty-group") => ("no-empty-group", "oxc"),

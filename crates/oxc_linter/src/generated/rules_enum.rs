@@ -408,6 +408,7 @@ pub use crate::rules::oxc::misrefactored_assign_op::MisrefactoredAssignOp as Oxc
 pub use crate::rules::oxc::missing_throw::MissingThrow as OxcMissingThrow;
 pub use crate::rules::oxc::no_accumulating_spread::NoAccumulatingSpread as OxcNoAccumulatingSpread;
 pub use crate::rules::oxc::no_all_duplicated_branches::NoAllDuplicatedBranches as OxcNoAllDuplicatedBranches;
+pub use crate::rules::oxc::no_angular_bypass_sanitization::NoAngularBypassSanitization as OxcNoAngularBypassSanitization;
 pub use crate::rules::oxc::no_async_await::NoAsyncAwait as OxcNoAsyncAwait;
 pub use crate::rules::oxc::no_async_constructor::NoAsyncConstructor as OxcNoAsyncConstructor;
 pub use crate::rules::oxc::no_async_endpoint_handlers::NoAsyncEndpointHandlers as OxcNoAsyncEndpointHandlers;
@@ -1631,6 +1632,7 @@ pub enum RuleEnum {
     OxcMissingThrow(OxcMissingThrow),
     OxcNoAccumulatingSpread(OxcNoAccumulatingSpread),
     OxcNoAllDuplicatedBranches(OxcNoAllDuplicatedBranches),
+    OxcNoAngularBypassSanitization(OxcNoAngularBypassSanitization),
     OxcNoAsyncAwait(OxcNoAsyncAwait),
     OxcNoAsyncConstructor(OxcNoAsyncConstructor),
     OxcNoAsyncEndpointHandlers(OxcNoAsyncEndpointHandlers),
@@ -2650,7 +2652,8 @@ const OXC_MISREFACTORED_ASSIGN_OP_ID: usize = OXC_MAX_SWITCH_CASES_ID + 1usize;
 const OXC_MISSING_THROW_ID: usize = OXC_MISREFACTORED_ASSIGN_OP_ID + 1usize;
 const OXC_NO_ACCUMULATING_SPREAD_ID: usize = OXC_MISSING_THROW_ID + 1usize;
 const OXC_NO_ALL_DUPLICATED_BRANCHES_ID: usize = OXC_NO_ACCUMULATING_SPREAD_ID + 1usize;
-const OXC_NO_ASYNC_AWAIT_ID: usize = OXC_NO_ALL_DUPLICATED_BRANCHES_ID + 1usize;
+const OXC_NO_ANGULAR_BYPASS_SANITIZATION_ID: usize = OXC_NO_ALL_DUPLICATED_BRANCHES_ID + 1usize;
+const OXC_NO_ASYNC_AWAIT_ID: usize = OXC_NO_ANGULAR_BYPASS_SANITIZATION_ID + 1usize;
 const OXC_NO_ASYNC_CONSTRUCTOR_ID: usize = OXC_NO_ASYNC_AWAIT_ID + 1usize;
 const OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID: usize = OXC_NO_ASYNC_CONSTRUCTOR_ID + 1usize;
 const OXC_NO_BARREL_FILE_ID: usize = OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID + 1usize;
@@ -2915,7 +2918,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 925usize] = [
+static RULE_NAMES: [&str; 926usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3596,6 +3599,7 @@ static RULE_NAMES: [&str; 925usize] = [
     OxcMissingThrow::NAME,
     OxcNoAccumulatingSpread::NAME,
     OxcNoAllDuplicatedBranches::NAME,
+    OxcNoAngularBypassSanitization::NAME,
     OxcNoAsyncAwait::NAME,
     OxcNoAsyncConstructor::NAME,
     OxcNoAsyncEndpointHandlers::NAME,
@@ -4641,6 +4645,7 @@ impl RuleEnum {
             Self::OxcMissingThrow(_) => OXC_MISSING_THROW_ID,
             Self::OxcNoAccumulatingSpread(_) => OXC_NO_ACCUMULATING_SPREAD_ID,
             Self::OxcNoAllDuplicatedBranches(_) => OXC_NO_ALL_DUPLICATED_BRANCHES_ID,
+            Self::OxcNoAngularBypassSanitization(_) => OXC_NO_ANGULAR_BYPASS_SANITIZATION_ID,
             Self::OxcNoAsyncAwait(_) => OXC_NO_ASYNC_AWAIT_ID,
             Self::OxcNoAsyncConstructor(_) => OXC_NO_ASYNC_CONSTRUCTOR_ID,
             Self::OxcNoAsyncEndpointHandlers(_) => OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID,
@@ -5739,6 +5744,7 @@ impl RuleEnum {
             Self::OxcMissingThrow(_) => OxcMissingThrow::CATEGORY,
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::CATEGORY,
             Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::CATEGORY,
+            Self::OxcNoAngularBypassSanitization(_) => OxcNoAngularBypassSanitization::CATEGORY,
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::CATEGORY,
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::CATEGORY,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::CATEGORY,
@@ -6801,6 +6807,7 @@ impl RuleEnum {
             Self::OxcMissingThrow(_) => OxcMissingThrow::FIX,
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::FIX,
             Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::FIX,
+            Self::OxcNoAngularBypassSanitization(_) => OxcNoAngularBypassSanitization::FIX,
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::FIX,
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::FIX,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::FIX,
@@ -8067,6 +8074,9 @@ impl RuleEnum {
             Self::OxcMissingThrow(_) => OxcMissingThrow::documentation(),
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::documentation(),
             Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::documentation(),
+            Self::OxcNoAngularBypassSanitization(_) => {
+                OxcNoAngularBypassSanitization::documentation()
+            }
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::documentation(),
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::documentation(),
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::documentation(),
@@ -10356,6 +10366,10 @@ impl RuleEnum {
                 OxcNoAllDuplicatedBranches::config_schema(generator)
                     .or_else(|| OxcNoAllDuplicatedBranches::schema(generator))
             }
+            Self::OxcNoAngularBypassSanitization(_) => {
+                OxcNoAngularBypassSanitization::config_schema(generator)
+                    .or_else(|| OxcNoAngularBypassSanitization::schema(generator))
+            }
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::config_schema(generator)
                 .or_else(|| OxcNoAsyncAwait::schema(generator)),
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::config_schema(generator)
@@ -11710,6 +11724,7 @@ impl RuleEnum {
             Self::OxcMissingThrow(_) => "oxc",
             Self::OxcNoAccumulatingSpread(_) => "oxc",
             Self::OxcNoAllDuplicatedBranches(_) => "oxc",
+            Self::OxcNoAngularBypassSanitization(_) => "oxc",
             Self::OxcNoAsyncAwait(_) => "oxc",
             Self::OxcNoAsyncConstructor(_) => "oxc",
             Self::OxcNoAsyncEndpointHandlers(_) => "oxc",
@@ -13782,6 +13797,7 @@ impl RuleEnum {
             Self::OxcMissingThrow(rule) => rule.run(node, ctx),
             Self::OxcNoAccumulatingSpread(rule) => rule.run(node, ctx),
             Self::OxcNoAllDuplicatedBranches(rule) => rule.run(node, ctx),
+            Self::OxcNoAngularBypassSanitization(rule) => rule.run(node, ctx),
             Self::OxcNoAsyncAwait(rule) => rule.run(node, ctx),
             Self::OxcNoAsyncConstructor(rule) => rule.run(node, ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run(node, ctx),
@@ -14724,6 +14740,7 @@ impl RuleEnum {
             Self::OxcMissingThrow(rule) => rule.run_once(ctx),
             Self::OxcNoAccumulatingSpread(rule) => rule.run_once(ctx),
             Self::OxcNoAllDuplicatedBranches(rule) => rule.run_once(ctx),
+            Self::OxcNoAngularBypassSanitization(rule) => rule.run_once(ctx),
             Self::OxcNoAsyncAwait(rule) => rule.run_once(ctx),
             Self::OxcNoAsyncConstructor(rule) => rule.run_once(ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run_once(ctx),
@@ -15773,6 +15790,7 @@ impl RuleEnum {
             Self::OxcMissingThrow(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoAccumulatingSpread(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoAllDuplicatedBranches(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoAngularBypassSanitization(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoAsyncAwait(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoAsyncConstructor(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16728,6 +16746,7 @@ impl RuleEnum {
             Self::OxcMissingThrow(rule) => rule.should_run(ctx),
             Self::OxcNoAccumulatingSpread(rule) => rule.should_run(ctx),
             Self::OxcNoAllDuplicatedBranches(rule) => rule.should_run(ctx),
+            Self::OxcNoAngularBypassSanitization(rule) => rule.should_run(ctx),
             Self::OxcNoAsyncAwait(rule) => rule.should_run(ctx),
             Self::OxcNoAsyncConstructor(rule) => rule.should_run(ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.should_run(ctx),
@@ -17981,6 +18000,9 @@ impl RuleEnum {
             Self::OxcMissingThrow(_) => OxcMissingThrow::IS_TSGOLINT_RULE,
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::IS_TSGOLINT_RULE,
             Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::IS_TSGOLINT_RULE,
+            Self::OxcNoAngularBypassSanitization(_) => {
+                OxcNoAngularBypassSanitization::IS_TSGOLINT_RULE
+            }
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::IS_TSGOLINT_RULE,
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::IS_TSGOLINT_RULE,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::IS_TSGOLINT_RULE,
@@ -19134,6 +19156,7 @@ impl RuleEnum {
             Self::OxcMissingThrow(_) => OxcMissingThrow::VERSION,
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::VERSION,
             Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::VERSION,
+            Self::OxcNoAngularBypassSanitization(_) => OxcNoAngularBypassSanitization::VERSION,
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::VERSION,
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::VERSION,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::VERSION,
@@ -20274,6 +20297,7 @@ impl RuleEnum {
             Self::OxcMissingThrow(_) => OxcMissingThrow::HAS_CONFIG,
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::HAS_CONFIG,
             Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::HAS_CONFIG,
+            Self::OxcNoAngularBypassSanitization(_) => OxcNoAngularBypassSanitization::HAS_CONFIG,
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::HAS_CONFIG,
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::HAS_CONFIG,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::HAS_CONFIG,
@@ -21345,6 +21369,7 @@ impl RuleEnum {
             Self::OxcMissingThrow(_) => OxcMissingThrow::INFO,
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::INFO,
             Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::INFO,
+            Self::OxcNoAngularBypassSanitization(_) => OxcNoAngularBypassSanitization::INFO,
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::INFO,
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::INFO,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::INFO,
@@ -22291,6 +22316,7 @@ impl RuleEnum {
             Self::OxcMissingThrow(rule) => rule.types_info(),
             Self::OxcNoAccumulatingSpread(rule) => rule.types_info(),
             Self::OxcNoAllDuplicatedBranches(rule) => rule.types_info(),
+            Self::OxcNoAngularBypassSanitization(rule) => rule.types_info(),
             Self::OxcNoAsyncAwait(rule) => rule.types_info(),
             Self::OxcNoAsyncConstructor(rule) => rule.types_info(),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.types_info(),
@@ -23220,6 +23246,7 @@ impl RuleEnum {
             Self::OxcMissingThrow(rule) => rule.run_info(),
             Self::OxcNoAccumulatingSpread(rule) => rule.run_info(),
             Self::OxcNoAllDuplicatedBranches(rule) => rule.run_info(),
+            Self::OxcNoAngularBypassSanitization(rule) => rule.run_info(),
             Self::OxcNoAsyncAwait(rule) => rule.run_info(),
             Self::OxcNoAsyncConstructor(rule) => rule.run_info(),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run_info(),
@@ -24275,6 +24302,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcMissingThrow(OxcMissingThrow::default()),
         RuleEnum::OxcNoAccumulatingSpread(OxcNoAccumulatingSpread::default()),
         RuleEnum::OxcNoAllDuplicatedBranches(OxcNoAllDuplicatedBranches::default()),
+        RuleEnum::OxcNoAngularBypassSanitization(OxcNoAngularBypassSanitization::default()),
         RuleEnum::OxcNoAsyncAwait(OxcNoAsyncAwait::default()),
         RuleEnum::OxcNoAsyncConstructor(OxcNoAsyncConstructor::default()),
         RuleEnum::OxcNoAsyncEndpointHandlers(OxcNoAsyncEndpointHandlers::default()),
