@@ -436,6 +436,7 @@ pub use crate::rules::oxc::no_hardcoded_secrets::NoHardcodedSecrets as OxcNoHard
 pub use crate::rules::oxc::no_identical_conditions::NoIdenticalConditions as OxcNoIdenticalConditions;
 pub use crate::rules::oxc::no_identical_expressions::NoIdenticalExpressions as OxcNoIdenticalExpressions;
 pub use crate::rules::oxc::no_ignored_exceptions::NoIgnoredExceptions as OxcNoIgnoredExceptions;
+pub use crate::rules::oxc::no_ignored_return::NoIgnoredReturn as OxcNoIgnoredReturn;
 pub use crate::rules::oxc::no_implicit_global::NoImplicitGlobal as OxcNoImplicitGlobal;
 pub use crate::rules::oxc::no_in_misuse::NoInMisuse as OxcNoInMisuse;
 pub use crate::rules::oxc::no_insecure_cookie::NoInsecureCookie as OxcNoInsecureCookie;
@@ -1683,6 +1684,7 @@ pub enum RuleEnum {
     OxcNoIdenticalConditions(OxcNoIdenticalConditions),
     OxcNoIdenticalExpressions(OxcNoIdenticalExpressions),
     OxcNoIgnoredExceptions(OxcNoIgnoredExceptions),
+    OxcNoIgnoredReturn(OxcNoIgnoredReturn),
     OxcNoImplicitGlobal(OxcNoImplicitGlobal),
     OxcNoInMisuse(OxcNoInMisuse),
     OxcNoInsecureCookie(OxcNoInsecureCookie),
@@ -2726,7 +2728,8 @@ const OXC_NO_HARDCODED_SECRETS_ID: usize = OXC_NO_HARDCODED_PASSWORDS_ID + 1usiz
 const OXC_NO_IDENTICAL_CONDITIONS_ID: usize = OXC_NO_HARDCODED_SECRETS_ID + 1usize;
 const OXC_NO_IDENTICAL_EXPRESSIONS_ID: usize = OXC_NO_IDENTICAL_CONDITIONS_ID + 1usize;
 const OXC_NO_IGNORED_EXCEPTIONS_ID: usize = OXC_NO_IDENTICAL_EXPRESSIONS_ID + 1usize;
-const OXC_NO_IMPLICIT_GLOBAL_ID: usize = OXC_NO_IGNORED_EXCEPTIONS_ID + 1usize;
+const OXC_NO_IGNORED_RETURN_ID: usize = OXC_NO_IGNORED_EXCEPTIONS_ID + 1usize;
+const OXC_NO_IMPLICIT_GLOBAL_ID: usize = OXC_NO_IGNORED_RETURN_ID + 1usize;
 const OXC_NO_IN_MISUSE_ID: usize = OXC_NO_IMPLICIT_GLOBAL_ID + 1usize;
 const OXC_NO_INSECURE_COOKIE_ID: usize = OXC_NO_IN_MISUSE_ID + 1usize;
 const OXC_NO_INTERNAL_API_USE_ID: usize = OXC_NO_INSECURE_COOKIE_ID + 1usize;
@@ -2986,7 +2989,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 949usize] = [
+static RULE_NAMES: [&str; 950usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3695,6 +3698,7 @@ static RULE_NAMES: [&str; 949usize] = [
     OxcNoIdenticalConditions::NAME,
     OxcNoIdenticalExpressions::NAME,
     OxcNoIgnoredExceptions::NAME,
+    OxcNoIgnoredReturn::NAME,
     OxcNoImplicitGlobal::NAME,
     OxcNoInMisuse::NAME,
     OxcNoInsecureCookie::NAME,
@@ -4764,6 +4768,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalConditions(_) => OXC_NO_IDENTICAL_CONDITIONS_ID,
             Self::OxcNoIdenticalExpressions(_) => OXC_NO_IDENTICAL_EXPRESSIONS_ID,
             Self::OxcNoIgnoredExceptions(_) => OXC_NO_IGNORED_EXCEPTIONS_ID,
+            Self::OxcNoIgnoredReturn(_) => OXC_NO_IGNORED_RETURN_ID,
             Self::OxcNoImplicitGlobal(_) => OXC_NO_IMPLICIT_GLOBAL_ID,
             Self::OxcNoInMisuse(_) => OXC_NO_IN_MISUSE_ID,
             Self::OxcNoInsecureCookie(_) => OXC_NO_INSECURE_COOKIE_ID,
@@ -5888,6 +5893,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::CATEGORY,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::CATEGORY,
             Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::CATEGORY,
+            Self::OxcNoIgnoredReturn(_) => OxcNoIgnoredReturn::CATEGORY,
             Self::OxcNoImplicitGlobal(_) => OxcNoImplicitGlobal::CATEGORY,
             Self::OxcNoInMisuse(_) => OxcNoInMisuse::CATEGORY,
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::CATEGORY,
@@ -6972,6 +6978,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::FIX,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::FIX,
             Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::FIX,
+            Self::OxcNoIgnoredReturn(_) => OxcNoIgnoredReturn::FIX,
             Self::OxcNoImplicitGlobal(_) => OxcNoImplicitGlobal::FIX,
             Self::OxcNoInMisuse(_) => OxcNoInMisuse::FIX,
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::FIX,
@@ -8266,6 +8273,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::documentation(),
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::documentation(),
             Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::documentation(),
+            Self::OxcNoIgnoredReturn(_) => OxcNoIgnoredReturn::documentation(),
             Self::OxcNoImplicitGlobal(_) => OxcNoImplicitGlobal::documentation(),
             Self::OxcNoInMisuse(_) => OxcNoInMisuse::documentation(),
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::documentation(),
@@ -10625,6 +10633,8 @@ impl RuleEnum {
             }
             Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::config_schema(generator)
                 .or_else(|| OxcNoIgnoredExceptions::schema(generator)),
+            Self::OxcNoIgnoredReturn(_) => OxcNoIgnoredReturn::config_schema(generator)
+                .or_else(|| OxcNoIgnoredReturn::schema(generator)),
             Self::OxcNoImplicitGlobal(_) => OxcNoImplicitGlobal::config_schema(generator)
                 .or_else(|| OxcNoImplicitGlobal::schema(generator)),
             Self::OxcNoInMisuse(_) => {
@@ -11991,6 +12001,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalConditions(_) => "oxc",
             Self::OxcNoIdenticalExpressions(_) => "oxc",
             Self::OxcNoIgnoredExceptions(_) => "oxc",
+            Self::OxcNoIgnoredReturn(_) => "oxc",
             Self::OxcNoImplicitGlobal(_) => "oxc",
             Self::OxcNoInMisuse(_) => "oxc",
             Self::OxcNoInsecureCookie(_) => "oxc",
@@ -14087,6 +14098,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalConditions(rule) => rule.run(node, ctx),
             Self::OxcNoIdenticalExpressions(rule) => rule.run(node, ctx),
             Self::OxcNoIgnoredExceptions(rule) => rule.run(node, ctx),
+            Self::OxcNoIgnoredReturn(rule) => rule.run(node, ctx),
             Self::OxcNoImplicitGlobal(rule) => rule.run(node, ctx),
             Self::OxcNoInMisuse(rule) => rule.run(node, ctx),
             Self::OxcNoInsecureCookie(rule) => rule.run(node, ctx),
@@ -15053,6 +15065,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalConditions(rule) => rule.run_once(ctx),
             Self::OxcNoIdenticalExpressions(rule) => rule.run_once(ctx),
             Self::OxcNoIgnoredExceptions(rule) => rule.run_once(ctx),
+            Self::OxcNoIgnoredReturn(rule) => rule.run_once(ctx),
             Self::OxcNoImplicitGlobal(rule) => rule.run_once(ctx),
             Self::OxcNoInMisuse(rule) => rule.run_once(ctx),
             Self::OxcNoInsecureCookie(rule) => rule.run_once(ctx),
@@ -16126,6 +16139,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalConditions(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoIdenticalExpressions(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoIgnoredExceptions(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoIgnoredReturn(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoImplicitGlobal(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoInMisuse(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoInsecureCookie(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -17105,6 +17119,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalConditions(rule) => rule.should_run(ctx),
             Self::OxcNoIdenticalExpressions(rule) => rule.should_run(ctx),
             Self::OxcNoIgnoredExceptions(rule) => rule.should_run(ctx),
+            Self::OxcNoIgnoredReturn(rule) => rule.should_run(ctx),
             Self::OxcNoImplicitGlobal(rule) => rule.should_run(ctx),
             Self::OxcNoInMisuse(rule) => rule.should_run(ctx),
             Self::OxcNoInsecureCookie(rule) => rule.should_run(ctx),
@@ -18386,6 +18401,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::IS_TSGOLINT_RULE,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::IS_TSGOLINT_RULE,
             Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::IS_TSGOLINT_RULE,
+            Self::OxcNoIgnoredReturn(_) => OxcNoIgnoredReturn::IS_TSGOLINT_RULE,
             Self::OxcNoImplicitGlobal(_) => OxcNoImplicitGlobal::IS_TSGOLINT_RULE,
             Self::OxcNoInMisuse(_) => OxcNoInMisuse::IS_TSGOLINT_RULE,
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::IS_TSGOLINT_RULE,
@@ -19567,6 +19583,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::VERSION,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::VERSION,
             Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::VERSION,
+            Self::OxcNoIgnoredReturn(_) => OxcNoIgnoredReturn::VERSION,
             Self::OxcNoImplicitGlobal(_) => OxcNoImplicitGlobal::VERSION,
             Self::OxcNoInMisuse(_) => OxcNoInMisuse::VERSION,
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::VERSION,
@@ -20731,6 +20748,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::HAS_CONFIG,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::HAS_CONFIG,
             Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::HAS_CONFIG,
+            Self::OxcNoIgnoredReturn(_) => OxcNoIgnoredReturn::HAS_CONFIG,
             Self::OxcNoImplicitGlobal(_) => OxcNoImplicitGlobal::HAS_CONFIG,
             Self::OxcNoInMisuse(_) => OxcNoInMisuse::HAS_CONFIG,
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::HAS_CONFIG,
@@ -21824,6 +21842,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::INFO,
             Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::INFO,
             Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::INFO,
+            Self::OxcNoIgnoredReturn(_) => OxcNoIgnoredReturn::INFO,
             Self::OxcNoImplicitGlobal(_) => OxcNoImplicitGlobal::INFO,
             Self::OxcNoInMisuse(_) => OxcNoInMisuse::INFO,
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::INFO,
@@ -22794,6 +22813,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalConditions(rule) => rule.types_info(),
             Self::OxcNoIdenticalExpressions(rule) => rule.types_info(),
             Self::OxcNoIgnoredExceptions(rule) => rule.types_info(),
+            Self::OxcNoIgnoredReturn(rule) => rule.types_info(),
             Self::OxcNoImplicitGlobal(rule) => rule.types_info(),
             Self::OxcNoInMisuse(rule) => rule.types_info(),
             Self::OxcNoInsecureCookie(rule) => rule.types_info(),
@@ -23747,6 +23767,7 @@ impl RuleEnum {
             Self::OxcNoIdenticalConditions(rule) => rule.run_info(),
             Self::OxcNoIdenticalExpressions(rule) => rule.run_info(),
             Self::OxcNoIgnoredExceptions(rule) => rule.run_info(),
+            Self::OxcNoIgnoredReturn(rule) => rule.run_info(),
             Self::OxcNoImplicitGlobal(rule) => rule.run_info(),
             Self::OxcNoInMisuse(rule) => rule.run_info(),
             Self::OxcNoInsecureCookie(rule) => rule.run_info(),
@@ -24826,6 +24847,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoIdenticalConditions(OxcNoIdenticalConditions::default()),
         RuleEnum::OxcNoIdenticalExpressions(OxcNoIdenticalExpressions::default()),
         RuleEnum::OxcNoIgnoredExceptions(OxcNoIgnoredExceptions::default()),
+        RuleEnum::OxcNoIgnoredReturn(OxcNoIgnoredReturn::default()),
         RuleEnum::OxcNoImplicitGlobal(OxcNoImplicitGlobal::default()),
         RuleEnum::OxcNoInMisuse(OxcNoInMisuse::default()),
         RuleEnum::OxcNoInsecureCookie(OxcNoInsecureCookie::default()),
