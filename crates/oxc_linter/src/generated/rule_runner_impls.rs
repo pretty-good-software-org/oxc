@@ -4569,6 +4569,12 @@ impl RuleRunner for crate::rules::oxc::no_ignored_exceptions::NoIgnoredException
     const RUN_FUNCTIONS: RuleRunFunctionsImplemented = RuleRunFunctionsImplemented::Run;
 }
 
+impl RuleRunner for crate::rules::oxc::no_in_misuse::NoInMisuse {
+    const NODE_TYPES: Option<&AstTypesBitset> =
+        Some(&AstTypesBitset::from_types(&[AstType::BinaryExpression]));
+    const RUN_FUNCTIONS: RuleRunFunctionsImplemented = RuleRunFunctionsImplemented::Run;
+}
+
 impl RuleRunner for crate::rules::oxc::no_insecure_cookie::NoInsecureCookie {
     const NODE_TYPES: Option<&AstTypesBitset> =
         Some(&AstTypesBitset::from_types(&[AstType::AssignmentExpression]));

@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-in-misuse): Use `indexOf` or `includes` instead of `in` for arrays.
+   ╭─[no_in_misuse.tsx:1:1]
+ 1 │ 'key' in [key]
+   · ──────────────
+   ╰────
+  help: Use `array.includes(value)` to search by value.
