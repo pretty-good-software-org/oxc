@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(single-character-alternation): Replace this single-character alternation with a character class.
+   ╭─[single_character_alternation.tsx:1:1]
+ 1 │ /a|b/
+   · ─────
+   ╰────
+  help: Use a character class such as `[ab]`.

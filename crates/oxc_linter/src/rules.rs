@@ -824,6 +824,7 @@ pub(crate) mod oxc {
     pub mod number_arg_out_of_range;
     pub mod only_used_in_recursion;
     pub mod require_safety_comment_for_type_assertion;
+    pub mod single_character_alternation;
     pub mod uninvoked_array_callback;
 }
 
