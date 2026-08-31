@@ -4761,6 +4761,12 @@ impl RuleRunner for crate::rules::oxc::post_message::PostMessage {
     const RUN_FUNCTIONS: RuleRunFunctionsImplemented = RuleRunFunctionsImplemented::Run;
 }
 
+impl RuleRunner for crate::rules::oxc::prefer_default_last::PreferDefaultLast {
+    const NODE_TYPES: Option<&AstTypesBitset> =
+        Some(&AstTypesBitset::from_types(&[AstType::SwitchStatement]));
+    const RUN_FUNCTIONS: RuleRunFunctionsImplemented = RuleRunFunctionsImplemented::Run;
+}
+
 impl RuleRunner for crate::rules::oxc::require_safety_comment_for_type_assertion::RequireSafetyCommentForTypeAssertion {
     const NODE_TYPES: Option<&AstTypesBitset> = Some(&AstTypesBitset::from_types(&[AstType::TSAsExpression, AstType::TSTypeAssertion]));
     const RUN_FUNCTIONS: RuleRunFunctionsImplemented = RuleRunFunctionsImplemented::Run;
