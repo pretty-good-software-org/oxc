@@ -835,6 +835,7 @@ pub(crate) mod oxc {
     pub mod no_unverified_hostname;
     pub mod no_useless_increment;
     pub mod no_weak_cipher;
+    pub mod no_weak_keys;
     pub mod no_weak_ssl;
     pub mod no_widen_then_assert;
     pub mod number_arg_out_of_range;

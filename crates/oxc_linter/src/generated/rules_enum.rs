@@ -476,6 +476,7 @@ pub use crate::rules::oxc::no_unverified_certificate::NoUnverifiedCertificate as
 pub use crate::rules::oxc::no_unverified_hostname::NoUnverifiedHostname as OxcNoUnverifiedHostname;
 pub use crate::rules::oxc::no_useless_increment::NoUselessIncrement as OxcNoUselessIncrement;
 pub use crate::rules::oxc::no_weak_cipher::NoWeakCipher as OxcNoWeakCipher;
+pub use crate::rules::oxc::no_weak_keys::NoWeakKeys as OxcNoWeakKeys;
 pub use crate::rules::oxc::no_weak_ssl::NoWeakSsl as OxcNoWeakSsl;
 pub use crate::rules::oxc::no_widen_then_assert::NoWidenThenAssert as OxcNoWidenThenAssert;
 pub use crate::rules::oxc::number_arg_out_of_range::NumberArgOutOfRange as OxcNumberArgOutOfRange;
@@ -1727,6 +1728,7 @@ pub enum RuleEnum {
     OxcNoUnverifiedHostname(OxcNoUnverifiedHostname),
     OxcNoUselessIncrement(OxcNoUselessIncrement),
     OxcNoWeakCipher(OxcNoWeakCipher),
+    OxcNoWeakKeys(OxcNoWeakKeys),
     OxcNoWeakSsl(OxcNoWeakSsl),
     OxcNoWidenThenAssert(OxcNoWidenThenAssert),
     OxcNumberArgOutOfRange(OxcNumberArgOutOfRange),
@@ -2774,7 +2776,8 @@ const OXC_NO_UNVERIFIED_CERTIFICATE_ID: usize = OXC_NO_UNUSED_COLLECTION_ID + 1u
 const OXC_NO_UNVERIFIED_HOSTNAME_ID: usize = OXC_NO_UNVERIFIED_CERTIFICATE_ID + 1usize;
 const OXC_NO_USELESS_INCREMENT_ID: usize = OXC_NO_UNVERIFIED_HOSTNAME_ID + 1usize;
 const OXC_NO_WEAK_CIPHER_ID: usize = OXC_NO_USELESS_INCREMENT_ID + 1usize;
-const OXC_NO_WEAK_SSL_ID: usize = OXC_NO_WEAK_CIPHER_ID + 1usize;
+const OXC_NO_WEAK_KEYS_ID: usize = OXC_NO_WEAK_CIPHER_ID + 1usize;
+const OXC_NO_WEAK_SSL_ID: usize = OXC_NO_WEAK_KEYS_ID + 1usize;
 const OXC_NO_WIDEN_THEN_ASSERT_ID: usize = OXC_NO_WEAK_SSL_ID + 1usize;
 const OXC_NUMBER_ARG_OUT_OF_RANGE_ID: usize = OXC_NO_WIDEN_THEN_ASSERT_ID + 1usize;
 const OXC_ONLY_USED_IN_RECURSION_ID: usize = OXC_NUMBER_ARG_OUT_OF_RANGE_ID + 1usize;
@@ -2998,7 +3001,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 953usize] = [
+static RULE_NAMES: [&str; 954usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3747,6 +3750,7 @@ static RULE_NAMES: [&str; 953usize] = [
     OxcNoUnverifiedHostname::NAME,
     OxcNoUselessIncrement::NAME,
     OxcNoWeakCipher::NAME,
+    OxcNoWeakKeys::NAME,
     OxcNoWeakSsl::NAME,
     OxcNoWidenThenAssert::NAME,
     OxcNumberArgOutOfRange::NAME,
@@ -4820,6 +4824,7 @@ impl RuleEnum {
             Self::OxcNoUnverifiedHostname(_) => OXC_NO_UNVERIFIED_HOSTNAME_ID,
             Self::OxcNoUselessIncrement(_) => OXC_NO_USELESS_INCREMENT_ID,
             Self::OxcNoWeakCipher(_) => OXC_NO_WEAK_CIPHER_ID,
+            Self::OxcNoWeakKeys(_) => OXC_NO_WEAK_KEYS_ID,
             Self::OxcNoWeakSsl(_) => OXC_NO_WEAK_SSL_ID,
             Self::OxcNoWidenThenAssert(_) => OXC_NO_WIDEN_THEN_ASSERT_ID,
             Self::OxcNumberArgOutOfRange(_) => OXC_NUMBER_ARG_OUT_OF_RANGE_ID,
@@ -5948,6 +5953,7 @@ impl RuleEnum {
             Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::CATEGORY,
             Self::OxcNoUselessIncrement(_) => OxcNoUselessIncrement::CATEGORY,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::CATEGORY,
+            Self::OxcNoWeakKeys(_) => OxcNoWeakKeys::CATEGORY,
             Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::CATEGORY,
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::CATEGORY,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::CATEGORY,
@@ -7036,6 +7042,7 @@ impl RuleEnum {
             Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::FIX,
             Self::OxcNoUselessIncrement(_) => OxcNoUselessIncrement::FIX,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::FIX,
+            Self::OxcNoWeakKeys(_) => OxcNoWeakKeys::FIX,
             Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::FIX,
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::FIX,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::FIX,
@@ -8334,6 +8341,7 @@ impl RuleEnum {
             Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::documentation(),
             Self::OxcNoUselessIncrement(_) => OxcNoUselessIncrement::documentation(),
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::documentation(),
+            Self::OxcNoWeakKeys(_) => OxcNoWeakKeys::documentation(),
             Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::documentation(),
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::documentation(),
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::documentation(),
@@ -10751,6 +10759,9 @@ impl RuleEnum {
                 .or_else(|| OxcNoUselessIncrement::schema(generator)),
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::config_schema(generator)
                 .or_else(|| OxcNoWeakCipher::schema(generator)),
+            Self::OxcNoWeakKeys(_) => {
+                OxcNoWeakKeys::config_schema(generator).or_else(|| OxcNoWeakKeys::schema(generator))
+            }
             Self::OxcNoWeakSsl(_) => {
                 OxcNoWeakSsl::config_schema(generator).or_else(|| OxcNoWeakSsl::schema(generator))
             }
@@ -12072,6 +12083,7 @@ impl RuleEnum {
             Self::OxcNoUnverifiedHostname(_) => "oxc",
             Self::OxcNoUselessIncrement(_) => "oxc",
             Self::OxcNoWeakCipher(_) => "oxc",
+            Self::OxcNoWeakKeys(_) => "oxc",
             Self::OxcNoWeakSsl(_) => "oxc",
             Self::OxcNoWidenThenAssert(_) => "oxc",
             Self::OxcNumberArgOutOfRange(_) => "oxc",
@@ -14172,6 +14184,7 @@ impl RuleEnum {
             Self::OxcNoUnverifiedHostname(rule) => rule.run(node, ctx),
             Self::OxcNoUselessIncrement(rule) => rule.run(node, ctx),
             Self::OxcNoWeakCipher(rule) => rule.run(node, ctx),
+            Self::OxcNoWeakKeys(rule) => rule.run(node, ctx),
             Self::OxcNoWeakSsl(rule) => rule.run(node, ctx),
             Self::OxcNoWidenThenAssert(rule) => rule.run(node, ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run(node, ctx),
@@ -15142,6 +15155,7 @@ impl RuleEnum {
             Self::OxcNoUnverifiedHostname(rule) => rule.run_once(ctx),
             Self::OxcNoUselessIncrement(rule) => rule.run_once(ctx),
             Self::OxcNoWeakCipher(rule) => rule.run_once(ctx),
+            Self::OxcNoWeakKeys(rule) => rule.run_once(ctx),
             Self::OxcNoWeakSsl(rule) => rule.run_once(ctx),
             Self::OxcNoWidenThenAssert(rule) => rule.run_once(ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_once(ctx),
@@ -16219,6 +16233,7 @@ impl RuleEnum {
             Self::OxcNoUnverifiedHostname(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoUselessIncrement(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoWeakCipher(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoWeakKeys(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoWeakSsl(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoWidenThenAssert(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -17202,6 +17217,7 @@ impl RuleEnum {
             Self::OxcNoUnverifiedHostname(rule) => rule.should_run(ctx),
             Self::OxcNoUselessIncrement(rule) => rule.should_run(ctx),
             Self::OxcNoWeakCipher(rule) => rule.should_run(ctx),
+            Self::OxcNoWeakKeys(rule) => rule.should_run(ctx),
             Self::OxcNoWeakSsl(rule) => rule.should_run(ctx),
             Self::OxcNoWidenThenAssert(rule) => rule.should_run(ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.should_run(ctx),
@@ -18487,6 +18503,7 @@ impl RuleEnum {
             Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::IS_TSGOLINT_RULE,
             Self::OxcNoUselessIncrement(_) => OxcNoUselessIncrement::IS_TSGOLINT_RULE,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::IS_TSGOLINT_RULE,
+            Self::OxcNoWeakKeys(_) => OxcNoWeakKeys::IS_TSGOLINT_RULE,
             Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::IS_TSGOLINT_RULE,
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::IS_TSGOLINT_RULE,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::IS_TSGOLINT_RULE,
@@ -19672,6 +19689,7 @@ impl RuleEnum {
             Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::VERSION,
             Self::OxcNoUselessIncrement(_) => OxcNoUselessIncrement::VERSION,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::VERSION,
+            Self::OxcNoWeakKeys(_) => OxcNoWeakKeys::VERSION,
             Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::VERSION,
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::VERSION,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::VERSION,
@@ -20840,6 +20858,7 @@ impl RuleEnum {
             Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::HAS_CONFIG,
             Self::OxcNoUselessIncrement(_) => OxcNoUselessIncrement::HAS_CONFIG,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::HAS_CONFIG,
+            Self::OxcNoWeakKeys(_) => OxcNoWeakKeys::HAS_CONFIG,
             Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::HAS_CONFIG,
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::HAS_CONFIG,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::HAS_CONFIG,
@@ -21937,6 +21956,7 @@ impl RuleEnum {
             Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::INFO,
             Self::OxcNoUselessIncrement(_) => OxcNoUselessIncrement::INFO,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::INFO,
+            Self::OxcNoWeakKeys(_) => OxcNoWeakKeys::INFO,
             Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::INFO,
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::INFO,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::INFO,
@@ -22911,6 +22931,7 @@ impl RuleEnum {
             Self::OxcNoUnverifiedHostname(rule) => rule.types_info(),
             Self::OxcNoUselessIncrement(rule) => rule.types_info(),
             Self::OxcNoWeakCipher(rule) => rule.types_info(),
+            Self::OxcNoWeakKeys(rule) => rule.types_info(),
             Self::OxcNoWeakSsl(rule) => rule.types_info(),
             Self::OxcNoWidenThenAssert(rule) => rule.types_info(),
             Self::OxcNumberArgOutOfRange(rule) => rule.types_info(),
@@ -23868,6 +23889,7 @@ impl RuleEnum {
             Self::OxcNoUnverifiedHostname(rule) => rule.run_info(),
             Self::OxcNoUselessIncrement(rule) => rule.run_info(),
             Self::OxcNoWeakCipher(rule) => rule.run_info(),
+            Self::OxcNoWeakKeys(rule) => rule.run_info(),
             Self::OxcNoWeakSsl(rule) => rule.run_info(),
             Self::OxcNoWidenThenAssert(rule) => rule.run_info(),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_info(),
@@ -24951,6 +24973,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoUnverifiedHostname(OxcNoUnverifiedHostname::default()),
         RuleEnum::OxcNoUselessIncrement(OxcNoUselessIncrement::default()),
         RuleEnum::OxcNoWeakCipher(OxcNoWeakCipher::default()),
+        RuleEnum::OxcNoWeakKeys(OxcNoWeakKeys::default()),
         RuleEnum::OxcNoWeakSsl(OxcNoWeakSsl::default()),
         RuleEnum::OxcNoWidenThenAssert(OxcNoWidenThenAssert::default()),
         RuleEnum::OxcNumberArgOutOfRange(OxcNumberArgOutOfRange::default()),
