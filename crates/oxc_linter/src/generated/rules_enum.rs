@@ -401,6 +401,7 @@ pub use crate::rules::oxc::erasing_op::ErasingOp as OxcErasingOp;
 pub use crate::rules::oxc::misrefactored_assign_op::MisrefactoredAssignOp as OxcMisrefactoredAssignOp;
 pub use crate::rules::oxc::missing_throw::MissingThrow as OxcMissingThrow;
 pub use crate::rules::oxc::no_accumulating_spread::NoAccumulatingSpread as OxcNoAccumulatingSpread;
+pub use crate::rules::oxc::no_all_duplicated_branches::NoAllDuplicatedBranches as OxcNoAllDuplicatedBranches;
 pub use crate::rules::oxc::no_async_await::NoAsyncAwait as OxcNoAsyncAwait;
 pub use crate::rules::oxc::no_async_constructor::NoAsyncConstructor as OxcNoAsyncConstructor;
 pub use crate::rules::oxc::no_async_endpoint_handlers::NoAsyncEndpointHandlers as OxcNoAsyncEndpointHandlers;
@@ -1615,6 +1616,7 @@ pub enum RuleEnum {
     OxcMisrefactoredAssignOp(OxcMisrefactoredAssignOp),
     OxcMissingThrow(OxcMissingThrow),
     OxcNoAccumulatingSpread(OxcNoAccumulatingSpread),
+    OxcNoAllDuplicatedBranches(OxcNoAllDuplicatedBranches),
     OxcNoAsyncAwait(OxcNoAsyncAwait),
     OxcNoAsyncConstructor(OxcNoAsyncConstructor),
     OxcNoAsyncEndpointHandlers(OxcNoAsyncEndpointHandlers),
@@ -2625,7 +2627,8 @@ const OXC_ERASING_OP_ID: usize = OXC_DUPLICATES_IN_CHARACTER_CLASS_ID + 1usize;
 const OXC_MISREFACTORED_ASSIGN_OP_ID: usize = OXC_ERASING_OP_ID + 1usize;
 const OXC_MISSING_THROW_ID: usize = OXC_MISREFACTORED_ASSIGN_OP_ID + 1usize;
 const OXC_NO_ACCUMULATING_SPREAD_ID: usize = OXC_MISSING_THROW_ID + 1usize;
-const OXC_NO_ASYNC_AWAIT_ID: usize = OXC_NO_ACCUMULATING_SPREAD_ID + 1usize;
+const OXC_NO_ALL_DUPLICATED_BRANCHES_ID: usize = OXC_NO_ACCUMULATING_SPREAD_ID + 1usize;
+const OXC_NO_ASYNC_AWAIT_ID: usize = OXC_NO_ALL_DUPLICATED_BRANCHES_ID + 1usize;
 const OXC_NO_ASYNC_CONSTRUCTOR_ID: usize = OXC_NO_ASYNC_AWAIT_ID + 1usize;
 const OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID: usize = OXC_NO_ASYNC_CONSTRUCTOR_ID + 1usize;
 const OXC_NO_BARREL_FILE_ID: usize = OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID + 1usize;
@@ -2888,7 +2891,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 916usize] = [
+static RULE_NAMES: [&str; 917usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3562,6 +3565,7 @@ static RULE_NAMES: [&str; 916usize] = [
     OxcMisrefactoredAssignOp::NAME,
     OxcMissingThrow::NAME,
     OxcNoAccumulatingSpread::NAME,
+    OxcNoAllDuplicatedBranches::NAME,
     OxcNoAsyncAwait::NAME,
     OxcNoAsyncConstructor::NAME,
     OxcNoAsyncEndpointHandlers::NAME,
@@ -4598,6 +4602,7 @@ impl RuleEnum {
             Self::OxcMisrefactoredAssignOp(_) => OXC_MISREFACTORED_ASSIGN_OP_ID,
             Self::OxcMissingThrow(_) => OXC_MISSING_THROW_ID,
             Self::OxcNoAccumulatingSpread(_) => OXC_NO_ACCUMULATING_SPREAD_ID,
+            Self::OxcNoAllDuplicatedBranches(_) => OXC_NO_ALL_DUPLICATED_BRANCHES_ID,
             Self::OxcNoAsyncAwait(_) => OXC_NO_ASYNC_AWAIT_ID,
             Self::OxcNoAsyncConstructor(_) => OXC_NO_ASYNC_CONSTRUCTOR_ID,
             Self::OxcNoAsyncEndpointHandlers(_) => OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID,
@@ -5687,6 +5692,7 @@ impl RuleEnum {
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::CATEGORY,
             Self::OxcMissingThrow(_) => OxcMissingThrow::CATEGORY,
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::CATEGORY,
+            Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::CATEGORY,
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::CATEGORY,
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::CATEGORY,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::CATEGORY,
@@ -6740,6 +6746,7 @@ impl RuleEnum {
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::FIX,
             Self::OxcMissingThrow(_) => OxcMissingThrow::FIX,
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::FIX,
+            Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::FIX,
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::FIX,
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::FIX,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::FIX,
@@ -7997,6 +8004,7 @@ impl RuleEnum {
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::documentation(),
             Self::OxcMissingThrow(_) => OxcMissingThrow::documentation(),
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::documentation(),
+            Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::documentation(),
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::documentation(),
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::documentation(),
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::documentation(),
@@ -10267,6 +10275,10 @@ impl RuleEnum {
                 .or_else(|| OxcMissingThrow::schema(generator)),
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::config_schema(generator)
                 .or_else(|| OxcNoAccumulatingSpread::schema(generator)),
+            Self::OxcNoAllDuplicatedBranches(_) => {
+                OxcNoAllDuplicatedBranches::config_schema(generator)
+                    .or_else(|| OxcNoAllDuplicatedBranches::schema(generator))
+            }
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::config_schema(generator)
                 .or_else(|| OxcNoAsyncAwait::schema(generator)),
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::config_schema(generator)
@@ -11610,6 +11622,7 @@ impl RuleEnum {
             Self::OxcMisrefactoredAssignOp(_) => "oxc",
             Self::OxcMissingThrow(_) => "oxc",
             Self::OxcNoAccumulatingSpread(_) => "oxc",
+            Self::OxcNoAllDuplicatedBranches(_) => "oxc",
             Self::OxcNoAsyncAwait(_) => "oxc",
             Self::OxcNoAsyncConstructor(_) => "oxc",
             Self::OxcNoAsyncEndpointHandlers(_) => "oxc",
@@ -13667,6 +13680,7 @@ impl RuleEnum {
             Self::OxcMisrefactoredAssignOp(rule) => rule.run(node, ctx),
             Self::OxcMissingThrow(rule) => rule.run(node, ctx),
             Self::OxcNoAccumulatingSpread(rule) => rule.run(node, ctx),
+            Self::OxcNoAllDuplicatedBranches(rule) => rule.run(node, ctx),
             Self::OxcNoAsyncAwait(rule) => rule.run(node, ctx),
             Self::OxcNoAsyncConstructor(rule) => rule.run(node, ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run(node, ctx),
@@ -14600,6 +14614,7 @@ impl RuleEnum {
             Self::OxcMisrefactoredAssignOp(rule) => rule.run_once(ctx),
             Self::OxcMissingThrow(rule) => rule.run_once(ctx),
             Self::OxcNoAccumulatingSpread(rule) => rule.run_once(ctx),
+            Self::OxcNoAllDuplicatedBranches(rule) => rule.run_once(ctx),
             Self::OxcNoAsyncAwait(rule) => rule.run_once(ctx),
             Self::OxcNoAsyncConstructor(rule) => rule.run_once(ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run_once(ctx),
@@ -15640,6 +15655,7 @@ impl RuleEnum {
             Self::OxcMisrefactoredAssignOp(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcMissingThrow(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoAccumulatingSpread(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoAllDuplicatedBranches(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoAsyncAwait(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoAsyncConstructor(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16586,6 +16602,7 @@ impl RuleEnum {
             Self::OxcMisrefactoredAssignOp(rule) => rule.should_run(ctx),
             Self::OxcMissingThrow(rule) => rule.should_run(ctx),
             Self::OxcNoAccumulatingSpread(rule) => rule.should_run(ctx),
+            Self::OxcNoAllDuplicatedBranches(rule) => rule.should_run(ctx),
             Self::OxcNoAsyncAwait(rule) => rule.should_run(ctx),
             Self::OxcNoAsyncConstructor(rule) => rule.should_run(ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.should_run(ctx),
@@ -17830,6 +17847,7 @@ impl RuleEnum {
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::IS_TSGOLINT_RULE,
             Self::OxcMissingThrow(_) => OxcMissingThrow::IS_TSGOLINT_RULE,
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::IS_TSGOLINT_RULE,
+            Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::IS_TSGOLINT_RULE,
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::IS_TSGOLINT_RULE,
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::IS_TSGOLINT_RULE,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::IS_TSGOLINT_RULE,
@@ -18974,6 +18992,7 @@ impl RuleEnum {
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::VERSION,
             Self::OxcMissingThrow(_) => OxcMissingThrow::VERSION,
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::VERSION,
+            Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::VERSION,
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::VERSION,
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::VERSION,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::VERSION,
@@ -20105,6 +20124,7 @@ impl RuleEnum {
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::HAS_CONFIG,
             Self::OxcMissingThrow(_) => OxcMissingThrow::HAS_CONFIG,
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::HAS_CONFIG,
+            Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::HAS_CONFIG,
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::HAS_CONFIG,
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::HAS_CONFIG,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::HAS_CONFIG,
@@ -21167,6 +21187,7 @@ impl RuleEnum {
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::INFO,
             Self::OxcMissingThrow(_) => OxcMissingThrow::INFO,
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::INFO,
+            Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::INFO,
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::INFO,
             Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::INFO,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::INFO,
@@ -22104,6 +22125,7 @@ impl RuleEnum {
             Self::OxcMisrefactoredAssignOp(rule) => rule.types_info(),
             Self::OxcMissingThrow(rule) => rule.types_info(),
             Self::OxcNoAccumulatingSpread(rule) => rule.types_info(),
+            Self::OxcNoAllDuplicatedBranches(rule) => rule.types_info(),
             Self::OxcNoAsyncAwait(rule) => rule.types_info(),
             Self::OxcNoAsyncConstructor(rule) => rule.types_info(),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.types_info(),
@@ -23024,6 +23046,7 @@ impl RuleEnum {
             Self::OxcMisrefactoredAssignOp(rule) => rule.run_info(),
             Self::OxcMissingThrow(rule) => rule.run_info(),
             Self::OxcNoAccumulatingSpread(rule) => rule.run_info(),
+            Self::OxcNoAllDuplicatedBranches(rule) => rule.run_info(),
             Self::OxcNoAsyncAwait(rule) => rule.run_info(),
             Self::OxcNoAsyncConstructor(rule) => rule.run_info(),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run_info(),
@@ -24070,6 +24093,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcMisrefactoredAssignOp(OxcMisrefactoredAssignOp::default()),
         RuleEnum::OxcMissingThrow(OxcMissingThrow::default()),
         RuleEnum::OxcNoAccumulatingSpread(OxcNoAccumulatingSpread::default()),
+        RuleEnum::OxcNoAllDuplicatedBranches(OxcNoAllDuplicatedBranches::default()),
         RuleEnum::OxcNoAsyncAwait(OxcNoAsyncAwait::default()),
         RuleEnum::OxcNoAsyncConstructor(OxcNoAsyncConstructor::default()),
         RuleEnum::OxcNoAsyncEndpointHandlers(OxcNoAsyncEndpointHandlers::default()),

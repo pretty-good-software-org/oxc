@@ -760,6 +760,7 @@ pub(crate) mod oxc {
     pub mod misrefactored_assign_op;
     pub mod missing_throw;
     pub mod no_accumulating_spread;
+    pub mod no_all_duplicated_branches;
     pub mod no_async_await;
     pub mod no_async_constructor;
     pub mod no_async_endpoint_handlers;

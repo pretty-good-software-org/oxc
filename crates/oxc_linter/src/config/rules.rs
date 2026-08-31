@@ -249,6 +249,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("typescript", name) if is_eslint_rule_adapted_to_typescript(name) => (name, "eslint"),
         ("sonarjs", "no-parameter-reassignment") => ("no-param-reassign", "eslint"),
         ("sonarjs", "array-callback-without-return") => ("array-callback-without-return", "oxc"),
+        ("sonarjs", "no-all-duplicated-branches") => ("no-all-duplicated-branches", "oxc"),
         ("sonarjs", "no-async-constructor") => ("no-async-constructor", "oxc"),
         ("sonarjs", "constructor-for-side-effects") => ("constructor-for-side-effects", "oxc"),
         ("sonarjs", "no-empty-group") => ("no-empty-group", "oxc"),
