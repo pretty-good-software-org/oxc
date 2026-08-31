@@ -382,6 +382,7 @@ pub use crate::rules::node::no_path_concat::NoPathConcat as NodeNoPathConcat;
 pub use crate::rules::node::no_process_env::NoProcessEnv as NodeNoProcessEnv;
 pub use crate::rules::node::no_sync::NoSync as NodeNoSync;
 pub use crate::rules::node::no_top_level_await::NoTopLevelAwait as NodeNoTopLevelAwait;
+pub use crate::rules::oxc::anchor_precedence::AnchorPrecedence as OxcAnchorPrecedence;
 pub use crate::rules::oxc::approx_constant::ApproxConstant as OxcApproxConstant;
 pub use crate::rules::oxc::array_callback_without_return::ArrayCallbackWithoutReturn as OxcArrayCallbackWithoutReturn;
 pub use crate::rules::oxc::bad_array_method_on_arguments::BadArrayMethodOnArguments as OxcBadArrayMethodOnArguments;
@@ -1638,6 +1639,7 @@ pub enum RuleEnum {
     JsxA11YRoleSupportsAriaProps(JsxA11YRoleSupportsAriaProps),
     JsxA11YScope(JsxA11YScope),
     JsxA11YTabindexNoPositive(JsxA11YTabindexNoPositive),
+    OxcAnchorPrecedence(OxcAnchorPrecedence),
     OxcApproxConstant(OxcApproxConstant),
     OxcArrayCallbackWithoutReturn(OxcArrayCallbackWithoutReturn),
     OxcBadArrayMethodOnArguments(OxcBadArrayMethodOnArguments),
@@ -2690,7 +2692,8 @@ const JSX_A_11_Y_ROLE_SUPPORTS_ARIA_PROPS_ID: usize =
     JSX_A_11_Y_ROLE_HAS_REQUIRED_ARIA_PROPS_ID + 1usize;
 const JSX_A_11_Y_SCOPE_ID: usize = JSX_A_11_Y_ROLE_SUPPORTS_ARIA_PROPS_ID + 1usize;
 const JSX_A_11_Y_TABINDEX_NO_POSITIVE_ID: usize = JSX_A_11_Y_SCOPE_ID + 1usize;
-const OXC_APPROX_CONSTANT_ID: usize = JSX_A_11_Y_TABINDEX_NO_POSITIVE_ID + 1usize;
+const OXC_ANCHOR_PRECEDENCE_ID: usize = JSX_A_11_Y_TABINDEX_NO_POSITIVE_ID + 1usize;
+const OXC_APPROX_CONSTANT_ID: usize = OXC_ANCHOR_PRECEDENCE_ID + 1usize;
 const OXC_ARRAY_CALLBACK_WITHOUT_RETURN_ID: usize = OXC_APPROX_CONSTANT_ID + 1usize;
 const OXC_BAD_ARRAY_METHOD_ON_ARGUMENTS_ID: usize = OXC_ARRAY_CALLBACK_WITHOUT_RETURN_ID + 1usize;
 const OXC_BAD_BITWISE_OPERATOR_ID: usize = OXC_BAD_ARRAY_METHOD_ON_ARGUMENTS_ID + 1usize;
@@ -3013,7 +3016,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 958usize] = [
+static RULE_NAMES: [&str; 959usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3668,6 +3671,7 @@ static RULE_NAMES: [&str; 958usize] = [
     JsxA11YRoleSupportsAriaProps::NAME,
     JsxA11YScope::NAME,
     JsxA11YTabindexNoPositive::NAME,
+    OxcAnchorPrecedence::NAME,
     OxcApproxConstant::NAME,
     OxcArrayCallbackWithoutReturn::NAME,
     OxcBadArrayMethodOnArguments::NAME,
@@ -4746,6 +4750,7 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(_) => JSX_A_11_Y_ROLE_SUPPORTS_ARIA_PROPS_ID,
             Self::JsxA11YScope(_) => JSX_A_11_Y_SCOPE_ID,
             Self::JsxA11YTabindexNoPositive(_) => JSX_A_11_Y_TABINDEX_NO_POSITIVE_ID,
+            Self::OxcAnchorPrecedence(_) => OXC_ANCHOR_PRECEDENCE_ID,
             Self::OxcApproxConstant(_) => OXC_APPROX_CONSTANT_ID,
             Self::OxcArrayCallbackWithoutReturn(_) => OXC_ARRAY_CALLBACK_WITHOUT_RETURN_ID,
             Self::OxcBadArrayMethodOnArguments(_) => OXC_BAD_ARRAY_METHOD_ON_ARGUMENTS_ID,
@@ -5877,6 +5882,7 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(_) => JsxA11YRoleSupportsAriaProps::CATEGORY,
             Self::JsxA11YScope(_) => JsxA11YScope::CATEGORY,
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::CATEGORY,
+            Self::OxcAnchorPrecedence(_) => OxcAnchorPrecedence::CATEGORY,
             Self::OxcApproxConstant(_) => OxcApproxConstant::CATEGORY,
             Self::OxcArrayCallbackWithoutReturn(_) => OxcArrayCallbackWithoutReturn::CATEGORY,
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::CATEGORY,
@@ -6972,6 +6978,7 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(_) => JsxA11YRoleSupportsAriaProps::FIX,
             Self::JsxA11YScope(_) => JsxA11YScope::FIX,
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::FIX,
+            Self::OxcAnchorPrecedence(_) => OxcAnchorPrecedence::FIX,
             Self::OxcApproxConstant(_) => OxcApproxConstant::FIX,
             Self::OxcArrayCallbackWithoutReturn(_) => OxcArrayCallbackWithoutReturn::FIX,
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::FIX,
@@ -8265,6 +8272,7 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(_) => JsxA11YRoleSupportsAriaProps::documentation(),
             Self::JsxA11YScope(_) => JsxA11YScope::documentation(),
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::documentation(),
+            Self::OxcAnchorPrecedence(_) => OxcAnchorPrecedence::documentation(),
             Self::OxcApproxConstant(_) => OxcApproxConstant::documentation(),
             Self::OxcArrayCallbackWithoutReturn(_) => {
                 OxcArrayCallbackWithoutReturn::documentation()
@@ -10559,6 +10567,8 @@ impl RuleEnum {
                 JsxA11YTabindexNoPositive::config_schema(generator)
                     .or_else(|| JsxA11YTabindexNoPositive::schema(generator))
             }
+            Self::OxcAnchorPrecedence(_) => OxcAnchorPrecedence::config_schema(generator)
+                .or_else(|| OxcAnchorPrecedence::schema(generator)),
             Self::OxcApproxConstant(_) => OxcApproxConstant::config_schema(generator)
                 .or_else(|| OxcApproxConstant::schema(generator)),
             Self::OxcArrayCallbackWithoutReturn(_) => {
@@ -12033,6 +12043,7 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(_) => "jsx_a11y",
             Self::JsxA11YScope(_) => "jsx_a11y",
             Self::JsxA11YTabindexNoPositive(_) => "jsx_a11y",
+            Self::OxcAnchorPrecedence(_) => "oxc",
             Self::OxcApproxConstant(_) => "oxc",
             Self::OxcArrayCallbackWithoutReturn(_) => "oxc",
             Self::OxcBadArrayMethodOnArguments(_) => "oxc",
@@ -14138,6 +14149,7 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(rule) => rule.run(node, ctx),
             Self::JsxA11YScope(rule) => rule.run(node, ctx),
             Self::JsxA11YTabindexNoPositive(rule) => rule.run(node, ctx),
+            Self::OxcAnchorPrecedence(rule) => rule.run(node, ctx),
             Self::OxcApproxConstant(rule) => rule.run(node, ctx),
             Self::OxcArrayCallbackWithoutReturn(rule) => rule.run(node, ctx),
             Self::OxcBadArrayMethodOnArguments(rule) => rule.run(node, ctx),
@@ -15113,6 +15125,7 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(rule) => rule.run_once(ctx),
             Self::JsxA11YScope(rule) => rule.run_once(ctx),
             Self::JsxA11YTabindexNoPositive(rule) => rule.run_once(ctx),
+            Self::OxcAnchorPrecedence(rule) => rule.run_once(ctx),
             Self::OxcApproxConstant(rule) => rule.run_once(ctx),
             Self::OxcArrayCallbackWithoutReturn(rule) => rule.run_once(ctx),
             Self::OxcBadArrayMethodOnArguments(rule) => rule.run_once(ctx),
@@ -16195,6 +16208,7 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::JsxA11YScope(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::JsxA11YTabindexNoPositive(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcAnchorPrecedence(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcApproxConstant(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcArrayCallbackWithoutReturn(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcBadArrayMethodOnArguments(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -17183,6 +17197,7 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(rule) => rule.should_run(ctx),
             Self::JsxA11YScope(rule) => rule.should_run(ctx),
             Self::JsxA11YTabindexNoPositive(rule) => rule.should_run(ctx),
+            Self::OxcAnchorPrecedence(rule) => rule.should_run(ctx),
             Self::OxcApproxConstant(rule) => rule.should_run(ctx),
             Self::OxcArrayCallbackWithoutReturn(rule) => rule.should_run(ctx),
             Self::OxcBadArrayMethodOnArguments(rule) => rule.should_run(ctx),
@@ -18463,6 +18478,7 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(_) => JsxA11YRoleSupportsAriaProps::IS_TSGOLINT_RULE,
             Self::JsxA11YScope(_) => JsxA11YScope::IS_TSGOLINT_RULE,
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::IS_TSGOLINT_RULE,
+            Self::OxcAnchorPrecedence(_) => OxcAnchorPrecedence::IS_TSGOLINT_RULE,
             Self::OxcApproxConstant(_) => OxcApproxConstant::IS_TSGOLINT_RULE,
             Self::OxcArrayCallbackWithoutReturn(_) => {
                 OxcArrayCallbackWithoutReturn::IS_TSGOLINT_RULE
@@ -19661,6 +19677,7 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(_) => JsxA11YRoleSupportsAriaProps::VERSION,
             Self::JsxA11YScope(_) => JsxA11YScope::VERSION,
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::VERSION,
+            Self::OxcAnchorPrecedence(_) => OxcAnchorPrecedence::VERSION,
             Self::OxcApproxConstant(_) => OxcApproxConstant::VERSION,
             Self::OxcArrayCallbackWithoutReturn(_) => OxcArrayCallbackWithoutReturn::VERSION,
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::VERSION,
@@ -20834,6 +20851,7 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(_) => JsxA11YRoleSupportsAriaProps::HAS_CONFIG,
             Self::JsxA11YScope(_) => JsxA11YScope::HAS_CONFIG,
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::HAS_CONFIG,
+            Self::OxcAnchorPrecedence(_) => OxcAnchorPrecedence::HAS_CONFIG,
             Self::OxcApproxConstant(_) => OxcApproxConstant::HAS_CONFIG,
             Self::OxcArrayCallbackWithoutReturn(_) => OxcArrayCallbackWithoutReturn::HAS_CONFIG,
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::HAS_CONFIG,
@@ -21938,6 +21956,7 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(_) => JsxA11YRoleSupportsAriaProps::INFO,
             Self::JsxA11YScope(_) => JsxA11YScope::INFO,
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::INFO,
+            Self::OxcAnchorPrecedence(_) => OxcAnchorPrecedence::INFO,
             Self::OxcApproxConstant(_) => OxcApproxConstant::INFO,
             Self::OxcArrayCallbackWithoutReturn(_) => OxcArrayCallbackWithoutReturn::INFO,
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::INFO,
@@ -22917,6 +22936,7 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(rule) => rule.types_info(),
             Self::JsxA11YScope(rule) => rule.types_info(),
             Self::JsxA11YTabindexNoPositive(rule) => rule.types_info(),
+            Self::OxcAnchorPrecedence(rule) => rule.types_info(),
             Self::OxcApproxConstant(rule) => rule.types_info(),
             Self::OxcArrayCallbackWithoutReturn(rule) => rule.types_info(),
             Self::OxcBadArrayMethodOnArguments(rule) => rule.types_info(),
@@ -23879,6 +23899,7 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(rule) => rule.run_info(),
             Self::JsxA11YScope(rule) => rule.run_info(),
             Self::JsxA11YTabindexNoPositive(rule) => rule.run_info(),
+            Self::OxcAnchorPrecedence(rule) => rule.run_info(),
             Self::OxcApproxConstant(rule) => rule.run_info(),
             Self::OxcArrayCallbackWithoutReturn(rule) => rule.run_info(),
             Self::OxcBadArrayMethodOnArguments(rule) => rule.run_info(),
@@ -24967,6 +24988,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::JsxA11YRoleSupportsAriaProps(JsxA11YRoleSupportsAriaProps::default()),
         RuleEnum::JsxA11YScope(JsxA11YScope::default()),
         RuleEnum::JsxA11YTabindexNoPositive(JsxA11YTabindexNoPositive::default()),
+        RuleEnum::OxcAnchorPrecedence(OxcAnchorPrecedence::default()),
         RuleEnum::OxcApproxConstant(OxcApproxConstant::default()),
         RuleEnum::OxcArrayCallbackWithoutReturn(OxcArrayCallbackWithoutReturn::default()),
         RuleEnum::OxcBadArrayMethodOnArguments(OxcBadArrayMethodOnArguments::default()),

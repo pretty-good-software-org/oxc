@@ -741,6 +741,7 @@ pub(crate) mod jsx_a11y {
 }
 
 pub(crate) mod oxc {
+    pub mod anchor_precedence;
     pub mod approx_constant;
     pub mod array_callback_without_return;
     pub mod bad_array_method_on_arguments;
