@@ -326,6 +326,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("anti-slop", "no-unknown-parameters") => ("no-unknown-parameters", "oxc"),
         ("anti-slop", "no-unknown-returns") => ("no-unknown-returns", "oxc"),
         ("sonarjs", "no-empty-after-reluctant") => ("no-empty-after-reluctant", "oxc"),
+        ("sonarjs", "different-types-comparison") => ("different-types-comparison", "oxc"),
         ("sonarjs", "no-empty-test-file") => ("no-empty-test-file", "oxc"),
         ("sonarjs", "no-empty-collection") => ("no-empty-collection", "oxc"),
         ("sonarjs", "no-unsafe-unzip") => ("no-unsafe-unzip", "oxc"),

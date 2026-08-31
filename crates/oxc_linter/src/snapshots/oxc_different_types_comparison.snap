@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(different-types-comparison): Do not compare values of different primitive types.
+   ╭─[different_types_comparison.tsx:1:1]
+ 1 │ 1 === '1'
+   · ─────────
+   ╰────
+  help: Convert the values explicitly or compare compatible types.

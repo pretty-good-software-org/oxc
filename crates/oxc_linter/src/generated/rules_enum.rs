@@ -396,6 +396,7 @@ pub use crate::rules::oxc::branches_sharing_code::BranchesSharingCode as OxcBran
 pub use crate::rules::oxc::class_name::ClassName as OxcClassName;
 pub use crate::rules::oxc::const_comparisons::ConstComparisons as OxcConstComparisons;
 pub use crate::rules::oxc::constructor_for_side_effects::ConstructorForSideEffects as OxcConstructorForSideEffects;
+pub use crate::rules::oxc::different_types_comparison::DifferentTypesComparison as OxcDifferentTypesComparison;
 pub use crate::rules::oxc::double_comparisons::DoubleComparisons as OxcDoubleComparisons;
 pub use crate::rules::oxc::duplicates_in_character_class::DuplicatesInCharacterClass as OxcDuplicatesInCharacterClass;
 pub use crate::rules::oxc::erasing_op::ErasingOp as OxcErasingOp;
@@ -1651,6 +1652,7 @@ pub enum RuleEnum {
     OxcClassName(OxcClassName),
     OxcConstComparisons(OxcConstComparisons),
     OxcConstructorForSideEffects(OxcConstructorForSideEffects),
+    OxcDifferentTypesComparison(OxcDifferentTypesComparison),
     OxcDoubleComparisons(OxcDoubleComparisons),
     OxcDuplicatesInCharacterClass(OxcDuplicatesInCharacterClass),
     OxcErasingOp(OxcErasingOp),
@@ -2702,7 +2704,8 @@ const OXC_BRANCHES_SHARING_CODE_ID: usize = OXC_BAD_REPLACE_ALL_ARG_ID + 1usize;
 const OXC_CLASS_NAME_ID: usize = OXC_BRANCHES_SHARING_CODE_ID + 1usize;
 const OXC_CONST_COMPARISONS_ID: usize = OXC_CLASS_NAME_ID + 1usize;
 const OXC_CONSTRUCTOR_FOR_SIDE_EFFECTS_ID: usize = OXC_CONST_COMPARISONS_ID + 1usize;
-const OXC_DOUBLE_COMPARISONS_ID: usize = OXC_CONSTRUCTOR_FOR_SIDE_EFFECTS_ID + 1usize;
+const OXC_DIFFERENT_TYPES_COMPARISON_ID: usize = OXC_CONSTRUCTOR_FOR_SIDE_EFFECTS_ID + 1usize;
+const OXC_DOUBLE_COMPARISONS_ID: usize = OXC_DIFFERENT_TYPES_COMPARISON_ID + 1usize;
 const OXC_DUPLICATES_IN_CHARACTER_CLASS_ID: usize = OXC_DOUBLE_COMPARISONS_ID + 1usize;
 const OXC_ERASING_OP_ID: usize = OXC_DUPLICATES_IN_CHARACTER_CLASS_ID + 1usize;
 const OXC_GENERATOR_WITHOUT_YIELD_ID: usize = OXC_ERASING_OP_ID + 1usize;
@@ -3010,7 +3013,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 957usize] = [
+static RULE_NAMES: [&str; 958usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3679,6 +3682,7 @@ static RULE_NAMES: [&str; 957usize] = [
     OxcClassName::NAME,
     OxcConstComparisons::NAME,
     OxcConstructorForSideEffects::NAME,
+    OxcDifferentTypesComparison::NAME,
     OxcDoubleComparisons::NAME,
     OxcDuplicatesInCharacterClass::NAME,
     OxcErasingOp::NAME,
@@ -4756,6 +4760,7 @@ impl RuleEnum {
             Self::OxcClassName(_) => OXC_CLASS_NAME_ID,
             Self::OxcConstComparisons(_) => OXC_CONST_COMPARISONS_ID,
             Self::OxcConstructorForSideEffects(_) => OXC_CONSTRUCTOR_FOR_SIDE_EFFECTS_ID,
+            Self::OxcDifferentTypesComparison(_) => OXC_DIFFERENT_TYPES_COMPARISON_ID,
             Self::OxcDoubleComparisons(_) => OXC_DOUBLE_COMPARISONS_ID,
             Self::OxcDuplicatesInCharacterClass(_) => OXC_DUPLICATES_IN_CHARACTER_CLASS_ID,
             Self::OxcErasingOp(_) => OXC_ERASING_OP_ID,
@@ -5886,6 +5891,7 @@ impl RuleEnum {
             Self::OxcClassName(_) => OxcClassName::CATEGORY,
             Self::OxcConstComparisons(_) => OxcConstComparisons::CATEGORY,
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::CATEGORY,
+            Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::CATEGORY,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::CATEGORY,
             Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::CATEGORY,
             Self::OxcErasingOp(_) => OxcErasingOp::CATEGORY,
@@ -6980,6 +6986,7 @@ impl RuleEnum {
             Self::OxcClassName(_) => OxcClassName::FIX,
             Self::OxcConstComparisons(_) => OxcConstComparisons::FIX,
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::FIX,
+            Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::FIX,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::FIX,
             Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::FIX,
             Self::OxcErasingOp(_) => OxcErasingOp::FIX,
@@ -8276,6 +8283,7 @@ impl RuleEnum {
             Self::OxcClassName(_) => OxcClassName::documentation(),
             Self::OxcConstComparisons(_) => OxcConstComparisons::documentation(),
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::documentation(),
+            Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::documentation(),
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::documentation(),
             Self::OxcDuplicatesInCharacterClass(_) => {
                 OxcDuplicatesInCharacterClass::documentation()
@@ -10588,6 +10596,10 @@ impl RuleEnum {
                 OxcConstructorForSideEffects::config_schema(generator)
                     .or_else(|| OxcConstructorForSideEffects::schema(generator))
             }
+            Self::OxcDifferentTypesComparison(_) => {
+                OxcDifferentTypesComparison::config_schema(generator)
+                    .or_else(|| OxcDifferentTypesComparison::schema(generator))
+            }
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::config_schema(generator)
                 .or_else(|| OxcDoubleComparisons::schema(generator)),
             Self::OxcDuplicatesInCharacterClass(_) => {
@@ -12035,6 +12047,7 @@ impl RuleEnum {
             Self::OxcClassName(_) => "oxc",
             Self::OxcConstComparisons(_) => "oxc",
             Self::OxcConstructorForSideEffects(_) => "oxc",
+            Self::OxcDifferentTypesComparison(_) => "oxc",
             Self::OxcDoubleComparisons(_) => "oxc",
             Self::OxcDuplicatesInCharacterClass(_) => "oxc",
             Self::OxcErasingOp(_) => "oxc",
@@ -14139,6 +14152,7 @@ impl RuleEnum {
             Self::OxcClassName(rule) => rule.run(node, ctx),
             Self::OxcConstComparisons(rule) => rule.run(node, ctx),
             Self::OxcConstructorForSideEffects(rule) => rule.run(node, ctx),
+            Self::OxcDifferentTypesComparison(rule) => rule.run(node, ctx),
             Self::OxcDoubleComparisons(rule) => rule.run(node, ctx),
             Self::OxcDuplicatesInCharacterClass(rule) => rule.run(node, ctx),
             Self::OxcErasingOp(rule) => rule.run(node, ctx),
@@ -15113,6 +15127,7 @@ impl RuleEnum {
             Self::OxcClassName(rule) => rule.run_once(ctx),
             Self::OxcConstComparisons(rule) => rule.run_once(ctx),
             Self::OxcConstructorForSideEffects(rule) => rule.run_once(ctx),
+            Self::OxcDifferentTypesComparison(rule) => rule.run_once(ctx),
             Self::OxcDoubleComparisons(rule) => rule.run_once(ctx),
             Self::OxcDuplicatesInCharacterClass(rule) => rule.run_once(ctx),
             Self::OxcErasingOp(rule) => rule.run_once(ctx),
@@ -16194,6 +16209,7 @@ impl RuleEnum {
             Self::OxcClassName(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcConstComparisons(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcConstructorForSideEffects(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcDifferentTypesComparison(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcDoubleComparisons(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcDuplicatesInCharacterClass(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcErasingOp(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -17181,6 +17197,7 @@ impl RuleEnum {
             Self::OxcClassName(rule) => rule.should_run(ctx),
             Self::OxcConstComparisons(rule) => rule.should_run(ctx),
             Self::OxcConstructorForSideEffects(rule) => rule.should_run(ctx),
+            Self::OxcDifferentTypesComparison(rule) => rule.should_run(ctx),
             Self::OxcDoubleComparisons(rule) => rule.should_run(ctx),
             Self::OxcDuplicatesInCharacterClass(rule) => rule.should_run(ctx),
             Self::OxcErasingOp(rule) => rule.should_run(ctx),
@@ -18464,6 +18481,7 @@ impl RuleEnum {
             Self::OxcClassName(_) => OxcClassName::IS_TSGOLINT_RULE,
             Self::OxcConstComparisons(_) => OxcConstComparisons::IS_TSGOLINT_RULE,
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::IS_TSGOLINT_RULE,
+            Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::IS_TSGOLINT_RULE,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::IS_TSGOLINT_RULE,
             Self::OxcDuplicatesInCharacterClass(_) => {
                 OxcDuplicatesInCharacterClass::IS_TSGOLINT_RULE
@@ -19657,6 +19675,7 @@ impl RuleEnum {
             Self::OxcClassName(_) => OxcClassName::VERSION,
             Self::OxcConstComparisons(_) => OxcConstComparisons::VERSION,
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::VERSION,
+            Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::VERSION,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::VERSION,
             Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::VERSION,
             Self::OxcErasingOp(_) => OxcErasingOp::VERSION,
@@ -20829,6 +20848,7 @@ impl RuleEnum {
             Self::OxcClassName(_) => OxcClassName::HAS_CONFIG,
             Self::OxcConstComparisons(_) => OxcConstComparisons::HAS_CONFIG,
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::HAS_CONFIG,
+            Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::HAS_CONFIG,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::HAS_CONFIG,
             Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::HAS_CONFIG,
             Self::OxcErasingOp(_) => OxcErasingOp::HAS_CONFIG,
@@ -21932,6 +21952,7 @@ impl RuleEnum {
             Self::OxcClassName(_) => OxcClassName::INFO,
             Self::OxcConstComparisons(_) => OxcConstComparisons::INFO,
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::INFO,
+            Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::INFO,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::INFO,
             Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::INFO,
             Self::OxcErasingOp(_) => OxcErasingOp::INFO,
@@ -22910,6 +22931,7 @@ impl RuleEnum {
             Self::OxcClassName(rule) => rule.types_info(),
             Self::OxcConstComparisons(rule) => rule.types_info(),
             Self::OxcConstructorForSideEffects(rule) => rule.types_info(),
+            Self::OxcDifferentTypesComparison(rule) => rule.types_info(),
             Self::OxcDoubleComparisons(rule) => rule.types_info(),
             Self::OxcDuplicatesInCharacterClass(rule) => rule.types_info(),
             Self::OxcErasingOp(rule) => rule.types_info(),
@@ -23871,6 +23893,7 @@ impl RuleEnum {
             Self::OxcClassName(rule) => rule.run_info(),
             Self::OxcConstComparisons(rule) => rule.run_info(),
             Self::OxcConstructorForSideEffects(rule) => rule.run_info(),
+            Self::OxcDifferentTypesComparison(rule) => rule.run_info(),
             Self::OxcDoubleComparisons(rule) => rule.run_info(),
             Self::OxcDuplicatesInCharacterClass(rule) => rule.run_info(),
             Self::OxcErasingOp(rule) => rule.run_info(),
@@ -24958,6 +24981,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcClassName(OxcClassName::default()),
         RuleEnum::OxcConstComparisons(OxcConstComparisons::default()),
         RuleEnum::OxcConstructorForSideEffects(OxcConstructorForSideEffects::default()),
+        RuleEnum::OxcDifferentTypesComparison(OxcDifferentTypesComparison::default()),
         RuleEnum::OxcDoubleComparisons(OxcDoubleComparisons::default()),
         RuleEnum::OxcDuplicatesInCharacterClass(OxcDuplicatesInCharacterClass::default()),
         RuleEnum::OxcErasingOp(OxcErasingOp::default()),
