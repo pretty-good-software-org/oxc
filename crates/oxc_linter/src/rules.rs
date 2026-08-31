@@ -784,6 +784,7 @@ pub(crate) mod oxc {
     pub mod no_empty_after_reluctant;
     pub mod no_empty_alternatives;
     pub mod no_empty_group;
+    pub mod no_empty_test_file;
     pub mod no_equals_in_for_termination;
     pub mod no_exclusive_tests;
     pub mod no_global_this;

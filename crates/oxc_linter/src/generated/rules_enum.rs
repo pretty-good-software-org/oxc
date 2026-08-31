@@ -425,6 +425,7 @@ pub use crate::rules::oxc::no_duplicated_branches::NoDuplicatedBranches as OxcNo
 pub use crate::rules::oxc::no_empty_after_reluctant::NoEmptyAfterReluctant as OxcNoEmptyAfterReluctant;
 pub use crate::rules::oxc::no_empty_alternatives::NoEmptyAlternatives as OxcNoEmptyAlternatives;
 pub use crate::rules::oxc::no_empty_group::NoEmptyGroup as OxcNoEmptyGroup;
+pub use crate::rules::oxc::no_empty_test_file::NoEmptyTestFile as OxcNoEmptyTestFile;
 pub use crate::rules::oxc::no_equals_in_for_termination::NoEqualsInForTermination as OxcNoEqualsInForTermination;
 pub use crate::rules::oxc::no_exclusive_tests::NoExclusiveTests as OxcNoExclusiveTests;
 pub use crate::rules::oxc::no_global_this::NoGlobalThis as OxcNoGlobalThis;
@@ -1668,6 +1669,7 @@ pub enum RuleEnum {
     OxcNoEmptyAfterReluctant(OxcNoEmptyAfterReluctant),
     OxcNoEmptyAlternatives(OxcNoEmptyAlternatives),
     OxcNoEmptyGroup(OxcNoEmptyGroup),
+    OxcNoEmptyTestFile(OxcNoEmptyTestFile),
     OxcNoEqualsInForTermination(OxcNoEqualsInForTermination),
     OxcNoExclusiveTests(OxcNoExclusiveTests),
     OxcNoGlobalThis(OxcNoGlobalThis),
@@ -2707,7 +2709,8 @@ const OXC_NO_DUPLICATED_BRANCHES_ID: usize = OXC_NO_DUPLICATE_IN_COMPOSITE_ID + 
 const OXC_NO_EMPTY_AFTER_RELUCTANT_ID: usize = OXC_NO_DUPLICATED_BRANCHES_ID + 1usize;
 const OXC_NO_EMPTY_ALTERNATIVES_ID: usize = OXC_NO_EMPTY_AFTER_RELUCTANT_ID + 1usize;
 const OXC_NO_EMPTY_GROUP_ID: usize = OXC_NO_EMPTY_ALTERNATIVES_ID + 1usize;
-const OXC_NO_EQUALS_IN_FOR_TERMINATION_ID: usize = OXC_NO_EMPTY_GROUP_ID + 1usize;
+const OXC_NO_EMPTY_TEST_FILE_ID: usize = OXC_NO_EMPTY_GROUP_ID + 1usize;
+const OXC_NO_EQUALS_IN_FOR_TERMINATION_ID: usize = OXC_NO_EMPTY_TEST_FILE_ID + 1usize;
 const OXC_NO_EXCLUSIVE_TESTS_ID: usize = OXC_NO_EQUALS_IN_FOR_TERMINATION_ID + 1usize;
 const OXC_NO_GLOBAL_THIS_ID: usize = OXC_NO_EXCLUSIVE_TESTS_ID + 1usize;
 const OXC_NO_HARDCODED_IP_ID: usize = OXC_NO_GLOBAL_THIS_ID + 1usize;
@@ -2974,7 +2977,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 945usize] = [
+static RULE_NAMES: [&str; 946usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3672,6 +3675,7 @@ static RULE_NAMES: [&str; 945usize] = [
     OxcNoEmptyAfterReluctant::NAME,
     OxcNoEmptyAlternatives::NAME,
     OxcNoEmptyGroup::NAME,
+    OxcNoEmptyTestFile::NAME,
     OxcNoEqualsInForTermination::NAME,
     OxcNoExclusiveTests::NAME,
     OxcNoGlobalThis::NAME,
@@ -4737,6 +4741,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAfterReluctant(_) => OXC_NO_EMPTY_AFTER_RELUCTANT_ID,
             Self::OxcNoEmptyAlternatives(_) => OXC_NO_EMPTY_ALTERNATIVES_ID,
             Self::OxcNoEmptyGroup(_) => OXC_NO_EMPTY_GROUP_ID,
+            Self::OxcNoEmptyTestFile(_) => OXC_NO_EMPTY_TEST_FILE_ID,
             Self::OxcNoEqualsInForTermination(_) => OXC_NO_EQUALS_IN_FOR_TERMINATION_ID,
             Self::OxcNoExclusiveTests(_) => OXC_NO_EXCLUSIVE_TESTS_ID,
             Self::OxcNoGlobalThis(_) => OXC_NO_GLOBAL_THIS_ID,
@@ -5857,6 +5862,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::CATEGORY,
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::CATEGORY,
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::CATEGORY,
+            Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::CATEGORY,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::CATEGORY,
             Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::CATEGORY,
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::CATEGORY,
@@ -6937,6 +6943,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::FIX,
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::FIX,
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::FIX,
+            Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::FIX,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::FIX,
             Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::FIX,
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::FIX,
@@ -8227,6 +8234,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::documentation(),
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::documentation(),
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::documentation(),
+            Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::documentation(),
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::documentation(),
             Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::documentation(),
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::documentation(),
@@ -10567,6 +10575,8 @@ impl RuleEnum {
                 .or_else(|| OxcNoEmptyAlternatives::schema(generator)),
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::config_schema(generator)
                 .or_else(|| OxcNoEmptyGroup::schema(generator)),
+            Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::config_schema(generator)
+                .or_else(|| OxcNoEmptyTestFile::schema(generator)),
             Self::OxcNoEqualsInForTermination(_) => {
                 OxcNoEqualsInForTermination::config_schema(generator)
                     .or_else(|| OxcNoEqualsInForTermination::schema(generator))
@@ -11940,6 +11950,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAfterReluctant(_) => "oxc",
             Self::OxcNoEmptyAlternatives(_) => "oxc",
             Self::OxcNoEmptyGroup(_) => "oxc",
+            Self::OxcNoEmptyTestFile(_) => "oxc",
             Self::OxcNoEqualsInForTermination(_) => "oxc",
             Self::OxcNoExclusiveTests(_) => "oxc",
             Self::OxcNoGlobalThis(_) => "oxc",
@@ -14032,6 +14043,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAfterReluctant(rule) => rule.run(node, ctx),
             Self::OxcNoEmptyAlternatives(rule) => rule.run(node, ctx),
             Self::OxcNoEmptyGroup(rule) => rule.run(node, ctx),
+            Self::OxcNoEmptyTestFile(rule) => rule.run(node, ctx),
             Self::OxcNoEqualsInForTermination(rule) => rule.run(node, ctx),
             Self::OxcNoExclusiveTests(rule) => rule.run(node, ctx),
             Self::OxcNoGlobalThis(rule) => rule.run(node, ctx),
@@ -14994,6 +15006,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAfterReluctant(rule) => rule.run_once(ctx),
             Self::OxcNoEmptyAlternatives(rule) => rule.run_once(ctx),
             Self::OxcNoEmptyGroup(rule) => rule.run_once(ctx),
+            Self::OxcNoEmptyTestFile(rule) => rule.run_once(ctx),
             Self::OxcNoEqualsInForTermination(rule) => rule.run_once(ctx),
             Self::OxcNoExclusiveTests(rule) => rule.run_once(ctx),
             Self::OxcNoGlobalThis(rule) => rule.run_once(ctx),
@@ -16063,6 +16076,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAfterReluctant(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoEmptyAlternatives(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoEmptyGroup(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoEmptyTestFile(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoEqualsInForTermination(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoExclusiveTests(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoGlobalThis(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -17038,6 +17052,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAfterReluctant(rule) => rule.should_run(ctx),
             Self::OxcNoEmptyAlternatives(rule) => rule.should_run(ctx),
             Self::OxcNoEmptyGroup(rule) => rule.should_run(ctx),
+            Self::OxcNoEmptyTestFile(rule) => rule.should_run(ctx),
             Self::OxcNoEqualsInForTermination(rule) => rule.should_run(ctx),
             Self::OxcNoExclusiveTests(rule) => rule.should_run(ctx),
             Self::OxcNoGlobalThis(rule) => rule.should_run(ctx),
@@ -18315,6 +18330,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::IS_TSGOLINT_RULE,
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::IS_TSGOLINT_RULE,
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::IS_TSGOLINT_RULE,
+            Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::IS_TSGOLINT_RULE,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::IS_TSGOLINT_RULE,
             Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::IS_TSGOLINT_RULE,
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::IS_TSGOLINT_RULE,
@@ -19492,6 +19508,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::VERSION,
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::VERSION,
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::VERSION,
+            Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::VERSION,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::VERSION,
             Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::VERSION,
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::VERSION,
@@ -20652,6 +20669,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::HAS_CONFIG,
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::HAS_CONFIG,
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::HAS_CONFIG,
+            Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::HAS_CONFIG,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::HAS_CONFIG,
             Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::HAS_CONFIG,
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::HAS_CONFIG,
@@ -21741,6 +21759,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::INFO,
             Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::INFO,
             Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::INFO,
+            Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::INFO,
             Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::INFO,
             Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::INFO,
             Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::INFO,
@@ -22707,6 +22726,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAfterReluctant(rule) => rule.types_info(),
             Self::OxcNoEmptyAlternatives(rule) => rule.types_info(),
             Self::OxcNoEmptyGroup(rule) => rule.types_info(),
+            Self::OxcNoEmptyTestFile(rule) => rule.types_info(),
             Self::OxcNoEqualsInForTermination(rule) => rule.types_info(),
             Self::OxcNoExclusiveTests(rule) => rule.types_info(),
             Self::OxcNoGlobalThis(rule) => rule.types_info(),
@@ -23656,6 +23676,7 @@ impl RuleEnum {
             Self::OxcNoEmptyAfterReluctant(rule) => rule.run_info(),
             Self::OxcNoEmptyAlternatives(rule) => rule.run_info(),
             Self::OxcNoEmptyGroup(rule) => rule.run_info(),
+            Self::OxcNoEmptyTestFile(rule) => rule.run_info(),
             Self::OxcNoEqualsInForTermination(rule) => rule.run_info(),
             Self::OxcNoExclusiveTests(rule) => rule.run_info(),
             Self::OxcNoGlobalThis(rule) => rule.run_info(),
@@ -24731,6 +24752,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoEmptyAfterReluctant(OxcNoEmptyAfterReluctant::default()),
         RuleEnum::OxcNoEmptyAlternatives(OxcNoEmptyAlternatives::default()),
         RuleEnum::OxcNoEmptyGroup(OxcNoEmptyGroup::default()),
+        RuleEnum::OxcNoEmptyTestFile(OxcNoEmptyTestFile::default()),
         RuleEnum::OxcNoEqualsInForTermination(OxcNoEqualsInForTermination::default()),
         RuleEnum::OxcNoExclusiveTests(OxcNoExclusiveTests::default()),
         RuleEnum::OxcNoGlobalThis(OxcNoGlobalThis::default()),
