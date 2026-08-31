@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(production-debug): Make sure this debug feature is deactivated before delivering the code in production.
+   ╭─[production_debug.tsx:1:9]
+ 1 │ app.use(errorhandler())
+   ·         ──────────────
+   ╰────
+  help: Install the error handler only in a development-only conditional.
