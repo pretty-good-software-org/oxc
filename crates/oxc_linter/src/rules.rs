@@ -833,6 +833,7 @@ pub(crate) mod oxc {
     pub mod no_unused_collection;
     pub mod no_unverified_certificate;
     pub mod no_unverified_hostname;
+    pub mod no_useless_increment;
     pub mod no_weak_cipher;
     pub mod no_weak_ssl;
     pub mod no_widen_then_assert;

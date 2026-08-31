@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-useless-increment): Remove this useless increment or use its result.
+   ╭─[no_useless_increment.tsx:1:8]
+ 1 │ return value++;
+   ·        ───────
+   ╰────
+  help: Use the prefix form when the updated value is needed, or remove the update.
