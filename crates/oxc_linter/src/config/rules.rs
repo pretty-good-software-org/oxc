@@ -325,6 +325,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("pgs-oxlint-compat", "no-octal") => ("no-octal", "eslint"),
         ("sonarjs", "post-message") => ("post-message", "oxc"),
         ("sonarjs", "prefer-default-last") => ("prefer-default-last", "oxc"),
+        ("sonarjs", "prefer-while") => ("prefer-while", "oxc"),
         ("sonarjs", "no-array-delete") => ("no-array-delete", "typescript"),
         ("sonarjs", "prefer-regexp-exec") => ("prefer-regexp-exec", "typescript"),
         ("sonarjs", name)
