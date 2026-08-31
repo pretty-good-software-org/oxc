@@ -814,6 +814,7 @@ pub(crate) mod oxc {
     pub mod no_reflect_get;
     pub mod no_rest_spread_properties;
     pub mod no_runtime_typeof;
+    pub mod no_same_line_conditional;
     pub mod no_shape_in_symbol_names;
     pub mod no_skipped_tests;
     pub mod no_small_switch;
