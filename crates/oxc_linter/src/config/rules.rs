@@ -322,6 +322,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "no-empty-test-file") => ("no-empty-test-file", "oxc"),
         ("sonarjs", "no-unsafe-unzip") => ("no-unsafe-unzip", "oxc"),
         ("sonarjs", "no-unthrown-error") => ("no-unthrown-error", "oxc"),
+        ("sonarjs", "no-unused-collection") => ("no-unused-collection", "oxc"),
         ("sonarjs", "no-uniq-key") => ("no-uniq-key", "oxc"),
         ("sonarjs", "no-literal-call") => ("no-literal-call", "oxc"),
         ("anti-slop", "no-unsafe-dictionary-type") => ("no-unsafe-dictionary-type", "oxc"),

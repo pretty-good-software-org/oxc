@@ -828,6 +828,7 @@ pub(crate) mod oxc {
     pub mod no_unsafe_dictionary_type;
     pub mod no_unsafe_unzip;
     pub mod no_unthrown_error;
+    pub mod no_unused_collection;
     pub mod no_unverified_certificate;
     pub mod no_unverified_hostname;
     pub mod no_weak_cipher;
