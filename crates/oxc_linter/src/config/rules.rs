@@ -296,6 +296,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "fixme-tag" | "todo-tag") => ("no-warning-comments", "eslint"),
         ("sonarjs", "in-operator-type-error") => ("in-operator-type-error", "oxc"),
         ("sonarjs", "no-in-misuse") => ("no-in-misuse", "oxc"),
+        ("sonarjs", "no-implicit-global") => ("no-implicit-global", "oxc"),
         ("sonarjs", "label-position") => ("label-position", "oxc"),
         ("sonarjs", "link-with-target-blank") => ("link-with-target-blank", "oxc"),
         ("sonarjs", "no-exclusive-tests") => ("no-exclusive-tests", "oxc"),
