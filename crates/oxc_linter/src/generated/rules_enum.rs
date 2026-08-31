@@ -464,6 +464,7 @@ pub use crate::rules::oxc::no_weak_ssl::NoWeakSsl as OxcNoWeakSsl;
 pub use crate::rules::oxc::no_widen_then_assert::NoWidenThenAssert as OxcNoWidenThenAssert;
 pub use crate::rules::oxc::number_arg_out_of_range::NumberArgOutOfRange as OxcNumberArgOutOfRange;
 pub use crate::rules::oxc::only_used_in_recursion::OnlyUsedInRecursion as OxcOnlyUsedInRecursion;
+pub use crate::rules::oxc::post_message::PostMessage as OxcPostMessage;
 pub use crate::rules::oxc::require_safety_comment_for_type_assertion::RequireSafetyCommentForTypeAssertion as OxcRequireSafetyCommentForTypeAssertion;
 pub use crate::rules::oxc::single_char_in_character_classes::SingleCharInCharacterClasses as OxcSingleCharInCharacterClasses;
 pub use crate::rules::oxc::single_character_alternation::SingleCharacterAlternation as OxcSingleCharacterAlternation;
@@ -1692,6 +1693,7 @@ pub enum RuleEnum {
     OxcNoWidenThenAssert(OxcNoWidenThenAssert),
     OxcNumberArgOutOfRange(OxcNumberArgOutOfRange),
     OxcOnlyUsedInRecursion(OxcOnlyUsedInRecursion),
+    OxcPostMessage(OxcPostMessage),
     OxcRequireSafetyCommentForTypeAssertion(OxcRequireSafetyCommentForTypeAssertion),
     OxcSingleCharInCharacterClasses(OxcSingleCharInCharacterClasses),
     OxcSingleCharacterAlternation(OxcSingleCharacterAlternation),
@@ -2716,8 +2718,8 @@ const OXC_NO_WEAK_SSL_ID: usize = OXC_NO_WEAK_CIPHER_ID + 1usize;
 const OXC_NO_WIDEN_THEN_ASSERT_ID: usize = OXC_NO_WEAK_SSL_ID + 1usize;
 const OXC_NUMBER_ARG_OUT_OF_RANGE_ID: usize = OXC_NO_WIDEN_THEN_ASSERT_ID + 1usize;
 const OXC_ONLY_USED_IN_RECURSION_ID: usize = OXC_NUMBER_ARG_OUT_OF_RANGE_ID + 1usize;
-const OXC_REQUIRE_SAFETY_COMMENT_FOR_TYPE_ASSERTION_ID: usize =
-    OXC_ONLY_USED_IN_RECURSION_ID + 1usize;
+const OXC_POST_MESSAGE_ID: usize = OXC_ONLY_USED_IN_RECURSION_ID + 1usize;
+const OXC_REQUIRE_SAFETY_COMMENT_FOR_TYPE_ASSERTION_ID: usize = OXC_POST_MESSAGE_ID + 1usize;
 const OXC_SINGLE_CHAR_IN_CHARACTER_CLASSES_ID: usize =
     OXC_REQUIRE_SAFETY_COMMENT_FOR_TYPE_ASSERTION_ID + 1usize;
 const OXC_SINGLE_CHARACTER_ALTERNATION_ID: usize = OXC_SINGLE_CHAR_IN_CHARACTER_CLASSES_ID + 1usize;
@@ -2930,7 +2932,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 930usize] = [
+static RULE_NAMES: [&str; 931usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3667,6 +3669,7 @@ static RULE_NAMES: [&str; 930usize] = [
     OxcNoWidenThenAssert::NAME,
     OxcNumberArgOutOfRange::NAME,
     OxcOnlyUsedInRecursion::NAME,
+    OxcPostMessage::NAME,
     OxcRequireSafetyCommentForTypeAssertion::NAME,
     OxcSingleCharInCharacterClasses::NAME,
     OxcSingleCharacterAlternation::NAME,
@@ -4717,6 +4720,7 @@ impl RuleEnum {
             Self::OxcNoWidenThenAssert(_) => OXC_NO_WIDEN_THEN_ASSERT_ID,
             Self::OxcNumberArgOutOfRange(_) => OXC_NUMBER_ARG_OUT_OF_RANGE_ID,
             Self::OxcOnlyUsedInRecursion(_) => OXC_ONLY_USED_IN_RECURSION_ID,
+            Self::OxcPostMessage(_) => OXC_POST_MESSAGE_ID,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OXC_REQUIRE_SAFETY_COMMENT_FOR_TYPE_ASSERTION_ID
             }
@@ -5822,6 +5826,7 @@ impl RuleEnum {
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::CATEGORY,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::CATEGORY,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::CATEGORY,
+            Self::OxcPostMessage(_) => OxcPostMessage::CATEGORY,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::CATEGORY
             }
@@ -6887,6 +6892,7 @@ impl RuleEnum {
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::FIX,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::FIX,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::FIX,
+            Self::OxcPostMessage(_) => OxcPostMessage::FIX,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::FIX
             }
@@ -8162,6 +8168,7 @@ impl RuleEnum {
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::documentation(),
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::documentation(),
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::documentation(),
+            Self::OxcPostMessage(_) => OxcPostMessage::documentation(),
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::documentation()
             }
@@ -10543,6 +10550,8 @@ impl RuleEnum {
                 .or_else(|| OxcNumberArgOutOfRange::schema(generator)),
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::config_schema(generator)
                 .or_else(|| OxcOnlyUsedInRecursion::schema(generator)),
+            Self::OxcPostMessage(_) => OxcPostMessage::config_schema(generator)
+                .or_else(|| OxcPostMessage::schema(generator)),
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::config_schema(generator)
                     .or_else(|| OxcRequireSafetyCommentForTypeAssertion::schema(generator))
@@ -11828,6 +11837,7 @@ impl RuleEnum {
             Self::OxcNoWidenThenAssert(_) => "oxc",
             Self::OxcNumberArgOutOfRange(_) => "oxc",
             Self::OxcOnlyUsedInRecursion(_) => "oxc",
+            Self::OxcPostMessage(_) => "oxc",
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => "oxc",
             Self::OxcSingleCharInCharacterClasses(_) => "oxc",
             Self::OxcSingleCharacterAlternation(_) => "oxc",
@@ -13905,6 +13915,7 @@ impl RuleEnum {
             Self::OxcNoWidenThenAssert(rule) => rule.run(node, ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run(node, ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run(node, ctx),
+            Self::OxcPostMessage(rule) => rule.run(node, ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.run(node, ctx),
             Self::OxcSingleCharInCharacterClasses(rule) => rule.run(node, ctx),
             Self::OxcSingleCharacterAlternation(rule) => rule.run(node, ctx),
@@ -14852,6 +14863,7 @@ impl RuleEnum {
             Self::OxcNoWidenThenAssert(rule) => rule.run_once(ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_once(ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_once(ctx),
+            Self::OxcPostMessage(rule) => rule.run_once(ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.run_once(ctx),
             Self::OxcSingleCharInCharacterClasses(rule) => rule.run_once(ctx),
             Self::OxcSingleCharacterAlternation(rule) => rule.run_once(ctx),
@@ -15906,6 +15918,7 @@ impl RuleEnum {
             Self::OxcNoWidenThenAssert(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcPostMessage(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => {
                 rule.run_on_jest_node(jest_node, ctx)
             }
@@ -16866,6 +16879,7 @@ impl RuleEnum {
             Self::OxcNoWidenThenAssert(rule) => rule.should_run(ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.should_run(ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.should_run(ctx),
+            Self::OxcPostMessage(rule) => rule.should_run(ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.should_run(ctx),
             Self::OxcSingleCharInCharacterClasses(rule) => rule.should_run(ctx),
             Self::OxcSingleCharacterAlternation(rule) => rule.should_run(ctx),
@@ -18128,6 +18142,7 @@ impl RuleEnum {
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::IS_TSGOLINT_RULE,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::IS_TSGOLINT_RULE,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::IS_TSGOLINT_RULE,
+            Self::OxcPostMessage(_) => OxcPostMessage::IS_TSGOLINT_RULE,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::IS_TSGOLINT_RULE
             }
@@ -19290,6 +19305,7 @@ impl RuleEnum {
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::VERSION,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::VERSION,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::VERSION,
+            Self::OxcPostMessage(_) => OxcPostMessage::VERSION,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::VERSION
             }
@@ -20435,6 +20451,7 @@ impl RuleEnum {
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::HAS_CONFIG,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::HAS_CONFIG,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::HAS_CONFIG,
+            Self::OxcPostMessage(_) => OxcPostMessage::HAS_CONFIG,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::HAS_CONFIG
             }
@@ -21509,6 +21526,7 @@ impl RuleEnum {
             Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::INFO,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::INFO,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::INFO,
+            Self::OxcPostMessage(_) => OxcPostMessage::INFO,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::INFO
             }
@@ -22460,6 +22478,7 @@ impl RuleEnum {
             Self::OxcNoWidenThenAssert(rule) => rule.types_info(),
             Self::OxcNumberArgOutOfRange(rule) => rule.types_info(),
             Self::OxcOnlyUsedInRecursion(rule) => rule.types_info(),
+            Self::OxcPostMessage(rule) => rule.types_info(),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.types_info(),
             Self::OxcSingleCharInCharacterClasses(rule) => rule.types_info(),
             Self::OxcSingleCharacterAlternation(rule) => rule.types_info(),
@@ -23394,6 +23413,7 @@ impl RuleEnum {
             Self::OxcNoWidenThenAssert(rule) => rule.run_info(),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_info(),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_info(),
+            Self::OxcPostMessage(rule) => rule.run_info(),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.run_info(),
             Self::OxcSingleCharInCharacterClasses(rule) => rule.run_info(),
             Self::OxcSingleCharacterAlternation(rule) => rule.run_info(),
@@ -24454,6 +24474,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoWidenThenAssert(OxcNoWidenThenAssert::default()),
         RuleEnum::OxcNumberArgOutOfRange(OxcNumberArgOutOfRange::default()),
         RuleEnum::OxcOnlyUsedInRecursion(OxcOnlyUsedInRecursion::default()),
+        RuleEnum::OxcPostMessage(OxcPostMessage::default()),
         RuleEnum::OxcRequireSafetyCommentForTypeAssertion(
             OxcRequireSafetyCommentForTypeAssertion::default(),
         ),
