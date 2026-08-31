@@ -272,6 +272,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "no-nested-functions") => ("no-nested-functions", "oxc"),
         ("sonarjs", "no-nested-template-literals") => ("no-nested-template-literals", "oxc"),
         ("sonarjs", "no-redundant-boolean") => ("no-redundant-boolean", "oxc"),
+        ("sonarjs", "no-redundant-jump") => ("no-redundant-jump", "oxc"),
         ("sonarjs", "no-duplicated-branches") => ("no-duplicated-branches", "oxc"),
         ("sonarjs", "no-duplicate-in-composite") => ("no-duplicate-in-composite", "oxc"),
         ("sonarjs", "duplicates-in-character-class") => ("duplicates-in-character-class", "oxc"),

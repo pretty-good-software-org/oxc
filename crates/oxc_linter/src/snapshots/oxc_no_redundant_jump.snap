@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-redundant-jump): Remove this redundant jump.
+   ╭─[no_redundant_jump.tsx:1:26]
+ 1 │ function run() { work(); return; }
+   ·                          ───────
+   ╰────
+  help: Allow the function to reach its end naturally.
