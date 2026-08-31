@@ -401,6 +401,7 @@ pub use crate::rules::oxc::duplicates_in_character_class::DuplicatesInCharacterC
 pub use crate::rules::oxc::erasing_op::ErasingOp as OxcErasingOp;
 pub use crate::rules::oxc::generator_without_yield::GeneratorWithoutYield as OxcGeneratorWithoutYield;
 pub use crate::rules::oxc::in_operator_type_error::InOperatorTypeError as OxcInOperatorTypeError;
+pub use crate::rules::oxc::label_position::LabelPosition as OxcLabelPosition;
 pub use crate::rules::oxc::max_switch_cases::MaxSwitchCases as OxcMaxSwitchCases;
 pub use crate::rules::oxc::misrefactored_assign_op::MisrefactoredAssignOp as OxcMisrefactoredAssignOp;
 pub use crate::rules::oxc::missing_throw::MissingThrow as OxcMissingThrow;
@@ -1622,6 +1623,7 @@ pub enum RuleEnum {
     OxcErasingOp(OxcErasingOp),
     OxcGeneratorWithoutYield(OxcGeneratorWithoutYield),
     OxcInOperatorTypeError(OxcInOperatorTypeError),
+    OxcLabelPosition(OxcLabelPosition),
     OxcMaxSwitchCases(OxcMaxSwitchCases),
     OxcMisrefactoredAssignOp(OxcMisrefactoredAssignOp),
     OxcMissingThrow(OxcMissingThrow),
@@ -2639,7 +2641,8 @@ const OXC_DUPLICATES_IN_CHARACTER_CLASS_ID: usize = OXC_DOUBLE_COMPARISONS_ID + 
 const OXC_ERASING_OP_ID: usize = OXC_DUPLICATES_IN_CHARACTER_CLASS_ID + 1usize;
 const OXC_GENERATOR_WITHOUT_YIELD_ID: usize = OXC_ERASING_OP_ID + 1usize;
 const OXC_IN_OPERATOR_TYPE_ERROR_ID: usize = OXC_GENERATOR_WITHOUT_YIELD_ID + 1usize;
-const OXC_MAX_SWITCH_CASES_ID: usize = OXC_IN_OPERATOR_TYPE_ERROR_ID + 1usize;
+const OXC_LABEL_POSITION_ID: usize = OXC_IN_OPERATOR_TYPE_ERROR_ID + 1usize;
+const OXC_MAX_SWITCH_CASES_ID: usize = OXC_LABEL_POSITION_ID + 1usize;
 const OXC_MISREFACTORED_ASSIGN_OP_ID: usize = OXC_MAX_SWITCH_CASES_ID + 1usize;
 const OXC_MISSING_THROW_ID: usize = OXC_MISREFACTORED_ASSIGN_OP_ID + 1usize;
 const OXC_NO_ACCUMULATING_SPREAD_ID: usize = OXC_MISSING_THROW_ID + 1usize;
@@ -2909,7 +2912,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 923usize] = [
+static RULE_NAMES: [&str; 924usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3583,6 +3586,7 @@ static RULE_NAMES: [&str; 923usize] = [
     OxcErasingOp::NAME,
     OxcGeneratorWithoutYield::NAME,
     OxcInOperatorTypeError::NAME,
+    OxcLabelPosition::NAME,
     OxcMaxSwitchCases::NAME,
     OxcMisrefactoredAssignOp::NAME,
     OxcMissingThrow::NAME,
@@ -4626,6 +4630,7 @@ impl RuleEnum {
             Self::OxcErasingOp(_) => OXC_ERASING_OP_ID,
             Self::OxcGeneratorWithoutYield(_) => OXC_GENERATOR_WITHOUT_YIELD_ID,
             Self::OxcInOperatorTypeError(_) => OXC_IN_OPERATOR_TYPE_ERROR_ID,
+            Self::OxcLabelPosition(_) => OXC_LABEL_POSITION_ID,
             Self::OxcMaxSwitchCases(_) => OXC_MAX_SWITCH_CASES_ID,
             Self::OxcMisrefactoredAssignOp(_) => OXC_MISREFACTORED_ASSIGN_OP_ID,
             Self::OxcMissingThrow(_) => OXC_MISSING_THROW_ID,
@@ -5722,6 +5727,7 @@ impl RuleEnum {
             Self::OxcErasingOp(_) => OxcErasingOp::CATEGORY,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::CATEGORY,
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::CATEGORY,
+            Self::OxcLabelPosition(_) => OxcLabelPosition::CATEGORY,
             Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::CATEGORY,
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::CATEGORY,
             Self::OxcMissingThrow(_) => OxcMissingThrow::CATEGORY,
@@ -6782,6 +6788,7 @@ impl RuleEnum {
             Self::OxcErasingOp(_) => OxcErasingOp::FIX,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::FIX,
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::FIX,
+            Self::OxcLabelPosition(_) => OxcLabelPosition::FIX,
             Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::FIX,
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::FIX,
             Self::OxcMissingThrow(_) => OxcMissingThrow::FIX,
@@ -8046,6 +8053,7 @@ impl RuleEnum {
             Self::OxcErasingOp(_) => OxcErasingOp::documentation(),
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::documentation(),
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::documentation(),
+            Self::OxcLabelPosition(_) => OxcLabelPosition::documentation(),
             Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::documentation(),
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::documentation(),
             Self::OxcMissingThrow(_) => OxcMissingThrow::documentation(),
@@ -10324,6 +10332,8 @@ impl RuleEnum {
                 .or_else(|| OxcGeneratorWithoutYield::schema(generator)),
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::config_schema(generator)
                 .or_else(|| OxcInOperatorTypeError::schema(generator)),
+            Self::OxcLabelPosition(_) => OxcLabelPosition::config_schema(generator)
+                .or_else(|| OxcLabelPosition::schema(generator)),
             Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::config_schema(generator)
                 .or_else(|| OxcMaxSwitchCases::schema(generator)),
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::config_schema(generator)
@@ -11683,6 +11693,7 @@ impl RuleEnum {
             Self::OxcErasingOp(_) => "oxc",
             Self::OxcGeneratorWithoutYield(_) => "oxc",
             Self::OxcInOperatorTypeError(_) => "oxc",
+            Self::OxcLabelPosition(_) => "oxc",
             Self::OxcMaxSwitchCases(_) => "oxc",
             Self::OxcMisrefactoredAssignOp(_) => "oxc",
             Self::OxcMissingThrow(_) => "oxc",
@@ -13753,6 +13764,7 @@ impl RuleEnum {
             Self::OxcErasingOp(rule) => rule.run(node, ctx),
             Self::OxcGeneratorWithoutYield(rule) => rule.run(node, ctx),
             Self::OxcInOperatorTypeError(rule) => rule.run(node, ctx),
+            Self::OxcLabelPosition(rule) => rule.run(node, ctx),
             Self::OxcMaxSwitchCases(rule) => rule.run(node, ctx),
             Self::OxcMisrefactoredAssignOp(rule) => rule.run(node, ctx),
             Self::OxcMissingThrow(rule) => rule.run(node, ctx),
@@ -14693,6 +14705,7 @@ impl RuleEnum {
             Self::OxcErasingOp(rule) => rule.run_once(ctx),
             Self::OxcGeneratorWithoutYield(rule) => rule.run_once(ctx),
             Self::OxcInOperatorTypeError(rule) => rule.run_once(ctx),
+            Self::OxcLabelPosition(rule) => rule.run_once(ctx),
             Self::OxcMaxSwitchCases(rule) => rule.run_once(ctx),
             Self::OxcMisrefactoredAssignOp(rule) => rule.run_once(ctx),
             Self::OxcMissingThrow(rule) => rule.run_once(ctx),
@@ -15740,6 +15753,7 @@ impl RuleEnum {
             Self::OxcErasingOp(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcGeneratorWithoutYield(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcInOperatorTypeError(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcLabelPosition(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcMaxSwitchCases(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcMisrefactoredAssignOp(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcMissingThrow(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16693,6 +16707,7 @@ impl RuleEnum {
             Self::OxcErasingOp(rule) => rule.should_run(ctx),
             Self::OxcGeneratorWithoutYield(rule) => rule.should_run(ctx),
             Self::OxcInOperatorTypeError(rule) => rule.should_run(ctx),
+            Self::OxcLabelPosition(rule) => rule.should_run(ctx),
             Self::OxcMaxSwitchCases(rule) => rule.should_run(ctx),
             Self::OxcMisrefactoredAssignOp(rule) => rule.should_run(ctx),
             Self::OxcMissingThrow(rule) => rule.should_run(ctx),
@@ -17944,6 +17959,7 @@ impl RuleEnum {
             Self::OxcErasingOp(_) => OxcErasingOp::IS_TSGOLINT_RULE,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::IS_TSGOLINT_RULE,
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::IS_TSGOLINT_RULE,
+            Self::OxcLabelPosition(_) => OxcLabelPosition::IS_TSGOLINT_RULE,
             Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::IS_TSGOLINT_RULE,
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::IS_TSGOLINT_RULE,
             Self::OxcMissingThrow(_) => OxcMissingThrow::IS_TSGOLINT_RULE,
@@ -19095,6 +19111,7 @@ impl RuleEnum {
             Self::OxcErasingOp(_) => OxcErasingOp::VERSION,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::VERSION,
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::VERSION,
+            Self::OxcLabelPosition(_) => OxcLabelPosition::VERSION,
             Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::VERSION,
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::VERSION,
             Self::OxcMissingThrow(_) => OxcMissingThrow::VERSION,
@@ -20233,6 +20250,7 @@ impl RuleEnum {
             Self::OxcErasingOp(_) => OxcErasingOp::HAS_CONFIG,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::HAS_CONFIG,
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::HAS_CONFIG,
+            Self::OxcLabelPosition(_) => OxcLabelPosition::HAS_CONFIG,
             Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::HAS_CONFIG,
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::HAS_CONFIG,
             Self::OxcMissingThrow(_) => OxcMissingThrow::HAS_CONFIG,
@@ -21302,6 +21320,7 @@ impl RuleEnum {
             Self::OxcErasingOp(_) => OxcErasingOp::INFO,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::INFO,
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::INFO,
+            Self::OxcLabelPosition(_) => OxcLabelPosition::INFO,
             Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::INFO,
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::INFO,
             Self::OxcMissingThrow(_) => OxcMissingThrow::INFO,
@@ -22246,6 +22265,7 @@ impl RuleEnum {
             Self::OxcErasingOp(rule) => rule.types_info(),
             Self::OxcGeneratorWithoutYield(rule) => rule.types_info(),
             Self::OxcInOperatorTypeError(rule) => rule.types_info(),
+            Self::OxcLabelPosition(rule) => rule.types_info(),
             Self::OxcMaxSwitchCases(rule) => rule.types_info(),
             Self::OxcMisrefactoredAssignOp(rule) => rule.types_info(),
             Self::OxcMissingThrow(rule) => rule.types_info(),
@@ -23173,6 +23193,7 @@ impl RuleEnum {
             Self::OxcErasingOp(rule) => rule.run_info(),
             Self::OxcGeneratorWithoutYield(rule) => rule.run_info(),
             Self::OxcInOperatorTypeError(rule) => rule.run_info(),
+            Self::OxcLabelPosition(rule) => rule.run_info(),
             Self::OxcMaxSwitchCases(rule) => rule.run_info(),
             Self::OxcMisrefactoredAssignOp(rule) => rule.run_info(),
             Self::OxcMissingThrow(rule) => rule.run_info(),
@@ -24226,6 +24247,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcErasingOp(OxcErasingOp::default()),
         RuleEnum::OxcGeneratorWithoutYield(OxcGeneratorWithoutYield::default()),
         RuleEnum::OxcInOperatorTypeError(OxcInOperatorTypeError::default()),
+        RuleEnum::OxcLabelPosition(OxcLabelPosition::default()),
         RuleEnum::OxcMaxSwitchCases(OxcMaxSwitchCases::default()),
         RuleEnum::OxcMisrefactoredAssignOp(OxcMisrefactoredAssignOp::default()),
         RuleEnum::OxcMissingThrow(OxcMissingThrow::default()),

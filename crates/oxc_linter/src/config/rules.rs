@@ -288,6 +288,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "no-undefined-argument") => ("no-undefined-argument", "oxc"),
         ("sonarjs", "fixme-tag" | "todo-tag") => ("no-warning-comments", "eslint"),
         ("sonarjs", "in-operator-type-error") => ("in-operator-type-error", "oxc"),
+        ("sonarjs", "label-position") => ("label-position", "oxc"),
         ("sonarjs", "no-identical-conditions") => ("no-identical-conditions", "oxc"),
         ("sonarjs", "no-identical-expressions") => ("no-identical-expressions", "oxc"),
         ("sonarjs", "bitwise-operators") => ("no-bitwise", "eslint"),
