@@ -457,6 +457,7 @@ pub use crate::rules::oxc::no_unknown_parameters::NoUnknownParameters as OxcNoUn
 pub use crate::rules::oxc::no_unknown_returns::NoUnknownReturns as OxcNoUnknownReturns;
 pub use crate::rules::oxc::no_unknown_type_aliases::NoUnknownTypeAliases as OxcNoUnknownTypeAliases;
 pub use crate::rules::oxc::no_unsafe_dictionary_type::NoUnsafeDictionaryType as OxcNoUnsafeDictionaryType;
+pub use crate::rules::oxc::no_unsafe_unzip::NoUnsafeUnzip as OxcNoUnsafeUnzip;
 pub use crate::rules::oxc::no_unverified_certificate::NoUnverifiedCertificate as OxcNoUnverifiedCertificate;
 pub use crate::rules::oxc::no_unverified_hostname::NoUnverifiedHostname as OxcNoUnverifiedHostname;
 pub use crate::rules::oxc::no_weak_cipher::NoWeakCipher as OxcNoWeakCipher;
@@ -1688,6 +1689,7 @@ pub enum RuleEnum {
     OxcNoUnknownReturns(OxcNoUnknownReturns),
     OxcNoUnknownTypeAliases(OxcNoUnknownTypeAliases),
     OxcNoUnsafeDictionaryType(OxcNoUnsafeDictionaryType),
+    OxcNoUnsafeUnzip(OxcNoUnsafeUnzip),
     OxcNoUnverifiedCertificate(OxcNoUnverifiedCertificate),
     OxcNoUnverifiedHostname(OxcNoUnverifiedHostname),
     OxcNoWeakCipher(OxcNoWeakCipher),
@@ -2715,7 +2717,8 @@ const OXC_NO_UNKNOWN_PARAMETERS_ID: usize = OXC_NO_UNDEFINED_ARGUMENT_ID + 1usiz
 const OXC_NO_UNKNOWN_RETURNS_ID: usize = OXC_NO_UNKNOWN_PARAMETERS_ID + 1usize;
 const OXC_NO_UNKNOWN_TYPE_ALIASES_ID: usize = OXC_NO_UNKNOWN_RETURNS_ID + 1usize;
 const OXC_NO_UNSAFE_DICTIONARY_TYPE_ID: usize = OXC_NO_UNKNOWN_TYPE_ALIASES_ID + 1usize;
-const OXC_NO_UNVERIFIED_CERTIFICATE_ID: usize = OXC_NO_UNSAFE_DICTIONARY_TYPE_ID + 1usize;
+const OXC_NO_UNSAFE_UNZIP_ID: usize = OXC_NO_UNSAFE_DICTIONARY_TYPE_ID + 1usize;
+const OXC_NO_UNVERIFIED_CERTIFICATE_ID: usize = OXC_NO_UNSAFE_UNZIP_ID + 1usize;
 const OXC_NO_UNVERIFIED_HOSTNAME_ID: usize = OXC_NO_UNVERIFIED_CERTIFICATE_ID + 1usize;
 const OXC_NO_WEAK_CIPHER_ID: usize = OXC_NO_UNVERIFIED_HOSTNAME_ID + 1usize;
 const OXC_NO_WEAK_SSL_ID: usize = OXC_NO_WEAK_CIPHER_ID + 1usize;
@@ -2938,7 +2941,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 933usize] = [
+static RULE_NAMES: [&str; 934usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3668,6 +3671,7 @@ static RULE_NAMES: [&str; 933usize] = [
     OxcNoUnknownReturns::NAME,
     OxcNoUnknownTypeAliases::NAME,
     OxcNoUnsafeDictionaryType::NAME,
+    OxcNoUnsafeUnzip::NAME,
     OxcNoUnverifiedCertificate::NAME,
     OxcNoUnverifiedHostname::NAME,
     OxcNoWeakCipher::NAME,
@@ -4721,6 +4725,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OXC_NO_UNKNOWN_RETURNS_ID,
             Self::OxcNoUnknownTypeAliases(_) => OXC_NO_UNKNOWN_TYPE_ALIASES_ID,
             Self::OxcNoUnsafeDictionaryType(_) => OXC_NO_UNSAFE_DICTIONARY_TYPE_ID,
+            Self::OxcNoUnsafeUnzip(_) => OXC_NO_UNSAFE_UNZIP_ID,
             Self::OxcNoUnverifiedCertificate(_) => OXC_NO_UNVERIFIED_CERTIFICATE_ID,
             Self::OxcNoUnverifiedHostname(_) => OXC_NO_UNVERIFIED_HOSTNAME_ID,
             Self::OxcNoWeakCipher(_) => OXC_NO_WEAK_CIPHER_ID,
@@ -5829,6 +5834,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::CATEGORY,
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::CATEGORY,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::CATEGORY,
+            Self::OxcNoUnsafeUnzip(_) => OxcNoUnsafeUnzip::CATEGORY,
             Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::CATEGORY,
             Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::CATEGORY,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::CATEGORY,
@@ -6897,6 +6903,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::FIX,
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::FIX,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::FIX,
+            Self::OxcNoUnsafeUnzip(_) => OxcNoUnsafeUnzip::FIX,
             Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::FIX,
             Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::FIX,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::FIX,
@@ -8175,6 +8182,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::documentation(),
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::documentation(),
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::documentation(),
+            Self::OxcNoUnsafeUnzip(_) => OxcNoUnsafeUnzip::documentation(),
             Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::documentation(),
             Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::documentation(),
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::documentation(),
@@ -10549,6 +10557,8 @@ impl RuleEnum {
                 OxcNoUnsafeDictionaryType::config_schema(generator)
                     .or_else(|| OxcNoUnsafeDictionaryType::schema(generator))
             }
+            Self::OxcNoUnsafeUnzip(_) => OxcNoUnsafeUnzip::config_schema(generator)
+                .or_else(|| OxcNoUnsafeUnzip::schema(generator)),
             Self::OxcNoUnverifiedCertificate(_) => {
                 OxcNoUnverifiedCertificate::config_schema(generator)
                     .or_else(|| OxcNoUnverifiedCertificate::schema(generator))
@@ -11850,6 +11860,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => "oxc",
             Self::OxcNoUnknownTypeAliases(_) => "oxc",
             Self::OxcNoUnsafeDictionaryType(_) => "oxc",
+            Self::OxcNoUnsafeUnzip(_) => "oxc",
             Self::OxcNoUnverifiedCertificate(_) => "oxc",
             Self::OxcNoUnverifiedHostname(_) => "oxc",
             Self::OxcNoWeakCipher(_) => "oxc",
@@ -13930,6 +13941,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(rule) => rule.run(node, ctx),
             Self::OxcNoUnknownTypeAliases(rule) => rule.run(node, ctx),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.run(node, ctx),
+            Self::OxcNoUnsafeUnzip(rule) => rule.run(node, ctx),
             Self::OxcNoUnverifiedCertificate(rule) => rule.run(node, ctx),
             Self::OxcNoUnverifiedHostname(rule) => rule.run(node, ctx),
             Self::OxcNoWeakCipher(rule) => rule.run(node, ctx),
@@ -14880,6 +14892,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(rule) => rule.run_once(ctx),
             Self::OxcNoUnknownTypeAliases(rule) => rule.run_once(ctx),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.run_once(ctx),
+            Self::OxcNoUnsafeUnzip(rule) => rule.run_once(ctx),
             Self::OxcNoUnverifiedCertificate(rule) => rule.run_once(ctx),
             Self::OxcNoUnverifiedHostname(rule) => rule.run_once(ctx),
             Self::OxcNoWeakCipher(rule) => rule.run_once(ctx),
@@ -15937,6 +15950,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoUnknownTypeAliases(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoUnsafeUnzip(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoUnverifiedCertificate(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoUnverifiedHostname(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoWeakCipher(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16900,6 +16914,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(rule) => rule.should_run(ctx),
             Self::OxcNoUnknownTypeAliases(rule) => rule.should_run(ctx),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.should_run(ctx),
+            Self::OxcNoUnsafeUnzip(rule) => rule.should_run(ctx),
             Self::OxcNoUnverifiedCertificate(rule) => rule.should_run(ctx),
             Self::OxcNoUnverifiedHostname(rule) => rule.should_run(ctx),
             Self::OxcNoWeakCipher(rule) => rule.should_run(ctx),
@@ -18165,6 +18180,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::IS_TSGOLINT_RULE,
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::IS_TSGOLINT_RULE,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::IS_TSGOLINT_RULE,
+            Self::OxcNoUnsafeUnzip(_) => OxcNoUnsafeUnzip::IS_TSGOLINT_RULE,
             Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::IS_TSGOLINT_RULE,
             Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::IS_TSGOLINT_RULE,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::IS_TSGOLINT_RULE,
@@ -19330,6 +19346,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::VERSION,
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::VERSION,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::VERSION,
+            Self::OxcNoUnsafeUnzip(_) => OxcNoUnsafeUnzip::VERSION,
             Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::VERSION,
             Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::VERSION,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::VERSION,
@@ -20478,6 +20495,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::HAS_CONFIG,
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::HAS_CONFIG,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::HAS_CONFIG,
+            Self::OxcNoUnsafeUnzip(_) => OxcNoUnsafeUnzip::HAS_CONFIG,
             Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::HAS_CONFIG,
             Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::HAS_CONFIG,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::HAS_CONFIG,
@@ -21555,6 +21573,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::INFO,
             Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::INFO,
             Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::INFO,
+            Self::OxcNoUnsafeUnzip(_) => OxcNoUnsafeUnzip::INFO,
             Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::INFO,
             Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::INFO,
             Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::INFO,
@@ -22509,6 +22528,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(rule) => rule.types_info(),
             Self::OxcNoUnknownTypeAliases(rule) => rule.types_info(),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.types_info(),
+            Self::OxcNoUnsafeUnzip(rule) => rule.types_info(),
             Self::OxcNoUnverifiedCertificate(rule) => rule.types_info(),
             Self::OxcNoUnverifiedHostname(rule) => rule.types_info(),
             Self::OxcNoWeakCipher(rule) => rule.types_info(),
@@ -23446,6 +23466,7 @@ impl RuleEnum {
             Self::OxcNoUnknownReturns(rule) => rule.run_info(),
             Self::OxcNoUnknownTypeAliases(rule) => rule.run_info(),
             Self::OxcNoUnsafeDictionaryType(rule) => rule.run_info(),
+            Self::OxcNoUnsafeUnzip(rule) => rule.run_info(),
             Self::OxcNoUnverifiedCertificate(rule) => rule.run_info(),
             Self::OxcNoUnverifiedHostname(rule) => rule.run_info(),
             Self::OxcNoWeakCipher(rule) => rule.run_info(),
@@ -24509,6 +24530,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoUnknownReturns(OxcNoUnknownReturns::default()),
         RuleEnum::OxcNoUnknownTypeAliases(OxcNoUnknownTypeAliases::default()),
         RuleEnum::OxcNoUnsafeDictionaryType(OxcNoUnsafeDictionaryType::default()),
+        RuleEnum::OxcNoUnsafeUnzip(OxcNoUnsafeUnzip::default()),
         RuleEnum::OxcNoUnverifiedCertificate(OxcNoUnverifiedCertificate::default()),
         RuleEnum::OxcNoUnverifiedHostname(OxcNoUnverifiedHostname::default()),
         RuleEnum::OxcNoWeakCipher(OxcNoWeakCipher::default()),
