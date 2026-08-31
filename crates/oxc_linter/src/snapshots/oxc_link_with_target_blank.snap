@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(link-with-target-blank): Make sure not using `noopener` is safe here.
+   ╭─[link_with_target_blank.tsx:1:1]
+ 1 │ window.open('https://example.com', '_blank')
+   · ───────────
+   ╰────
+  help: Include `noopener` in the window features argument.

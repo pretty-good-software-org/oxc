@@ -761,6 +761,7 @@ pub(crate) mod oxc {
     pub mod generator_without_yield;
     pub mod in_operator_type_error;
     pub mod label_position;
+    pub mod link_with_target_blank;
     pub mod max_switch_cases;
     pub mod misrefactored_assign_op;
     pub mod missing_throw;
