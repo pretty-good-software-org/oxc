@@ -795,6 +795,7 @@ pub(crate) mod oxc {
     pub mod no_insecure_cookie;
     pub mod no_inverted_boolean_check;
     pub mod no_known_value_widening;
+    pub mod no_literal_call;
     pub mod no_map_spread;
     pub mod no_module_mocking;
     pub mod no_nested_assignment;

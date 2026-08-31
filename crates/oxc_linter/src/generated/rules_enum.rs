@@ -436,6 +436,7 @@ pub use crate::rules::oxc::no_ignored_exceptions::NoIgnoredExceptions as OxcNoIg
 pub use crate::rules::oxc::no_insecure_cookie::NoInsecureCookie as OxcNoInsecureCookie;
 pub use crate::rules::oxc::no_inverted_boolean_check::NoInvertedBooleanCheck as OxcNoInvertedBooleanCheck;
 pub use crate::rules::oxc::no_known_value_widening::NoKnownValueWidening as OxcNoKnownValueWidening;
+pub use crate::rules::oxc::no_literal_call::NoLiteralCall as OxcNoLiteralCall;
 pub use crate::rules::oxc::no_map_spread::NoMapSpread as OxcNoMapSpread;
 pub use crate::rules::oxc::no_module_mocking::NoModuleMocking as OxcNoModuleMocking;
 pub use crate::rules::oxc::no_nested_assignment::NoNestedAssignment as OxcNoNestedAssignment;
@@ -1668,6 +1669,7 @@ pub enum RuleEnum {
     OxcNoInsecureCookie(OxcNoInsecureCookie),
     OxcNoInvertedBooleanCheck(OxcNoInvertedBooleanCheck),
     OxcNoKnownValueWidening(OxcNoKnownValueWidening),
+    OxcNoLiteralCall(OxcNoLiteralCall),
     OxcNoMapSpread(OxcNoMapSpread),
     OxcNoModuleMocking(OxcNoModuleMocking),
     OxcNoNestedAssignment(OxcNoNestedAssignment),
@@ -2696,7 +2698,8 @@ const OXC_NO_IGNORED_EXCEPTIONS_ID: usize = OXC_NO_IDENTICAL_EXPRESSIONS_ID + 1u
 const OXC_NO_INSECURE_COOKIE_ID: usize = OXC_NO_IGNORED_EXCEPTIONS_ID + 1usize;
 const OXC_NO_INVERTED_BOOLEAN_CHECK_ID: usize = OXC_NO_INSECURE_COOKIE_ID + 1usize;
 const OXC_NO_KNOWN_VALUE_WIDENING_ID: usize = OXC_NO_INVERTED_BOOLEAN_CHECK_ID + 1usize;
-const OXC_NO_MAP_SPREAD_ID: usize = OXC_NO_KNOWN_VALUE_WIDENING_ID + 1usize;
+const OXC_NO_LITERAL_CALL_ID: usize = OXC_NO_KNOWN_VALUE_WIDENING_ID + 1usize;
+const OXC_NO_MAP_SPREAD_ID: usize = OXC_NO_LITERAL_CALL_ID + 1usize;
 const OXC_NO_MODULE_MOCKING_ID: usize = OXC_NO_MAP_SPREAD_ID + 1usize;
 const OXC_NO_NESTED_ASSIGNMENT_ID: usize = OXC_NO_MODULE_MOCKING_ID + 1usize;
 const OXC_NO_NESTED_FUNCTIONS_ID: usize = OXC_NO_NESTED_ASSIGNMENT_ID + 1usize;
@@ -2941,7 +2944,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 934usize] = [
+static RULE_NAMES: [&str; 935usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3650,6 +3653,7 @@ static RULE_NAMES: [&str; 934usize] = [
     OxcNoInsecureCookie::NAME,
     OxcNoInvertedBooleanCheck::NAME,
     OxcNoKnownValueWidening::NAME,
+    OxcNoLiteralCall::NAME,
     OxcNoMapSpread::NAME,
     OxcNoModuleMocking::NAME,
     OxcNoNestedAssignment::NAME,
@@ -4704,6 +4708,7 @@ impl RuleEnum {
             Self::OxcNoInsecureCookie(_) => OXC_NO_INSECURE_COOKIE_ID,
             Self::OxcNoInvertedBooleanCheck(_) => OXC_NO_INVERTED_BOOLEAN_CHECK_ID,
             Self::OxcNoKnownValueWidening(_) => OXC_NO_KNOWN_VALUE_WIDENING_ID,
+            Self::OxcNoLiteralCall(_) => OXC_NO_LITERAL_CALL_ID,
             Self::OxcNoMapSpread(_) => OXC_NO_MAP_SPREAD_ID,
             Self::OxcNoModuleMocking(_) => OXC_NO_MODULE_MOCKING_ID,
             Self::OxcNoNestedAssignment(_) => OXC_NO_NESTED_ASSIGNMENT_ID,
@@ -5813,6 +5818,7 @@ impl RuleEnum {
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::CATEGORY,
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::CATEGORY,
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::CATEGORY,
+            Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::CATEGORY,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::CATEGORY,
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::CATEGORY,
             Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::CATEGORY,
@@ -6882,6 +6888,7 @@ impl RuleEnum {
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::FIX,
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::FIX,
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::FIX,
+            Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::FIX,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::FIX,
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::FIX,
             Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::FIX,
@@ -8161,6 +8168,7 @@ impl RuleEnum {
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::documentation(),
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::documentation(),
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::documentation(),
+            Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::documentation(),
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::documentation(),
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::documentation(),
             Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::documentation(),
@@ -10507,6 +10515,8 @@ impl RuleEnum {
             }
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::config_schema(generator)
                 .or_else(|| OxcNoKnownValueWidening::schema(generator)),
+            Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::config_schema(generator)
+                .or_else(|| OxcNoLiteralCall::schema(generator)),
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::config_schema(generator)
                 .or_else(|| OxcNoMapSpread::schema(generator)),
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::config_schema(generator)
@@ -11839,6 +11849,7 @@ impl RuleEnum {
             Self::OxcNoInsecureCookie(_) => "oxc",
             Self::OxcNoInvertedBooleanCheck(_) => "oxc",
             Self::OxcNoKnownValueWidening(_) => "oxc",
+            Self::OxcNoLiteralCall(_) => "oxc",
             Self::OxcNoMapSpread(_) => "oxc",
             Self::OxcNoModuleMocking(_) => "oxc",
             Self::OxcNoNestedAssignment(_) => "oxc",
@@ -13920,6 +13931,7 @@ impl RuleEnum {
             Self::OxcNoInsecureCookie(rule) => rule.run(node, ctx),
             Self::OxcNoInvertedBooleanCheck(rule) => rule.run(node, ctx),
             Self::OxcNoKnownValueWidening(rule) => rule.run(node, ctx),
+            Self::OxcNoLiteralCall(rule) => rule.run(node, ctx),
             Self::OxcNoMapSpread(rule) => rule.run(node, ctx),
             Self::OxcNoModuleMocking(rule) => rule.run(node, ctx),
             Self::OxcNoNestedAssignment(rule) => rule.run(node, ctx),
@@ -14871,6 +14883,7 @@ impl RuleEnum {
             Self::OxcNoInsecureCookie(rule) => rule.run_once(ctx),
             Self::OxcNoInvertedBooleanCheck(rule) => rule.run_once(ctx),
             Self::OxcNoKnownValueWidening(rule) => rule.run_once(ctx),
+            Self::OxcNoLiteralCall(rule) => rule.run_once(ctx),
             Self::OxcNoMapSpread(rule) => rule.run_once(ctx),
             Self::OxcNoModuleMocking(rule) => rule.run_once(ctx),
             Self::OxcNoNestedAssignment(rule) => rule.run_once(ctx),
@@ -15929,6 +15942,7 @@ impl RuleEnum {
             Self::OxcNoInsecureCookie(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoInvertedBooleanCheck(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoKnownValueWidening(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoLiteralCall(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoMapSpread(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoModuleMocking(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoNestedAssignment(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16893,6 +16907,7 @@ impl RuleEnum {
             Self::OxcNoInsecureCookie(rule) => rule.should_run(ctx),
             Self::OxcNoInvertedBooleanCheck(rule) => rule.should_run(ctx),
             Self::OxcNoKnownValueWidening(rule) => rule.should_run(ctx),
+            Self::OxcNoLiteralCall(rule) => rule.should_run(ctx),
             Self::OxcNoMapSpread(rule) => rule.should_run(ctx),
             Self::OxcNoModuleMocking(rule) => rule.should_run(ctx),
             Self::OxcNoNestedAssignment(rule) => rule.should_run(ctx),
@@ -18159,6 +18174,7 @@ impl RuleEnum {
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::IS_TSGOLINT_RULE,
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::IS_TSGOLINT_RULE,
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::IS_TSGOLINT_RULE,
+            Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::IS_TSGOLINT_RULE,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::IS_TSGOLINT_RULE,
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::IS_TSGOLINT_RULE,
             Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::IS_TSGOLINT_RULE,
@@ -19325,6 +19341,7 @@ impl RuleEnum {
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::VERSION,
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::VERSION,
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::VERSION,
+            Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::VERSION,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::VERSION,
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::VERSION,
             Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::VERSION,
@@ -20474,6 +20491,7 @@ impl RuleEnum {
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::HAS_CONFIG,
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::HAS_CONFIG,
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::HAS_CONFIG,
+            Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::HAS_CONFIG,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::HAS_CONFIG,
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::HAS_CONFIG,
             Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::HAS_CONFIG,
@@ -21552,6 +21570,7 @@ impl RuleEnum {
             Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::INFO,
             Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::INFO,
             Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::INFO,
+            Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::INFO,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::INFO,
             Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::INFO,
             Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::INFO,
@@ -22507,6 +22526,7 @@ impl RuleEnum {
             Self::OxcNoInsecureCookie(rule) => rule.types_info(),
             Self::OxcNoInvertedBooleanCheck(rule) => rule.types_info(),
             Self::OxcNoKnownValueWidening(rule) => rule.types_info(),
+            Self::OxcNoLiteralCall(rule) => rule.types_info(),
             Self::OxcNoMapSpread(rule) => rule.types_info(),
             Self::OxcNoModuleMocking(rule) => rule.types_info(),
             Self::OxcNoNestedAssignment(rule) => rule.types_info(),
@@ -23445,6 +23465,7 @@ impl RuleEnum {
             Self::OxcNoInsecureCookie(rule) => rule.run_info(),
             Self::OxcNoInvertedBooleanCheck(rule) => rule.run_info(),
             Self::OxcNoKnownValueWidening(rule) => rule.run_info(),
+            Self::OxcNoLiteralCall(rule) => rule.run_info(),
             Self::OxcNoMapSpread(rule) => rule.run_info(),
             Self::OxcNoModuleMocking(rule) => rule.run_info(),
             Self::OxcNoNestedAssignment(rule) => rule.run_info(),
@@ -24509,6 +24530,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcNoInsecureCookie(OxcNoInsecureCookie::default()),
         RuleEnum::OxcNoInvertedBooleanCheck(OxcNoInvertedBooleanCheck::default()),
         RuleEnum::OxcNoKnownValueWidening(OxcNoKnownValueWidening::default()),
+        RuleEnum::OxcNoLiteralCall(OxcNoLiteralCall::default()),
         RuleEnum::OxcNoMapSpread(OxcNoMapSpread::default()),
         RuleEnum::OxcNoModuleMocking(OxcNoModuleMocking::default()),
         RuleEnum::OxcNoNestedAssignment(OxcNoNestedAssignment::default()),
