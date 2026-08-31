@@ -281,6 +281,9 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "no-weak-cipher") => ("no-weak-cipher", "oxc"),
         ("sonarjs", "no-weak-ssl" | "weak-ssl") => ("no-weak-ssl", "oxc"),
         ("sonarjs", "single-character-alternation") => ("single-character-alternation", "oxc"),
+        ("sonarjs", "single-char-in-character-classes") => {
+            ("single-char-in-character-classes", "oxc")
+        }
         ("sonarjs", "no-unverified-certificate" | "unverified-certificate") => {
             ("no-unverified-certificate", "oxc")
         }

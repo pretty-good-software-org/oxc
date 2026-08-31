@@ -465,6 +465,7 @@ pub use crate::rules::oxc::no_widen_then_assert::NoWidenThenAssert as OxcNoWiden
 pub use crate::rules::oxc::number_arg_out_of_range::NumberArgOutOfRange as OxcNumberArgOutOfRange;
 pub use crate::rules::oxc::only_used_in_recursion::OnlyUsedInRecursion as OxcOnlyUsedInRecursion;
 pub use crate::rules::oxc::require_safety_comment_for_type_assertion::RequireSafetyCommentForTypeAssertion as OxcRequireSafetyCommentForTypeAssertion;
+pub use crate::rules::oxc::single_char_in_character_classes::SingleCharInCharacterClasses as OxcSingleCharInCharacterClasses;
 pub use crate::rules::oxc::single_character_alternation::SingleCharacterAlternation as OxcSingleCharacterAlternation;
 pub use crate::rules::oxc::uninvoked_array_callback::UninvokedArrayCallback as OxcUninvokedArrayCallback;
 pub use crate::rules::promise::always_return::AlwaysReturn as PromiseAlwaysReturn;
@@ -1692,6 +1693,7 @@ pub enum RuleEnum {
     OxcNumberArgOutOfRange(OxcNumberArgOutOfRange),
     OxcOnlyUsedInRecursion(OxcOnlyUsedInRecursion),
     OxcRequireSafetyCommentForTypeAssertion(OxcRequireSafetyCommentForTypeAssertion),
+    OxcSingleCharInCharacterClasses(OxcSingleCharInCharacterClasses),
     OxcSingleCharacterAlternation(OxcSingleCharacterAlternation),
     OxcUninvokedArrayCallback(OxcUninvokedArrayCallback),
     NextjsGoogleFontDisplay(NextjsGoogleFontDisplay),
@@ -2716,8 +2718,9 @@ const OXC_NUMBER_ARG_OUT_OF_RANGE_ID: usize = OXC_NO_WIDEN_THEN_ASSERT_ID + 1usi
 const OXC_ONLY_USED_IN_RECURSION_ID: usize = OXC_NUMBER_ARG_OUT_OF_RANGE_ID + 1usize;
 const OXC_REQUIRE_SAFETY_COMMENT_FOR_TYPE_ASSERTION_ID: usize =
     OXC_ONLY_USED_IN_RECURSION_ID + 1usize;
-const OXC_SINGLE_CHARACTER_ALTERNATION_ID: usize =
+const OXC_SINGLE_CHAR_IN_CHARACTER_CLASSES_ID: usize =
     OXC_REQUIRE_SAFETY_COMMENT_FOR_TYPE_ASSERTION_ID + 1usize;
+const OXC_SINGLE_CHARACTER_ALTERNATION_ID: usize = OXC_SINGLE_CHAR_IN_CHARACTER_CLASSES_ID + 1usize;
 const OXC_UNINVOKED_ARRAY_CALLBACK_ID: usize = OXC_SINGLE_CHARACTER_ALTERNATION_ID + 1usize;
 const NEXTJS_GOOGLE_FONT_DISPLAY_ID: usize = OXC_UNINVOKED_ARRAY_CALLBACK_ID + 1usize;
 const NEXTJS_GOOGLE_FONT_PRECONNECT_ID: usize = NEXTJS_GOOGLE_FONT_DISPLAY_ID + 1usize;
@@ -2927,7 +2930,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 929usize] = [
+static RULE_NAMES: [&str; 930usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3665,6 +3668,7 @@ static RULE_NAMES: [&str; 929usize] = [
     OxcNumberArgOutOfRange::NAME,
     OxcOnlyUsedInRecursion::NAME,
     OxcRequireSafetyCommentForTypeAssertion::NAME,
+    OxcSingleCharInCharacterClasses::NAME,
     OxcSingleCharacterAlternation::NAME,
     OxcUninvokedArrayCallback::NAME,
     NextjsGoogleFontDisplay::NAME,
@@ -4716,6 +4720,7 @@ impl RuleEnum {
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OXC_REQUIRE_SAFETY_COMMENT_FOR_TYPE_ASSERTION_ID
             }
+            Self::OxcSingleCharInCharacterClasses(_) => OXC_SINGLE_CHAR_IN_CHARACTER_CLASSES_ID,
             Self::OxcSingleCharacterAlternation(_) => OXC_SINGLE_CHARACTER_ALTERNATION_ID,
             Self::OxcUninvokedArrayCallback(_) => OXC_UNINVOKED_ARRAY_CALLBACK_ID,
             Self::NextjsGoogleFontDisplay(_) => NEXTJS_GOOGLE_FONT_DISPLAY_ID,
@@ -5820,6 +5825,7 @@ impl RuleEnum {
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::CATEGORY
             }
+            Self::OxcSingleCharInCharacterClasses(_) => OxcSingleCharInCharacterClasses::CATEGORY,
             Self::OxcSingleCharacterAlternation(_) => OxcSingleCharacterAlternation::CATEGORY,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::CATEGORY,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::CATEGORY,
@@ -6884,6 +6890,7 @@ impl RuleEnum {
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::FIX
             }
+            Self::OxcSingleCharInCharacterClasses(_) => OxcSingleCharInCharacterClasses::FIX,
             Self::OxcSingleCharacterAlternation(_) => OxcSingleCharacterAlternation::FIX,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::FIX,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::FIX,
@@ -8157,6 +8164,9 @@ impl RuleEnum {
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::documentation(),
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::documentation()
+            }
+            Self::OxcSingleCharInCharacterClasses(_) => {
+                OxcSingleCharInCharacterClasses::documentation()
             }
             Self::OxcSingleCharacterAlternation(_) => {
                 OxcSingleCharacterAlternation::documentation()
@@ -10537,6 +10547,10 @@ impl RuleEnum {
                 OxcRequireSafetyCommentForTypeAssertion::config_schema(generator)
                     .or_else(|| OxcRequireSafetyCommentForTypeAssertion::schema(generator))
             }
+            Self::OxcSingleCharInCharacterClasses(_) => {
+                OxcSingleCharInCharacterClasses::config_schema(generator)
+                    .or_else(|| OxcSingleCharInCharacterClasses::schema(generator))
+            }
             Self::OxcSingleCharacterAlternation(_) => {
                 OxcSingleCharacterAlternation::config_schema(generator)
                     .or_else(|| OxcSingleCharacterAlternation::schema(generator))
@@ -11815,6 +11829,7 @@ impl RuleEnum {
             Self::OxcNumberArgOutOfRange(_) => "oxc",
             Self::OxcOnlyUsedInRecursion(_) => "oxc",
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => "oxc",
+            Self::OxcSingleCharInCharacterClasses(_) => "oxc",
             Self::OxcSingleCharacterAlternation(_) => "oxc",
             Self::OxcUninvokedArrayCallback(_) => "oxc",
             Self::NextjsGoogleFontDisplay(_) => "nextjs",
@@ -13891,6 +13906,7 @@ impl RuleEnum {
             Self::OxcNumberArgOutOfRange(rule) => rule.run(node, ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run(node, ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.run(node, ctx),
+            Self::OxcSingleCharInCharacterClasses(rule) => rule.run(node, ctx),
             Self::OxcSingleCharacterAlternation(rule) => rule.run(node, ctx),
             Self::OxcUninvokedArrayCallback(rule) => rule.run(node, ctx),
             Self::NextjsGoogleFontDisplay(rule) => rule.run(node, ctx),
@@ -14837,6 +14853,7 @@ impl RuleEnum {
             Self::OxcNumberArgOutOfRange(rule) => rule.run_once(ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_once(ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.run_once(ctx),
+            Self::OxcSingleCharInCharacterClasses(rule) => rule.run_once(ctx),
             Self::OxcSingleCharacterAlternation(rule) => rule.run_once(ctx),
             Self::OxcUninvokedArrayCallback(rule) => rule.run_once(ctx),
             Self::NextjsGoogleFontDisplay(rule) => rule.run_once(ctx),
@@ -15892,6 +15909,7 @@ impl RuleEnum {
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => {
                 rule.run_on_jest_node(jest_node, ctx)
             }
+            Self::OxcSingleCharInCharacterClasses(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcSingleCharacterAlternation(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcUninvokedArrayCallback(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::NextjsGoogleFontDisplay(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16849,6 +16867,7 @@ impl RuleEnum {
             Self::OxcNumberArgOutOfRange(rule) => rule.should_run(ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.should_run(ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.should_run(ctx),
+            Self::OxcSingleCharInCharacterClasses(rule) => rule.should_run(ctx),
             Self::OxcSingleCharacterAlternation(rule) => rule.should_run(ctx),
             Self::OxcUninvokedArrayCallback(rule) => rule.should_run(ctx),
             Self::NextjsGoogleFontDisplay(rule) => rule.should_run(ctx),
@@ -18112,6 +18131,9 @@ impl RuleEnum {
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::IS_TSGOLINT_RULE
             }
+            Self::OxcSingleCharInCharacterClasses(_) => {
+                OxcSingleCharInCharacterClasses::IS_TSGOLINT_RULE
+            }
             Self::OxcSingleCharacterAlternation(_) => {
                 OxcSingleCharacterAlternation::IS_TSGOLINT_RULE
             }
@@ -19271,6 +19293,7 @@ impl RuleEnum {
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::VERSION
             }
+            Self::OxcSingleCharInCharacterClasses(_) => OxcSingleCharInCharacterClasses::VERSION,
             Self::OxcSingleCharacterAlternation(_) => OxcSingleCharacterAlternation::VERSION,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::VERSION,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::VERSION,
@@ -20415,6 +20438,7 @@ impl RuleEnum {
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::HAS_CONFIG
             }
+            Self::OxcSingleCharInCharacterClasses(_) => OxcSingleCharInCharacterClasses::HAS_CONFIG,
             Self::OxcSingleCharacterAlternation(_) => OxcSingleCharacterAlternation::HAS_CONFIG,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::HAS_CONFIG,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::HAS_CONFIG,
@@ -21488,6 +21512,7 @@ impl RuleEnum {
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::INFO
             }
+            Self::OxcSingleCharInCharacterClasses(_) => OxcSingleCharInCharacterClasses::INFO,
             Self::OxcSingleCharacterAlternation(_) => OxcSingleCharacterAlternation::INFO,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::INFO,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::INFO,
@@ -22436,6 +22461,7 @@ impl RuleEnum {
             Self::OxcNumberArgOutOfRange(rule) => rule.types_info(),
             Self::OxcOnlyUsedInRecursion(rule) => rule.types_info(),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.types_info(),
+            Self::OxcSingleCharInCharacterClasses(rule) => rule.types_info(),
             Self::OxcSingleCharacterAlternation(rule) => rule.types_info(),
             Self::OxcUninvokedArrayCallback(rule) => rule.types_info(),
             Self::NextjsGoogleFontDisplay(rule) => rule.types_info(),
@@ -23369,6 +23395,7 @@ impl RuleEnum {
             Self::OxcNumberArgOutOfRange(rule) => rule.run_info(),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_info(),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.run_info(),
+            Self::OxcSingleCharInCharacterClasses(rule) => rule.run_info(),
             Self::OxcSingleCharacterAlternation(rule) => rule.run_info(),
             Self::OxcUninvokedArrayCallback(rule) => rule.run_info(),
             Self::NextjsGoogleFontDisplay(rule) => rule.run_info(),
@@ -24430,6 +24457,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcRequireSafetyCommentForTypeAssertion(
             OxcRequireSafetyCommentForTypeAssertion::default(),
         ),
+        RuleEnum::OxcSingleCharInCharacterClasses(OxcSingleCharInCharacterClasses::default()),
         RuleEnum::OxcSingleCharacterAlternation(OxcSingleCharacterAlternation::default()),
         RuleEnum::OxcUninvokedArrayCallback(OxcUninvokedArrayCallback::default()),
         RuleEnum::NextjsGoogleFontDisplay(NextjsGoogleFontDisplay::default()),
