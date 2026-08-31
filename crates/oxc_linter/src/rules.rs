@@ -843,6 +843,7 @@ pub(crate) mod oxc {
     pub mod only_used_in_recursion;
     pub mod post_message;
     pub mod prefer_default_last;
+    pub mod prefer_single_boolean_return;
     pub mod prefer_while;
     pub mod production_debug;
     pub mod require_safety_comment_for_type_assertion;

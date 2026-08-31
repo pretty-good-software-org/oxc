@@ -484,6 +484,7 @@ pub use crate::rules::oxc::number_arg_out_of_range::NumberArgOutOfRange as OxcNu
 pub use crate::rules::oxc::only_used_in_recursion::OnlyUsedInRecursion as OxcOnlyUsedInRecursion;
 pub use crate::rules::oxc::post_message::PostMessage as OxcPostMessage;
 pub use crate::rules::oxc::prefer_default_last::PreferDefaultLast as OxcPreferDefaultLast;
+pub use crate::rules::oxc::prefer_single_boolean_return::PreferSingleBooleanReturn as OxcPreferSingleBooleanReturn;
 pub use crate::rules::oxc::prefer_while::PreferWhile as OxcPreferWhile;
 pub use crate::rules::oxc::production_debug::ProductionDebug as OxcProductionDebug;
 pub use crate::rules::oxc::require_safety_comment_for_type_assertion::RequireSafetyCommentForTypeAssertion as OxcRequireSafetyCommentForTypeAssertion;
@@ -1738,6 +1739,7 @@ pub enum RuleEnum {
     OxcOnlyUsedInRecursion(OxcOnlyUsedInRecursion),
     OxcPostMessage(OxcPostMessage),
     OxcPreferDefaultLast(OxcPreferDefaultLast),
+    OxcPreferSingleBooleanReturn(OxcPreferSingleBooleanReturn),
     OxcPreferWhile(OxcPreferWhile),
     OxcProductionDebug(OxcProductionDebug),
     OxcRequireSafetyCommentForTypeAssertion(OxcRequireSafetyCommentForTypeAssertion),
@@ -2788,7 +2790,8 @@ const OXC_NUMBER_ARG_OUT_OF_RANGE_ID: usize = OXC_NO_WIDEN_THEN_ASSERT_ID + 1usi
 const OXC_ONLY_USED_IN_RECURSION_ID: usize = OXC_NUMBER_ARG_OUT_OF_RANGE_ID + 1usize;
 const OXC_POST_MESSAGE_ID: usize = OXC_ONLY_USED_IN_RECURSION_ID + 1usize;
 const OXC_PREFER_DEFAULT_LAST_ID: usize = OXC_POST_MESSAGE_ID + 1usize;
-const OXC_PREFER_WHILE_ID: usize = OXC_PREFER_DEFAULT_LAST_ID + 1usize;
+const OXC_PREFER_SINGLE_BOOLEAN_RETURN_ID: usize = OXC_PREFER_DEFAULT_LAST_ID + 1usize;
+const OXC_PREFER_WHILE_ID: usize = OXC_PREFER_SINGLE_BOOLEAN_RETURN_ID + 1usize;
 const OXC_PRODUCTION_DEBUG_ID: usize = OXC_PREFER_WHILE_ID + 1usize;
 const OXC_REQUIRE_SAFETY_COMMENT_FOR_TYPE_ASSERTION_ID: usize = OXC_PRODUCTION_DEBUG_ID + 1usize;
 const OXC_SINGLE_CHAR_IN_CHARACTER_CLASSES_ID: usize =
@@ -3007,7 +3010,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 956usize] = [
+static RULE_NAMES: [&str; 957usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3764,6 +3767,7 @@ static RULE_NAMES: [&str; 956usize] = [
     OxcOnlyUsedInRecursion::NAME,
     OxcPostMessage::NAME,
     OxcPreferDefaultLast::NAME,
+    OxcPreferSingleBooleanReturn::NAME,
     OxcPreferWhile::NAME,
     OxcProductionDebug::NAME,
     OxcRequireSafetyCommentForTypeAssertion::NAME,
@@ -4840,6 +4844,7 @@ impl RuleEnum {
             Self::OxcOnlyUsedInRecursion(_) => OXC_ONLY_USED_IN_RECURSION_ID,
             Self::OxcPostMessage(_) => OXC_POST_MESSAGE_ID,
             Self::OxcPreferDefaultLast(_) => OXC_PREFER_DEFAULT_LAST_ID,
+            Self::OxcPreferSingleBooleanReturn(_) => OXC_PREFER_SINGLE_BOOLEAN_RETURN_ID,
             Self::OxcPreferWhile(_) => OXC_PREFER_WHILE_ID,
             Self::OxcProductionDebug(_) => OXC_PRODUCTION_DEBUG_ID,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
@@ -5971,6 +5976,7 @@ impl RuleEnum {
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::CATEGORY,
             Self::OxcPostMessage(_) => OxcPostMessage::CATEGORY,
             Self::OxcPreferDefaultLast(_) => OxcPreferDefaultLast::CATEGORY,
+            Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::CATEGORY,
             Self::OxcPreferWhile(_) => OxcPreferWhile::CATEGORY,
             Self::OxcProductionDebug(_) => OxcProductionDebug::CATEGORY,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
@@ -7062,6 +7068,7 @@ impl RuleEnum {
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::FIX,
             Self::OxcPostMessage(_) => OxcPostMessage::FIX,
             Self::OxcPreferDefaultLast(_) => OxcPreferDefaultLast::FIX,
+            Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::FIX,
             Self::OxcPreferWhile(_) => OxcPreferWhile::FIX,
             Self::OxcProductionDebug(_) => OxcProductionDebug::FIX,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
@@ -8363,6 +8370,7 @@ impl RuleEnum {
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::documentation(),
             Self::OxcPostMessage(_) => OxcPostMessage::documentation(),
             Self::OxcPreferDefaultLast(_) => OxcPreferDefaultLast::documentation(),
+            Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::documentation(),
             Self::OxcPreferWhile(_) => OxcPreferWhile::documentation(),
             Self::OxcProductionDebug(_) => OxcProductionDebug::documentation(),
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
@@ -10793,6 +10801,10 @@ impl RuleEnum {
                 .or_else(|| OxcPostMessage::schema(generator)),
             Self::OxcPreferDefaultLast(_) => OxcPreferDefaultLast::config_schema(generator)
                 .or_else(|| OxcPreferDefaultLast::schema(generator)),
+            Self::OxcPreferSingleBooleanReturn(_) => {
+                OxcPreferSingleBooleanReturn::config_schema(generator)
+                    .or_else(|| OxcPreferSingleBooleanReturn::schema(generator))
+            }
             Self::OxcPreferWhile(_) => OxcPreferWhile::config_schema(generator)
                 .or_else(|| OxcPreferWhile::schema(generator)),
             Self::OxcProductionDebug(_) => OxcProductionDebug::config_schema(generator)
@@ -12111,6 +12123,7 @@ impl RuleEnum {
             Self::OxcOnlyUsedInRecursion(_) => "oxc",
             Self::OxcPostMessage(_) => "oxc",
             Self::OxcPreferDefaultLast(_) => "oxc",
+            Self::OxcPreferSingleBooleanReturn(_) => "oxc",
             Self::OxcPreferWhile(_) => "oxc",
             Self::OxcProductionDebug(_) => "oxc",
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => "oxc",
@@ -14214,6 +14227,7 @@ impl RuleEnum {
             Self::OxcOnlyUsedInRecursion(rule) => rule.run(node, ctx),
             Self::OxcPostMessage(rule) => rule.run(node, ctx),
             Self::OxcPreferDefaultLast(rule) => rule.run(node, ctx),
+            Self::OxcPreferSingleBooleanReturn(rule) => rule.run(node, ctx),
             Self::OxcPreferWhile(rule) => rule.run(node, ctx),
             Self::OxcProductionDebug(rule) => rule.run(node, ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.run(node, ctx),
@@ -15187,6 +15201,7 @@ impl RuleEnum {
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_once(ctx),
             Self::OxcPostMessage(rule) => rule.run_once(ctx),
             Self::OxcPreferDefaultLast(rule) => rule.run_once(ctx),
+            Self::OxcPreferSingleBooleanReturn(rule) => rule.run_once(ctx),
             Self::OxcPreferWhile(rule) => rule.run_once(ctx),
             Self::OxcProductionDebug(rule) => rule.run_once(ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.run_once(ctx),
@@ -16267,6 +16282,7 @@ impl RuleEnum {
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcPostMessage(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcPreferDefaultLast(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcPreferSingleBooleanReturn(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcPreferWhile(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcProductionDebug(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => {
@@ -17253,6 +17269,7 @@ impl RuleEnum {
             Self::OxcOnlyUsedInRecursion(rule) => rule.should_run(ctx),
             Self::OxcPostMessage(rule) => rule.should_run(ctx),
             Self::OxcPreferDefaultLast(rule) => rule.should_run(ctx),
+            Self::OxcPreferSingleBooleanReturn(rule) => rule.should_run(ctx),
             Self::OxcPreferWhile(rule) => rule.should_run(ctx),
             Self::OxcProductionDebug(rule) => rule.should_run(ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.should_run(ctx),
@@ -18541,6 +18558,7 @@ impl RuleEnum {
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::IS_TSGOLINT_RULE,
             Self::OxcPostMessage(_) => OxcPostMessage::IS_TSGOLINT_RULE,
             Self::OxcPreferDefaultLast(_) => OxcPreferDefaultLast::IS_TSGOLINT_RULE,
+            Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::IS_TSGOLINT_RULE,
             Self::OxcPreferWhile(_) => OxcPreferWhile::IS_TSGOLINT_RULE,
             Self::OxcProductionDebug(_) => OxcProductionDebug::IS_TSGOLINT_RULE,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
@@ -19729,6 +19747,7 @@ impl RuleEnum {
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::VERSION,
             Self::OxcPostMessage(_) => OxcPostMessage::VERSION,
             Self::OxcPreferDefaultLast(_) => OxcPreferDefaultLast::VERSION,
+            Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::VERSION,
             Self::OxcPreferWhile(_) => OxcPreferWhile::VERSION,
             Self::OxcProductionDebug(_) => OxcProductionDebug::VERSION,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
@@ -20900,6 +20919,7 @@ impl RuleEnum {
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::HAS_CONFIG,
             Self::OxcPostMessage(_) => OxcPostMessage::HAS_CONFIG,
             Self::OxcPreferDefaultLast(_) => OxcPreferDefaultLast::HAS_CONFIG,
+            Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::HAS_CONFIG,
             Self::OxcPreferWhile(_) => OxcPreferWhile::HAS_CONFIG,
             Self::OxcProductionDebug(_) => OxcProductionDebug::HAS_CONFIG,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
@@ -22000,6 +22020,7 @@ impl RuleEnum {
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::INFO,
             Self::OxcPostMessage(_) => OxcPostMessage::INFO,
             Self::OxcPreferDefaultLast(_) => OxcPreferDefaultLast::INFO,
+            Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::INFO,
             Self::OxcPreferWhile(_) => OxcPreferWhile::INFO,
             Self::OxcProductionDebug(_) => OxcProductionDebug::INFO,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
@@ -22977,6 +22998,7 @@ impl RuleEnum {
             Self::OxcOnlyUsedInRecursion(rule) => rule.types_info(),
             Self::OxcPostMessage(rule) => rule.types_info(),
             Self::OxcPreferDefaultLast(rule) => rule.types_info(),
+            Self::OxcPreferSingleBooleanReturn(rule) => rule.types_info(),
             Self::OxcPreferWhile(rule) => rule.types_info(),
             Self::OxcProductionDebug(rule) => rule.types_info(),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.types_info(),
@@ -23937,6 +23959,7 @@ impl RuleEnum {
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_info(),
             Self::OxcPostMessage(rule) => rule.run_info(),
             Self::OxcPreferDefaultLast(rule) => rule.run_info(),
+            Self::OxcPreferSingleBooleanReturn(rule) => rule.run_info(),
             Self::OxcPreferWhile(rule) => rule.run_info(),
             Self::OxcProductionDebug(rule) => rule.run_info(),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.run_info(),
@@ -25023,6 +25046,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcOnlyUsedInRecursion(OxcOnlyUsedInRecursion::default()),
         RuleEnum::OxcPostMessage(OxcPostMessage::default()),
         RuleEnum::OxcPreferDefaultLast(OxcPreferDefaultLast::default()),
+        RuleEnum::OxcPreferSingleBooleanReturn(OxcPreferSingleBooleanReturn::default()),
         RuleEnum::OxcPreferWhile(OxcPreferWhile::default()),
         RuleEnum::OxcProductionDebug(OxcProductionDebug::default()),
         RuleEnum::OxcRequireSafetyCommentForTypeAssertion(

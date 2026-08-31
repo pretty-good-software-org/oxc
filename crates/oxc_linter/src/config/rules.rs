@@ -347,6 +347,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("pgs-oxlint-compat", "no-octal") => ("no-octal", "eslint"),
         ("sonarjs", "post-message") => ("post-message", "oxc"),
         ("sonarjs", "prefer-default-last") => ("prefer-default-last", "oxc"),
+        ("sonarjs", "prefer-single-boolean-return") => ("prefer-single-boolean-return", "oxc"),
         ("sonarjs", "prefer-while") => ("prefer-while", "oxc"),
         ("sonarjs", "production-debug") => ("production-debug", "oxc"),
         ("sonarjs", "no-array-delete") => ("no-array-delete", "typescript"),
