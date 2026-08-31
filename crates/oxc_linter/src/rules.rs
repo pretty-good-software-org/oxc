@@ -800,6 +800,7 @@ pub(crate) mod oxc {
     pub mod no_rest_spread_properties;
     pub mod no_runtime_typeof;
     pub mod no_shape_in_symbol_names;
+    pub mod no_small_switch;
     pub mod no_this_in_exported_function;
     pub mod no_undefined_argument;
     pub mod no_unknown_parameters;
