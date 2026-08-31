@@ -754,6 +754,7 @@ pub(crate) mod oxc {
     pub mod const_comparisons;
     pub mod constructor_for_side_effects;
     pub mod double_comparisons;
+    pub mod duplicates_in_character_class;
     pub mod erasing_op;
     pub mod misrefactored_assign_op;
     pub mod missing_throw;

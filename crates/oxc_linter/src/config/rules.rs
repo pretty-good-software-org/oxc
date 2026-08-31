@@ -266,6 +266,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "no-redundant-boolean") => ("no-redundant-boolean", "oxc"),
         ("sonarjs", "no-duplicated-branches") => ("no-duplicated-branches", "oxc"),
         ("sonarjs", "no-duplicate-in-composite") => ("no-duplicate-in-composite", "oxc"),
+        ("sonarjs", "duplicates-in-character-class") => ("duplicates-in-character-class", "oxc"),
         ("sonarjs", "no-hardcoded-passwords") => ("no-hardcoded-passwords", "oxc"),
         ("sonarjs", "no-hardcoded-secrets") => ("no-hardcoded-secrets", "oxc"),
         ("sonarjs", "insecure-cookie" | "no-insecure-cookie") => ("no-insecure-cookie", "oxc"),
