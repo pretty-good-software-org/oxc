@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(void-use): Remove this use of the `void` operator.
+   ╭─[void_use.tsx:1:1]
+ 1 │ void value
+   · ──────────
+   ╰────
+  help: Use the expression directly unless intentionally discarding its result.
