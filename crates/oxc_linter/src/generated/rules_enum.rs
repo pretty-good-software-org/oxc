@@ -393,6 +393,7 @@ pub use crate::rules::oxc::bad_min_max_func::BadMinMaxFunc as OxcBadMinMaxFunc;
 pub use crate::rules::oxc::bad_object_literal_comparison::BadObjectLiteralComparison as OxcBadObjectLiteralComparison;
 pub use crate::rules::oxc::bad_replace_all_arg::BadReplaceAllArg as OxcBadReplaceAllArg;
 pub use crate::rules::oxc::branches_sharing_code::BranchesSharingCode as OxcBranchesSharingCode;
+pub use crate::rules::oxc::class_name::ClassName as OxcClassName;
 pub use crate::rules::oxc::const_comparisons::ConstComparisons as OxcConstComparisons;
 pub use crate::rules::oxc::constructor_for_side_effects::ConstructorForSideEffects as OxcConstructorForSideEffects;
 pub use crate::rules::oxc::double_comparisons::DoubleComparisons as OxcDoubleComparisons;
@@ -1608,6 +1609,7 @@ pub enum RuleEnum {
     OxcBadObjectLiteralComparison(OxcBadObjectLiteralComparison),
     OxcBadReplaceAllArg(OxcBadReplaceAllArg),
     OxcBranchesSharingCode(OxcBranchesSharingCode),
+    OxcClassName(OxcClassName),
     OxcConstComparisons(OxcConstComparisons),
     OxcConstructorForSideEffects(OxcConstructorForSideEffects),
     OxcDoubleComparisons(OxcDoubleComparisons),
@@ -2619,7 +2621,8 @@ const OXC_BAD_MIN_MAX_FUNC_ID: usize = OXC_BAD_MATCH_ALL_ARG_ID + 1usize;
 const OXC_BAD_OBJECT_LITERAL_COMPARISON_ID: usize = OXC_BAD_MIN_MAX_FUNC_ID + 1usize;
 const OXC_BAD_REPLACE_ALL_ARG_ID: usize = OXC_BAD_OBJECT_LITERAL_COMPARISON_ID + 1usize;
 const OXC_BRANCHES_SHARING_CODE_ID: usize = OXC_BAD_REPLACE_ALL_ARG_ID + 1usize;
-const OXC_CONST_COMPARISONS_ID: usize = OXC_BRANCHES_SHARING_CODE_ID + 1usize;
+const OXC_CLASS_NAME_ID: usize = OXC_BRANCHES_SHARING_CODE_ID + 1usize;
+const OXC_CONST_COMPARISONS_ID: usize = OXC_CLASS_NAME_ID + 1usize;
 const OXC_CONSTRUCTOR_FOR_SIDE_EFFECTS_ID: usize = OXC_CONST_COMPARISONS_ID + 1usize;
 const OXC_DOUBLE_COMPARISONS_ID: usize = OXC_CONSTRUCTOR_FOR_SIDE_EFFECTS_ID + 1usize;
 const OXC_DUPLICATES_IN_CHARACTER_CLASS_ID: usize = OXC_DOUBLE_COMPARISONS_ID + 1usize;
@@ -2891,7 +2894,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 917usize] = [
+static RULE_NAMES: [&str; 918usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3557,6 +3560,7 @@ static RULE_NAMES: [&str; 917usize] = [
     OxcBadObjectLiteralComparison::NAME,
     OxcBadReplaceAllArg::NAME,
     OxcBranchesSharingCode::NAME,
+    OxcClassName::NAME,
     OxcConstComparisons::NAME,
     OxcConstructorForSideEffects::NAME,
     OxcDoubleComparisons::NAME,
@@ -4594,6 +4598,7 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(_) => OXC_BAD_OBJECT_LITERAL_COMPARISON_ID,
             Self::OxcBadReplaceAllArg(_) => OXC_BAD_REPLACE_ALL_ARG_ID,
             Self::OxcBranchesSharingCode(_) => OXC_BRANCHES_SHARING_CODE_ID,
+            Self::OxcClassName(_) => OXC_CLASS_NAME_ID,
             Self::OxcConstComparisons(_) => OXC_CONST_COMPARISONS_ID,
             Self::OxcConstructorForSideEffects(_) => OXC_CONSTRUCTOR_FOR_SIDE_EFFECTS_ID,
             Self::OxcDoubleComparisons(_) => OXC_DOUBLE_COMPARISONS_ID,
@@ -5684,6 +5689,7 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(_) => OxcBadObjectLiteralComparison::CATEGORY,
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::CATEGORY,
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::CATEGORY,
+            Self::OxcClassName(_) => OxcClassName::CATEGORY,
             Self::OxcConstComparisons(_) => OxcConstComparisons::CATEGORY,
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::CATEGORY,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::CATEGORY,
@@ -6738,6 +6744,7 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(_) => OxcBadObjectLiteralComparison::FIX,
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::FIX,
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::FIX,
+            Self::OxcClassName(_) => OxcClassName::FIX,
             Self::OxcConstComparisons(_) => OxcConstComparisons::FIX,
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::FIX,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::FIX,
@@ -7994,6 +8001,7 @@ impl RuleEnum {
             }
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::documentation(),
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::documentation(),
+            Self::OxcClassName(_) => OxcClassName::documentation(),
             Self::OxcConstComparisons(_) => OxcConstComparisons::documentation(),
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::documentation(),
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::documentation(),
@@ -10254,6 +10262,9 @@ impl RuleEnum {
                 .or_else(|| OxcBadReplaceAllArg::schema(generator)),
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::config_schema(generator)
                 .or_else(|| OxcBranchesSharingCode::schema(generator)),
+            Self::OxcClassName(_) => {
+                OxcClassName::config_schema(generator).or_else(|| OxcClassName::schema(generator))
+            }
             Self::OxcConstComparisons(_) => OxcConstComparisons::config_schema(generator)
                 .or_else(|| OxcConstComparisons::schema(generator)),
             Self::OxcConstructorForSideEffects(_) => {
@@ -11614,6 +11625,7 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(_) => "oxc",
             Self::OxcBadReplaceAllArg(_) => "oxc",
             Self::OxcBranchesSharingCode(_) => "oxc",
+            Self::OxcClassName(_) => "oxc",
             Self::OxcConstComparisons(_) => "oxc",
             Self::OxcConstructorForSideEffects(_) => "oxc",
             Self::OxcDoubleComparisons(_) => "oxc",
@@ -12764,6 +12776,9 @@ impl RuleEnum {
                     JsxA11YNoStaticElementInteractions::from_configuration(value)?,
                 ))
             }
+            Self::OxcClassName(_) => {
+                Ok(Self::OxcClassName(OxcClassName::from_configuration(value)?))
+            }
             Self::OxcNoAsyncEndpointHandlers(_) => Ok(Self::OxcNoAsyncEndpointHandlers(
                 OxcNoAsyncEndpointHandlers::from_configuration(value)?,
             )),
@@ -13672,6 +13687,7 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(rule) => rule.run(node, ctx),
             Self::OxcBadReplaceAllArg(rule) => rule.run(node, ctx),
             Self::OxcBranchesSharingCode(rule) => rule.run(node, ctx),
+            Self::OxcClassName(rule) => rule.run(node, ctx),
             Self::OxcConstComparisons(rule) => rule.run(node, ctx),
             Self::OxcConstructorForSideEffects(rule) => rule.run(node, ctx),
             Self::OxcDoubleComparisons(rule) => rule.run(node, ctx),
@@ -14606,6 +14622,7 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(rule) => rule.run_once(ctx),
             Self::OxcBadReplaceAllArg(rule) => rule.run_once(ctx),
             Self::OxcBranchesSharingCode(rule) => rule.run_once(ctx),
+            Self::OxcClassName(rule) => rule.run_once(ctx),
             Self::OxcConstComparisons(rule) => rule.run_once(ctx),
             Self::OxcConstructorForSideEffects(rule) => rule.run_once(ctx),
             Self::OxcDoubleComparisons(rule) => rule.run_once(ctx),
@@ -15647,6 +15664,7 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcBadReplaceAllArg(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcBranchesSharingCode(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcClassName(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcConstComparisons(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcConstructorForSideEffects(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcDoubleComparisons(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -16594,6 +16612,7 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(rule) => rule.should_run(ctx),
             Self::OxcBadReplaceAllArg(rule) => rule.should_run(ctx),
             Self::OxcBranchesSharingCode(rule) => rule.should_run(ctx),
+            Self::OxcClassName(rule) => rule.should_run(ctx),
             Self::OxcConstComparisons(rule) => rule.should_run(ctx),
             Self::OxcConstructorForSideEffects(rule) => rule.should_run(ctx),
             Self::OxcDoubleComparisons(rule) => rule.should_run(ctx),
@@ -17837,6 +17856,7 @@ impl RuleEnum {
             }
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::IS_TSGOLINT_RULE,
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::IS_TSGOLINT_RULE,
+            Self::OxcClassName(_) => OxcClassName::IS_TSGOLINT_RULE,
             Self::OxcConstComparisons(_) => OxcConstComparisons::IS_TSGOLINT_RULE,
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::IS_TSGOLINT_RULE,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::IS_TSGOLINT_RULE,
@@ -18984,6 +19004,7 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(_) => OxcBadObjectLiteralComparison::VERSION,
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::VERSION,
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::VERSION,
+            Self::OxcClassName(_) => OxcClassName::VERSION,
             Self::OxcConstComparisons(_) => OxcConstComparisons::VERSION,
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::VERSION,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::VERSION,
@@ -20116,6 +20137,7 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(_) => OxcBadObjectLiteralComparison::HAS_CONFIG,
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::HAS_CONFIG,
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::HAS_CONFIG,
+            Self::OxcClassName(_) => OxcClassName::HAS_CONFIG,
             Self::OxcConstComparisons(_) => OxcConstComparisons::HAS_CONFIG,
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::HAS_CONFIG,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::HAS_CONFIG,
@@ -21179,6 +21201,7 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(_) => OxcBadObjectLiteralComparison::INFO,
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::INFO,
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::INFO,
+            Self::OxcClassName(_) => OxcClassName::INFO,
             Self::OxcConstComparisons(_) => OxcConstComparisons::INFO,
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::INFO,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::INFO,
@@ -22117,6 +22140,7 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(rule) => rule.types_info(),
             Self::OxcBadReplaceAllArg(rule) => rule.types_info(),
             Self::OxcBranchesSharingCode(rule) => rule.types_info(),
+            Self::OxcClassName(rule) => rule.types_info(),
             Self::OxcConstComparisons(rule) => rule.types_info(),
             Self::OxcConstructorForSideEffects(rule) => rule.types_info(),
             Self::OxcDoubleComparisons(rule) => rule.types_info(),
@@ -23038,6 +23062,7 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(rule) => rule.run_info(),
             Self::OxcBadReplaceAllArg(rule) => rule.run_info(),
             Self::OxcBranchesSharingCode(rule) => rule.run_info(),
+            Self::OxcClassName(rule) => rule.run_info(),
             Self::OxcConstComparisons(rule) => rule.run_info(),
             Self::OxcConstructorForSideEffects(rule) => rule.run_info(),
             Self::OxcDoubleComparisons(rule) => rule.run_info(),
@@ -24085,6 +24110,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcBadObjectLiteralComparison(OxcBadObjectLiteralComparison::default()),
         RuleEnum::OxcBadReplaceAllArg(OxcBadReplaceAllArg::default()),
         RuleEnum::OxcBranchesSharingCode(OxcBranchesSharingCode::default()),
+        RuleEnum::OxcClassName(OxcClassName::default()),
         RuleEnum::OxcConstComparisons(OxcConstComparisons::default()),
         RuleEnum::OxcConstructorForSideEffects(OxcConstructorForSideEffects::default()),
         RuleEnum::OxcDoubleComparisons(OxcDoubleComparisons::default()),
