@@ -402,6 +402,7 @@ pub use crate::rules::oxc::constructor_for_side_effects::ConstructorForSideEffec
 pub use crate::rules::oxc::different_types_comparison::DifferentTypesComparison as OxcDifferentTypesComparison;
 pub use crate::rules::oxc::double_comparisons::DoubleComparisons as OxcDoubleComparisons;
 pub use crate::rules::oxc::duplicates_in_character_class::DuplicatesInCharacterClass as OxcDuplicatesInCharacterClass;
+pub use crate::rules::oxc::empty_string_repetition::EmptyStringRepetition as OxcEmptyStringRepetition;
 pub use crate::rules::oxc::erasing_op::ErasingOp as OxcErasingOp;
 pub use crate::rules::oxc::for_loop_increment_sign::ForLoopIncrementSign as OxcForLoopIncrementSign;
 pub use crate::rules::oxc::generator_without_yield::GeneratorWithoutYield as OxcGeneratorWithoutYield;
@@ -1662,6 +1663,7 @@ pub enum RuleEnum {
     OxcDifferentTypesComparison(OxcDifferentTypesComparison),
     OxcDoubleComparisons(OxcDoubleComparisons),
     OxcDuplicatesInCharacterClass(OxcDuplicatesInCharacterClass),
+    OxcEmptyStringRepetition(OxcEmptyStringRepetition),
     OxcErasingOp(OxcErasingOp),
     OxcForLoopIncrementSign(OxcForLoopIncrementSign),
     OxcGeneratorWithoutYield(OxcGeneratorWithoutYield),
@@ -2718,7 +2720,8 @@ const OXC_CONSTRUCTOR_FOR_SIDE_EFFECTS_ID: usize = OXC_CONST_COMPARISONS_ID + 1u
 const OXC_DIFFERENT_TYPES_COMPARISON_ID: usize = OXC_CONSTRUCTOR_FOR_SIDE_EFFECTS_ID + 1usize;
 const OXC_DOUBLE_COMPARISONS_ID: usize = OXC_DIFFERENT_TYPES_COMPARISON_ID + 1usize;
 const OXC_DUPLICATES_IN_CHARACTER_CLASS_ID: usize = OXC_DOUBLE_COMPARISONS_ID + 1usize;
-const OXC_ERASING_OP_ID: usize = OXC_DUPLICATES_IN_CHARACTER_CLASS_ID + 1usize;
+const OXC_EMPTY_STRING_REPETITION_ID: usize = OXC_DUPLICATES_IN_CHARACTER_CLASS_ID + 1usize;
+const OXC_ERASING_OP_ID: usize = OXC_EMPTY_STRING_REPETITION_ID + 1usize;
 const OXC_FOR_LOOP_INCREMENT_SIGN_ID: usize = OXC_ERASING_OP_ID + 1usize;
 const OXC_GENERATOR_WITHOUT_YIELD_ID: usize = OXC_FOR_LOOP_INCREMENT_SIGN_ID + 1usize;
 const OXC_IN_OPERATOR_TYPE_ERROR_ID: usize = OXC_GENERATOR_WITHOUT_YIELD_ID + 1usize;
@@ -3025,7 +3028,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 962usize] = [
+static RULE_NAMES: [&str; 963usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3700,6 +3703,7 @@ static RULE_NAMES: [&str; 962usize] = [
     OxcDifferentTypesComparison::NAME,
     OxcDoubleComparisons::NAME,
     OxcDuplicatesInCharacterClass::NAME,
+    OxcEmptyStringRepetition::NAME,
     OxcErasingOp::NAME,
     OxcForLoopIncrementSign::NAME,
     OxcGeneratorWithoutYield::NAME,
@@ -4782,6 +4786,7 @@ impl RuleEnum {
             Self::OxcDifferentTypesComparison(_) => OXC_DIFFERENT_TYPES_COMPARISON_ID,
             Self::OxcDoubleComparisons(_) => OXC_DOUBLE_COMPARISONS_ID,
             Self::OxcDuplicatesInCharacterClass(_) => OXC_DUPLICATES_IN_CHARACTER_CLASS_ID,
+            Self::OxcEmptyStringRepetition(_) => OXC_EMPTY_STRING_REPETITION_ID,
             Self::OxcErasingOp(_) => OXC_ERASING_OP_ID,
             Self::OxcForLoopIncrementSign(_) => OXC_FOR_LOOP_INCREMENT_SIGN_ID,
             Self::OxcGeneratorWithoutYield(_) => OXC_GENERATOR_WITHOUT_YIELD_ID,
@@ -5917,6 +5922,7 @@ impl RuleEnum {
             Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::CATEGORY,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::CATEGORY,
             Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::CATEGORY,
+            Self::OxcEmptyStringRepetition(_) => OxcEmptyStringRepetition::CATEGORY,
             Self::OxcErasingOp(_) => OxcErasingOp::CATEGORY,
             Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::CATEGORY,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::CATEGORY,
@@ -7016,6 +7022,7 @@ impl RuleEnum {
             Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::FIX,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::FIX,
             Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::FIX,
+            Self::OxcEmptyStringRepetition(_) => OxcEmptyStringRepetition::FIX,
             Self::OxcErasingOp(_) => OxcErasingOp::FIX,
             Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::FIX,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::FIX,
@@ -8319,6 +8326,7 @@ impl RuleEnum {
             Self::OxcDuplicatesInCharacterClass(_) => {
                 OxcDuplicatesInCharacterClass::documentation()
             }
+            Self::OxcEmptyStringRepetition(_) => OxcEmptyStringRepetition::documentation(),
             Self::OxcErasingOp(_) => OxcErasingOp::documentation(),
             Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::documentation(),
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::documentation(),
@@ -10644,6 +10652,8 @@ impl RuleEnum {
                 OxcDuplicatesInCharacterClass::config_schema(generator)
                     .or_else(|| OxcDuplicatesInCharacterClass::schema(generator))
             }
+            Self::OxcEmptyStringRepetition(_) => OxcEmptyStringRepetition::config_schema(generator)
+                .or_else(|| OxcEmptyStringRepetition::schema(generator)),
             Self::OxcErasingOp(_) => {
                 OxcErasingOp::config_schema(generator).or_else(|| OxcErasingOp::schema(generator))
             }
@@ -12093,6 +12103,7 @@ impl RuleEnum {
             Self::OxcDifferentTypesComparison(_) => "oxc",
             Self::OxcDoubleComparisons(_) => "oxc",
             Self::OxcDuplicatesInCharacterClass(_) => "oxc",
+            Self::OxcEmptyStringRepetition(_) => "oxc",
             Self::OxcErasingOp(_) => "oxc",
             Self::OxcForLoopIncrementSign(_) => "oxc",
             Self::OxcGeneratorWithoutYield(_) => "oxc",
@@ -14202,6 +14213,7 @@ impl RuleEnum {
             Self::OxcDifferentTypesComparison(rule) => rule.run(node, ctx),
             Self::OxcDoubleComparisons(rule) => rule.run(node, ctx),
             Self::OxcDuplicatesInCharacterClass(rule) => rule.run(node, ctx),
+            Self::OxcEmptyStringRepetition(rule) => rule.run(node, ctx),
             Self::OxcErasingOp(rule) => rule.run(node, ctx),
             Self::OxcForLoopIncrementSign(rule) => rule.run(node, ctx),
             Self::OxcGeneratorWithoutYield(rule) => rule.run(node, ctx),
@@ -15181,6 +15193,7 @@ impl RuleEnum {
             Self::OxcDifferentTypesComparison(rule) => rule.run_once(ctx),
             Self::OxcDoubleComparisons(rule) => rule.run_once(ctx),
             Self::OxcDuplicatesInCharacterClass(rule) => rule.run_once(ctx),
+            Self::OxcEmptyStringRepetition(rule) => rule.run_once(ctx),
             Self::OxcErasingOp(rule) => rule.run_once(ctx),
             Self::OxcForLoopIncrementSign(rule) => rule.run_once(ctx),
             Self::OxcGeneratorWithoutYield(rule) => rule.run_once(ctx),
@@ -16267,6 +16280,7 @@ impl RuleEnum {
             Self::OxcDifferentTypesComparison(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcDoubleComparisons(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcDuplicatesInCharacterClass(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcEmptyStringRepetition(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcErasingOp(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcForLoopIncrementSign(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcGeneratorWithoutYield(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -17259,6 +17273,7 @@ impl RuleEnum {
             Self::OxcDifferentTypesComparison(rule) => rule.should_run(ctx),
             Self::OxcDoubleComparisons(rule) => rule.should_run(ctx),
             Self::OxcDuplicatesInCharacterClass(rule) => rule.should_run(ctx),
+            Self::OxcEmptyStringRepetition(rule) => rule.should_run(ctx),
             Self::OxcErasingOp(rule) => rule.should_run(ctx),
             Self::OxcForLoopIncrementSign(rule) => rule.should_run(ctx),
             Self::OxcGeneratorWithoutYield(rule) => rule.should_run(ctx),
@@ -18549,6 +18564,7 @@ impl RuleEnum {
             Self::OxcDuplicatesInCharacterClass(_) => {
                 OxcDuplicatesInCharacterClass::IS_TSGOLINT_RULE
             }
+            Self::OxcEmptyStringRepetition(_) => OxcEmptyStringRepetition::IS_TSGOLINT_RULE,
             Self::OxcErasingOp(_) => OxcErasingOp::IS_TSGOLINT_RULE,
             Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::IS_TSGOLINT_RULE,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::IS_TSGOLINT_RULE,
@@ -19745,6 +19761,7 @@ impl RuleEnum {
             Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::VERSION,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::VERSION,
             Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::VERSION,
+            Self::OxcEmptyStringRepetition(_) => OxcEmptyStringRepetition::VERSION,
             Self::OxcErasingOp(_) => OxcErasingOp::VERSION,
             Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::VERSION,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::VERSION,
@@ -20922,6 +20939,7 @@ impl RuleEnum {
             Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::HAS_CONFIG,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::HAS_CONFIG,
             Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::HAS_CONFIG,
+            Self::OxcEmptyStringRepetition(_) => OxcEmptyStringRepetition::HAS_CONFIG,
             Self::OxcErasingOp(_) => OxcErasingOp::HAS_CONFIG,
             Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::HAS_CONFIG,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::HAS_CONFIG,
@@ -22030,6 +22048,7 @@ impl RuleEnum {
             Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::INFO,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::INFO,
             Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::INFO,
+            Self::OxcEmptyStringRepetition(_) => OxcEmptyStringRepetition::INFO,
             Self::OxcErasingOp(_) => OxcErasingOp::INFO,
             Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::INFO,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::INFO,
@@ -23013,6 +23032,7 @@ impl RuleEnum {
             Self::OxcDifferentTypesComparison(rule) => rule.types_info(),
             Self::OxcDoubleComparisons(rule) => rule.types_info(),
             Self::OxcDuplicatesInCharacterClass(rule) => rule.types_info(),
+            Self::OxcEmptyStringRepetition(rule) => rule.types_info(),
             Self::OxcErasingOp(rule) => rule.types_info(),
             Self::OxcForLoopIncrementSign(rule) => rule.types_info(),
             Self::OxcGeneratorWithoutYield(rule) => rule.types_info(),
@@ -23979,6 +23999,7 @@ impl RuleEnum {
             Self::OxcDifferentTypesComparison(rule) => rule.run_info(),
             Self::OxcDoubleComparisons(rule) => rule.run_info(),
             Self::OxcDuplicatesInCharacterClass(rule) => rule.run_info(),
+            Self::OxcEmptyStringRepetition(rule) => rule.run_info(),
             Self::OxcErasingOp(rule) => rule.run_info(),
             Self::OxcForLoopIncrementSign(rule) => rule.run_info(),
             Self::OxcGeneratorWithoutYield(rule) => rule.run_info(),
@@ -25071,6 +25092,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcDifferentTypesComparison(OxcDifferentTypesComparison::default()),
         RuleEnum::OxcDoubleComparisons(OxcDoubleComparisons::default()),
         RuleEnum::OxcDuplicatesInCharacterClass(OxcDuplicatesInCharacterClass::default()),
+        RuleEnum::OxcEmptyStringRepetition(OxcEmptyStringRepetition::default()),
         RuleEnum::OxcErasingOp(OxcErasingOp::default()),
         RuleEnum::OxcForLoopIncrementSign(OxcForLoopIncrementSign::default()),
         RuleEnum::OxcGeneratorWithoutYield(OxcGeneratorWithoutYield::default()),
