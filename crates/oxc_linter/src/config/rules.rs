@@ -352,6 +352,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "prefer-while") => ("prefer-while", "oxc"),
         ("sonarjs", "production-debug") => ("production-debug", "oxc"),
         ("sonarjs", "anchor-precedence") => ("anchor-precedence", "oxc"),
+        ("sonarjs", "comma-or-logical-or-case") => ("comma-or-logical-or-case", "oxc"),
         ("sonarjs", "concise-regex") => ("concise-regex", "oxc"),
         ("sonarjs", "no-array-delete") => ("no-array-delete", "typescript"),
         ("sonarjs", "prefer-regexp-exec") => ("prefer-regexp-exec", "typescript"),

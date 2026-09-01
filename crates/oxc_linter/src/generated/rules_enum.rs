@@ -395,6 +395,7 @@ pub use crate::rules::oxc::bad_object_literal_comparison::BadObjectLiteralCompar
 pub use crate::rules::oxc::bad_replace_all_arg::BadReplaceAllArg as OxcBadReplaceAllArg;
 pub use crate::rules::oxc::branches_sharing_code::BranchesSharingCode as OxcBranchesSharingCode;
 pub use crate::rules::oxc::class_name::ClassName as OxcClassName;
+pub use crate::rules::oxc::comma_or_logical_or_case::CommaOrLogicalOrCase as OxcCommaOrLogicalOrCase;
 pub use crate::rules::oxc::concise_regex::ConciseRegex as OxcConciseRegex;
 pub use crate::rules::oxc::const_comparisons::ConstComparisons as OxcConstComparisons;
 pub use crate::rules::oxc::constructor_for_side_effects::ConstructorForSideEffects as OxcConstructorForSideEffects;
@@ -1653,6 +1654,7 @@ pub enum RuleEnum {
     OxcBadReplaceAllArg(OxcBadReplaceAllArg),
     OxcBranchesSharingCode(OxcBranchesSharingCode),
     OxcClassName(OxcClassName),
+    OxcCommaOrLogicalOrCase(OxcCommaOrLogicalOrCase),
     OxcConciseRegex(OxcConciseRegex),
     OxcConstComparisons(OxcConstComparisons),
     OxcConstructorForSideEffects(OxcConstructorForSideEffects),
@@ -2707,7 +2709,8 @@ const OXC_BAD_OBJECT_LITERAL_COMPARISON_ID: usize = OXC_BAD_MIN_MAX_FUNC_ID + 1u
 const OXC_BAD_REPLACE_ALL_ARG_ID: usize = OXC_BAD_OBJECT_LITERAL_COMPARISON_ID + 1usize;
 const OXC_BRANCHES_SHARING_CODE_ID: usize = OXC_BAD_REPLACE_ALL_ARG_ID + 1usize;
 const OXC_CLASS_NAME_ID: usize = OXC_BRANCHES_SHARING_CODE_ID + 1usize;
-const OXC_CONCISE_REGEX_ID: usize = OXC_CLASS_NAME_ID + 1usize;
+const OXC_COMMA_OR_LOGICAL_OR_CASE_ID: usize = OXC_CLASS_NAME_ID + 1usize;
+const OXC_CONCISE_REGEX_ID: usize = OXC_COMMA_OR_LOGICAL_OR_CASE_ID + 1usize;
 const OXC_CONST_COMPARISONS_ID: usize = OXC_CONCISE_REGEX_ID + 1usize;
 const OXC_CONSTRUCTOR_FOR_SIDE_EFFECTS_ID: usize = OXC_CONST_COMPARISONS_ID + 1usize;
 const OXC_DIFFERENT_TYPES_COMPARISON_ID: usize = OXC_CONSTRUCTOR_FOR_SIDE_EFFECTS_ID + 1usize;
@@ -3019,7 +3022,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 960usize] = [
+static RULE_NAMES: [&str; 961usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3687,6 +3690,7 @@ static RULE_NAMES: [&str; 960usize] = [
     OxcBadReplaceAllArg::NAME,
     OxcBranchesSharingCode::NAME,
     OxcClassName::NAME,
+    OxcCommaOrLogicalOrCase::NAME,
     OxcConciseRegex::NAME,
     OxcConstComparisons::NAME,
     OxcConstructorForSideEffects::NAME,
@@ -4767,6 +4771,7 @@ impl RuleEnum {
             Self::OxcBadReplaceAllArg(_) => OXC_BAD_REPLACE_ALL_ARG_ID,
             Self::OxcBranchesSharingCode(_) => OXC_BRANCHES_SHARING_CODE_ID,
             Self::OxcClassName(_) => OXC_CLASS_NAME_ID,
+            Self::OxcCommaOrLogicalOrCase(_) => OXC_COMMA_OR_LOGICAL_OR_CASE_ID,
             Self::OxcConciseRegex(_) => OXC_CONCISE_REGEX_ID,
             Self::OxcConstComparisons(_) => OXC_CONST_COMPARISONS_ID,
             Self::OxcConstructorForSideEffects(_) => OXC_CONSTRUCTOR_FOR_SIDE_EFFECTS_ID,
@@ -5900,6 +5905,7 @@ impl RuleEnum {
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::CATEGORY,
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::CATEGORY,
             Self::OxcClassName(_) => OxcClassName::CATEGORY,
+            Self::OxcCommaOrLogicalOrCase(_) => OxcCommaOrLogicalOrCase::CATEGORY,
             Self::OxcConciseRegex(_) => OxcConciseRegex::CATEGORY,
             Self::OxcConstComparisons(_) => OxcConstComparisons::CATEGORY,
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::CATEGORY,
@@ -6997,6 +7003,7 @@ impl RuleEnum {
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::FIX,
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::FIX,
             Self::OxcClassName(_) => OxcClassName::FIX,
+            Self::OxcCommaOrLogicalOrCase(_) => OxcCommaOrLogicalOrCase::FIX,
             Self::OxcConciseRegex(_) => OxcConciseRegex::FIX,
             Self::OxcConstComparisons(_) => OxcConstComparisons::FIX,
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::FIX,
@@ -8296,6 +8303,7 @@ impl RuleEnum {
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::documentation(),
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::documentation(),
             Self::OxcClassName(_) => OxcClassName::documentation(),
+            Self::OxcCommaOrLogicalOrCase(_) => OxcCommaOrLogicalOrCase::documentation(),
             Self::OxcConciseRegex(_) => OxcConciseRegex::documentation(),
             Self::OxcConstComparisons(_) => OxcConstComparisons::documentation(),
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::documentation(),
@@ -10608,6 +10616,8 @@ impl RuleEnum {
             Self::OxcClassName(_) => {
                 OxcClassName::config_schema(generator).or_else(|| OxcClassName::schema(generator))
             }
+            Self::OxcCommaOrLogicalOrCase(_) => OxcCommaOrLogicalOrCase::config_schema(generator)
+                .or_else(|| OxcCommaOrLogicalOrCase::schema(generator)),
             Self::OxcConciseRegex(_) => OxcConciseRegex::config_schema(generator)
                 .or_else(|| OxcConciseRegex::schema(generator)),
             Self::OxcConstComparisons(_) => OxcConstComparisons::config_schema(generator)
@@ -12066,6 +12076,7 @@ impl RuleEnum {
             Self::OxcBadReplaceAllArg(_) => "oxc",
             Self::OxcBranchesSharingCode(_) => "oxc",
             Self::OxcClassName(_) => "oxc",
+            Self::OxcCommaOrLogicalOrCase(_) => "oxc",
             Self::OxcConciseRegex(_) => "oxc",
             Self::OxcConstComparisons(_) => "oxc",
             Self::OxcConstructorForSideEffects(_) => "oxc",
@@ -14173,6 +14184,7 @@ impl RuleEnum {
             Self::OxcBadReplaceAllArg(rule) => rule.run(node, ctx),
             Self::OxcBranchesSharingCode(rule) => rule.run(node, ctx),
             Self::OxcClassName(rule) => rule.run(node, ctx),
+            Self::OxcCommaOrLogicalOrCase(rule) => rule.run(node, ctx),
             Self::OxcConciseRegex(rule) => rule.run(node, ctx),
             Self::OxcConstComparisons(rule) => rule.run(node, ctx),
             Self::OxcConstructorForSideEffects(rule) => rule.run(node, ctx),
@@ -15150,6 +15162,7 @@ impl RuleEnum {
             Self::OxcBadReplaceAllArg(rule) => rule.run_once(ctx),
             Self::OxcBranchesSharingCode(rule) => rule.run_once(ctx),
             Self::OxcClassName(rule) => rule.run_once(ctx),
+            Self::OxcCommaOrLogicalOrCase(rule) => rule.run_once(ctx),
             Self::OxcConciseRegex(rule) => rule.run_once(ctx),
             Self::OxcConstComparisons(rule) => rule.run_once(ctx),
             Self::OxcConstructorForSideEffects(rule) => rule.run_once(ctx),
@@ -16234,6 +16247,7 @@ impl RuleEnum {
             Self::OxcBadReplaceAllArg(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcBranchesSharingCode(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcClassName(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcCommaOrLogicalOrCase(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcConciseRegex(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcConstComparisons(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcConstructorForSideEffects(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -17224,6 +17238,7 @@ impl RuleEnum {
             Self::OxcBadReplaceAllArg(rule) => rule.should_run(ctx),
             Self::OxcBranchesSharingCode(rule) => rule.should_run(ctx),
             Self::OxcClassName(rule) => rule.should_run(ctx),
+            Self::OxcCommaOrLogicalOrCase(rule) => rule.should_run(ctx),
             Self::OxcConciseRegex(rule) => rule.should_run(ctx),
             Self::OxcConstComparisons(rule) => rule.should_run(ctx),
             Self::OxcConstructorForSideEffects(rule) => rule.should_run(ctx),
@@ -18510,6 +18525,7 @@ impl RuleEnum {
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::IS_TSGOLINT_RULE,
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::IS_TSGOLINT_RULE,
             Self::OxcClassName(_) => OxcClassName::IS_TSGOLINT_RULE,
+            Self::OxcCommaOrLogicalOrCase(_) => OxcCommaOrLogicalOrCase::IS_TSGOLINT_RULE,
             Self::OxcConciseRegex(_) => OxcConciseRegex::IS_TSGOLINT_RULE,
             Self::OxcConstComparisons(_) => OxcConstComparisons::IS_TSGOLINT_RULE,
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::IS_TSGOLINT_RULE,
@@ -19706,6 +19722,7 @@ impl RuleEnum {
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::VERSION,
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::VERSION,
             Self::OxcClassName(_) => OxcClassName::VERSION,
+            Self::OxcCommaOrLogicalOrCase(_) => OxcCommaOrLogicalOrCase::VERSION,
             Self::OxcConciseRegex(_) => OxcConciseRegex::VERSION,
             Self::OxcConstComparisons(_) => OxcConstComparisons::VERSION,
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::VERSION,
@@ -20881,6 +20898,7 @@ impl RuleEnum {
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::HAS_CONFIG,
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::HAS_CONFIG,
             Self::OxcClassName(_) => OxcClassName::HAS_CONFIG,
+            Self::OxcCommaOrLogicalOrCase(_) => OxcCommaOrLogicalOrCase::HAS_CONFIG,
             Self::OxcConciseRegex(_) => OxcConciseRegex::HAS_CONFIG,
             Self::OxcConstComparisons(_) => OxcConstComparisons::HAS_CONFIG,
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::HAS_CONFIG,
@@ -21987,6 +22005,7 @@ impl RuleEnum {
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::INFO,
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::INFO,
             Self::OxcClassName(_) => OxcClassName::INFO,
+            Self::OxcCommaOrLogicalOrCase(_) => OxcCommaOrLogicalOrCase::INFO,
             Self::OxcConciseRegex(_) => OxcConciseRegex::INFO,
             Self::OxcConstComparisons(_) => OxcConstComparisons::INFO,
             Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::INFO,
@@ -22968,6 +22987,7 @@ impl RuleEnum {
             Self::OxcBadReplaceAllArg(rule) => rule.types_info(),
             Self::OxcBranchesSharingCode(rule) => rule.types_info(),
             Self::OxcClassName(rule) => rule.types_info(),
+            Self::OxcCommaOrLogicalOrCase(rule) => rule.types_info(),
             Self::OxcConciseRegex(rule) => rule.types_info(),
             Self::OxcConstComparisons(rule) => rule.types_info(),
             Self::OxcConstructorForSideEffects(rule) => rule.types_info(),
@@ -23932,6 +23952,7 @@ impl RuleEnum {
             Self::OxcBadReplaceAllArg(rule) => rule.run_info(),
             Self::OxcBranchesSharingCode(rule) => rule.run_info(),
             Self::OxcClassName(rule) => rule.run_info(),
+            Self::OxcCommaOrLogicalOrCase(rule) => rule.run_info(),
             Self::OxcConciseRegex(rule) => rule.run_info(),
             Self::OxcConstComparisons(rule) => rule.run_info(),
             Self::OxcConstructorForSideEffects(rule) => rule.run_info(),
@@ -25022,6 +25043,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcBadReplaceAllArg(OxcBadReplaceAllArg::default()),
         RuleEnum::OxcBranchesSharingCode(OxcBranchesSharingCode::default()),
         RuleEnum::OxcClassName(OxcClassName::default()),
+        RuleEnum::OxcCommaOrLogicalOrCase(OxcCommaOrLogicalOrCase::default()),
         RuleEnum::OxcConciseRegex(OxcConciseRegex::default()),
         RuleEnum::OxcConstComparisons(OxcConstComparisons::default()),
         RuleEnum::OxcConstructorForSideEffects(OxcConstructorForSideEffects::default()),

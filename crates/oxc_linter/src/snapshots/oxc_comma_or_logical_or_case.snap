@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(comma-or-logical-or-case): Explicitly specify separate cases that fall through.
+   ╭─[comma_or_logical_or_case.tsx:1:23]
+ 1 │ switch (value) { case 1 || 2: run(); }
+   ·                       ──────
+   ╰────
+  help: Use one `case` clause for each accepted value.
