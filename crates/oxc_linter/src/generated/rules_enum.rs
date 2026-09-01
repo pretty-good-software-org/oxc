@@ -403,6 +403,7 @@ pub use crate::rules::oxc::different_types_comparison::DifferentTypesComparison 
 pub use crate::rules::oxc::double_comparisons::DoubleComparisons as OxcDoubleComparisons;
 pub use crate::rules::oxc::duplicates_in_character_class::DuplicatesInCharacterClass as OxcDuplicatesInCharacterClass;
 pub use crate::rules::oxc::erasing_op::ErasingOp as OxcErasingOp;
+pub use crate::rules::oxc::for_loop_increment_sign::ForLoopIncrementSign as OxcForLoopIncrementSign;
 pub use crate::rules::oxc::generator_without_yield::GeneratorWithoutYield as OxcGeneratorWithoutYield;
 pub use crate::rules::oxc::in_operator_type_error::InOperatorTypeError as OxcInOperatorTypeError;
 pub use crate::rules::oxc::label_position::LabelPosition as OxcLabelPosition;
@@ -1662,6 +1663,7 @@ pub enum RuleEnum {
     OxcDoubleComparisons(OxcDoubleComparisons),
     OxcDuplicatesInCharacterClass(OxcDuplicatesInCharacterClass),
     OxcErasingOp(OxcErasingOp),
+    OxcForLoopIncrementSign(OxcForLoopIncrementSign),
     OxcGeneratorWithoutYield(OxcGeneratorWithoutYield),
     OxcInOperatorTypeError(OxcInOperatorTypeError),
     OxcLabelPosition(OxcLabelPosition),
@@ -2717,7 +2719,8 @@ const OXC_DIFFERENT_TYPES_COMPARISON_ID: usize = OXC_CONSTRUCTOR_FOR_SIDE_EFFECT
 const OXC_DOUBLE_COMPARISONS_ID: usize = OXC_DIFFERENT_TYPES_COMPARISON_ID + 1usize;
 const OXC_DUPLICATES_IN_CHARACTER_CLASS_ID: usize = OXC_DOUBLE_COMPARISONS_ID + 1usize;
 const OXC_ERASING_OP_ID: usize = OXC_DUPLICATES_IN_CHARACTER_CLASS_ID + 1usize;
-const OXC_GENERATOR_WITHOUT_YIELD_ID: usize = OXC_ERASING_OP_ID + 1usize;
+const OXC_FOR_LOOP_INCREMENT_SIGN_ID: usize = OXC_ERASING_OP_ID + 1usize;
+const OXC_GENERATOR_WITHOUT_YIELD_ID: usize = OXC_FOR_LOOP_INCREMENT_SIGN_ID + 1usize;
 const OXC_IN_OPERATOR_TYPE_ERROR_ID: usize = OXC_GENERATOR_WITHOUT_YIELD_ID + 1usize;
 const OXC_LABEL_POSITION_ID: usize = OXC_IN_OPERATOR_TYPE_ERROR_ID + 1usize;
 const OXC_LINK_WITH_TARGET_BLANK_ID: usize = OXC_LABEL_POSITION_ID + 1usize;
@@ -3022,7 +3025,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 961usize] = [
+static RULE_NAMES: [&str; 962usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3698,6 +3701,7 @@ static RULE_NAMES: [&str; 961usize] = [
     OxcDoubleComparisons::NAME,
     OxcDuplicatesInCharacterClass::NAME,
     OxcErasingOp::NAME,
+    OxcForLoopIncrementSign::NAME,
     OxcGeneratorWithoutYield::NAME,
     OxcInOperatorTypeError::NAME,
     OxcLabelPosition::NAME,
@@ -4779,6 +4783,7 @@ impl RuleEnum {
             Self::OxcDoubleComparisons(_) => OXC_DOUBLE_COMPARISONS_ID,
             Self::OxcDuplicatesInCharacterClass(_) => OXC_DUPLICATES_IN_CHARACTER_CLASS_ID,
             Self::OxcErasingOp(_) => OXC_ERASING_OP_ID,
+            Self::OxcForLoopIncrementSign(_) => OXC_FOR_LOOP_INCREMENT_SIGN_ID,
             Self::OxcGeneratorWithoutYield(_) => OXC_GENERATOR_WITHOUT_YIELD_ID,
             Self::OxcInOperatorTypeError(_) => OXC_IN_OPERATOR_TYPE_ERROR_ID,
             Self::OxcLabelPosition(_) => OXC_LABEL_POSITION_ID,
@@ -5913,6 +5918,7 @@ impl RuleEnum {
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::CATEGORY,
             Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::CATEGORY,
             Self::OxcErasingOp(_) => OxcErasingOp::CATEGORY,
+            Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::CATEGORY,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::CATEGORY,
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::CATEGORY,
             Self::OxcLabelPosition(_) => OxcLabelPosition::CATEGORY,
@@ -7011,6 +7017,7 @@ impl RuleEnum {
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::FIX,
             Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::FIX,
             Self::OxcErasingOp(_) => OxcErasingOp::FIX,
+            Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::FIX,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::FIX,
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::FIX,
             Self::OxcLabelPosition(_) => OxcLabelPosition::FIX,
@@ -8313,6 +8320,7 @@ impl RuleEnum {
                 OxcDuplicatesInCharacterClass::documentation()
             }
             Self::OxcErasingOp(_) => OxcErasingOp::documentation(),
+            Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::documentation(),
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::documentation(),
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::documentation(),
             Self::OxcLabelPosition(_) => OxcLabelPosition::documentation(),
@@ -10639,6 +10647,8 @@ impl RuleEnum {
             Self::OxcErasingOp(_) => {
                 OxcErasingOp::config_schema(generator).or_else(|| OxcErasingOp::schema(generator))
             }
+            Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::config_schema(generator)
+                .or_else(|| OxcForLoopIncrementSign::schema(generator)),
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::config_schema(generator)
                 .or_else(|| OxcGeneratorWithoutYield::schema(generator)),
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::config_schema(generator)
@@ -12084,6 +12094,7 @@ impl RuleEnum {
             Self::OxcDoubleComparisons(_) => "oxc",
             Self::OxcDuplicatesInCharacterClass(_) => "oxc",
             Self::OxcErasingOp(_) => "oxc",
+            Self::OxcForLoopIncrementSign(_) => "oxc",
             Self::OxcGeneratorWithoutYield(_) => "oxc",
             Self::OxcInOperatorTypeError(_) => "oxc",
             Self::OxcLabelPosition(_) => "oxc",
@@ -14192,6 +14203,7 @@ impl RuleEnum {
             Self::OxcDoubleComparisons(rule) => rule.run(node, ctx),
             Self::OxcDuplicatesInCharacterClass(rule) => rule.run(node, ctx),
             Self::OxcErasingOp(rule) => rule.run(node, ctx),
+            Self::OxcForLoopIncrementSign(rule) => rule.run(node, ctx),
             Self::OxcGeneratorWithoutYield(rule) => rule.run(node, ctx),
             Self::OxcInOperatorTypeError(rule) => rule.run(node, ctx),
             Self::OxcLabelPosition(rule) => rule.run(node, ctx),
@@ -15170,6 +15182,7 @@ impl RuleEnum {
             Self::OxcDoubleComparisons(rule) => rule.run_once(ctx),
             Self::OxcDuplicatesInCharacterClass(rule) => rule.run_once(ctx),
             Self::OxcErasingOp(rule) => rule.run_once(ctx),
+            Self::OxcForLoopIncrementSign(rule) => rule.run_once(ctx),
             Self::OxcGeneratorWithoutYield(rule) => rule.run_once(ctx),
             Self::OxcInOperatorTypeError(rule) => rule.run_once(ctx),
             Self::OxcLabelPosition(rule) => rule.run_once(ctx),
@@ -16255,6 +16268,7 @@ impl RuleEnum {
             Self::OxcDoubleComparisons(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcDuplicatesInCharacterClass(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcErasingOp(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcForLoopIncrementSign(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcGeneratorWithoutYield(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcInOperatorTypeError(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcLabelPosition(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -17246,6 +17260,7 @@ impl RuleEnum {
             Self::OxcDoubleComparisons(rule) => rule.should_run(ctx),
             Self::OxcDuplicatesInCharacterClass(rule) => rule.should_run(ctx),
             Self::OxcErasingOp(rule) => rule.should_run(ctx),
+            Self::OxcForLoopIncrementSign(rule) => rule.should_run(ctx),
             Self::OxcGeneratorWithoutYield(rule) => rule.should_run(ctx),
             Self::OxcInOperatorTypeError(rule) => rule.should_run(ctx),
             Self::OxcLabelPosition(rule) => rule.should_run(ctx),
@@ -18535,6 +18550,7 @@ impl RuleEnum {
                 OxcDuplicatesInCharacterClass::IS_TSGOLINT_RULE
             }
             Self::OxcErasingOp(_) => OxcErasingOp::IS_TSGOLINT_RULE,
+            Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::IS_TSGOLINT_RULE,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::IS_TSGOLINT_RULE,
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::IS_TSGOLINT_RULE,
             Self::OxcLabelPosition(_) => OxcLabelPosition::IS_TSGOLINT_RULE,
@@ -19730,6 +19746,7 @@ impl RuleEnum {
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::VERSION,
             Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::VERSION,
             Self::OxcErasingOp(_) => OxcErasingOp::VERSION,
+            Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::VERSION,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::VERSION,
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::VERSION,
             Self::OxcLabelPosition(_) => OxcLabelPosition::VERSION,
@@ -20906,6 +20923,7 @@ impl RuleEnum {
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::HAS_CONFIG,
             Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::HAS_CONFIG,
             Self::OxcErasingOp(_) => OxcErasingOp::HAS_CONFIG,
+            Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::HAS_CONFIG,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::HAS_CONFIG,
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::HAS_CONFIG,
             Self::OxcLabelPosition(_) => OxcLabelPosition::HAS_CONFIG,
@@ -22013,6 +22031,7 @@ impl RuleEnum {
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::INFO,
             Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::INFO,
             Self::OxcErasingOp(_) => OxcErasingOp::INFO,
+            Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::INFO,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::INFO,
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::INFO,
             Self::OxcLabelPosition(_) => OxcLabelPosition::INFO,
@@ -22995,6 +23014,7 @@ impl RuleEnum {
             Self::OxcDoubleComparisons(rule) => rule.types_info(),
             Self::OxcDuplicatesInCharacterClass(rule) => rule.types_info(),
             Self::OxcErasingOp(rule) => rule.types_info(),
+            Self::OxcForLoopIncrementSign(rule) => rule.types_info(),
             Self::OxcGeneratorWithoutYield(rule) => rule.types_info(),
             Self::OxcInOperatorTypeError(rule) => rule.types_info(),
             Self::OxcLabelPosition(rule) => rule.types_info(),
@@ -23960,6 +23980,7 @@ impl RuleEnum {
             Self::OxcDoubleComparisons(rule) => rule.run_info(),
             Self::OxcDuplicatesInCharacterClass(rule) => rule.run_info(),
             Self::OxcErasingOp(rule) => rule.run_info(),
+            Self::OxcForLoopIncrementSign(rule) => rule.run_info(),
             Self::OxcGeneratorWithoutYield(rule) => rule.run_info(),
             Self::OxcInOperatorTypeError(rule) => rule.run_info(),
             Self::OxcLabelPosition(rule) => rule.run_info(),
@@ -25051,6 +25072,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcDoubleComparisons(OxcDoubleComparisons::default()),
         RuleEnum::OxcDuplicatesInCharacterClass(OxcDuplicatesInCharacterClass::default()),
         RuleEnum::OxcErasingOp(OxcErasingOp::default()),
+        RuleEnum::OxcForLoopIncrementSign(OxcForLoopIncrementSign::default()),
         RuleEnum::OxcGeneratorWithoutYield(OxcGeneratorWithoutYield::default()),
         RuleEnum::OxcInOperatorTypeError(OxcInOperatorTypeError::default()),
         RuleEnum::OxcLabelPosition(OxcLabelPosition::default()),

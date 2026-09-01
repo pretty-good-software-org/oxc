@@ -762,6 +762,7 @@ pub(crate) mod oxc {
     pub mod double_comparisons;
     pub mod duplicates_in_character_class;
     pub mod erasing_op;
+    pub mod for_loop_increment_sign;
     pub mod generator_without_yield;
     pub mod in_operator_type_error;
     pub mod label_position;

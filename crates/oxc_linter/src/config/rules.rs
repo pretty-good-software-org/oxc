@@ -354,6 +354,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "anchor-precedence") => ("anchor-precedence", "oxc"),
         ("sonarjs", "comma-or-logical-or-case") => ("comma-or-logical-or-case", "oxc"),
         ("sonarjs", "concise-regex") => ("concise-regex", "oxc"),
+        ("sonarjs", "for-loop-increment-sign") => ("for-loop-increment-sign", "oxc"),
         ("sonarjs", "no-array-delete") => ("no-array-delete", "typescript"),
         ("sonarjs", "prefer-regexp-exec") => ("prefer-regexp-exec", "typescript"),
         ("sonarjs", name)
