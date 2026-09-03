@@ -852,6 +852,7 @@ pub(crate) mod oxc {
     pub mod prefer_single_boolean_return;
     pub mod prefer_while;
     pub mod production_debug;
+    pub mod pseudo_random;
     pub mod require_safety_comment_for_type_assertion;
     pub mod single_char_in_character_classes;
     pub mod single_character_alternation;

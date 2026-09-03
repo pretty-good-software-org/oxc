@@ -350,6 +350,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "prefer-default-last") => ("prefer-default-last", "oxc"),
         ("sonarjs", "prefer-single-boolean-return") => ("prefer-single-boolean-return", "oxc"),
         ("sonarjs", "prefer-while") => ("prefer-while", "oxc"),
+        ("sonarjs", "pseudo-random") => ("pseudo-random", "oxc"),
         ("sonarjs", "production-debug") => ("production-debug", "oxc"),
         ("sonarjs", "anchor-precedence") => ("anchor-precedence", "oxc"),
         ("sonarjs", "comma-or-logical-or-case") => ("comma-or-logical-or-case", "oxc"),

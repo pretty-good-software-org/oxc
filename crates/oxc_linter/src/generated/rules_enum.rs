@@ -493,6 +493,7 @@ pub use crate::rules::oxc::prefer_default_last::PreferDefaultLast as OxcPreferDe
 pub use crate::rules::oxc::prefer_single_boolean_return::PreferSingleBooleanReturn as OxcPreferSingleBooleanReturn;
 pub use crate::rules::oxc::prefer_while::PreferWhile as OxcPreferWhile;
 pub use crate::rules::oxc::production_debug::ProductionDebug as OxcProductionDebug;
+pub use crate::rules::oxc::pseudo_random::PseudoRandom as OxcPseudoRandom;
 pub use crate::rules::oxc::require_safety_comment_for_type_assertion::RequireSafetyCommentForTypeAssertion as OxcRequireSafetyCommentForTypeAssertion;
 pub use crate::rules::oxc::single_char_in_character_classes::SingleCharInCharacterClasses as OxcSingleCharInCharacterClasses;
 pub use crate::rules::oxc::single_character_alternation::SingleCharacterAlternation as OxcSingleCharacterAlternation;
@@ -1754,6 +1755,7 @@ pub enum RuleEnum {
     OxcPreferSingleBooleanReturn(OxcPreferSingleBooleanReturn),
     OxcPreferWhile(OxcPreferWhile),
     OxcProductionDebug(OxcProductionDebug),
+    OxcPseudoRandom(OxcPseudoRandom),
     OxcRequireSafetyCommentForTypeAssertion(OxcRequireSafetyCommentForTypeAssertion),
     OxcSingleCharInCharacterClasses(OxcSingleCharInCharacterClasses),
     OxcSingleCharacterAlternation(OxcSingleCharacterAlternation),
@@ -2811,7 +2813,8 @@ const OXC_PREFER_DEFAULT_LAST_ID: usize = OXC_POST_MESSAGE_ID + 1usize;
 const OXC_PREFER_SINGLE_BOOLEAN_RETURN_ID: usize = OXC_PREFER_DEFAULT_LAST_ID + 1usize;
 const OXC_PREFER_WHILE_ID: usize = OXC_PREFER_SINGLE_BOOLEAN_RETURN_ID + 1usize;
 const OXC_PRODUCTION_DEBUG_ID: usize = OXC_PREFER_WHILE_ID + 1usize;
-const OXC_REQUIRE_SAFETY_COMMENT_FOR_TYPE_ASSERTION_ID: usize = OXC_PRODUCTION_DEBUG_ID + 1usize;
+const OXC_PSEUDO_RANDOM_ID: usize = OXC_PRODUCTION_DEBUG_ID + 1usize;
+const OXC_REQUIRE_SAFETY_COMMENT_FOR_TYPE_ASSERTION_ID: usize = OXC_PSEUDO_RANDOM_ID + 1usize;
 const OXC_SINGLE_CHAR_IN_CHARACTER_CLASSES_ID: usize =
     OXC_REQUIRE_SAFETY_COMMENT_FOR_TYPE_ASSERTION_ID + 1usize;
 const OXC_SINGLE_CHARACTER_ALTERNATION_ID: usize = OXC_SINGLE_CHAR_IN_CHARACTER_CLASSES_ID + 1usize;
@@ -3028,7 +3031,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 963usize] = [
+static RULE_NAMES: [&str; 964usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3794,6 +3797,7 @@ static RULE_NAMES: [&str; 963usize] = [
     OxcPreferSingleBooleanReturn::NAME,
     OxcPreferWhile::NAME,
     OxcProductionDebug::NAME,
+    OxcPseudoRandom::NAME,
     OxcRequireSafetyCommentForTypeAssertion::NAME,
     OxcSingleCharInCharacterClasses::NAME,
     OxcSingleCharacterAlternation::NAME,
@@ -4877,6 +4881,7 @@ impl RuleEnum {
             Self::OxcPreferSingleBooleanReturn(_) => OXC_PREFER_SINGLE_BOOLEAN_RETURN_ID,
             Self::OxcPreferWhile(_) => OXC_PREFER_WHILE_ID,
             Self::OxcProductionDebug(_) => OXC_PRODUCTION_DEBUG_ID,
+            Self::OxcPseudoRandom(_) => OXC_PSEUDO_RANDOM_ID,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OXC_REQUIRE_SAFETY_COMMENT_FOR_TYPE_ASSERTION_ID
             }
@@ -6015,6 +6020,7 @@ impl RuleEnum {
             Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::CATEGORY,
             Self::OxcPreferWhile(_) => OxcPreferWhile::CATEGORY,
             Self::OxcProductionDebug(_) => OxcProductionDebug::CATEGORY,
+            Self::OxcPseudoRandom(_) => OxcPseudoRandom::CATEGORY,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::CATEGORY
             }
@@ -7113,6 +7119,7 @@ impl RuleEnum {
             Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::FIX,
             Self::OxcPreferWhile(_) => OxcPreferWhile::FIX,
             Self::OxcProductionDebug(_) => OxcProductionDebug::FIX,
+            Self::OxcPseudoRandom(_) => OxcPseudoRandom::FIX,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::FIX
             }
@@ -8421,6 +8428,7 @@ impl RuleEnum {
             Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::documentation(),
             Self::OxcPreferWhile(_) => OxcPreferWhile::documentation(),
             Self::OxcProductionDebug(_) => OxcProductionDebug::documentation(),
+            Self::OxcPseudoRandom(_) => OxcPseudoRandom::documentation(),
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::documentation()
             }
@@ -10871,6 +10879,8 @@ impl RuleEnum {
                 .or_else(|| OxcPreferWhile::schema(generator)),
             Self::OxcProductionDebug(_) => OxcProductionDebug::config_schema(generator)
                 .or_else(|| OxcProductionDebug::schema(generator)),
+            Self::OxcPseudoRandom(_) => OxcPseudoRandom::config_schema(generator)
+                .or_else(|| OxcPseudoRandom::schema(generator)),
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::config_schema(generator)
                     .or_else(|| OxcRequireSafetyCommentForTypeAssertion::schema(generator))
@@ -12194,6 +12204,7 @@ impl RuleEnum {
             Self::OxcPreferSingleBooleanReturn(_) => "oxc",
             Self::OxcPreferWhile(_) => "oxc",
             Self::OxcProductionDebug(_) => "oxc",
+            Self::OxcPseudoRandom(_) => "oxc",
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => "oxc",
             Self::OxcSingleCharInCharacterClasses(_) => "oxc",
             Self::OxcSingleCharacterAlternation(_) => "oxc",
@@ -14304,6 +14315,7 @@ impl RuleEnum {
             Self::OxcPreferSingleBooleanReturn(rule) => rule.run(node, ctx),
             Self::OxcPreferWhile(rule) => rule.run(node, ctx),
             Self::OxcProductionDebug(rule) => rule.run(node, ctx),
+            Self::OxcPseudoRandom(rule) => rule.run(node, ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.run(node, ctx),
             Self::OxcSingleCharInCharacterClasses(rule) => rule.run(node, ctx),
             Self::OxcSingleCharacterAlternation(rule) => rule.run(node, ctx),
@@ -15284,6 +15296,7 @@ impl RuleEnum {
             Self::OxcPreferSingleBooleanReturn(rule) => rule.run_once(ctx),
             Self::OxcPreferWhile(rule) => rule.run_once(ctx),
             Self::OxcProductionDebug(rule) => rule.run_once(ctx),
+            Self::OxcPseudoRandom(rule) => rule.run_once(ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.run_once(ctx),
             Self::OxcSingleCharInCharacterClasses(rule) => rule.run_once(ctx),
             Self::OxcSingleCharacterAlternation(rule) => rule.run_once(ctx),
@@ -16371,6 +16384,7 @@ impl RuleEnum {
             Self::OxcPreferSingleBooleanReturn(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcPreferWhile(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcProductionDebug(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcPseudoRandom(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => {
                 rule.run_on_jest_node(jest_node, ctx)
             }
@@ -17364,6 +17378,7 @@ impl RuleEnum {
             Self::OxcPreferSingleBooleanReturn(rule) => rule.should_run(ctx),
             Self::OxcPreferWhile(rule) => rule.should_run(ctx),
             Self::OxcProductionDebug(rule) => rule.should_run(ctx),
+            Self::OxcPseudoRandom(rule) => rule.should_run(ctx),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.should_run(ctx),
             Self::OxcSingleCharInCharacterClasses(rule) => rule.should_run(ctx),
             Self::OxcSingleCharacterAlternation(rule) => rule.should_run(ctx),
@@ -18659,6 +18674,7 @@ impl RuleEnum {
             Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::IS_TSGOLINT_RULE,
             Self::OxcPreferWhile(_) => OxcPreferWhile::IS_TSGOLINT_RULE,
             Self::OxcProductionDebug(_) => OxcProductionDebug::IS_TSGOLINT_RULE,
+            Self::OxcPseudoRandom(_) => OxcPseudoRandom::IS_TSGOLINT_RULE,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::IS_TSGOLINT_RULE
             }
@@ -19854,6 +19870,7 @@ impl RuleEnum {
             Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::VERSION,
             Self::OxcPreferWhile(_) => OxcPreferWhile::VERSION,
             Self::OxcProductionDebug(_) => OxcProductionDebug::VERSION,
+            Self::OxcPseudoRandom(_) => OxcPseudoRandom::VERSION,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::VERSION
             }
@@ -21032,6 +21049,7 @@ impl RuleEnum {
             Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::HAS_CONFIG,
             Self::OxcPreferWhile(_) => OxcPreferWhile::HAS_CONFIG,
             Self::OxcProductionDebug(_) => OxcProductionDebug::HAS_CONFIG,
+            Self::OxcPseudoRandom(_) => OxcPseudoRandom::HAS_CONFIG,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::HAS_CONFIG
             }
@@ -22139,6 +22157,7 @@ impl RuleEnum {
             Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::INFO,
             Self::OxcPreferWhile(_) => OxcPreferWhile::INFO,
             Self::OxcProductionDebug(_) => OxcProductionDebug::INFO,
+            Self::OxcPseudoRandom(_) => OxcPseudoRandom::INFO,
             Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
                 OxcRequireSafetyCommentForTypeAssertion::INFO
             }
@@ -23123,6 +23142,7 @@ impl RuleEnum {
             Self::OxcPreferSingleBooleanReturn(rule) => rule.types_info(),
             Self::OxcPreferWhile(rule) => rule.types_info(),
             Self::OxcProductionDebug(rule) => rule.types_info(),
+            Self::OxcPseudoRandom(rule) => rule.types_info(),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.types_info(),
             Self::OxcSingleCharInCharacterClasses(rule) => rule.types_info(),
             Self::OxcSingleCharacterAlternation(rule) => rule.types_info(),
@@ -24090,6 +24110,7 @@ impl RuleEnum {
             Self::OxcPreferSingleBooleanReturn(rule) => rule.run_info(),
             Self::OxcPreferWhile(rule) => rule.run_info(),
             Self::OxcProductionDebug(rule) => rule.run_info(),
+            Self::OxcPseudoRandom(rule) => rule.run_info(),
             Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.run_info(),
             Self::OxcSingleCharInCharacterClasses(rule) => rule.run_info(),
             Self::OxcSingleCharacterAlternation(rule) => rule.run_info(),
@@ -25183,6 +25204,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcPreferSingleBooleanReturn(OxcPreferSingleBooleanReturn::default()),
         RuleEnum::OxcPreferWhile(OxcPreferWhile::default()),
         RuleEnum::OxcProductionDebug(OxcProductionDebug::default()),
+        RuleEnum::OxcPseudoRandom(OxcPseudoRandom::default()),
         RuleEnum::OxcRequireSafetyCommentForTypeAssertion(
             OxcRequireSafetyCommentForTypeAssertion::default(),
         ),

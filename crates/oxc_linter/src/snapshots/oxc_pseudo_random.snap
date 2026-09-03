@@ -1,0 +1,10 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(pseudo-random): Make sure that using this pseudorandom number generator is safe here.
+   ╭─[pseudo_random.tsx:1:1]
+ 1 │ Math.random();
+   · ─────────────
+   ╰────
