@@ -1,0 +1,18 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-reflect-apply): Avoid `Reflect.apply`.
+   ╭─[no_reflect_apply.tsx:1:1]
+ 1 │ Reflect.apply(fn, receiver, args)
+   · ─────────────────────────────────
+   ╰────
+  help: Use a direct call or a typed wrapper instead.
+
+  ⚠ oxc(no-reflect-apply): Avoid `Reflect.apply`.
+   ╭─[no_reflect_apply.tsx:1:1]
+ 1 │ Reflect["apply"](fn, receiver, args)
+   · ────────────────────────────────────
+   ╰────
+  help: Use a direct call or a typed wrapper instead.

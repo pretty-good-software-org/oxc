@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(label-position): Move this label to a loop or switch statement.
+   ╭─[label_position.tsx:1:1]
+ 1 │ label: if (value) run();
+   · ─────
+   ╰────
+  help: Labels should identify statements that can be continued or broken.

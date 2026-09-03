@@ -1769,6 +1769,32 @@ mod test {
     }
 
     #[test]
+    fn test_unknown_sonarjs_rule_errors_in_root_config() {
+        let oxlintrc: Oxlintrc = serde_json::from_str(
+            r#"
+            {
+                "rules": {
+                    "sonarjs/not-ported": "error"
+                }
+            }
+            "#,
+        )
+        .unwrap();
+
+        let mut external_plugin_store = ExternalPluginStore::default();
+        let err = ConfigStoreBuilder::from_oxlintrc(
+            true,
+            oxlintrc,
+            None,
+            &mut external_plugin_store,
+            None,
+        )
+        .unwrap_err();
+
+        assert_eq!(err.to_string(), "Rule 'not-ported' not found in plugin 'oxc'");
+    }
+
+    #[test]
     fn test_unknown_builtin_rule_errors_in_overrides() {
         let oxlintrc: Oxlintrc = serde_json::from_str(
             r#"

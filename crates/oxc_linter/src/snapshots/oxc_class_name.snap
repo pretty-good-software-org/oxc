@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(class-name): Rename class `example` to match `^[A-Z][a-zA-Z0-9]*$`.
+   ╭─[class_name.tsx:1:1]
+ 1 │ class example {}
+   · ────────────────
+   ╰────
+  help: Use a PascalCase class name.

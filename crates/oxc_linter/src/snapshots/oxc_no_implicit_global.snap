@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-implicit-global): Add an explicit declaration for `implicitValue` to avoid creating an implicit global.
+   ╭─[no_implicit_global.tsx:1:1]
+ 1 │ implicitValue = 1;
+   · ─────────────
+   ╰────
+  help: Declare the variable with `let`, `const`, or `var`.

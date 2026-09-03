@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-clear-text-protocols): Use HTTPS instead of a clear-text HTTP URL.
+   ╭─[no_clear_text_protocols.tsx:1:13]
+ 1 │ const url = "http://example.test";
+   ·             ─────────────────────
+   ╰────
+  help: Use an HTTPS URL to protect data in transit.

@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(prefer-single-boolean-return): Replace this if-then-else flow with a single return statement.
+   ╭─[prefer_single_boolean_return.tsx:1:1]
+ 1 │ if (condition) return true; else return false;
+   · ──────────────────────────────────────────────
+   ╰────
+  help: Return the condition directly, negating it when necessary.

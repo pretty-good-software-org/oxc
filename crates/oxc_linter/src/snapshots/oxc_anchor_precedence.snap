@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(anchor-precedence): Group parts of the regex together to make anchor precedence explicit.
+   ╭─[anchor_precedence.tsx:1:1]
+ 1 │ /^foo|bar/
+   · ──────────
+   ╰────
+  help: Use parentheses to show which alternatives the anchor applies to.

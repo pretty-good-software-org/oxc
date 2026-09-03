@@ -1,0 +1,10 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(empty-string-repetition): Rework this part of the regex to not match the empty string.
+   ╭─[empty_string_repetition.tsx:1:1]
+ 1 │ /(?:)*/
+   · ───────
+   ╰────

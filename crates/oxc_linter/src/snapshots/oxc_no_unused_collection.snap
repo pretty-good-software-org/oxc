@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-unused-collection): Either use this collection's contents or remove the collection.
+   ╭─[no_unused_collection.tsx:1:5]
+ 1 │ let values = []; values = []; values = [];
+   ·     ──────
+   ╰────
+  help: Read from the collection or remove redundant assignments.

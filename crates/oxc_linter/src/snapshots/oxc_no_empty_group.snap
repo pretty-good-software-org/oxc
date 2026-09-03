@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-empty-group): Remove the empty regular-expression group.
+   ╭─[no_empty_group.tsx:1:17]
+ 1 │ const pattern = /value()/;
+   ·                 ─────────
+   ╰────
+  help: Replace the empty group with the intended pattern.

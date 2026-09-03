@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-case-label-in-switch): Remove this misleading `label:` label.
+   ╭─[no_case_label_in_switch.tsx:1:26]
+ 1 │ switch (value) { case 1: label: break; }
+   ·                          ─────
+   ╰────
+  help: Use a case clause or a block instead of a label.

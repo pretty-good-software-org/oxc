@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(single-char-in-character-classes): Replace this single-character class with the character itself.
+   ╭─[single_char_in_character_classes.tsx:1:1]
+ 1 │ /[a]/
+   · ─────
+   ╰────
+  help: Remove the brackets around the single character.

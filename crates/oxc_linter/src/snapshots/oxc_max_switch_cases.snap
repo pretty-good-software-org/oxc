@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(max-switch-cases): Reduce this switch statement to at most 30 cases.
+   ╭─[max_switch_cases.tsx:1:1]
+ 1 │ switch (value) { case 1: handler();case 2: handler();case 3: handler();case 4: handler();case 5: handler();case 6: handler();case 7: handler();case 8: handler();case 9: handler();case 10: handler();case 11: handler();case 12: handler();case 13: handler();case 14: handler();case 15: handler();case 16: handler();case 17: handler();case 18: handler();case 19: handler();case 20: handler();case 21: handler();case 22: handler();case 23: handler();case 24: handler();case 25: handler();case 26: handler();case 27: handler();case 28: handler();case 29: handler();case 30: handler();case 31: handler(); }
+   · ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   ╰────
+  help: Split the switch into smaller decision structures.

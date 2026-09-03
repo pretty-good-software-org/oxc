@@ -1,0 +1,16 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(for-loop-increment-sign): `i` moves away from its stop condition.
+   ╭─[for_loop_increment_sign.tsx:1:25]
+ 1 │ for (let i = 0; i < 10; i--) {}
+   ·                         ───
+   ╰────
+
+  ⚠ oxc(for-loop-increment-sign): `i` moves away from its stop condition.
+   ╭─[for_loop_increment_sign.tsx:1:25]
+ 1 │ for (let i = 10; i > 0; i++) {}
+   ·                         ───
+   ╰────

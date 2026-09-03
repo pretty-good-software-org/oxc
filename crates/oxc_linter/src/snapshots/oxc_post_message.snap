@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(post-message): Specify a target origin for this message.
+   ╭─[post_message.tsx:1:29]
+ 1 │ window.postMessage(message, '*')
+   ·                             ───
+   ╰────
+  help: Replace `*` with the exact origin that should receive the message.

@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-equals-in-for-termination): Replace 'i != 3' with a relational comparison for loop termination.
+   ╭─[no_equals_in_for_termination.tsx:1:17]
+ 1 │ for (let i = 0; i != 3; i++) {}
+   ·                 ──────
+   ╰────
+  help: Use `<`, `<=`, `>` or `>=` for an incrementing loop.

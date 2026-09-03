@@ -1,0 +1,18 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-module-mocking): Avoid test-framework module mocking.
+   ╭─[no_module_mocking.tsx:1:1]
+ 1 │ vi.mock('./client')
+   · ───────────────────
+   ╰────
+  help: Replace module mocking with dependency injection through a real interface.
+
+  ⚠ oxc(no-module-mocking): Avoid test-framework module mocking.
+   ╭─[no_module_mocking.tsx:1:1]
+ 1 │ jest.doMock('./client')
+   · ───────────────────────
+   ╰────
+  help: Replace module mocking with dependency injection through a real interface.

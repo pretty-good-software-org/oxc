@@ -1,0 +1,27 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-unknown-type-aliases): Type alias `UnknownValue` hides `unknown`.
+   ╭─[no_unknown_type_aliases.tsx:1:6]
+ 1 │ type UnknownValue = unknown;
+   ·      ────────────
+   ╰────
+  help: Keep `unknown` explicit at the parsing boundary or use a parsed owner type.
+
+  ⚠ oxc(no-unknown-type-aliases): Type alias `Alias` hides `unknown`.
+   ╭─[no_unknown_type_aliases.tsx:1:6]
+ 1 │ type Alias = UnknownValue;
+   ·      ─────
+ 2 │ type UnknownValue = unknown;
+   ╰────
+  help: Keep `unknown` explicit at the parsing boundary or use a parsed owner type.
+
+  ⚠ oxc(no-unknown-type-aliases): Type alias `UnknownValue` hides `unknown`.
+   ╭─[no_unknown_type_aliases.tsx:2:6]
+ 1 │ type Alias = UnknownValue;
+ 2 │ type UnknownValue = unknown;
+   ·      ────────────
+   ╰────
+  help: Keep `unknown` explicit at the parsing boundary or use a parsed owner type.

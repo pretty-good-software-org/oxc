@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(unused-import): Remove the unused import `value`.
+   ╭─[unused_import.tsx:1:10]
+ 1 │ import { value } from 'module';
+   ·          ─────
+   ╰────
+  help: Remove the import or use it in this file.

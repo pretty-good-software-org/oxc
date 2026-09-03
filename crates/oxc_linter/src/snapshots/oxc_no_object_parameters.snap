@@ -1,0 +1,18 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-object-parameters): Parameter `value` uses the broad `object` type.
+   ╭─[no_object_parameters.tsx:1:23]
+ 1 │ function process(value: object) {}
+   ·                       ────────
+   ╰────
+  help: Accept a named owner type and decode external input at its boundary.
+
+  ⚠ oxc(no-object-parameters): Parameter `value` uses the broad `object` type.
+   ╭─[no_object_parameters.tsx:1:23]
+ 1 │ const process = (value: object) => value;
+   ·                       ────────
+   ╰────
+  help: Accept a named owner type and decode external input at its boundary.

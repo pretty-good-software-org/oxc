@@ -112,6 +112,7 @@ pub use crate::rules::eslint::no_new_wrappers::NoNewWrappers as EslintNoNewWrapp
 pub use crate::rules::eslint::no_nonoctal_decimal_escape::NoNonoctalDecimalEscape as EslintNoNonoctalDecimalEscape;
 pub use crate::rules::eslint::no_obj_calls::NoObjCalls as EslintNoObjCalls;
 pub use crate::rules::eslint::no_object_constructor::NoObjectConstructor as EslintNoObjectConstructor;
+pub use crate::rules::eslint::no_octal::NoOctal as EslintNoOctal;
 pub use crate::rules::eslint::no_param_reassign::NoParamReassign as EslintNoParamReassign;
 pub use crate::rules::eslint::no_plusplus::NoPlusplus as EslintNoPlusplus;
 pub use crate::rules::eslint::no_promise_executor_return::NoPromiseExecutorReturn as EslintNoPromiseExecutorReturn;
@@ -381,7 +382,9 @@ pub use crate::rules::node::no_path_concat::NoPathConcat as NodeNoPathConcat;
 pub use crate::rules::node::no_process_env::NoProcessEnv as NodeNoProcessEnv;
 pub use crate::rules::node::no_sync::NoSync as NodeNoSync;
 pub use crate::rules::node::no_top_level_await::NoTopLevelAwait as NodeNoTopLevelAwait;
+pub use crate::rules::oxc::anchor_precedence::AnchorPrecedence as OxcAnchorPrecedence;
 pub use crate::rules::oxc::approx_constant::ApproxConstant as OxcApproxConstant;
+pub use crate::rules::oxc::array_callback_without_return::ArrayCallbackWithoutReturn as OxcArrayCallbackWithoutReturn;
 pub use crate::rules::oxc::bad_array_method_on_arguments::BadArrayMethodOnArguments as OxcBadArrayMethodOnArguments;
 pub use crate::rules::oxc::bad_bitwise_operator::BadBitwiseOperator as OxcBadBitwiseOperator;
 pub use crate::rules::oxc::bad_char_at_comparison::BadCharAtComparison as OxcBadCharAtComparison;
@@ -391,23 +394,114 @@ pub use crate::rules::oxc::bad_min_max_func::BadMinMaxFunc as OxcBadMinMaxFunc;
 pub use crate::rules::oxc::bad_object_literal_comparison::BadObjectLiteralComparison as OxcBadObjectLiteralComparison;
 pub use crate::rules::oxc::bad_replace_all_arg::BadReplaceAllArg as OxcBadReplaceAllArg;
 pub use crate::rules::oxc::branches_sharing_code::BranchesSharingCode as OxcBranchesSharingCode;
+pub use crate::rules::oxc::class_name::ClassName as OxcClassName;
+pub use crate::rules::oxc::comma_or_logical_or_case::CommaOrLogicalOrCase as OxcCommaOrLogicalOrCase;
+pub use crate::rules::oxc::concise_regex::ConciseRegex as OxcConciseRegex;
 pub use crate::rules::oxc::const_comparisons::ConstComparisons as OxcConstComparisons;
+pub use crate::rules::oxc::constructor_for_side_effects::ConstructorForSideEffects as OxcConstructorForSideEffects;
+pub use crate::rules::oxc::different_types_comparison::DifferentTypesComparison as OxcDifferentTypesComparison;
 pub use crate::rules::oxc::double_comparisons::DoubleComparisons as OxcDoubleComparisons;
+pub use crate::rules::oxc::duplicates_in_character_class::DuplicatesInCharacterClass as OxcDuplicatesInCharacterClass;
+pub use crate::rules::oxc::empty_string_repetition::EmptyStringRepetition as OxcEmptyStringRepetition;
 pub use crate::rules::oxc::erasing_op::ErasingOp as OxcErasingOp;
+pub use crate::rules::oxc::for_loop_increment_sign::ForLoopIncrementSign as OxcForLoopIncrementSign;
+pub use crate::rules::oxc::generator_without_yield::GeneratorWithoutYield as OxcGeneratorWithoutYield;
+pub use crate::rules::oxc::in_operator_type_error::InOperatorTypeError as OxcInOperatorTypeError;
+pub use crate::rules::oxc::label_position::LabelPosition as OxcLabelPosition;
+pub use crate::rules::oxc::link_with_target_blank::LinkWithTargetBlank as OxcLinkWithTargetBlank;
+pub use crate::rules::oxc::max_switch_cases::MaxSwitchCases as OxcMaxSwitchCases;
 pub use crate::rules::oxc::misrefactored_assign_op::MisrefactoredAssignOp as OxcMisrefactoredAssignOp;
 pub use crate::rules::oxc::missing_throw::MissingThrow as OxcMissingThrow;
 pub use crate::rules::oxc::no_accumulating_spread::NoAccumulatingSpread as OxcNoAccumulatingSpread;
+pub use crate::rules::oxc::no_all_duplicated_branches::NoAllDuplicatedBranches as OxcNoAllDuplicatedBranches;
+pub use crate::rules::oxc::no_angular_bypass_sanitization::NoAngularBypassSanitization as OxcNoAngularBypassSanitization;
 pub use crate::rules::oxc::no_async_await::NoAsyncAwait as OxcNoAsyncAwait;
+pub use crate::rules::oxc::no_async_constructor::NoAsyncConstructor as OxcNoAsyncConstructor;
 pub use crate::rules::oxc::no_async_endpoint_handlers::NoAsyncEndpointHandlers as OxcNoAsyncEndpointHandlers;
 pub use crate::rules::oxc::no_barrel_file::NoBarrelFile as OxcNoBarrelFile;
+pub use crate::rules::oxc::no_case_label_in_switch::NoCaseLabelInSwitch as OxcNoCaseLabelInSwitch;
+pub use crate::rules::oxc::no_chained_type_assertions::NoChainedTypeAssertions as OxcNoChainedTypeAssertions;
+pub use crate::rules::oxc::no_clear_text_protocols::NoClearTextProtocols as OxcNoClearTextProtocols;
+pub use crate::rules::oxc::no_collection_size_mischeck::NoCollectionSizeMischeck as OxcNoCollectionSizeMischeck;
+pub use crate::rules::oxc::no_commented_code::NoCommentedCode as OxcNoCommentedCode;
+pub use crate::rules::oxc::no_conditional_empty_object_spread::NoConditionalEmptyObjectSpread as OxcNoConditionalEmptyObjectSpread;
 pub use crate::rules::oxc::no_const_enum::NoConstEnum as OxcNoConstEnum;
+pub use crate::rules::oxc::no_duplicate_in_composite::NoDuplicateInComposite as OxcNoDuplicateInComposite;
+pub use crate::rules::oxc::no_duplicated_branches::NoDuplicatedBranches as OxcNoDuplicatedBranches;
+pub use crate::rules::oxc::no_empty_after_reluctant::NoEmptyAfterReluctant as OxcNoEmptyAfterReluctant;
+pub use crate::rules::oxc::no_empty_alternatives::NoEmptyAlternatives as OxcNoEmptyAlternatives;
+pub use crate::rules::oxc::no_empty_collection::NoEmptyCollection as OxcNoEmptyCollection;
+pub use crate::rules::oxc::no_empty_group::NoEmptyGroup as OxcNoEmptyGroup;
+pub use crate::rules::oxc::no_empty_test_file::NoEmptyTestFile as OxcNoEmptyTestFile;
+pub use crate::rules::oxc::no_equals_in_for_termination::NoEqualsInForTermination as OxcNoEqualsInForTermination;
+pub use crate::rules::oxc::no_exclusive_tests::NoExclusiveTests as OxcNoExclusiveTests;
+pub use crate::rules::oxc::no_global_this::NoGlobalThis as OxcNoGlobalThis;
+pub use crate::rules::oxc::no_hardcoded_ip::NoHardcodedIp as OxcNoHardcodedIp;
+pub use crate::rules::oxc::no_hardcoded_passwords::NoHardcodedPasswords as OxcNoHardcodedPasswords;
+pub use crate::rules::oxc::no_hardcoded_secrets::NoHardcodedSecrets as OxcNoHardcodedSecrets;
+pub use crate::rules::oxc::no_identical_conditions::NoIdenticalConditions as OxcNoIdenticalConditions;
+pub use crate::rules::oxc::no_identical_expressions::NoIdenticalExpressions as OxcNoIdenticalExpressions;
+pub use crate::rules::oxc::no_ignored_exceptions::NoIgnoredExceptions as OxcNoIgnoredExceptions;
+pub use crate::rules::oxc::no_ignored_return::NoIgnoredReturn as OxcNoIgnoredReturn;
+pub use crate::rules::oxc::no_implicit_global::NoImplicitGlobal as OxcNoImplicitGlobal;
+pub use crate::rules::oxc::no_in_misuse::NoInMisuse as OxcNoInMisuse;
+pub use crate::rules::oxc::no_insecure_cookie::NoInsecureCookie as OxcNoInsecureCookie;
+pub use crate::rules::oxc::no_internal_api_use::NoInternalApiUse as OxcNoInternalApiUse;
+pub use crate::rules::oxc::no_inverted_boolean_check::NoInvertedBooleanCheck as OxcNoInvertedBooleanCheck;
+pub use crate::rules::oxc::no_known_value_widening::NoKnownValueWidening as OxcNoKnownValueWidening;
+pub use crate::rules::oxc::no_literal_call::NoLiteralCall as OxcNoLiteralCall;
 pub use crate::rules::oxc::no_map_spread::NoMapSpread as OxcNoMapSpread;
+pub use crate::rules::oxc::no_module_mocking::NoModuleMocking as OxcNoModuleMocking;
+pub use crate::rules::oxc::no_nested_assignment::NoNestedAssignment as OxcNoNestedAssignment;
+pub use crate::rules::oxc::no_nested_functions::NoNestedFunctions as OxcNoNestedFunctions;
+pub use crate::rules::oxc::no_nested_template_literals::NoNestedTemplateLiterals as OxcNoNestedTemplateLiterals;
+pub use crate::rules::oxc::no_object_parameters::NoObjectParameters as OxcNoObjectParameters;
 pub use crate::rules::oxc::no_optional_chaining::NoOptionalChaining as OxcNoOptionalChaining;
+pub use crate::rules::oxc::no_os_command_from_path::NoOsCommandFromPath as OxcNoOsCommandFromPath;
+pub use crate::rules::oxc::no_redundant_boolean::NoRedundantBoolean as OxcNoRedundantBoolean;
+pub use crate::rules::oxc::no_redundant_jump::NoRedundantJump as OxcNoRedundantJump;
+pub use crate::rules::oxc::no_redundant_optional::NoRedundantOptional as OxcNoRedundantOptional;
+pub use crate::rules::oxc::no_reflect_apply::NoReflectApply as OxcNoReflectApply;
+pub use crate::rules::oxc::no_reflect_get::NoReflectGet as OxcNoReflectGet;
 pub use crate::rules::oxc::no_rest_spread_properties::NoRestSpreadProperties as OxcNoRestSpreadProperties;
+pub use crate::rules::oxc::no_runtime_typeof::NoRuntimeTypeof as OxcNoRuntimeTypeof;
+pub use crate::rules::oxc::no_same_line_conditional::NoSameLineConditional as OxcNoSameLineConditional;
+pub use crate::rules::oxc::no_shape_in_symbol_names::NoShapeInSymbolNames as OxcNoShapeInSymbolNames;
+pub use crate::rules::oxc::no_skipped_tests::NoSkippedTests as OxcNoSkippedTests;
+pub use crate::rules::oxc::no_small_switch::NoSmallSwitch as OxcNoSmallSwitch;
 pub use crate::rules::oxc::no_this_in_exported_function::NoThisInExportedFunction as OxcNoThisInExportedFunction;
+pub use crate::rules::oxc::no_undefined_argument::NoUndefinedArgument as OxcNoUndefinedArgument;
+pub use crate::rules::oxc::no_uniq_key::NoUniqKey as OxcNoUniqKey;
+pub use crate::rules::oxc::no_unknown_parameters::NoUnknownParameters as OxcNoUnknownParameters;
+pub use crate::rules::oxc::no_unknown_returns::NoUnknownReturns as OxcNoUnknownReturns;
+pub use crate::rules::oxc::no_unknown_type_aliases::NoUnknownTypeAliases as OxcNoUnknownTypeAliases;
+pub use crate::rules::oxc::no_unsafe_dictionary_type::NoUnsafeDictionaryType as OxcNoUnsafeDictionaryType;
+pub use crate::rules::oxc::no_unsafe_unzip::NoUnsafeUnzip as OxcNoUnsafeUnzip;
+pub use crate::rules::oxc::no_unthrown_error::NoUnthrownError as OxcNoUnthrownError;
+pub use crate::rules::oxc::no_unused_collection::NoUnusedCollection as OxcNoUnusedCollection;
+pub use crate::rules::oxc::no_unverified_certificate::NoUnverifiedCertificate as OxcNoUnverifiedCertificate;
+pub use crate::rules::oxc::no_unverified_hostname::NoUnverifiedHostname as OxcNoUnverifiedHostname;
+pub use crate::rules::oxc::no_useless_increment::NoUselessIncrement as OxcNoUselessIncrement;
+pub use crate::rules::oxc::no_weak_cipher::NoWeakCipher as OxcNoWeakCipher;
+pub use crate::rules::oxc::no_weak_keys::NoWeakKeys as OxcNoWeakKeys;
+pub use crate::rules::oxc::no_weak_ssl::NoWeakSsl as OxcNoWeakSsl;
+pub use crate::rules::oxc::no_widen_then_assert::NoWidenThenAssert as OxcNoWidenThenAssert;
 pub use crate::rules::oxc::number_arg_out_of_range::NumberArgOutOfRange as OxcNumberArgOutOfRange;
 pub use crate::rules::oxc::only_used_in_recursion::OnlyUsedInRecursion as OxcOnlyUsedInRecursion;
+pub use crate::rules::oxc::post_message::PostMessage as OxcPostMessage;
+pub use crate::rules::oxc::prefer_default_last::PreferDefaultLast as OxcPreferDefaultLast;
+pub use crate::rules::oxc::prefer_single_boolean_return::PreferSingleBooleanReturn as OxcPreferSingleBooleanReturn;
+pub use crate::rules::oxc::prefer_while::PreferWhile as OxcPreferWhile;
+pub use crate::rules::oxc::production_debug::ProductionDebug as OxcProductionDebug;
+pub use crate::rules::oxc::pseudo_random::PseudoRandom as OxcPseudoRandom;
+pub use crate::rules::oxc::require_safety_comment_for_type_assertion::RequireSafetyCommentForTypeAssertion as OxcRequireSafetyCommentForTypeAssertion;
+pub use crate::rules::oxc::single_char_in_character_classes::SingleCharInCharacterClasses as OxcSingleCharInCharacterClasses;
+pub use crate::rules::oxc::single_character_alternation::SingleCharacterAlternation as OxcSingleCharacterAlternation;
 pub use crate::rules::oxc::uninvoked_array_callback::UninvokedArrayCallback as OxcUninvokedArrayCallback;
+pub use crate::rules::oxc::unused_import::UnusedImport as OxcUnusedImport;
+pub use crate::rules::oxc::unused_named_groups::UnusedNamedGroups as OxcUnusedNamedGroups;
+pub use crate::rules::oxc::use_type_alias::UseTypeAlias as OxcUseTypeAlias;
+pub use crate::rules::oxc::void_use::VoidUse as OxcVoidUse;
 pub use crate::rules::promise::always_return::AlwaysReturn as PromiseAlwaysReturn;
 pub use crate::rules::promise::avoid_new::AvoidNew as PromiseAvoidNew;
 pub use crate::rules::promise::catch_or_return::CatchOrReturn as PromiseCatchOrReturn;
@@ -1025,6 +1119,7 @@ pub enum RuleEnum {
     EslintNoNonoctalDecimalEscape(EslintNoNonoctalDecimalEscape),
     EslintNoObjCalls(EslintNoObjCalls),
     EslintNoObjectConstructor(EslintNoObjectConstructor),
+    EslintNoOctal(EslintNoOctal),
     EslintNoParamReassign(EslintNoParamReassign),
     EslintNoPlusplus(EslintNoPlusplus),
     EslintNoPromiseExecutorReturn(EslintNoPromiseExecutorReturn),
@@ -1549,7 +1644,9 @@ pub enum RuleEnum {
     JsxA11YRoleSupportsAriaProps(JsxA11YRoleSupportsAriaProps),
     JsxA11YScope(JsxA11YScope),
     JsxA11YTabindexNoPositive(JsxA11YTabindexNoPositive),
+    OxcAnchorPrecedence(OxcAnchorPrecedence),
     OxcApproxConstant(OxcApproxConstant),
+    OxcArrayCallbackWithoutReturn(OxcArrayCallbackWithoutReturn),
     OxcBadArrayMethodOnArguments(OxcBadArrayMethodOnArguments),
     OxcBadBitwiseOperator(OxcBadBitwiseOperator),
     OxcBadCharAtComparison(OxcBadCharAtComparison),
@@ -1559,23 +1656,114 @@ pub enum RuleEnum {
     OxcBadObjectLiteralComparison(OxcBadObjectLiteralComparison),
     OxcBadReplaceAllArg(OxcBadReplaceAllArg),
     OxcBranchesSharingCode(OxcBranchesSharingCode),
+    OxcClassName(OxcClassName),
+    OxcCommaOrLogicalOrCase(OxcCommaOrLogicalOrCase),
+    OxcConciseRegex(OxcConciseRegex),
     OxcConstComparisons(OxcConstComparisons),
+    OxcConstructorForSideEffects(OxcConstructorForSideEffects),
+    OxcDifferentTypesComparison(OxcDifferentTypesComparison),
     OxcDoubleComparisons(OxcDoubleComparisons),
+    OxcDuplicatesInCharacterClass(OxcDuplicatesInCharacterClass),
+    OxcEmptyStringRepetition(OxcEmptyStringRepetition),
     OxcErasingOp(OxcErasingOp),
+    OxcForLoopIncrementSign(OxcForLoopIncrementSign),
+    OxcGeneratorWithoutYield(OxcGeneratorWithoutYield),
+    OxcInOperatorTypeError(OxcInOperatorTypeError),
+    OxcLabelPosition(OxcLabelPosition),
+    OxcLinkWithTargetBlank(OxcLinkWithTargetBlank),
+    OxcMaxSwitchCases(OxcMaxSwitchCases),
     OxcMisrefactoredAssignOp(OxcMisrefactoredAssignOp),
     OxcMissingThrow(OxcMissingThrow),
     OxcNoAccumulatingSpread(OxcNoAccumulatingSpread),
+    OxcNoAllDuplicatedBranches(OxcNoAllDuplicatedBranches),
+    OxcNoAngularBypassSanitization(OxcNoAngularBypassSanitization),
     OxcNoAsyncAwait(OxcNoAsyncAwait),
+    OxcNoAsyncConstructor(OxcNoAsyncConstructor),
     OxcNoAsyncEndpointHandlers(OxcNoAsyncEndpointHandlers),
     OxcNoBarrelFile(OxcNoBarrelFile),
+    OxcNoCaseLabelInSwitch(OxcNoCaseLabelInSwitch),
+    OxcNoChainedTypeAssertions(OxcNoChainedTypeAssertions),
+    OxcNoClearTextProtocols(OxcNoClearTextProtocols),
+    OxcNoCollectionSizeMischeck(OxcNoCollectionSizeMischeck),
+    OxcNoCommentedCode(OxcNoCommentedCode),
+    OxcNoConditionalEmptyObjectSpread(OxcNoConditionalEmptyObjectSpread),
     OxcNoConstEnum(OxcNoConstEnum),
+    OxcNoDuplicateInComposite(OxcNoDuplicateInComposite),
+    OxcNoDuplicatedBranches(OxcNoDuplicatedBranches),
+    OxcNoEmptyAfterReluctant(OxcNoEmptyAfterReluctant),
+    OxcNoEmptyAlternatives(OxcNoEmptyAlternatives),
+    OxcNoEmptyCollection(OxcNoEmptyCollection),
+    OxcNoEmptyGroup(OxcNoEmptyGroup),
+    OxcNoEmptyTestFile(OxcNoEmptyTestFile),
+    OxcNoEqualsInForTermination(OxcNoEqualsInForTermination),
+    OxcNoExclusiveTests(OxcNoExclusiveTests),
+    OxcNoGlobalThis(OxcNoGlobalThis),
+    OxcNoHardcodedIp(OxcNoHardcodedIp),
+    OxcNoHardcodedPasswords(OxcNoHardcodedPasswords),
+    OxcNoHardcodedSecrets(OxcNoHardcodedSecrets),
+    OxcNoIdenticalConditions(OxcNoIdenticalConditions),
+    OxcNoIdenticalExpressions(OxcNoIdenticalExpressions),
+    OxcNoIgnoredExceptions(OxcNoIgnoredExceptions),
+    OxcNoIgnoredReturn(OxcNoIgnoredReturn),
+    OxcNoImplicitGlobal(OxcNoImplicitGlobal),
+    OxcNoInMisuse(OxcNoInMisuse),
+    OxcNoInsecureCookie(OxcNoInsecureCookie),
+    OxcNoInternalApiUse(OxcNoInternalApiUse),
+    OxcNoInvertedBooleanCheck(OxcNoInvertedBooleanCheck),
+    OxcNoKnownValueWidening(OxcNoKnownValueWidening),
+    OxcNoLiteralCall(OxcNoLiteralCall),
     OxcNoMapSpread(OxcNoMapSpread),
+    OxcNoModuleMocking(OxcNoModuleMocking),
+    OxcNoNestedAssignment(OxcNoNestedAssignment),
+    OxcNoNestedFunctions(OxcNoNestedFunctions),
+    OxcNoNestedTemplateLiterals(OxcNoNestedTemplateLiterals),
+    OxcNoObjectParameters(OxcNoObjectParameters),
     OxcNoOptionalChaining(OxcNoOptionalChaining),
+    OxcNoOsCommandFromPath(OxcNoOsCommandFromPath),
+    OxcNoRedundantBoolean(OxcNoRedundantBoolean),
+    OxcNoRedundantJump(OxcNoRedundantJump),
+    OxcNoRedundantOptional(OxcNoRedundantOptional),
+    OxcNoReflectApply(OxcNoReflectApply),
+    OxcNoReflectGet(OxcNoReflectGet),
     OxcNoRestSpreadProperties(OxcNoRestSpreadProperties),
+    OxcNoRuntimeTypeof(OxcNoRuntimeTypeof),
+    OxcNoSameLineConditional(OxcNoSameLineConditional),
+    OxcNoShapeInSymbolNames(OxcNoShapeInSymbolNames),
+    OxcNoSkippedTests(OxcNoSkippedTests),
+    OxcNoSmallSwitch(OxcNoSmallSwitch),
     OxcNoThisInExportedFunction(OxcNoThisInExportedFunction),
+    OxcNoUndefinedArgument(OxcNoUndefinedArgument),
+    OxcNoUniqKey(OxcNoUniqKey),
+    OxcNoUnknownParameters(OxcNoUnknownParameters),
+    OxcNoUnknownReturns(OxcNoUnknownReturns),
+    OxcNoUnknownTypeAliases(OxcNoUnknownTypeAliases),
+    OxcNoUnsafeDictionaryType(OxcNoUnsafeDictionaryType),
+    OxcNoUnsafeUnzip(OxcNoUnsafeUnzip),
+    OxcNoUnthrownError(OxcNoUnthrownError),
+    OxcNoUnusedCollection(OxcNoUnusedCollection),
+    OxcNoUnverifiedCertificate(OxcNoUnverifiedCertificate),
+    OxcNoUnverifiedHostname(OxcNoUnverifiedHostname),
+    OxcNoUselessIncrement(OxcNoUselessIncrement),
+    OxcNoWeakCipher(OxcNoWeakCipher),
+    OxcNoWeakKeys(OxcNoWeakKeys),
+    OxcNoWeakSsl(OxcNoWeakSsl),
+    OxcNoWidenThenAssert(OxcNoWidenThenAssert),
     OxcNumberArgOutOfRange(OxcNumberArgOutOfRange),
     OxcOnlyUsedInRecursion(OxcOnlyUsedInRecursion),
+    OxcPostMessage(OxcPostMessage),
+    OxcPreferDefaultLast(OxcPreferDefaultLast),
+    OxcPreferSingleBooleanReturn(OxcPreferSingleBooleanReturn),
+    OxcPreferWhile(OxcPreferWhile),
+    OxcProductionDebug(OxcProductionDebug),
+    OxcPseudoRandom(OxcPseudoRandom),
+    OxcRequireSafetyCommentForTypeAssertion(OxcRequireSafetyCommentForTypeAssertion),
+    OxcSingleCharInCharacterClasses(OxcSingleCharInCharacterClasses),
+    OxcSingleCharacterAlternation(OxcSingleCharacterAlternation),
     OxcUninvokedArrayCallback(OxcUninvokedArrayCallback),
+    OxcUnusedImport(OxcUnusedImport),
+    OxcUnusedNamedGroups(OxcUnusedNamedGroups),
+    OxcUseTypeAlias(OxcUseTypeAlias),
+    OxcVoidUse(OxcVoidUse),
     NextjsGoogleFontDisplay(NextjsGoogleFontDisplay),
     NextjsGoogleFontPreconnect(NextjsGoogleFontPreconnect),
     NextjsInlineScriptId(NextjsInlineScriptId),
@@ -1904,7 +2092,8 @@ const ESLINT_NO_NEW_WRAPPERS_ID: usize = ESLINT_NO_NEW_NATIVE_NONCONSTRUCTOR_ID 
 const ESLINT_NO_NONOCTAL_DECIMAL_ESCAPE_ID: usize = ESLINT_NO_NEW_WRAPPERS_ID + 1usize;
 const ESLINT_NO_OBJ_CALLS_ID: usize = ESLINT_NO_NONOCTAL_DECIMAL_ESCAPE_ID + 1usize;
 const ESLINT_NO_OBJECT_CONSTRUCTOR_ID: usize = ESLINT_NO_OBJ_CALLS_ID + 1usize;
-const ESLINT_NO_PARAM_REASSIGN_ID: usize = ESLINT_NO_OBJECT_CONSTRUCTOR_ID + 1usize;
+const ESLINT_NO_OCTAL_ID: usize = ESLINT_NO_OBJECT_CONSTRUCTOR_ID + 1usize;
+const ESLINT_NO_PARAM_REASSIGN_ID: usize = ESLINT_NO_OCTAL_ID + 1usize;
 const ESLINT_NO_PLUSPLUS_ID: usize = ESLINT_NO_PARAM_REASSIGN_ID + 1usize;
 const ESLINT_NO_PROMISE_EXECUTOR_RETURN_ID: usize = ESLINT_NO_PLUSPLUS_ID + 1usize;
 const ESLINT_NO_PROTO_ID: usize = ESLINT_NO_PROMISE_EXECUTOR_RETURN_ID + 1usize;
@@ -2513,8 +2702,10 @@ const JSX_A_11_Y_ROLE_SUPPORTS_ARIA_PROPS_ID: usize =
     JSX_A_11_Y_ROLE_HAS_REQUIRED_ARIA_PROPS_ID + 1usize;
 const JSX_A_11_Y_SCOPE_ID: usize = JSX_A_11_Y_ROLE_SUPPORTS_ARIA_PROPS_ID + 1usize;
 const JSX_A_11_Y_TABINDEX_NO_POSITIVE_ID: usize = JSX_A_11_Y_SCOPE_ID + 1usize;
-const OXC_APPROX_CONSTANT_ID: usize = JSX_A_11_Y_TABINDEX_NO_POSITIVE_ID + 1usize;
-const OXC_BAD_ARRAY_METHOD_ON_ARGUMENTS_ID: usize = OXC_APPROX_CONSTANT_ID + 1usize;
+const OXC_ANCHOR_PRECEDENCE_ID: usize = JSX_A_11_Y_TABINDEX_NO_POSITIVE_ID + 1usize;
+const OXC_APPROX_CONSTANT_ID: usize = OXC_ANCHOR_PRECEDENCE_ID + 1usize;
+const OXC_ARRAY_CALLBACK_WITHOUT_RETURN_ID: usize = OXC_APPROX_CONSTANT_ID + 1usize;
+const OXC_BAD_ARRAY_METHOD_ON_ARGUMENTS_ID: usize = OXC_ARRAY_CALLBACK_WITHOUT_RETURN_ID + 1usize;
 const OXC_BAD_BITWISE_OPERATOR_ID: usize = OXC_BAD_ARRAY_METHOD_ON_ARGUMENTS_ID + 1usize;
 const OXC_BAD_CHAR_AT_COMPARISON_ID: usize = OXC_BAD_BITWISE_OPERATOR_ID + 1usize;
 const OXC_BAD_COMPARISON_SEQUENCE_ID: usize = OXC_BAD_CHAR_AT_COMPARISON_ID + 1usize;
@@ -2523,24 +2714,116 @@ const OXC_BAD_MIN_MAX_FUNC_ID: usize = OXC_BAD_MATCH_ALL_ARG_ID + 1usize;
 const OXC_BAD_OBJECT_LITERAL_COMPARISON_ID: usize = OXC_BAD_MIN_MAX_FUNC_ID + 1usize;
 const OXC_BAD_REPLACE_ALL_ARG_ID: usize = OXC_BAD_OBJECT_LITERAL_COMPARISON_ID + 1usize;
 const OXC_BRANCHES_SHARING_CODE_ID: usize = OXC_BAD_REPLACE_ALL_ARG_ID + 1usize;
-const OXC_CONST_COMPARISONS_ID: usize = OXC_BRANCHES_SHARING_CODE_ID + 1usize;
-const OXC_DOUBLE_COMPARISONS_ID: usize = OXC_CONST_COMPARISONS_ID + 1usize;
-const OXC_ERASING_OP_ID: usize = OXC_DOUBLE_COMPARISONS_ID + 1usize;
-const OXC_MISREFACTORED_ASSIGN_OP_ID: usize = OXC_ERASING_OP_ID + 1usize;
+const OXC_CLASS_NAME_ID: usize = OXC_BRANCHES_SHARING_CODE_ID + 1usize;
+const OXC_COMMA_OR_LOGICAL_OR_CASE_ID: usize = OXC_CLASS_NAME_ID + 1usize;
+const OXC_CONCISE_REGEX_ID: usize = OXC_COMMA_OR_LOGICAL_OR_CASE_ID + 1usize;
+const OXC_CONST_COMPARISONS_ID: usize = OXC_CONCISE_REGEX_ID + 1usize;
+const OXC_CONSTRUCTOR_FOR_SIDE_EFFECTS_ID: usize = OXC_CONST_COMPARISONS_ID + 1usize;
+const OXC_DIFFERENT_TYPES_COMPARISON_ID: usize = OXC_CONSTRUCTOR_FOR_SIDE_EFFECTS_ID + 1usize;
+const OXC_DOUBLE_COMPARISONS_ID: usize = OXC_DIFFERENT_TYPES_COMPARISON_ID + 1usize;
+const OXC_DUPLICATES_IN_CHARACTER_CLASS_ID: usize = OXC_DOUBLE_COMPARISONS_ID + 1usize;
+const OXC_EMPTY_STRING_REPETITION_ID: usize = OXC_DUPLICATES_IN_CHARACTER_CLASS_ID + 1usize;
+const OXC_ERASING_OP_ID: usize = OXC_EMPTY_STRING_REPETITION_ID + 1usize;
+const OXC_FOR_LOOP_INCREMENT_SIGN_ID: usize = OXC_ERASING_OP_ID + 1usize;
+const OXC_GENERATOR_WITHOUT_YIELD_ID: usize = OXC_FOR_LOOP_INCREMENT_SIGN_ID + 1usize;
+const OXC_IN_OPERATOR_TYPE_ERROR_ID: usize = OXC_GENERATOR_WITHOUT_YIELD_ID + 1usize;
+const OXC_LABEL_POSITION_ID: usize = OXC_IN_OPERATOR_TYPE_ERROR_ID + 1usize;
+const OXC_LINK_WITH_TARGET_BLANK_ID: usize = OXC_LABEL_POSITION_ID + 1usize;
+const OXC_MAX_SWITCH_CASES_ID: usize = OXC_LINK_WITH_TARGET_BLANK_ID + 1usize;
+const OXC_MISREFACTORED_ASSIGN_OP_ID: usize = OXC_MAX_SWITCH_CASES_ID + 1usize;
 const OXC_MISSING_THROW_ID: usize = OXC_MISREFACTORED_ASSIGN_OP_ID + 1usize;
 const OXC_NO_ACCUMULATING_SPREAD_ID: usize = OXC_MISSING_THROW_ID + 1usize;
-const OXC_NO_ASYNC_AWAIT_ID: usize = OXC_NO_ACCUMULATING_SPREAD_ID + 1usize;
-const OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID: usize = OXC_NO_ASYNC_AWAIT_ID + 1usize;
+const OXC_NO_ALL_DUPLICATED_BRANCHES_ID: usize = OXC_NO_ACCUMULATING_SPREAD_ID + 1usize;
+const OXC_NO_ANGULAR_BYPASS_SANITIZATION_ID: usize = OXC_NO_ALL_DUPLICATED_BRANCHES_ID + 1usize;
+const OXC_NO_ASYNC_AWAIT_ID: usize = OXC_NO_ANGULAR_BYPASS_SANITIZATION_ID + 1usize;
+const OXC_NO_ASYNC_CONSTRUCTOR_ID: usize = OXC_NO_ASYNC_AWAIT_ID + 1usize;
+const OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID: usize = OXC_NO_ASYNC_CONSTRUCTOR_ID + 1usize;
 const OXC_NO_BARREL_FILE_ID: usize = OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID + 1usize;
-const OXC_NO_CONST_ENUM_ID: usize = OXC_NO_BARREL_FILE_ID + 1usize;
-const OXC_NO_MAP_SPREAD_ID: usize = OXC_NO_CONST_ENUM_ID + 1usize;
-const OXC_NO_OPTIONAL_CHAINING_ID: usize = OXC_NO_MAP_SPREAD_ID + 1usize;
-const OXC_NO_REST_SPREAD_PROPERTIES_ID: usize = OXC_NO_OPTIONAL_CHAINING_ID + 1usize;
-const OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID: usize = OXC_NO_REST_SPREAD_PROPERTIES_ID + 1usize;
-const OXC_NUMBER_ARG_OUT_OF_RANGE_ID: usize = OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID + 1usize;
+const OXC_NO_CASE_LABEL_IN_SWITCH_ID: usize = OXC_NO_BARREL_FILE_ID + 1usize;
+const OXC_NO_CHAINED_TYPE_ASSERTIONS_ID: usize = OXC_NO_CASE_LABEL_IN_SWITCH_ID + 1usize;
+const OXC_NO_CLEAR_TEXT_PROTOCOLS_ID: usize = OXC_NO_CHAINED_TYPE_ASSERTIONS_ID + 1usize;
+const OXC_NO_COLLECTION_SIZE_MISCHECK_ID: usize = OXC_NO_CLEAR_TEXT_PROTOCOLS_ID + 1usize;
+const OXC_NO_COMMENTED_CODE_ID: usize = OXC_NO_COLLECTION_SIZE_MISCHECK_ID + 1usize;
+const OXC_NO_CONDITIONAL_EMPTY_OBJECT_SPREAD_ID: usize = OXC_NO_COMMENTED_CODE_ID + 1usize;
+const OXC_NO_CONST_ENUM_ID: usize = OXC_NO_CONDITIONAL_EMPTY_OBJECT_SPREAD_ID + 1usize;
+const OXC_NO_DUPLICATE_IN_COMPOSITE_ID: usize = OXC_NO_CONST_ENUM_ID + 1usize;
+const OXC_NO_DUPLICATED_BRANCHES_ID: usize = OXC_NO_DUPLICATE_IN_COMPOSITE_ID + 1usize;
+const OXC_NO_EMPTY_AFTER_RELUCTANT_ID: usize = OXC_NO_DUPLICATED_BRANCHES_ID + 1usize;
+const OXC_NO_EMPTY_ALTERNATIVES_ID: usize = OXC_NO_EMPTY_AFTER_RELUCTANT_ID + 1usize;
+const OXC_NO_EMPTY_COLLECTION_ID: usize = OXC_NO_EMPTY_ALTERNATIVES_ID + 1usize;
+const OXC_NO_EMPTY_GROUP_ID: usize = OXC_NO_EMPTY_COLLECTION_ID + 1usize;
+const OXC_NO_EMPTY_TEST_FILE_ID: usize = OXC_NO_EMPTY_GROUP_ID + 1usize;
+const OXC_NO_EQUALS_IN_FOR_TERMINATION_ID: usize = OXC_NO_EMPTY_TEST_FILE_ID + 1usize;
+const OXC_NO_EXCLUSIVE_TESTS_ID: usize = OXC_NO_EQUALS_IN_FOR_TERMINATION_ID + 1usize;
+const OXC_NO_GLOBAL_THIS_ID: usize = OXC_NO_EXCLUSIVE_TESTS_ID + 1usize;
+const OXC_NO_HARDCODED_IP_ID: usize = OXC_NO_GLOBAL_THIS_ID + 1usize;
+const OXC_NO_HARDCODED_PASSWORDS_ID: usize = OXC_NO_HARDCODED_IP_ID + 1usize;
+const OXC_NO_HARDCODED_SECRETS_ID: usize = OXC_NO_HARDCODED_PASSWORDS_ID + 1usize;
+const OXC_NO_IDENTICAL_CONDITIONS_ID: usize = OXC_NO_HARDCODED_SECRETS_ID + 1usize;
+const OXC_NO_IDENTICAL_EXPRESSIONS_ID: usize = OXC_NO_IDENTICAL_CONDITIONS_ID + 1usize;
+const OXC_NO_IGNORED_EXCEPTIONS_ID: usize = OXC_NO_IDENTICAL_EXPRESSIONS_ID + 1usize;
+const OXC_NO_IGNORED_RETURN_ID: usize = OXC_NO_IGNORED_EXCEPTIONS_ID + 1usize;
+const OXC_NO_IMPLICIT_GLOBAL_ID: usize = OXC_NO_IGNORED_RETURN_ID + 1usize;
+const OXC_NO_IN_MISUSE_ID: usize = OXC_NO_IMPLICIT_GLOBAL_ID + 1usize;
+const OXC_NO_INSECURE_COOKIE_ID: usize = OXC_NO_IN_MISUSE_ID + 1usize;
+const OXC_NO_INTERNAL_API_USE_ID: usize = OXC_NO_INSECURE_COOKIE_ID + 1usize;
+const OXC_NO_INVERTED_BOOLEAN_CHECK_ID: usize = OXC_NO_INTERNAL_API_USE_ID + 1usize;
+const OXC_NO_KNOWN_VALUE_WIDENING_ID: usize = OXC_NO_INVERTED_BOOLEAN_CHECK_ID + 1usize;
+const OXC_NO_LITERAL_CALL_ID: usize = OXC_NO_KNOWN_VALUE_WIDENING_ID + 1usize;
+const OXC_NO_MAP_SPREAD_ID: usize = OXC_NO_LITERAL_CALL_ID + 1usize;
+const OXC_NO_MODULE_MOCKING_ID: usize = OXC_NO_MAP_SPREAD_ID + 1usize;
+const OXC_NO_NESTED_ASSIGNMENT_ID: usize = OXC_NO_MODULE_MOCKING_ID + 1usize;
+const OXC_NO_NESTED_FUNCTIONS_ID: usize = OXC_NO_NESTED_ASSIGNMENT_ID + 1usize;
+const OXC_NO_NESTED_TEMPLATE_LITERALS_ID: usize = OXC_NO_NESTED_FUNCTIONS_ID + 1usize;
+const OXC_NO_OBJECT_PARAMETERS_ID: usize = OXC_NO_NESTED_TEMPLATE_LITERALS_ID + 1usize;
+const OXC_NO_OPTIONAL_CHAINING_ID: usize = OXC_NO_OBJECT_PARAMETERS_ID + 1usize;
+const OXC_NO_OS_COMMAND_FROM_PATH_ID: usize = OXC_NO_OPTIONAL_CHAINING_ID + 1usize;
+const OXC_NO_REDUNDANT_BOOLEAN_ID: usize = OXC_NO_OS_COMMAND_FROM_PATH_ID + 1usize;
+const OXC_NO_REDUNDANT_JUMP_ID: usize = OXC_NO_REDUNDANT_BOOLEAN_ID + 1usize;
+const OXC_NO_REDUNDANT_OPTIONAL_ID: usize = OXC_NO_REDUNDANT_JUMP_ID + 1usize;
+const OXC_NO_REFLECT_APPLY_ID: usize = OXC_NO_REDUNDANT_OPTIONAL_ID + 1usize;
+const OXC_NO_REFLECT_GET_ID: usize = OXC_NO_REFLECT_APPLY_ID + 1usize;
+const OXC_NO_REST_SPREAD_PROPERTIES_ID: usize = OXC_NO_REFLECT_GET_ID + 1usize;
+const OXC_NO_RUNTIME_TYPEOF_ID: usize = OXC_NO_REST_SPREAD_PROPERTIES_ID + 1usize;
+const OXC_NO_SAME_LINE_CONDITIONAL_ID: usize = OXC_NO_RUNTIME_TYPEOF_ID + 1usize;
+const OXC_NO_SHAPE_IN_SYMBOL_NAMES_ID: usize = OXC_NO_SAME_LINE_CONDITIONAL_ID + 1usize;
+const OXC_NO_SKIPPED_TESTS_ID: usize = OXC_NO_SHAPE_IN_SYMBOL_NAMES_ID + 1usize;
+const OXC_NO_SMALL_SWITCH_ID: usize = OXC_NO_SKIPPED_TESTS_ID + 1usize;
+const OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID: usize = OXC_NO_SMALL_SWITCH_ID + 1usize;
+const OXC_NO_UNDEFINED_ARGUMENT_ID: usize = OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID + 1usize;
+const OXC_NO_UNIQ_KEY_ID: usize = OXC_NO_UNDEFINED_ARGUMENT_ID + 1usize;
+const OXC_NO_UNKNOWN_PARAMETERS_ID: usize = OXC_NO_UNIQ_KEY_ID + 1usize;
+const OXC_NO_UNKNOWN_RETURNS_ID: usize = OXC_NO_UNKNOWN_PARAMETERS_ID + 1usize;
+const OXC_NO_UNKNOWN_TYPE_ALIASES_ID: usize = OXC_NO_UNKNOWN_RETURNS_ID + 1usize;
+const OXC_NO_UNSAFE_DICTIONARY_TYPE_ID: usize = OXC_NO_UNKNOWN_TYPE_ALIASES_ID + 1usize;
+const OXC_NO_UNSAFE_UNZIP_ID: usize = OXC_NO_UNSAFE_DICTIONARY_TYPE_ID + 1usize;
+const OXC_NO_UNTHROWN_ERROR_ID: usize = OXC_NO_UNSAFE_UNZIP_ID + 1usize;
+const OXC_NO_UNUSED_COLLECTION_ID: usize = OXC_NO_UNTHROWN_ERROR_ID + 1usize;
+const OXC_NO_UNVERIFIED_CERTIFICATE_ID: usize = OXC_NO_UNUSED_COLLECTION_ID + 1usize;
+const OXC_NO_UNVERIFIED_HOSTNAME_ID: usize = OXC_NO_UNVERIFIED_CERTIFICATE_ID + 1usize;
+const OXC_NO_USELESS_INCREMENT_ID: usize = OXC_NO_UNVERIFIED_HOSTNAME_ID + 1usize;
+const OXC_NO_WEAK_CIPHER_ID: usize = OXC_NO_USELESS_INCREMENT_ID + 1usize;
+const OXC_NO_WEAK_KEYS_ID: usize = OXC_NO_WEAK_CIPHER_ID + 1usize;
+const OXC_NO_WEAK_SSL_ID: usize = OXC_NO_WEAK_KEYS_ID + 1usize;
+const OXC_NO_WIDEN_THEN_ASSERT_ID: usize = OXC_NO_WEAK_SSL_ID + 1usize;
+const OXC_NUMBER_ARG_OUT_OF_RANGE_ID: usize = OXC_NO_WIDEN_THEN_ASSERT_ID + 1usize;
 const OXC_ONLY_USED_IN_RECURSION_ID: usize = OXC_NUMBER_ARG_OUT_OF_RANGE_ID + 1usize;
-const OXC_UNINVOKED_ARRAY_CALLBACK_ID: usize = OXC_ONLY_USED_IN_RECURSION_ID + 1usize;
-const NEXTJS_GOOGLE_FONT_DISPLAY_ID: usize = OXC_UNINVOKED_ARRAY_CALLBACK_ID + 1usize;
+const OXC_POST_MESSAGE_ID: usize = OXC_ONLY_USED_IN_RECURSION_ID + 1usize;
+const OXC_PREFER_DEFAULT_LAST_ID: usize = OXC_POST_MESSAGE_ID + 1usize;
+const OXC_PREFER_SINGLE_BOOLEAN_RETURN_ID: usize = OXC_PREFER_DEFAULT_LAST_ID + 1usize;
+const OXC_PREFER_WHILE_ID: usize = OXC_PREFER_SINGLE_BOOLEAN_RETURN_ID + 1usize;
+const OXC_PRODUCTION_DEBUG_ID: usize = OXC_PREFER_WHILE_ID + 1usize;
+const OXC_PSEUDO_RANDOM_ID: usize = OXC_PRODUCTION_DEBUG_ID + 1usize;
+const OXC_REQUIRE_SAFETY_COMMENT_FOR_TYPE_ASSERTION_ID: usize = OXC_PSEUDO_RANDOM_ID + 1usize;
+const OXC_SINGLE_CHAR_IN_CHARACTER_CLASSES_ID: usize =
+    OXC_REQUIRE_SAFETY_COMMENT_FOR_TYPE_ASSERTION_ID + 1usize;
+const OXC_SINGLE_CHARACTER_ALTERNATION_ID: usize = OXC_SINGLE_CHAR_IN_CHARACTER_CLASSES_ID + 1usize;
+const OXC_UNINVOKED_ARRAY_CALLBACK_ID: usize = OXC_SINGLE_CHARACTER_ALTERNATION_ID + 1usize;
+const OXC_UNUSED_IMPORT_ID: usize = OXC_UNINVOKED_ARRAY_CALLBACK_ID + 1usize;
+const OXC_UNUSED_NAMED_GROUPS_ID: usize = OXC_UNUSED_IMPORT_ID + 1usize;
+const OXC_USE_TYPE_ALIAS_ID: usize = OXC_UNUSED_NAMED_GROUPS_ID + 1usize;
+const OXC_VOID_USE_ID: usize = OXC_USE_TYPE_ALIAS_ID + 1usize;
+const NEXTJS_GOOGLE_FONT_DISPLAY_ID: usize = OXC_VOID_USE_ID + 1usize;
 const NEXTJS_GOOGLE_FONT_PRECONNECT_ID: usize = NEXTJS_GOOGLE_FONT_DISPLAY_ID + 1usize;
 const NEXTJS_INLINE_SCRIPT_ID_ID: usize = NEXTJS_GOOGLE_FONT_PRECONNECT_ID + 1usize;
 const NEXTJS_NEXT_SCRIPT_FOR_GA_ID: usize = NEXTJS_INLINE_SCRIPT_ID_ID + 1usize;
@@ -2748,7 +3031,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 870usize] = [
+static RULE_NAMES: [&str; 964usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -2884,6 +3167,7 @@ static RULE_NAMES: [&str; 870usize] = [
     EslintNoNonoctalDecimalEscape::NAME,
     EslintNoObjCalls::NAME,
     EslintNoObjectConstructor::NAME,
+    EslintNoOctal::NAME,
     EslintNoParamReassign::NAME,
     EslintNoPlusplus::NAME,
     EslintNoPromiseExecutorReturn::NAME,
@@ -3402,7 +3686,9 @@ static RULE_NAMES: [&str; 870usize] = [
     JsxA11YRoleSupportsAriaProps::NAME,
     JsxA11YScope::NAME,
     JsxA11YTabindexNoPositive::NAME,
+    OxcAnchorPrecedence::NAME,
     OxcApproxConstant::NAME,
+    OxcArrayCallbackWithoutReturn::NAME,
     OxcBadArrayMethodOnArguments::NAME,
     OxcBadBitwiseOperator::NAME,
     OxcBadCharAtComparison::NAME,
@@ -3412,23 +3698,114 @@ static RULE_NAMES: [&str; 870usize] = [
     OxcBadObjectLiteralComparison::NAME,
     OxcBadReplaceAllArg::NAME,
     OxcBranchesSharingCode::NAME,
+    OxcClassName::NAME,
+    OxcCommaOrLogicalOrCase::NAME,
+    OxcConciseRegex::NAME,
     OxcConstComparisons::NAME,
+    OxcConstructorForSideEffects::NAME,
+    OxcDifferentTypesComparison::NAME,
     OxcDoubleComparisons::NAME,
+    OxcDuplicatesInCharacterClass::NAME,
+    OxcEmptyStringRepetition::NAME,
     OxcErasingOp::NAME,
+    OxcForLoopIncrementSign::NAME,
+    OxcGeneratorWithoutYield::NAME,
+    OxcInOperatorTypeError::NAME,
+    OxcLabelPosition::NAME,
+    OxcLinkWithTargetBlank::NAME,
+    OxcMaxSwitchCases::NAME,
     OxcMisrefactoredAssignOp::NAME,
     OxcMissingThrow::NAME,
     OxcNoAccumulatingSpread::NAME,
+    OxcNoAllDuplicatedBranches::NAME,
+    OxcNoAngularBypassSanitization::NAME,
     OxcNoAsyncAwait::NAME,
+    OxcNoAsyncConstructor::NAME,
     OxcNoAsyncEndpointHandlers::NAME,
     OxcNoBarrelFile::NAME,
+    OxcNoCaseLabelInSwitch::NAME,
+    OxcNoChainedTypeAssertions::NAME,
+    OxcNoClearTextProtocols::NAME,
+    OxcNoCollectionSizeMischeck::NAME,
+    OxcNoCommentedCode::NAME,
+    OxcNoConditionalEmptyObjectSpread::NAME,
     OxcNoConstEnum::NAME,
+    OxcNoDuplicateInComposite::NAME,
+    OxcNoDuplicatedBranches::NAME,
+    OxcNoEmptyAfterReluctant::NAME,
+    OxcNoEmptyAlternatives::NAME,
+    OxcNoEmptyCollection::NAME,
+    OxcNoEmptyGroup::NAME,
+    OxcNoEmptyTestFile::NAME,
+    OxcNoEqualsInForTermination::NAME,
+    OxcNoExclusiveTests::NAME,
+    OxcNoGlobalThis::NAME,
+    OxcNoHardcodedIp::NAME,
+    OxcNoHardcodedPasswords::NAME,
+    OxcNoHardcodedSecrets::NAME,
+    OxcNoIdenticalConditions::NAME,
+    OxcNoIdenticalExpressions::NAME,
+    OxcNoIgnoredExceptions::NAME,
+    OxcNoIgnoredReturn::NAME,
+    OxcNoImplicitGlobal::NAME,
+    OxcNoInMisuse::NAME,
+    OxcNoInsecureCookie::NAME,
+    OxcNoInternalApiUse::NAME,
+    OxcNoInvertedBooleanCheck::NAME,
+    OxcNoKnownValueWidening::NAME,
+    OxcNoLiteralCall::NAME,
     OxcNoMapSpread::NAME,
+    OxcNoModuleMocking::NAME,
+    OxcNoNestedAssignment::NAME,
+    OxcNoNestedFunctions::NAME,
+    OxcNoNestedTemplateLiterals::NAME,
+    OxcNoObjectParameters::NAME,
     OxcNoOptionalChaining::NAME,
+    OxcNoOsCommandFromPath::NAME,
+    OxcNoRedundantBoolean::NAME,
+    OxcNoRedundantJump::NAME,
+    OxcNoRedundantOptional::NAME,
+    OxcNoReflectApply::NAME,
+    OxcNoReflectGet::NAME,
     OxcNoRestSpreadProperties::NAME,
+    OxcNoRuntimeTypeof::NAME,
+    OxcNoSameLineConditional::NAME,
+    OxcNoShapeInSymbolNames::NAME,
+    OxcNoSkippedTests::NAME,
+    OxcNoSmallSwitch::NAME,
     OxcNoThisInExportedFunction::NAME,
+    OxcNoUndefinedArgument::NAME,
+    OxcNoUniqKey::NAME,
+    OxcNoUnknownParameters::NAME,
+    OxcNoUnknownReturns::NAME,
+    OxcNoUnknownTypeAliases::NAME,
+    OxcNoUnsafeDictionaryType::NAME,
+    OxcNoUnsafeUnzip::NAME,
+    OxcNoUnthrownError::NAME,
+    OxcNoUnusedCollection::NAME,
+    OxcNoUnverifiedCertificate::NAME,
+    OxcNoUnverifiedHostname::NAME,
+    OxcNoUselessIncrement::NAME,
+    OxcNoWeakCipher::NAME,
+    OxcNoWeakKeys::NAME,
+    OxcNoWeakSsl::NAME,
+    OxcNoWidenThenAssert::NAME,
     OxcNumberArgOutOfRange::NAME,
     OxcOnlyUsedInRecursion::NAME,
+    OxcPostMessage::NAME,
+    OxcPreferDefaultLast::NAME,
+    OxcPreferSingleBooleanReturn::NAME,
+    OxcPreferWhile::NAME,
+    OxcProductionDebug::NAME,
+    OxcPseudoRandom::NAME,
+    OxcRequireSafetyCommentForTypeAssertion::NAME,
+    OxcSingleCharInCharacterClasses::NAME,
+    OxcSingleCharacterAlternation::NAME,
     OxcUninvokedArrayCallback::NAME,
+    OxcUnusedImport::NAME,
+    OxcUnusedNamedGroups::NAME,
+    OxcUseTypeAlias::NAME,
+    OxcVoidUse::NAME,
     NextjsGoogleFontDisplay::NAME,
     NextjsGoogleFontPreconnect::NAME,
     NextjsInlineScriptId::NAME,
@@ -3760,6 +4137,7 @@ impl RuleEnum {
             Self::EslintNoNonoctalDecimalEscape(_) => ESLINT_NO_NONOCTAL_DECIMAL_ESCAPE_ID,
             Self::EslintNoObjCalls(_) => ESLINT_NO_OBJ_CALLS_ID,
             Self::EslintNoObjectConstructor(_) => ESLINT_NO_OBJECT_CONSTRUCTOR_ID,
+            Self::EslintNoOctal(_) => ESLINT_NO_OCTAL_ID,
             Self::EslintNoParamReassign(_) => ESLINT_NO_PARAM_REASSIGN_ID,
             Self::EslintNoPlusplus(_) => ESLINT_NO_PLUSPLUS_ID,
             Self::EslintNoPromiseExecutorReturn(_) => ESLINT_NO_PROMISE_EXECUTOR_RETURN_ID,
@@ -4392,7 +4770,9 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(_) => JSX_A_11_Y_ROLE_SUPPORTS_ARIA_PROPS_ID,
             Self::JsxA11YScope(_) => JSX_A_11_Y_SCOPE_ID,
             Self::JsxA11YTabindexNoPositive(_) => JSX_A_11_Y_TABINDEX_NO_POSITIVE_ID,
+            Self::OxcAnchorPrecedence(_) => OXC_ANCHOR_PRECEDENCE_ID,
             Self::OxcApproxConstant(_) => OXC_APPROX_CONSTANT_ID,
+            Self::OxcArrayCallbackWithoutReturn(_) => OXC_ARRAY_CALLBACK_WITHOUT_RETURN_ID,
             Self::OxcBadArrayMethodOnArguments(_) => OXC_BAD_ARRAY_METHOD_ON_ARGUMENTS_ID,
             Self::OxcBadBitwiseOperator(_) => OXC_BAD_BITWISE_OPERATOR_ID,
             Self::OxcBadCharAtComparison(_) => OXC_BAD_CHAR_AT_COMPARISON_ID,
@@ -4402,23 +4782,116 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(_) => OXC_BAD_OBJECT_LITERAL_COMPARISON_ID,
             Self::OxcBadReplaceAllArg(_) => OXC_BAD_REPLACE_ALL_ARG_ID,
             Self::OxcBranchesSharingCode(_) => OXC_BRANCHES_SHARING_CODE_ID,
+            Self::OxcClassName(_) => OXC_CLASS_NAME_ID,
+            Self::OxcCommaOrLogicalOrCase(_) => OXC_COMMA_OR_LOGICAL_OR_CASE_ID,
+            Self::OxcConciseRegex(_) => OXC_CONCISE_REGEX_ID,
             Self::OxcConstComparisons(_) => OXC_CONST_COMPARISONS_ID,
+            Self::OxcConstructorForSideEffects(_) => OXC_CONSTRUCTOR_FOR_SIDE_EFFECTS_ID,
+            Self::OxcDifferentTypesComparison(_) => OXC_DIFFERENT_TYPES_COMPARISON_ID,
             Self::OxcDoubleComparisons(_) => OXC_DOUBLE_COMPARISONS_ID,
+            Self::OxcDuplicatesInCharacterClass(_) => OXC_DUPLICATES_IN_CHARACTER_CLASS_ID,
+            Self::OxcEmptyStringRepetition(_) => OXC_EMPTY_STRING_REPETITION_ID,
             Self::OxcErasingOp(_) => OXC_ERASING_OP_ID,
+            Self::OxcForLoopIncrementSign(_) => OXC_FOR_LOOP_INCREMENT_SIGN_ID,
+            Self::OxcGeneratorWithoutYield(_) => OXC_GENERATOR_WITHOUT_YIELD_ID,
+            Self::OxcInOperatorTypeError(_) => OXC_IN_OPERATOR_TYPE_ERROR_ID,
+            Self::OxcLabelPosition(_) => OXC_LABEL_POSITION_ID,
+            Self::OxcLinkWithTargetBlank(_) => OXC_LINK_WITH_TARGET_BLANK_ID,
+            Self::OxcMaxSwitchCases(_) => OXC_MAX_SWITCH_CASES_ID,
             Self::OxcMisrefactoredAssignOp(_) => OXC_MISREFACTORED_ASSIGN_OP_ID,
             Self::OxcMissingThrow(_) => OXC_MISSING_THROW_ID,
             Self::OxcNoAccumulatingSpread(_) => OXC_NO_ACCUMULATING_SPREAD_ID,
+            Self::OxcNoAllDuplicatedBranches(_) => OXC_NO_ALL_DUPLICATED_BRANCHES_ID,
+            Self::OxcNoAngularBypassSanitization(_) => OXC_NO_ANGULAR_BYPASS_SANITIZATION_ID,
             Self::OxcNoAsyncAwait(_) => OXC_NO_ASYNC_AWAIT_ID,
+            Self::OxcNoAsyncConstructor(_) => OXC_NO_ASYNC_CONSTRUCTOR_ID,
             Self::OxcNoAsyncEndpointHandlers(_) => OXC_NO_ASYNC_ENDPOINT_HANDLERS_ID,
             Self::OxcNoBarrelFile(_) => OXC_NO_BARREL_FILE_ID,
+            Self::OxcNoCaseLabelInSwitch(_) => OXC_NO_CASE_LABEL_IN_SWITCH_ID,
+            Self::OxcNoChainedTypeAssertions(_) => OXC_NO_CHAINED_TYPE_ASSERTIONS_ID,
+            Self::OxcNoClearTextProtocols(_) => OXC_NO_CLEAR_TEXT_PROTOCOLS_ID,
+            Self::OxcNoCollectionSizeMischeck(_) => OXC_NO_COLLECTION_SIZE_MISCHECK_ID,
+            Self::OxcNoCommentedCode(_) => OXC_NO_COMMENTED_CODE_ID,
+            Self::OxcNoConditionalEmptyObjectSpread(_) => OXC_NO_CONDITIONAL_EMPTY_OBJECT_SPREAD_ID,
             Self::OxcNoConstEnum(_) => OXC_NO_CONST_ENUM_ID,
+            Self::OxcNoDuplicateInComposite(_) => OXC_NO_DUPLICATE_IN_COMPOSITE_ID,
+            Self::OxcNoDuplicatedBranches(_) => OXC_NO_DUPLICATED_BRANCHES_ID,
+            Self::OxcNoEmptyAfterReluctant(_) => OXC_NO_EMPTY_AFTER_RELUCTANT_ID,
+            Self::OxcNoEmptyAlternatives(_) => OXC_NO_EMPTY_ALTERNATIVES_ID,
+            Self::OxcNoEmptyCollection(_) => OXC_NO_EMPTY_COLLECTION_ID,
+            Self::OxcNoEmptyGroup(_) => OXC_NO_EMPTY_GROUP_ID,
+            Self::OxcNoEmptyTestFile(_) => OXC_NO_EMPTY_TEST_FILE_ID,
+            Self::OxcNoEqualsInForTermination(_) => OXC_NO_EQUALS_IN_FOR_TERMINATION_ID,
+            Self::OxcNoExclusiveTests(_) => OXC_NO_EXCLUSIVE_TESTS_ID,
+            Self::OxcNoGlobalThis(_) => OXC_NO_GLOBAL_THIS_ID,
+            Self::OxcNoHardcodedIp(_) => OXC_NO_HARDCODED_IP_ID,
+            Self::OxcNoHardcodedPasswords(_) => OXC_NO_HARDCODED_PASSWORDS_ID,
+            Self::OxcNoHardcodedSecrets(_) => OXC_NO_HARDCODED_SECRETS_ID,
+            Self::OxcNoIdenticalConditions(_) => OXC_NO_IDENTICAL_CONDITIONS_ID,
+            Self::OxcNoIdenticalExpressions(_) => OXC_NO_IDENTICAL_EXPRESSIONS_ID,
+            Self::OxcNoIgnoredExceptions(_) => OXC_NO_IGNORED_EXCEPTIONS_ID,
+            Self::OxcNoIgnoredReturn(_) => OXC_NO_IGNORED_RETURN_ID,
+            Self::OxcNoImplicitGlobal(_) => OXC_NO_IMPLICIT_GLOBAL_ID,
+            Self::OxcNoInMisuse(_) => OXC_NO_IN_MISUSE_ID,
+            Self::OxcNoInsecureCookie(_) => OXC_NO_INSECURE_COOKIE_ID,
+            Self::OxcNoInternalApiUse(_) => OXC_NO_INTERNAL_API_USE_ID,
+            Self::OxcNoInvertedBooleanCheck(_) => OXC_NO_INVERTED_BOOLEAN_CHECK_ID,
+            Self::OxcNoKnownValueWidening(_) => OXC_NO_KNOWN_VALUE_WIDENING_ID,
+            Self::OxcNoLiteralCall(_) => OXC_NO_LITERAL_CALL_ID,
             Self::OxcNoMapSpread(_) => OXC_NO_MAP_SPREAD_ID,
+            Self::OxcNoModuleMocking(_) => OXC_NO_MODULE_MOCKING_ID,
+            Self::OxcNoNestedAssignment(_) => OXC_NO_NESTED_ASSIGNMENT_ID,
+            Self::OxcNoNestedFunctions(_) => OXC_NO_NESTED_FUNCTIONS_ID,
+            Self::OxcNoNestedTemplateLiterals(_) => OXC_NO_NESTED_TEMPLATE_LITERALS_ID,
+            Self::OxcNoObjectParameters(_) => OXC_NO_OBJECT_PARAMETERS_ID,
             Self::OxcNoOptionalChaining(_) => OXC_NO_OPTIONAL_CHAINING_ID,
+            Self::OxcNoOsCommandFromPath(_) => OXC_NO_OS_COMMAND_FROM_PATH_ID,
+            Self::OxcNoRedundantBoolean(_) => OXC_NO_REDUNDANT_BOOLEAN_ID,
+            Self::OxcNoRedundantJump(_) => OXC_NO_REDUNDANT_JUMP_ID,
+            Self::OxcNoRedundantOptional(_) => OXC_NO_REDUNDANT_OPTIONAL_ID,
+            Self::OxcNoReflectApply(_) => OXC_NO_REFLECT_APPLY_ID,
+            Self::OxcNoReflectGet(_) => OXC_NO_REFLECT_GET_ID,
             Self::OxcNoRestSpreadProperties(_) => OXC_NO_REST_SPREAD_PROPERTIES_ID,
+            Self::OxcNoRuntimeTypeof(_) => OXC_NO_RUNTIME_TYPEOF_ID,
+            Self::OxcNoSameLineConditional(_) => OXC_NO_SAME_LINE_CONDITIONAL_ID,
+            Self::OxcNoShapeInSymbolNames(_) => OXC_NO_SHAPE_IN_SYMBOL_NAMES_ID,
+            Self::OxcNoSkippedTests(_) => OXC_NO_SKIPPED_TESTS_ID,
+            Self::OxcNoSmallSwitch(_) => OXC_NO_SMALL_SWITCH_ID,
             Self::OxcNoThisInExportedFunction(_) => OXC_NO_THIS_IN_EXPORTED_FUNCTION_ID,
+            Self::OxcNoUndefinedArgument(_) => OXC_NO_UNDEFINED_ARGUMENT_ID,
+            Self::OxcNoUniqKey(_) => OXC_NO_UNIQ_KEY_ID,
+            Self::OxcNoUnknownParameters(_) => OXC_NO_UNKNOWN_PARAMETERS_ID,
+            Self::OxcNoUnknownReturns(_) => OXC_NO_UNKNOWN_RETURNS_ID,
+            Self::OxcNoUnknownTypeAliases(_) => OXC_NO_UNKNOWN_TYPE_ALIASES_ID,
+            Self::OxcNoUnsafeDictionaryType(_) => OXC_NO_UNSAFE_DICTIONARY_TYPE_ID,
+            Self::OxcNoUnsafeUnzip(_) => OXC_NO_UNSAFE_UNZIP_ID,
+            Self::OxcNoUnthrownError(_) => OXC_NO_UNTHROWN_ERROR_ID,
+            Self::OxcNoUnusedCollection(_) => OXC_NO_UNUSED_COLLECTION_ID,
+            Self::OxcNoUnverifiedCertificate(_) => OXC_NO_UNVERIFIED_CERTIFICATE_ID,
+            Self::OxcNoUnverifiedHostname(_) => OXC_NO_UNVERIFIED_HOSTNAME_ID,
+            Self::OxcNoUselessIncrement(_) => OXC_NO_USELESS_INCREMENT_ID,
+            Self::OxcNoWeakCipher(_) => OXC_NO_WEAK_CIPHER_ID,
+            Self::OxcNoWeakKeys(_) => OXC_NO_WEAK_KEYS_ID,
+            Self::OxcNoWeakSsl(_) => OXC_NO_WEAK_SSL_ID,
+            Self::OxcNoWidenThenAssert(_) => OXC_NO_WIDEN_THEN_ASSERT_ID,
             Self::OxcNumberArgOutOfRange(_) => OXC_NUMBER_ARG_OUT_OF_RANGE_ID,
             Self::OxcOnlyUsedInRecursion(_) => OXC_ONLY_USED_IN_RECURSION_ID,
+            Self::OxcPostMessage(_) => OXC_POST_MESSAGE_ID,
+            Self::OxcPreferDefaultLast(_) => OXC_PREFER_DEFAULT_LAST_ID,
+            Self::OxcPreferSingleBooleanReturn(_) => OXC_PREFER_SINGLE_BOOLEAN_RETURN_ID,
+            Self::OxcPreferWhile(_) => OXC_PREFER_WHILE_ID,
+            Self::OxcProductionDebug(_) => OXC_PRODUCTION_DEBUG_ID,
+            Self::OxcPseudoRandom(_) => OXC_PSEUDO_RANDOM_ID,
+            Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
+                OXC_REQUIRE_SAFETY_COMMENT_FOR_TYPE_ASSERTION_ID
+            }
+            Self::OxcSingleCharInCharacterClasses(_) => OXC_SINGLE_CHAR_IN_CHARACTER_CLASSES_ID,
+            Self::OxcSingleCharacterAlternation(_) => OXC_SINGLE_CHARACTER_ALTERNATION_ID,
             Self::OxcUninvokedArrayCallback(_) => OXC_UNINVOKED_ARRAY_CALLBACK_ID,
+            Self::OxcUnusedImport(_) => OXC_UNUSED_IMPORT_ID,
+            Self::OxcUnusedNamedGroups(_) => OXC_UNUSED_NAMED_GROUPS_ID,
+            Self::OxcUseTypeAlias(_) => OXC_USE_TYPE_ALIAS_ID,
+            Self::OxcVoidUse(_) => OXC_VOID_USE_ID,
             Self::NextjsGoogleFontDisplay(_) => NEXTJS_GOOGLE_FONT_DISPLAY_ID,
             Self::NextjsGoogleFontPreconnect(_) => NEXTJS_GOOGLE_FONT_PRECONNECT_ID,
             Self::NextjsInlineScriptId(_) => NEXTJS_INLINE_SCRIPT_ID_ID,
@@ -4767,6 +5240,7 @@ impl RuleEnum {
             Self::EslintNoNonoctalDecimalEscape(_) => EslintNoNonoctalDecimalEscape::CATEGORY,
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::CATEGORY,
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::CATEGORY,
+            Self::EslintNoOctal(_) => EslintNoOctal::CATEGORY,
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::CATEGORY,
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::CATEGORY,
             Self::EslintNoPromiseExecutorReturn(_) => EslintNoPromiseExecutorReturn::CATEGORY,
@@ -5433,7 +5907,9 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(_) => JsxA11YRoleSupportsAriaProps::CATEGORY,
             Self::JsxA11YScope(_) => JsxA11YScope::CATEGORY,
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::CATEGORY,
+            Self::OxcAnchorPrecedence(_) => OxcAnchorPrecedence::CATEGORY,
             Self::OxcApproxConstant(_) => OxcApproxConstant::CATEGORY,
+            Self::OxcArrayCallbackWithoutReturn(_) => OxcArrayCallbackWithoutReturn::CATEGORY,
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::CATEGORY,
             Self::OxcBadBitwiseOperator(_) => OxcBadBitwiseOperator::CATEGORY,
             Self::OxcBadCharAtComparison(_) => OxcBadCharAtComparison::CATEGORY,
@@ -5443,23 +5919,118 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(_) => OxcBadObjectLiteralComparison::CATEGORY,
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::CATEGORY,
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::CATEGORY,
+            Self::OxcClassName(_) => OxcClassName::CATEGORY,
+            Self::OxcCommaOrLogicalOrCase(_) => OxcCommaOrLogicalOrCase::CATEGORY,
+            Self::OxcConciseRegex(_) => OxcConciseRegex::CATEGORY,
             Self::OxcConstComparisons(_) => OxcConstComparisons::CATEGORY,
+            Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::CATEGORY,
+            Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::CATEGORY,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::CATEGORY,
+            Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::CATEGORY,
+            Self::OxcEmptyStringRepetition(_) => OxcEmptyStringRepetition::CATEGORY,
             Self::OxcErasingOp(_) => OxcErasingOp::CATEGORY,
+            Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::CATEGORY,
+            Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::CATEGORY,
+            Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::CATEGORY,
+            Self::OxcLabelPosition(_) => OxcLabelPosition::CATEGORY,
+            Self::OxcLinkWithTargetBlank(_) => OxcLinkWithTargetBlank::CATEGORY,
+            Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::CATEGORY,
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::CATEGORY,
             Self::OxcMissingThrow(_) => OxcMissingThrow::CATEGORY,
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::CATEGORY,
+            Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::CATEGORY,
+            Self::OxcNoAngularBypassSanitization(_) => OxcNoAngularBypassSanitization::CATEGORY,
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::CATEGORY,
+            Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::CATEGORY,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::CATEGORY,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::CATEGORY,
+            Self::OxcNoCaseLabelInSwitch(_) => OxcNoCaseLabelInSwitch::CATEGORY,
+            Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::CATEGORY,
+            Self::OxcNoClearTextProtocols(_) => OxcNoClearTextProtocols::CATEGORY,
+            Self::OxcNoCollectionSizeMischeck(_) => OxcNoCollectionSizeMischeck::CATEGORY,
+            Self::OxcNoCommentedCode(_) => OxcNoCommentedCode::CATEGORY,
+            Self::OxcNoConditionalEmptyObjectSpread(_) => {
+                OxcNoConditionalEmptyObjectSpread::CATEGORY
+            }
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::CATEGORY,
+            Self::OxcNoDuplicateInComposite(_) => OxcNoDuplicateInComposite::CATEGORY,
+            Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::CATEGORY,
+            Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::CATEGORY,
+            Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::CATEGORY,
+            Self::OxcNoEmptyCollection(_) => OxcNoEmptyCollection::CATEGORY,
+            Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::CATEGORY,
+            Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::CATEGORY,
+            Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::CATEGORY,
+            Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::CATEGORY,
+            Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::CATEGORY,
+            Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::CATEGORY,
+            Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::CATEGORY,
+            Self::OxcNoHardcodedSecrets(_) => OxcNoHardcodedSecrets::CATEGORY,
+            Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::CATEGORY,
+            Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::CATEGORY,
+            Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::CATEGORY,
+            Self::OxcNoIgnoredReturn(_) => OxcNoIgnoredReturn::CATEGORY,
+            Self::OxcNoImplicitGlobal(_) => OxcNoImplicitGlobal::CATEGORY,
+            Self::OxcNoInMisuse(_) => OxcNoInMisuse::CATEGORY,
+            Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::CATEGORY,
+            Self::OxcNoInternalApiUse(_) => OxcNoInternalApiUse::CATEGORY,
+            Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::CATEGORY,
+            Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::CATEGORY,
+            Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::CATEGORY,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::CATEGORY,
+            Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::CATEGORY,
+            Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::CATEGORY,
+            Self::OxcNoNestedFunctions(_) => OxcNoNestedFunctions::CATEGORY,
+            Self::OxcNoNestedTemplateLiterals(_) => OxcNoNestedTemplateLiterals::CATEGORY,
+            Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::CATEGORY,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::CATEGORY,
+            Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::CATEGORY,
+            Self::OxcNoRedundantBoolean(_) => OxcNoRedundantBoolean::CATEGORY,
+            Self::OxcNoRedundantJump(_) => OxcNoRedundantJump::CATEGORY,
+            Self::OxcNoRedundantOptional(_) => OxcNoRedundantOptional::CATEGORY,
+            Self::OxcNoReflectApply(_) => OxcNoReflectApply::CATEGORY,
+            Self::OxcNoReflectGet(_) => OxcNoReflectGet::CATEGORY,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::CATEGORY,
+            Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::CATEGORY,
+            Self::OxcNoSameLineConditional(_) => OxcNoSameLineConditional::CATEGORY,
+            Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::CATEGORY,
+            Self::OxcNoSkippedTests(_) => OxcNoSkippedTests::CATEGORY,
+            Self::OxcNoSmallSwitch(_) => OxcNoSmallSwitch::CATEGORY,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::CATEGORY,
+            Self::OxcNoUndefinedArgument(_) => OxcNoUndefinedArgument::CATEGORY,
+            Self::OxcNoUniqKey(_) => OxcNoUniqKey::CATEGORY,
+            Self::OxcNoUnknownParameters(_) => OxcNoUnknownParameters::CATEGORY,
+            Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::CATEGORY,
+            Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::CATEGORY,
+            Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::CATEGORY,
+            Self::OxcNoUnsafeUnzip(_) => OxcNoUnsafeUnzip::CATEGORY,
+            Self::OxcNoUnthrownError(_) => OxcNoUnthrownError::CATEGORY,
+            Self::OxcNoUnusedCollection(_) => OxcNoUnusedCollection::CATEGORY,
+            Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::CATEGORY,
+            Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::CATEGORY,
+            Self::OxcNoUselessIncrement(_) => OxcNoUselessIncrement::CATEGORY,
+            Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::CATEGORY,
+            Self::OxcNoWeakKeys(_) => OxcNoWeakKeys::CATEGORY,
+            Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::CATEGORY,
+            Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::CATEGORY,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::CATEGORY,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::CATEGORY,
+            Self::OxcPostMessage(_) => OxcPostMessage::CATEGORY,
+            Self::OxcPreferDefaultLast(_) => OxcPreferDefaultLast::CATEGORY,
+            Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::CATEGORY,
+            Self::OxcPreferWhile(_) => OxcPreferWhile::CATEGORY,
+            Self::OxcProductionDebug(_) => OxcProductionDebug::CATEGORY,
+            Self::OxcPseudoRandom(_) => OxcPseudoRandom::CATEGORY,
+            Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
+                OxcRequireSafetyCommentForTypeAssertion::CATEGORY
+            }
+            Self::OxcSingleCharInCharacterClasses(_) => OxcSingleCharInCharacterClasses::CATEGORY,
+            Self::OxcSingleCharacterAlternation(_) => OxcSingleCharacterAlternation::CATEGORY,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::CATEGORY,
+            Self::OxcUnusedImport(_) => OxcUnusedImport::CATEGORY,
+            Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::CATEGORY,
+            Self::OxcUseTypeAlias(_) => OxcUseTypeAlias::CATEGORY,
+            Self::OxcVoidUse(_) => OxcVoidUse::CATEGORY,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::CATEGORY,
             Self::NextjsGoogleFontPreconnect(_) => NextjsGoogleFontPreconnect::CATEGORY,
             Self::NextjsInlineScriptId(_) => NextjsInlineScriptId::CATEGORY,
@@ -5814,6 +6385,7 @@ impl RuleEnum {
             Self::EslintNoNonoctalDecimalEscape(_) => EslintNoNonoctalDecimalEscape::FIX,
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::FIX,
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::FIX,
+            Self::EslintNoOctal(_) => EslintNoOctal::FIX,
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::FIX,
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::FIX,
             Self::EslintNoPromiseExecutorReturn(_) => EslintNoPromiseExecutorReturn::FIX,
@@ -6436,7 +7008,9 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(_) => JsxA11YRoleSupportsAriaProps::FIX,
             Self::JsxA11YScope(_) => JsxA11YScope::FIX,
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::FIX,
+            Self::OxcAnchorPrecedence(_) => OxcAnchorPrecedence::FIX,
             Self::OxcApproxConstant(_) => OxcApproxConstant::FIX,
+            Self::OxcArrayCallbackWithoutReturn(_) => OxcArrayCallbackWithoutReturn::FIX,
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::FIX,
             Self::OxcBadBitwiseOperator(_) => OxcBadBitwiseOperator::FIX,
             Self::OxcBadCharAtComparison(_) => OxcBadCharAtComparison::FIX,
@@ -6446,23 +7020,116 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(_) => OxcBadObjectLiteralComparison::FIX,
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::FIX,
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::FIX,
+            Self::OxcClassName(_) => OxcClassName::FIX,
+            Self::OxcCommaOrLogicalOrCase(_) => OxcCommaOrLogicalOrCase::FIX,
+            Self::OxcConciseRegex(_) => OxcConciseRegex::FIX,
             Self::OxcConstComparisons(_) => OxcConstComparisons::FIX,
+            Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::FIX,
+            Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::FIX,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::FIX,
+            Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::FIX,
+            Self::OxcEmptyStringRepetition(_) => OxcEmptyStringRepetition::FIX,
             Self::OxcErasingOp(_) => OxcErasingOp::FIX,
+            Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::FIX,
+            Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::FIX,
+            Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::FIX,
+            Self::OxcLabelPosition(_) => OxcLabelPosition::FIX,
+            Self::OxcLinkWithTargetBlank(_) => OxcLinkWithTargetBlank::FIX,
+            Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::FIX,
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::FIX,
             Self::OxcMissingThrow(_) => OxcMissingThrow::FIX,
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::FIX,
+            Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::FIX,
+            Self::OxcNoAngularBypassSanitization(_) => OxcNoAngularBypassSanitization::FIX,
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::FIX,
+            Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::FIX,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::FIX,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::FIX,
+            Self::OxcNoCaseLabelInSwitch(_) => OxcNoCaseLabelInSwitch::FIX,
+            Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::FIX,
+            Self::OxcNoClearTextProtocols(_) => OxcNoClearTextProtocols::FIX,
+            Self::OxcNoCollectionSizeMischeck(_) => OxcNoCollectionSizeMischeck::FIX,
+            Self::OxcNoCommentedCode(_) => OxcNoCommentedCode::FIX,
+            Self::OxcNoConditionalEmptyObjectSpread(_) => OxcNoConditionalEmptyObjectSpread::FIX,
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::FIX,
+            Self::OxcNoDuplicateInComposite(_) => OxcNoDuplicateInComposite::FIX,
+            Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::FIX,
+            Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::FIX,
+            Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::FIX,
+            Self::OxcNoEmptyCollection(_) => OxcNoEmptyCollection::FIX,
+            Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::FIX,
+            Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::FIX,
+            Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::FIX,
+            Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::FIX,
+            Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::FIX,
+            Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::FIX,
+            Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::FIX,
+            Self::OxcNoHardcodedSecrets(_) => OxcNoHardcodedSecrets::FIX,
+            Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::FIX,
+            Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::FIX,
+            Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::FIX,
+            Self::OxcNoIgnoredReturn(_) => OxcNoIgnoredReturn::FIX,
+            Self::OxcNoImplicitGlobal(_) => OxcNoImplicitGlobal::FIX,
+            Self::OxcNoInMisuse(_) => OxcNoInMisuse::FIX,
+            Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::FIX,
+            Self::OxcNoInternalApiUse(_) => OxcNoInternalApiUse::FIX,
+            Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::FIX,
+            Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::FIX,
+            Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::FIX,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::FIX,
+            Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::FIX,
+            Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::FIX,
+            Self::OxcNoNestedFunctions(_) => OxcNoNestedFunctions::FIX,
+            Self::OxcNoNestedTemplateLiterals(_) => OxcNoNestedTemplateLiterals::FIX,
+            Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::FIX,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::FIX,
+            Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::FIX,
+            Self::OxcNoRedundantBoolean(_) => OxcNoRedundantBoolean::FIX,
+            Self::OxcNoRedundantJump(_) => OxcNoRedundantJump::FIX,
+            Self::OxcNoRedundantOptional(_) => OxcNoRedundantOptional::FIX,
+            Self::OxcNoReflectApply(_) => OxcNoReflectApply::FIX,
+            Self::OxcNoReflectGet(_) => OxcNoReflectGet::FIX,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::FIX,
+            Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::FIX,
+            Self::OxcNoSameLineConditional(_) => OxcNoSameLineConditional::FIX,
+            Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::FIX,
+            Self::OxcNoSkippedTests(_) => OxcNoSkippedTests::FIX,
+            Self::OxcNoSmallSwitch(_) => OxcNoSmallSwitch::FIX,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::FIX,
+            Self::OxcNoUndefinedArgument(_) => OxcNoUndefinedArgument::FIX,
+            Self::OxcNoUniqKey(_) => OxcNoUniqKey::FIX,
+            Self::OxcNoUnknownParameters(_) => OxcNoUnknownParameters::FIX,
+            Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::FIX,
+            Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::FIX,
+            Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::FIX,
+            Self::OxcNoUnsafeUnzip(_) => OxcNoUnsafeUnzip::FIX,
+            Self::OxcNoUnthrownError(_) => OxcNoUnthrownError::FIX,
+            Self::OxcNoUnusedCollection(_) => OxcNoUnusedCollection::FIX,
+            Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::FIX,
+            Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::FIX,
+            Self::OxcNoUselessIncrement(_) => OxcNoUselessIncrement::FIX,
+            Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::FIX,
+            Self::OxcNoWeakKeys(_) => OxcNoWeakKeys::FIX,
+            Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::FIX,
+            Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::FIX,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::FIX,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::FIX,
+            Self::OxcPostMessage(_) => OxcPostMessage::FIX,
+            Self::OxcPreferDefaultLast(_) => OxcPreferDefaultLast::FIX,
+            Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::FIX,
+            Self::OxcPreferWhile(_) => OxcPreferWhile::FIX,
+            Self::OxcProductionDebug(_) => OxcProductionDebug::FIX,
+            Self::OxcPseudoRandom(_) => OxcPseudoRandom::FIX,
+            Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
+                OxcRequireSafetyCommentForTypeAssertion::FIX
+            }
+            Self::OxcSingleCharInCharacterClasses(_) => OxcSingleCharInCharacterClasses::FIX,
+            Self::OxcSingleCharacterAlternation(_) => OxcSingleCharacterAlternation::FIX,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::FIX,
+            Self::OxcUnusedImport(_) => OxcUnusedImport::FIX,
+            Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::FIX,
+            Self::OxcUseTypeAlias(_) => OxcUseTypeAlias::FIX,
+            Self::OxcVoidUse(_) => OxcVoidUse::FIX,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::FIX,
             Self::NextjsGoogleFontPreconnect(_) => NextjsGoogleFontPreconnect::FIX,
             Self::NextjsInlineScriptId(_) => NextjsInlineScriptId::FIX,
@@ -6819,6 +7486,7 @@ impl RuleEnum {
             }
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::documentation(),
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::documentation(),
+            Self::EslintNoOctal(_) => EslintNoOctal::documentation(),
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::documentation(),
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::documentation(),
             Self::EslintNoPromiseExecutorReturn(_) => {
@@ -7639,7 +8307,11 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(_) => JsxA11YRoleSupportsAriaProps::documentation(),
             Self::JsxA11YScope(_) => JsxA11YScope::documentation(),
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::documentation(),
+            Self::OxcAnchorPrecedence(_) => OxcAnchorPrecedence::documentation(),
             Self::OxcApproxConstant(_) => OxcApproxConstant::documentation(),
+            Self::OxcArrayCallbackWithoutReturn(_) => {
+                OxcArrayCallbackWithoutReturn::documentation()
+            }
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::documentation(),
             Self::OxcBadBitwiseOperator(_) => OxcBadBitwiseOperator::documentation(),
             Self::OxcBadCharAtComparison(_) => OxcBadCharAtComparison::documentation(),
@@ -7651,23 +8323,126 @@ impl RuleEnum {
             }
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::documentation(),
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::documentation(),
+            Self::OxcClassName(_) => OxcClassName::documentation(),
+            Self::OxcCommaOrLogicalOrCase(_) => OxcCommaOrLogicalOrCase::documentation(),
+            Self::OxcConciseRegex(_) => OxcConciseRegex::documentation(),
             Self::OxcConstComparisons(_) => OxcConstComparisons::documentation(),
+            Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::documentation(),
+            Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::documentation(),
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::documentation(),
+            Self::OxcDuplicatesInCharacterClass(_) => {
+                OxcDuplicatesInCharacterClass::documentation()
+            }
+            Self::OxcEmptyStringRepetition(_) => OxcEmptyStringRepetition::documentation(),
             Self::OxcErasingOp(_) => OxcErasingOp::documentation(),
+            Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::documentation(),
+            Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::documentation(),
+            Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::documentation(),
+            Self::OxcLabelPosition(_) => OxcLabelPosition::documentation(),
+            Self::OxcLinkWithTargetBlank(_) => OxcLinkWithTargetBlank::documentation(),
+            Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::documentation(),
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::documentation(),
             Self::OxcMissingThrow(_) => OxcMissingThrow::documentation(),
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::documentation(),
+            Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::documentation(),
+            Self::OxcNoAngularBypassSanitization(_) => {
+                OxcNoAngularBypassSanitization::documentation()
+            }
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::documentation(),
+            Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::documentation(),
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::documentation(),
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::documentation(),
+            Self::OxcNoCaseLabelInSwitch(_) => OxcNoCaseLabelInSwitch::documentation(),
+            Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::documentation(),
+            Self::OxcNoClearTextProtocols(_) => OxcNoClearTextProtocols::documentation(),
+            Self::OxcNoCollectionSizeMischeck(_) => OxcNoCollectionSizeMischeck::documentation(),
+            Self::OxcNoCommentedCode(_) => OxcNoCommentedCode::documentation(),
+            Self::OxcNoConditionalEmptyObjectSpread(_) => {
+                OxcNoConditionalEmptyObjectSpread::documentation()
+            }
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::documentation(),
+            Self::OxcNoDuplicateInComposite(_) => OxcNoDuplicateInComposite::documentation(),
+            Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::documentation(),
+            Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::documentation(),
+            Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::documentation(),
+            Self::OxcNoEmptyCollection(_) => OxcNoEmptyCollection::documentation(),
+            Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::documentation(),
+            Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::documentation(),
+            Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::documentation(),
+            Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::documentation(),
+            Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::documentation(),
+            Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::documentation(),
+            Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::documentation(),
+            Self::OxcNoHardcodedSecrets(_) => OxcNoHardcodedSecrets::documentation(),
+            Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::documentation(),
+            Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::documentation(),
+            Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::documentation(),
+            Self::OxcNoIgnoredReturn(_) => OxcNoIgnoredReturn::documentation(),
+            Self::OxcNoImplicitGlobal(_) => OxcNoImplicitGlobal::documentation(),
+            Self::OxcNoInMisuse(_) => OxcNoInMisuse::documentation(),
+            Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::documentation(),
+            Self::OxcNoInternalApiUse(_) => OxcNoInternalApiUse::documentation(),
+            Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::documentation(),
+            Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::documentation(),
+            Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::documentation(),
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::documentation(),
+            Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::documentation(),
+            Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::documentation(),
+            Self::OxcNoNestedFunctions(_) => OxcNoNestedFunctions::documentation(),
+            Self::OxcNoNestedTemplateLiterals(_) => OxcNoNestedTemplateLiterals::documentation(),
+            Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::documentation(),
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::documentation(),
+            Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::documentation(),
+            Self::OxcNoRedundantBoolean(_) => OxcNoRedundantBoolean::documentation(),
+            Self::OxcNoRedundantJump(_) => OxcNoRedundantJump::documentation(),
+            Self::OxcNoRedundantOptional(_) => OxcNoRedundantOptional::documentation(),
+            Self::OxcNoReflectApply(_) => OxcNoReflectApply::documentation(),
+            Self::OxcNoReflectGet(_) => OxcNoReflectGet::documentation(),
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::documentation(),
+            Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::documentation(),
+            Self::OxcNoSameLineConditional(_) => OxcNoSameLineConditional::documentation(),
+            Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::documentation(),
+            Self::OxcNoSkippedTests(_) => OxcNoSkippedTests::documentation(),
+            Self::OxcNoSmallSwitch(_) => OxcNoSmallSwitch::documentation(),
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::documentation(),
+            Self::OxcNoUndefinedArgument(_) => OxcNoUndefinedArgument::documentation(),
+            Self::OxcNoUniqKey(_) => OxcNoUniqKey::documentation(),
+            Self::OxcNoUnknownParameters(_) => OxcNoUnknownParameters::documentation(),
+            Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::documentation(),
+            Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::documentation(),
+            Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::documentation(),
+            Self::OxcNoUnsafeUnzip(_) => OxcNoUnsafeUnzip::documentation(),
+            Self::OxcNoUnthrownError(_) => OxcNoUnthrownError::documentation(),
+            Self::OxcNoUnusedCollection(_) => OxcNoUnusedCollection::documentation(),
+            Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::documentation(),
+            Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::documentation(),
+            Self::OxcNoUselessIncrement(_) => OxcNoUselessIncrement::documentation(),
+            Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::documentation(),
+            Self::OxcNoWeakKeys(_) => OxcNoWeakKeys::documentation(),
+            Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::documentation(),
+            Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::documentation(),
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::documentation(),
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::documentation(),
+            Self::OxcPostMessage(_) => OxcPostMessage::documentation(),
+            Self::OxcPreferDefaultLast(_) => OxcPreferDefaultLast::documentation(),
+            Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::documentation(),
+            Self::OxcPreferWhile(_) => OxcPreferWhile::documentation(),
+            Self::OxcProductionDebug(_) => OxcProductionDebug::documentation(),
+            Self::OxcPseudoRandom(_) => OxcPseudoRandom::documentation(),
+            Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
+                OxcRequireSafetyCommentForTypeAssertion::documentation()
+            }
+            Self::OxcSingleCharInCharacterClasses(_) => {
+                OxcSingleCharInCharacterClasses::documentation()
+            }
+            Self::OxcSingleCharacterAlternation(_) => {
+                OxcSingleCharacterAlternation::documentation()
+            }
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::documentation(),
+            Self::OxcUnusedImport(_) => OxcUnusedImport::documentation(),
+            Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::documentation(),
+            Self::OxcUseTypeAlias(_) => OxcUseTypeAlias::documentation(),
+            Self::OxcVoidUse(_) => OxcVoidUse::documentation(),
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::documentation(),
             Self::NextjsGoogleFontPreconnect(_) => NextjsGoogleFontPreconnect::documentation(),
             Self::NextjsInlineScriptId(_) => NextjsInlineScriptId::documentation(),
@@ -8263,6 +9038,9 @@ impl RuleEnum {
             Self::EslintNoObjectConstructor(_) => {
                 EslintNoObjectConstructor::config_schema(generator)
                     .or_else(|| EslintNoObjectConstructor::schema(generator))
+            }
+            Self::EslintNoOctal(_) => {
+                EslintNoOctal::config_schema(generator).or_else(|| EslintNoOctal::schema(generator))
             }
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::config_schema(generator)
                 .or_else(|| EslintNoParamReassign::schema(generator)),
@@ -9829,8 +10607,14 @@ impl RuleEnum {
                 JsxA11YTabindexNoPositive::config_schema(generator)
                     .or_else(|| JsxA11YTabindexNoPositive::schema(generator))
             }
+            Self::OxcAnchorPrecedence(_) => OxcAnchorPrecedence::config_schema(generator)
+                .or_else(|| OxcAnchorPrecedence::schema(generator)),
             Self::OxcApproxConstant(_) => OxcApproxConstant::config_schema(generator)
                 .or_else(|| OxcApproxConstant::schema(generator)),
+            Self::OxcArrayCallbackWithoutReturn(_) => {
+                OxcArrayCallbackWithoutReturn::config_schema(generator)
+                    .or_else(|| OxcArrayCallbackWithoutReturn::schema(generator))
+            }
             Self::OxcBadArrayMethodOnArguments(_) => {
                 OxcBadArrayMethodOnArguments::config_schema(generator)
                     .or_else(|| OxcBadArrayMethodOnArguments::schema(generator))
@@ -9853,48 +10637,274 @@ impl RuleEnum {
                 .or_else(|| OxcBadReplaceAllArg::schema(generator)),
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::config_schema(generator)
                 .or_else(|| OxcBranchesSharingCode::schema(generator)),
+            Self::OxcClassName(_) => {
+                OxcClassName::config_schema(generator).or_else(|| OxcClassName::schema(generator))
+            }
+            Self::OxcCommaOrLogicalOrCase(_) => OxcCommaOrLogicalOrCase::config_schema(generator)
+                .or_else(|| OxcCommaOrLogicalOrCase::schema(generator)),
+            Self::OxcConciseRegex(_) => OxcConciseRegex::config_schema(generator)
+                .or_else(|| OxcConciseRegex::schema(generator)),
             Self::OxcConstComparisons(_) => OxcConstComparisons::config_schema(generator)
                 .or_else(|| OxcConstComparisons::schema(generator)),
+            Self::OxcConstructorForSideEffects(_) => {
+                OxcConstructorForSideEffects::config_schema(generator)
+                    .or_else(|| OxcConstructorForSideEffects::schema(generator))
+            }
+            Self::OxcDifferentTypesComparison(_) => {
+                OxcDifferentTypesComparison::config_schema(generator)
+                    .or_else(|| OxcDifferentTypesComparison::schema(generator))
+            }
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::config_schema(generator)
                 .or_else(|| OxcDoubleComparisons::schema(generator)),
+            Self::OxcDuplicatesInCharacterClass(_) => {
+                OxcDuplicatesInCharacterClass::config_schema(generator)
+                    .or_else(|| OxcDuplicatesInCharacterClass::schema(generator))
+            }
+            Self::OxcEmptyStringRepetition(_) => OxcEmptyStringRepetition::config_schema(generator)
+                .or_else(|| OxcEmptyStringRepetition::schema(generator)),
             Self::OxcErasingOp(_) => {
                 OxcErasingOp::config_schema(generator).or_else(|| OxcErasingOp::schema(generator))
             }
+            Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::config_schema(generator)
+                .or_else(|| OxcForLoopIncrementSign::schema(generator)),
+            Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::config_schema(generator)
+                .or_else(|| OxcGeneratorWithoutYield::schema(generator)),
+            Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::config_schema(generator)
+                .or_else(|| OxcInOperatorTypeError::schema(generator)),
+            Self::OxcLabelPosition(_) => OxcLabelPosition::config_schema(generator)
+                .or_else(|| OxcLabelPosition::schema(generator)),
+            Self::OxcLinkWithTargetBlank(_) => OxcLinkWithTargetBlank::config_schema(generator)
+                .or_else(|| OxcLinkWithTargetBlank::schema(generator)),
+            Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::config_schema(generator)
+                .or_else(|| OxcMaxSwitchCases::schema(generator)),
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::config_schema(generator)
                 .or_else(|| OxcMisrefactoredAssignOp::schema(generator)),
             Self::OxcMissingThrow(_) => OxcMissingThrow::config_schema(generator)
                 .or_else(|| OxcMissingThrow::schema(generator)),
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::config_schema(generator)
                 .or_else(|| OxcNoAccumulatingSpread::schema(generator)),
+            Self::OxcNoAllDuplicatedBranches(_) => {
+                OxcNoAllDuplicatedBranches::config_schema(generator)
+                    .or_else(|| OxcNoAllDuplicatedBranches::schema(generator))
+            }
+            Self::OxcNoAngularBypassSanitization(_) => {
+                OxcNoAngularBypassSanitization::config_schema(generator)
+                    .or_else(|| OxcNoAngularBypassSanitization::schema(generator))
+            }
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::config_schema(generator)
                 .or_else(|| OxcNoAsyncAwait::schema(generator)),
+            Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::config_schema(generator)
+                .or_else(|| OxcNoAsyncConstructor::schema(generator)),
             Self::OxcNoAsyncEndpointHandlers(_) => {
                 OxcNoAsyncEndpointHandlers::config_schema(generator)
                     .or_else(|| OxcNoAsyncEndpointHandlers::schema(generator))
             }
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::config_schema(generator)
                 .or_else(|| OxcNoBarrelFile::schema(generator)),
+            Self::OxcNoCaseLabelInSwitch(_) => OxcNoCaseLabelInSwitch::config_schema(generator)
+                .or_else(|| OxcNoCaseLabelInSwitch::schema(generator)),
+            Self::OxcNoChainedTypeAssertions(_) => {
+                OxcNoChainedTypeAssertions::config_schema(generator)
+                    .or_else(|| OxcNoChainedTypeAssertions::schema(generator))
+            }
+            Self::OxcNoClearTextProtocols(_) => OxcNoClearTextProtocols::config_schema(generator)
+                .or_else(|| OxcNoClearTextProtocols::schema(generator)),
+            Self::OxcNoCollectionSizeMischeck(_) => {
+                OxcNoCollectionSizeMischeck::config_schema(generator)
+                    .or_else(|| OxcNoCollectionSizeMischeck::schema(generator))
+            }
+            Self::OxcNoCommentedCode(_) => OxcNoCommentedCode::config_schema(generator)
+                .or_else(|| OxcNoCommentedCode::schema(generator)),
+            Self::OxcNoConditionalEmptyObjectSpread(_) => {
+                OxcNoConditionalEmptyObjectSpread::config_schema(generator)
+                    .or_else(|| OxcNoConditionalEmptyObjectSpread::schema(generator))
+            }
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::config_schema(generator)
                 .or_else(|| OxcNoConstEnum::schema(generator)),
+            Self::OxcNoDuplicateInComposite(_) => {
+                OxcNoDuplicateInComposite::config_schema(generator)
+                    .or_else(|| OxcNoDuplicateInComposite::schema(generator))
+            }
+            Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::config_schema(generator)
+                .or_else(|| OxcNoDuplicatedBranches::schema(generator)),
+            Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::config_schema(generator)
+                .or_else(|| OxcNoEmptyAfterReluctant::schema(generator)),
+            Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::config_schema(generator)
+                .or_else(|| OxcNoEmptyAlternatives::schema(generator)),
+            Self::OxcNoEmptyCollection(_) => OxcNoEmptyCollection::config_schema(generator)
+                .or_else(|| OxcNoEmptyCollection::schema(generator)),
+            Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::config_schema(generator)
+                .or_else(|| OxcNoEmptyGroup::schema(generator)),
+            Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::config_schema(generator)
+                .or_else(|| OxcNoEmptyTestFile::schema(generator)),
+            Self::OxcNoEqualsInForTermination(_) => {
+                OxcNoEqualsInForTermination::config_schema(generator)
+                    .or_else(|| OxcNoEqualsInForTermination::schema(generator))
+            }
+            Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::config_schema(generator)
+                .or_else(|| OxcNoExclusiveTests::schema(generator)),
+            Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::config_schema(generator)
+                .or_else(|| OxcNoGlobalThis::schema(generator)),
+            Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::config_schema(generator)
+                .or_else(|| OxcNoHardcodedIp::schema(generator)),
+            Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::config_schema(generator)
+                .or_else(|| OxcNoHardcodedPasswords::schema(generator)),
+            Self::OxcNoHardcodedSecrets(_) => OxcNoHardcodedSecrets::config_schema(generator)
+                .or_else(|| OxcNoHardcodedSecrets::schema(generator)),
+            Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::config_schema(generator)
+                .or_else(|| OxcNoIdenticalConditions::schema(generator)),
+            Self::OxcNoIdenticalExpressions(_) => {
+                OxcNoIdenticalExpressions::config_schema(generator)
+                    .or_else(|| OxcNoIdenticalExpressions::schema(generator))
+            }
+            Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::config_schema(generator)
+                .or_else(|| OxcNoIgnoredExceptions::schema(generator)),
+            Self::OxcNoIgnoredReturn(_) => OxcNoIgnoredReturn::config_schema(generator)
+                .or_else(|| OxcNoIgnoredReturn::schema(generator)),
+            Self::OxcNoImplicitGlobal(_) => OxcNoImplicitGlobal::config_schema(generator)
+                .or_else(|| OxcNoImplicitGlobal::schema(generator)),
+            Self::OxcNoInMisuse(_) => {
+                OxcNoInMisuse::config_schema(generator).or_else(|| OxcNoInMisuse::schema(generator))
+            }
+            Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::config_schema(generator)
+                .or_else(|| OxcNoInsecureCookie::schema(generator)),
+            Self::OxcNoInternalApiUse(_) => OxcNoInternalApiUse::config_schema(generator)
+                .or_else(|| OxcNoInternalApiUse::schema(generator)),
+            Self::OxcNoInvertedBooleanCheck(_) => {
+                OxcNoInvertedBooleanCheck::config_schema(generator)
+                    .or_else(|| OxcNoInvertedBooleanCheck::schema(generator))
+            }
+            Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::config_schema(generator)
+                .or_else(|| OxcNoKnownValueWidening::schema(generator)),
+            Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::config_schema(generator)
+                .or_else(|| OxcNoLiteralCall::schema(generator)),
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::config_schema(generator)
                 .or_else(|| OxcNoMapSpread::schema(generator)),
+            Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::config_schema(generator)
+                .or_else(|| OxcNoModuleMocking::schema(generator)),
+            Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::config_schema(generator)
+                .or_else(|| OxcNoNestedAssignment::schema(generator)),
+            Self::OxcNoNestedFunctions(_) => OxcNoNestedFunctions::config_schema(generator)
+                .or_else(|| OxcNoNestedFunctions::schema(generator)),
+            Self::OxcNoNestedTemplateLiterals(_) => {
+                OxcNoNestedTemplateLiterals::config_schema(generator)
+                    .or_else(|| OxcNoNestedTemplateLiterals::schema(generator))
+            }
+            Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::config_schema(generator)
+                .or_else(|| OxcNoObjectParameters::schema(generator)),
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::config_schema(generator)
                 .or_else(|| OxcNoOptionalChaining::schema(generator)),
+            Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::config_schema(generator)
+                .or_else(|| OxcNoOsCommandFromPath::schema(generator)),
+            Self::OxcNoRedundantBoolean(_) => OxcNoRedundantBoolean::config_schema(generator)
+                .or_else(|| OxcNoRedundantBoolean::schema(generator)),
+            Self::OxcNoRedundantJump(_) => OxcNoRedundantJump::config_schema(generator)
+                .or_else(|| OxcNoRedundantJump::schema(generator)),
+            Self::OxcNoRedundantOptional(_) => OxcNoRedundantOptional::config_schema(generator)
+                .or_else(|| OxcNoRedundantOptional::schema(generator)),
+            Self::OxcNoReflectApply(_) => OxcNoReflectApply::config_schema(generator)
+                .or_else(|| OxcNoReflectApply::schema(generator)),
+            Self::OxcNoReflectGet(_) => OxcNoReflectGet::config_schema(generator)
+                .or_else(|| OxcNoReflectGet::schema(generator)),
             Self::OxcNoRestSpreadProperties(_) => {
                 OxcNoRestSpreadProperties::config_schema(generator)
                     .or_else(|| OxcNoRestSpreadProperties::schema(generator))
             }
+            Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::config_schema(generator)
+                .or_else(|| OxcNoRuntimeTypeof::schema(generator)),
+            Self::OxcNoSameLineConditional(_) => OxcNoSameLineConditional::config_schema(generator)
+                .or_else(|| OxcNoSameLineConditional::schema(generator)),
+            Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::config_schema(generator)
+                .or_else(|| OxcNoShapeInSymbolNames::schema(generator)),
+            Self::OxcNoSkippedTests(_) => OxcNoSkippedTests::config_schema(generator)
+                .or_else(|| OxcNoSkippedTests::schema(generator)),
+            Self::OxcNoSmallSwitch(_) => OxcNoSmallSwitch::config_schema(generator)
+                .or_else(|| OxcNoSmallSwitch::schema(generator)),
             Self::OxcNoThisInExportedFunction(_) => {
                 OxcNoThisInExportedFunction::config_schema(generator)
                     .or_else(|| OxcNoThisInExportedFunction::schema(generator))
             }
+            Self::OxcNoUndefinedArgument(_) => OxcNoUndefinedArgument::config_schema(generator)
+                .or_else(|| OxcNoUndefinedArgument::schema(generator)),
+            Self::OxcNoUniqKey(_) => {
+                OxcNoUniqKey::config_schema(generator).or_else(|| OxcNoUniqKey::schema(generator))
+            }
+            Self::OxcNoUnknownParameters(_) => OxcNoUnknownParameters::config_schema(generator)
+                .or_else(|| OxcNoUnknownParameters::schema(generator)),
+            Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::config_schema(generator)
+                .or_else(|| OxcNoUnknownReturns::schema(generator)),
+            Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::config_schema(generator)
+                .or_else(|| OxcNoUnknownTypeAliases::schema(generator)),
+            Self::OxcNoUnsafeDictionaryType(_) => {
+                OxcNoUnsafeDictionaryType::config_schema(generator)
+                    .or_else(|| OxcNoUnsafeDictionaryType::schema(generator))
+            }
+            Self::OxcNoUnsafeUnzip(_) => OxcNoUnsafeUnzip::config_schema(generator)
+                .or_else(|| OxcNoUnsafeUnzip::schema(generator)),
+            Self::OxcNoUnthrownError(_) => OxcNoUnthrownError::config_schema(generator)
+                .or_else(|| OxcNoUnthrownError::schema(generator)),
+            Self::OxcNoUnusedCollection(_) => OxcNoUnusedCollection::config_schema(generator)
+                .or_else(|| OxcNoUnusedCollection::schema(generator)),
+            Self::OxcNoUnverifiedCertificate(_) => {
+                OxcNoUnverifiedCertificate::config_schema(generator)
+                    .or_else(|| OxcNoUnverifiedCertificate::schema(generator))
+            }
+            Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::config_schema(generator)
+                .or_else(|| OxcNoUnverifiedHostname::schema(generator)),
+            Self::OxcNoUselessIncrement(_) => OxcNoUselessIncrement::config_schema(generator)
+                .or_else(|| OxcNoUselessIncrement::schema(generator)),
+            Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::config_schema(generator)
+                .or_else(|| OxcNoWeakCipher::schema(generator)),
+            Self::OxcNoWeakKeys(_) => {
+                OxcNoWeakKeys::config_schema(generator).or_else(|| OxcNoWeakKeys::schema(generator))
+            }
+            Self::OxcNoWeakSsl(_) => {
+                OxcNoWeakSsl::config_schema(generator).or_else(|| OxcNoWeakSsl::schema(generator))
+            }
+            Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::config_schema(generator)
+                .or_else(|| OxcNoWidenThenAssert::schema(generator)),
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::config_schema(generator)
                 .or_else(|| OxcNumberArgOutOfRange::schema(generator)),
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::config_schema(generator)
                 .or_else(|| OxcOnlyUsedInRecursion::schema(generator)),
+            Self::OxcPostMessage(_) => OxcPostMessage::config_schema(generator)
+                .or_else(|| OxcPostMessage::schema(generator)),
+            Self::OxcPreferDefaultLast(_) => OxcPreferDefaultLast::config_schema(generator)
+                .or_else(|| OxcPreferDefaultLast::schema(generator)),
+            Self::OxcPreferSingleBooleanReturn(_) => {
+                OxcPreferSingleBooleanReturn::config_schema(generator)
+                    .or_else(|| OxcPreferSingleBooleanReturn::schema(generator))
+            }
+            Self::OxcPreferWhile(_) => OxcPreferWhile::config_schema(generator)
+                .or_else(|| OxcPreferWhile::schema(generator)),
+            Self::OxcProductionDebug(_) => OxcProductionDebug::config_schema(generator)
+                .or_else(|| OxcProductionDebug::schema(generator)),
+            Self::OxcPseudoRandom(_) => OxcPseudoRandom::config_schema(generator)
+                .or_else(|| OxcPseudoRandom::schema(generator)),
+            Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
+                OxcRequireSafetyCommentForTypeAssertion::config_schema(generator)
+                    .or_else(|| OxcRequireSafetyCommentForTypeAssertion::schema(generator))
+            }
+            Self::OxcSingleCharInCharacterClasses(_) => {
+                OxcSingleCharInCharacterClasses::config_schema(generator)
+                    .or_else(|| OxcSingleCharInCharacterClasses::schema(generator))
+            }
+            Self::OxcSingleCharacterAlternation(_) => {
+                OxcSingleCharacterAlternation::config_schema(generator)
+                    .or_else(|| OxcSingleCharacterAlternation::schema(generator))
+            }
             Self::OxcUninvokedArrayCallback(_) => {
                 OxcUninvokedArrayCallback::config_schema(generator)
                     .or_else(|| OxcUninvokedArrayCallback::schema(generator))
+            }
+            Self::OxcUnusedImport(_) => OxcUnusedImport::config_schema(generator)
+                .or_else(|| OxcUnusedImport::schema(generator)),
+            Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::config_schema(generator)
+                .or_else(|| OxcUnusedNamedGroups::schema(generator)),
+            Self::OxcUseTypeAlias(_) => OxcUseTypeAlias::config_schema(generator)
+                .or_else(|| OxcUseTypeAlias::schema(generator)),
+            Self::OxcVoidUse(_) => {
+                OxcVoidUse::config_schema(generator).or_else(|| OxcVoidUse::schema(generator))
             }
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::config_schema(generator)
                 .or_else(|| NextjsGoogleFontDisplay::schema(generator)),
@@ -10564,6 +11574,7 @@ impl RuleEnum {
             Self::EslintNoNonoctalDecimalEscape(_) => "eslint",
             Self::EslintNoObjCalls(_) => "eslint",
             Self::EslintNoObjectConstructor(_) => "eslint",
+            Self::EslintNoOctal(_) => "eslint",
             Self::EslintNoParamReassign(_) => "eslint",
             Self::EslintNoPlusplus(_) => "eslint",
             Self::EslintNoPromiseExecutorReturn(_) => "eslint",
@@ -11082,7 +12093,9 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(_) => "jsx_a11y",
             Self::JsxA11YScope(_) => "jsx_a11y",
             Self::JsxA11YTabindexNoPositive(_) => "jsx_a11y",
+            Self::OxcAnchorPrecedence(_) => "oxc",
             Self::OxcApproxConstant(_) => "oxc",
+            Self::OxcArrayCallbackWithoutReturn(_) => "oxc",
             Self::OxcBadArrayMethodOnArguments(_) => "oxc",
             Self::OxcBadBitwiseOperator(_) => "oxc",
             Self::OxcBadCharAtComparison(_) => "oxc",
@@ -11092,23 +12105,114 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(_) => "oxc",
             Self::OxcBadReplaceAllArg(_) => "oxc",
             Self::OxcBranchesSharingCode(_) => "oxc",
+            Self::OxcClassName(_) => "oxc",
+            Self::OxcCommaOrLogicalOrCase(_) => "oxc",
+            Self::OxcConciseRegex(_) => "oxc",
             Self::OxcConstComparisons(_) => "oxc",
+            Self::OxcConstructorForSideEffects(_) => "oxc",
+            Self::OxcDifferentTypesComparison(_) => "oxc",
             Self::OxcDoubleComparisons(_) => "oxc",
+            Self::OxcDuplicatesInCharacterClass(_) => "oxc",
+            Self::OxcEmptyStringRepetition(_) => "oxc",
             Self::OxcErasingOp(_) => "oxc",
+            Self::OxcForLoopIncrementSign(_) => "oxc",
+            Self::OxcGeneratorWithoutYield(_) => "oxc",
+            Self::OxcInOperatorTypeError(_) => "oxc",
+            Self::OxcLabelPosition(_) => "oxc",
+            Self::OxcLinkWithTargetBlank(_) => "oxc",
+            Self::OxcMaxSwitchCases(_) => "oxc",
             Self::OxcMisrefactoredAssignOp(_) => "oxc",
             Self::OxcMissingThrow(_) => "oxc",
             Self::OxcNoAccumulatingSpread(_) => "oxc",
+            Self::OxcNoAllDuplicatedBranches(_) => "oxc",
+            Self::OxcNoAngularBypassSanitization(_) => "oxc",
             Self::OxcNoAsyncAwait(_) => "oxc",
+            Self::OxcNoAsyncConstructor(_) => "oxc",
             Self::OxcNoAsyncEndpointHandlers(_) => "oxc",
             Self::OxcNoBarrelFile(_) => "oxc",
+            Self::OxcNoCaseLabelInSwitch(_) => "oxc",
+            Self::OxcNoChainedTypeAssertions(_) => "oxc",
+            Self::OxcNoClearTextProtocols(_) => "oxc",
+            Self::OxcNoCollectionSizeMischeck(_) => "oxc",
+            Self::OxcNoCommentedCode(_) => "oxc",
+            Self::OxcNoConditionalEmptyObjectSpread(_) => "oxc",
             Self::OxcNoConstEnum(_) => "oxc",
+            Self::OxcNoDuplicateInComposite(_) => "oxc",
+            Self::OxcNoDuplicatedBranches(_) => "oxc",
+            Self::OxcNoEmptyAfterReluctant(_) => "oxc",
+            Self::OxcNoEmptyAlternatives(_) => "oxc",
+            Self::OxcNoEmptyCollection(_) => "oxc",
+            Self::OxcNoEmptyGroup(_) => "oxc",
+            Self::OxcNoEmptyTestFile(_) => "oxc",
+            Self::OxcNoEqualsInForTermination(_) => "oxc",
+            Self::OxcNoExclusiveTests(_) => "oxc",
+            Self::OxcNoGlobalThis(_) => "oxc",
+            Self::OxcNoHardcodedIp(_) => "oxc",
+            Self::OxcNoHardcodedPasswords(_) => "oxc",
+            Self::OxcNoHardcodedSecrets(_) => "oxc",
+            Self::OxcNoIdenticalConditions(_) => "oxc",
+            Self::OxcNoIdenticalExpressions(_) => "oxc",
+            Self::OxcNoIgnoredExceptions(_) => "oxc",
+            Self::OxcNoIgnoredReturn(_) => "oxc",
+            Self::OxcNoImplicitGlobal(_) => "oxc",
+            Self::OxcNoInMisuse(_) => "oxc",
+            Self::OxcNoInsecureCookie(_) => "oxc",
+            Self::OxcNoInternalApiUse(_) => "oxc",
+            Self::OxcNoInvertedBooleanCheck(_) => "oxc",
+            Self::OxcNoKnownValueWidening(_) => "oxc",
+            Self::OxcNoLiteralCall(_) => "oxc",
             Self::OxcNoMapSpread(_) => "oxc",
+            Self::OxcNoModuleMocking(_) => "oxc",
+            Self::OxcNoNestedAssignment(_) => "oxc",
+            Self::OxcNoNestedFunctions(_) => "oxc",
+            Self::OxcNoNestedTemplateLiterals(_) => "oxc",
+            Self::OxcNoObjectParameters(_) => "oxc",
             Self::OxcNoOptionalChaining(_) => "oxc",
+            Self::OxcNoOsCommandFromPath(_) => "oxc",
+            Self::OxcNoRedundantBoolean(_) => "oxc",
+            Self::OxcNoRedundantJump(_) => "oxc",
+            Self::OxcNoRedundantOptional(_) => "oxc",
+            Self::OxcNoReflectApply(_) => "oxc",
+            Self::OxcNoReflectGet(_) => "oxc",
             Self::OxcNoRestSpreadProperties(_) => "oxc",
+            Self::OxcNoRuntimeTypeof(_) => "oxc",
+            Self::OxcNoSameLineConditional(_) => "oxc",
+            Self::OxcNoShapeInSymbolNames(_) => "oxc",
+            Self::OxcNoSkippedTests(_) => "oxc",
+            Self::OxcNoSmallSwitch(_) => "oxc",
             Self::OxcNoThisInExportedFunction(_) => "oxc",
+            Self::OxcNoUndefinedArgument(_) => "oxc",
+            Self::OxcNoUniqKey(_) => "oxc",
+            Self::OxcNoUnknownParameters(_) => "oxc",
+            Self::OxcNoUnknownReturns(_) => "oxc",
+            Self::OxcNoUnknownTypeAliases(_) => "oxc",
+            Self::OxcNoUnsafeDictionaryType(_) => "oxc",
+            Self::OxcNoUnsafeUnzip(_) => "oxc",
+            Self::OxcNoUnthrownError(_) => "oxc",
+            Self::OxcNoUnusedCollection(_) => "oxc",
+            Self::OxcNoUnverifiedCertificate(_) => "oxc",
+            Self::OxcNoUnverifiedHostname(_) => "oxc",
+            Self::OxcNoUselessIncrement(_) => "oxc",
+            Self::OxcNoWeakCipher(_) => "oxc",
+            Self::OxcNoWeakKeys(_) => "oxc",
+            Self::OxcNoWeakSsl(_) => "oxc",
+            Self::OxcNoWidenThenAssert(_) => "oxc",
             Self::OxcNumberArgOutOfRange(_) => "oxc",
             Self::OxcOnlyUsedInRecursion(_) => "oxc",
+            Self::OxcPostMessage(_) => "oxc",
+            Self::OxcPreferDefaultLast(_) => "oxc",
+            Self::OxcPreferSingleBooleanReturn(_) => "oxc",
+            Self::OxcPreferWhile(_) => "oxc",
+            Self::OxcProductionDebug(_) => "oxc",
+            Self::OxcPseudoRandom(_) => "oxc",
+            Self::OxcRequireSafetyCommentForTypeAssertion(_) => "oxc",
+            Self::OxcSingleCharInCharacterClasses(_) => "oxc",
+            Self::OxcSingleCharacterAlternation(_) => "oxc",
             Self::OxcUninvokedArrayCallback(_) => "oxc",
+            Self::OxcUnusedImport(_) => "oxc",
+            Self::OxcUnusedNamedGroups(_) => "oxc",
+            Self::OxcUseTypeAlias(_) => "oxc",
+            Self::OxcVoidUse(_) => "oxc",
             Self::NextjsGoogleFontDisplay(_) => "nextjs",
             Self::NextjsGoogleFontPreconnect(_) => "nextjs",
             Self::NextjsInlineScriptId(_) => "nextjs",
@@ -12197,14 +13301,26 @@ impl RuleEnum {
                     JsxA11YNoStaticElementInteractions::from_configuration(value)?,
                 ))
             }
+            Self::OxcClassName(_) => {
+                Ok(Self::OxcClassName(OxcClassName::from_configuration(value)?))
+            }
+            Self::OxcMaxSwitchCases(_) => {
+                Ok(Self::OxcMaxSwitchCases(OxcMaxSwitchCases::from_configuration(value)?))
+            }
             Self::OxcNoAsyncEndpointHandlers(_) => Ok(Self::OxcNoAsyncEndpointHandlers(
                 OxcNoAsyncEndpointHandlers::from_configuration(value)?,
             )),
             Self::OxcNoBarrelFile(_) => {
                 Ok(Self::OxcNoBarrelFile(OxcNoBarrelFile::from_configuration(value)?))
             }
+            Self::OxcNoHardcodedPasswords(_) => Ok(Self::OxcNoHardcodedPasswords(
+                OxcNoHardcodedPasswords::from_configuration(value)?,
+            )),
             Self::OxcNoMapSpread(_) => {
                 Ok(Self::OxcNoMapSpread(OxcNoMapSpread::from_configuration(value)?))
+            }
+            Self::OxcNoNestedFunctions(_) => {
+                Ok(Self::OxcNoNestedFunctions(OxcNoNestedFunctions::from_configuration(value)?))
             }
             Self::OxcNoOptionalChaining(_) => {
                 Ok(Self::OxcNoOptionalChaining(OxcNoOptionalChaining::from_configuration(value)?))
@@ -12569,6 +13685,7 @@ impl RuleEnum {
             Self::EslintNoNonoctalDecimalEscape(rule) => rule.run(node, ctx),
             Self::EslintNoObjCalls(rule) => rule.run(node, ctx),
             Self::EslintNoObjectConstructor(rule) => rule.run(node, ctx),
+            Self::EslintNoOctal(rule) => rule.run(node, ctx),
             Self::EslintNoParamReassign(rule) => rule.run(node, ctx),
             Self::EslintNoPlusplus(rule) => rule.run(node, ctx),
             Self::EslintNoPromiseExecutorReturn(rule) => rule.run(node, ctx),
@@ -13087,7 +14204,9 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(rule) => rule.run(node, ctx),
             Self::JsxA11YScope(rule) => rule.run(node, ctx),
             Self::JsxA11YTabindexNoPositive(rule) => rule.run(node, ctx),
+            Self::OxcAnchorPrecedence(rule) => rule.run(node, ctx),
             Self::OxcApproxConstant(rule) => rule.run(node, ctx),
+            Self::OxcArrayCallbackWithoutReturn(rule) => rule.run(node, ctx),
             Self::OxcBadArrayMethodOnArguments(rule) => rule.run(node, ctx),
             Self::OxcBadBitwiseOperator(rule) => rule.run(node, ctx),
             Self::OxcBadCharAtComparison(rule) => rule.run(node, ctx),
@@ -13097,23 +14216,114 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(rule) => rule.run(node, ctx),
             Self::OxcBadReplaceAllArg(rule) => rule.run(node, ctx),
             Self::OxcBranchesSharingCode(rule) => rule.run(node, ctx),
+            Self::OxcClassName(rule) => rule.run(node, ctx),
+            Self::OxcCommaOrLogicalOrCase(rule) => rule.run(node, ctx),
+            Self::OxcConciseRegex(rule) => rule.run(node, ctx),
             Self::OxcConstComparisons(rule) => rule.run(node, ctx),
+            Self::OxcConstructorForSideEffects(rule) => rule.run(node, ctx),
+            Self::OxcDifferentTypesComparison(rule) => rule.run(node, ctx),
             Self::OxcDoubleComparisons(rule) => rule.run(node, ctx),
+            Self::OxcDuplicatesInCharacterClass(rule) => rule.run(node, ctx),
+            Self::OxcEmptyStringRepetition(rule) => rule.run(node, ctx),
             Self::OxcErasingOp(rule) => rule.run(node, ctx),
+            Self::OxcForLoopIncrementSign(rule) => rule.run(node, ctx),
+            Self::OxcGeneratorWithoutYield(rule) => rule.run(node, ctx),
+            Self::OxcInOperatorTypeError(rule) => rule.run(node, ctx),
+            Self::OxcLabelPosition(rule) => rule.run(node, ctx),
+            Self::OxcLinkWithTargetBlank(rule) => rule.run(node, ctx),
+            Self::OxcMaxSwitchCases(rule) => rule.run(node, ctx),
             Self::OxcMisrefactoredAssignOp(rule) => rule.run(node, ctx),
             Self::OxcMissingThrow(rule) => rule.run(node, ctx),
             Self::OxcNoAccumulatingSpread(rule) => rule.run(node, ctx),
+            Self::OxcNoAllDuplicatedBranches(rule) => rule.run(node, ctx),
+            Self::OxcNoAngularBypassSanitization(rule) => rule.run(node, ctx),
             Self::OxcNoAsyncAwait(rule) => rule.run(node, ctx),
+            Self::OxcNoAsyncConstructor(rule) => rule.run(node, ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run(node, ctx),
             Self::OxcNoBarrelFile(rule) => rule.run(node, ctx),
+            Self::OxcNoCaseLabelInSwitch(rule) => rule.run(node, ctx),
+            Self::OxcNoChainedTypeAssertions(rule) => rule.run(node, ctx),
+            Self::OxcNoClearTextProtocols(rule) => rule.run(node, ctx),
+            Self::OxcNoCollectionSizeMischeck(rule) => rule.run(node, ctx),
+            Self::OxcNoCommentedCode(rule) => rule.run(node, ctx),
+            Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.run(node, ctx),
             Self::OxcNoConstEnum(rule) => rule.run(node, ctx),
+            Self::OxcNoDuplicateInComposite(rule) => rule.run(node, ctx),
+            Self::OxcNoDuplicatedBranches(rule) => rule.run(node, ctx),
+            Self::OxcNoEmptyAfterReluctant(rule) => rule.run(node, ctx),
+            Self::OxcNoEmptyAlternatives(rule) => rule.run(node, ctx),
+            Self::OxcNoEmptyCollection(rule) => rule.run(node, ctx),
+            Self::OxcNoEmptyGroup(rule) => rule.run(node, ctx),
+            Self::OxcNoEmptyTestFile(rule) => rule.run(node, ctx),
+            Self::OxcNoEqualsInForTermination(rule) => rule.run(node, ctx),
+            Self::OxcNoExclusiveTests(rule) => rule.run(node, ctx),
+            Self::OxcNoGlobalThis(rule) => rule.run(node, ctx),
+            Self::OxcNoHardcodedIp(rule) => rule.run(node, ctx),
+            Self::OxcNoHardcodedPasswords(rule) => rule.run(node, ctx),
+            Self::OxcNoHardcodedSecrets(rule) => rule.run(node, ctx),
+            Self::OxcNoIdenticalConditions(rule) => rule.run(node, ctx),
+            Self::OxcNoIdenticalExpressions(rule) => rule.run(node, ctx),
+            Self::OxcNoIgnoredExceptions(rule) => rule.run(node, ctx),
+            Self::OxcNoIgnoredReturn(rule) => rule.run(node, ctx),
+            Self::OxcNoImplicitGlobal(rule) => rule.run(node, ctx),
+            Self::OxcNoInMisuse(rule) => rule.run(node, ctx),
+            Self::OxcNoInsecureCookie(rule) => rule.run(node, ctx),
+            Self::OxcNoInternalApiUse(rule) => rule.run(node, ctx),
+            Self::OxcNoInvertedBooleanCheck(rule) => rule.run(node, ctx),
+            Self::OxcNoKnownValueWidening(rule) => rule.run(node, ctx),
+            Self::OxcNoLiteralCall(rule) => rule.run(node, ctx),
             Self::OxcNoMapSpread(rule) => rule.run(node, ctx),
+            Self::OxcNoModuleMocking(rule) => rule.run(node, ctx),
+            Self::OxcNoNestedAssignment(rule) => rule.run(node, ctx),
+            Self::OxcNoNestedFunctions(rule) => rule.run(node, ctx),
+            Self::OxcNoNestedTemplateLiterals(rule) => rule.run(node, ctx),
+            Self::OxcNoObjectParameters(rule) => rule.run(node, ctx),
             Self::OxcNoOptionalChaining(rule) => rule.run(node, ctx),
+            Self::OxcNoOsCommandFromPath(rule) => rule.run(node, ctx),
+            Self::OxcNoRedundantBoolean(rule) => rule.run(node, ctx),
+            Self::OxcNoRedundantJump(rule) => rule.run(node, ctx),
+            Self::OxcNoRedundantOptional(rule) => rule.run(node, ctx),
+            Self::OxcNoReflectApply(rule) => rule.run(node, ctx),
+            Self::OxcNoReflectGet(rule) => rule.run(node, ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.run(node, ctx),
+            Self::OxcNoRuntimeTypeof(rule) => rule.run(node, ctx),
+            Self::OxcNoSameLineConditional(rule) => rule.run(node, ctx),
+            Self::OxcNoShapeInSymbolNames(rule) => rule.run(node, ctx),
+            Self::OxcNoSkippedTests(rule) => rule.run(node, ctx),
+            Self::OxcNoSmallSwitch(rule) => rule.run(node, ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.run(node, ctx),
+            Self::OxcNoUndefinedArgument(rule) => rule.run(node, ctx),
+            Self::OxcNoUniqKey(rule) => rule.run(node, ctx),
+            Self::OxcNoUnknownParameters(rule) => rule.run(node, ctx),
+            Self::OxcNoUnknownReturns(rule) => rule.run(node, ctx),
+            Self::OxcNoUnknownTypeAliases(rule) => rule.run(node, ctx),
+            Self::OxcNoUnsafeDictionaryType(rule) => rule.run(node, ctx),
+            Self::OxcNoUnsafeUnzip(rule) => rule.run(node, ctx),
+            Self::OxcNoUnthrownError(rule) => rule.run(node, ctx),
+            Self::OxcNoUnusedCollection(rule) => rule.run(node, ctx),
+            Self::OxcNoUnverifiedCertificate(rule) => rule.run(node, ctx),
+            Self::OxcNoUnverifiedHostname(rule) => rule.run(node, ctx),
+            Self::OxcNoUselessIncrement(rule) => rule.run(node, ctx),
+            Self::OxcNoWeakCipher(rule) => rule.run(node, ctx),
+            Self::OxcNoWeakKeys(rule) => rule.run(node, ctx),
+            Self::OxcNoWeakSsl(rule) => rule.run(node, ctx),
+            Self::OxcNoWidenThenAssert(rule) => rule.run(node, ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run(node, ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run(node, ctx),
+            Self::OxcPostMessage(rule) => rule.run(node, ctx),
+            Self::OxcPreferDefaultLast(rule) => rule.run(node, ctx),
+            Self::OxcPreferSingleBooleanReturn(rule) => rule.run(node, ctx),
+            Self::OxcPreferWhile(rule) => rule.run(node, ctx),
+            Self::OxcProductionDebug(rule) => rule.run(node, ctx),
+            Self::OxcPseudoRandom(rule) => rule.run(node, ctx),
+            Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.run(node, ctx),
+            Self::OxcSingleCharInCharacterClasses(rule) => rule.run(node, ctx),
+            Self::OxcSingleCharacterAlternation(rule) => rule.run(node, ctx),
             Self::OxcUninvokedArrayCallback(rule) => rule.run(node, ctx),
+            Self::OxcUnusedImport(rule) => rule.run(node, ctx),
+            Self::OxcUnusedNamedGroups(rule) => rule.run(node, ctx),
+            Self::OxcUseTypeAlias(rule) => rule.run(node, ctx),
+            Self::OxcVoidUse(rule) => rule.run(node, ctx),
             Self::NextjsGoogleFontDisplay(rule) => rule.run(node, ctx),
             Self::NextjsGoogleFontPreconnect(rule) => rule.run(node, ctx),
             Self::NextjsInlineScriptId(rule) => rule.run(node, ctx),
@@ -13456,6 +14666,7 @@ impl RuleEnum {
             Self::EslintNoNonoctalDecimalEscape(rule) => rule.run_once(ctx),
             Self::EslintNoObjCalls(rule) => rule.run_once(ctx),
             Self::EslintNoObjectConstructor(rule) => rule.run_once(ctx),
+            Self::EslintNoOctal(rule) => rule.run_once(ctx),
             Self::EslintNoParamReassign(rule) => rule.run_once(ctx),
             Self::EslintNoPlusplus(rule) => rule.run_once(ctx),
             Self::EslintNoPromiseExecutorReturn(rule) => rule.run_once(ctx),
@@ -13974,7 +15185,9 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(rule) => rule.run_once(ctx),
             Self::JsxA11YScope(rule) => rule.run_once(ctx),
             Self::JsxA11YTabindexNoPositive(rule) => rule.run_once(ctx),
+            Self::OxcAnchorPrecedence(rule) => rule.run_once(ctx),
             Self::OxcApproxConstant(rule) => rule.run_once(ctx),
+            Self::OxcArrayCallbackWithoutReturn(rule) => rule.run_once(ctx),
             Self::OxcBadArrayMethodOnArguments(rule) => rule.run_once(ctx),
             Self::OxcBadBitwiseOperator(rule) => rule.run_once(ctx),
             Self::OxcBadCharAtComparison(rule) => rule.run_once(ctx),
@@ -13984,23 +15197,114 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(rule) => rule.run_once(ctx),
             Self::OxcBadReplaceAllArg(rule) => rule.run_once(ctx),
             Self::OxcBranchesSharingCode(rule) => rule.run_once(ctx),
+            Self::OxcClassName(rule) => rule.run_once(ctx),
+            Self::OxcCommaOrLogicalOrCase(rule) => rule.run_once(ctx),
+            Self::OxcConciseRegex(rule) => rule.run_once(ctx),
             Self::OxcConstComparisons(rule) => rule.run_once(ctx),
+            Self::OxcConstructorForSideEffects(rule) => rule.run_once(ctx),
+            Self::OxcDifferentTypesComparison(rule) => rule.run_once(ctx),
             Self::OxcDoubleComparisons(rule) => rule.run_once(ctx),
+            Self::OxcDuplicatesInCharacterClass(rule) => rule.run_once(ctx),
+            Self::OxcEmptyStringRepetition(rule) => rule.run_once(ctx),
             Self::OxcErasingOp(rule) => rule.run_once(ctx),
+            Self::OxcForLoopIncrementSign(rule) => rule.run_once(ctx),
+            Self::OxcGeneratorWithoutYield(rule) => rule.run_once(ctx),
+            Self::OxcInOperatorTypeError(rule) => rule.run_once(ctx),
+            Self::OxcLabelPosition(rule) => rule.run_once(ctx),
+            Self::OxcLinkWithTargetBlank(rule) => rule.run_once(ctx),
+            Self::OxcMaxSwitchCases(rule) => rule.run_once(ctx),
             Self::OxcMisrefactoredAssignOp(rule) => rule.run_once(ctx),
             Self::OxcMissingThrow(rule) => rule.run_once(ctx),
             Self::OxcNoAccumulatingSpread(rule) => rule.run_once(ctx),
+            Self::OxcNoAllDuplicatedBranches(rule) => rule.run_once(ctx),
+            Self::OxcNoAngularBypassSanitization(rule) => rule.run_once(ctx),
             Self::OxcNoAsyncAwait(rule) => rule.run_once(ctx),
+            Self::OxcNoAsyncConstructor(rule) => rule.run_once(ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run_once(ctx),
             Self::OxcNoBarrelFile(rule) => rule.run_once(ctx),
+            Self::OxcNoCaseLabelInSwitch(rule) => rule.run_once(ctx),
+            Self::OxcNoChainedTypeAssertions(rule) => rule.run_once(ctx),
+            Self::OxcNoClearTextProtocols(rule) => rule.run_once(ctx),
+            Self::OxcNoCollectionSizeMischeck(rule) => rule.run_once(ctx),
+            Self::OxcNoCommentedCode(rule) => rule.run_once(ctx),
+            Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.run_once(ctx),
             Self::OxcNoConstEnum(rule) => rule.run_once(ctx),
+            Self::OxcNoDuplicateInComposite(rule) => rule.run_once(ctx),
+            Self::OxcNoDuplicatedBranches(rule) => rule.run_once(ctx),
+            Self::OxcNoEmptyAfterReluctant(rule) => rule.run_once(ctx),
+            Self::OxcNoEmptyAlternatives(rule) => rule.run_once(ctx),
+            Self::OxcNoEmptyCollection(rule) => rule.run_once(ctx),
+            Self::OxcNoEmptyGroup(rule) => rule.run_once(ctx),
+            Self::OxcNoEmptyTestFile(rule) => rule.run_once(ctx),
+            Self::OxcNoEqualsInForTermination(rule) => rule.run_once(ctx),
+            Self::OxcNoExclusiveTests(rule) => rule.run_once(ctx),
+            Self::OxcNoGlobalThis(rule) => rule.run_once(ctx),
+            Self::OxcNoHardcodedIp(rule) => rule.run_once(ctx),
+            Self::OxcNoHardcodedPasswords(rule) => rule.run_once(ctx),
+            Self::OxcNoHardcodedSecrets(rule) => rule.run_once(ctx),
+            Self::OxcNoIdenticalConditions(rule) => rule.run_once(ctx),
+            Self::OxcNoIdenticalExpressions(rule) => rule.run_once(ctx),
+            Self::OxcNoIgnoredExceptions(rule) => rule.run_once(ctx),
+            Self::OxcNoIgnoredReturn(rule) => rule.run_once(ctx),
+            Self::OxcNoImplicitGlobal(rule) => rule.run_once(ctx),
+            Self::OxcNoInMisuse(rule) => rule.run_once(ctx),
+            Self::OxcNoInsecureCookie(rule) => rule.run_once(ctx),
+            Self::OxcNoInternalApiUse(rule) => rule.run_once(ctx),
+            Self::OxcNoInvertedBooleanCheck(rule) => rule.run_once(ctx),
+            Self::OxcNoKnownValueWidening(rule) => rule.run_once(ctx),
+            Self::OxcNoLiteralCall(rule) => rule.run_once(ctx),
             Self::OxcNoMapSpread(rule) => rule.run_once(ctx),
+            Self::OxcNoModuleMocking(rule) => rule.run_once(ctx),
+            Self::OxcNoNestedAssignment(rule) => rule.run_once(ctx),
+            Self::OxcNoNestedFunctions(rule) => rule.run_once(ctx),
+            Self::OxcNoNestedTemplateLiterals(rule) => rule.run_once(ctx),
+            Self::OxcNoObjectParameters(rule) => rule.run_once(ctx),
             Self::OxcNoOptionalChaining(rule) => rule.run_once(ctx),
+            Self::OxcNoOsCommandFromPath(rule) => rule.run_once(ctx),
+            Self::OxcNoRedundantBoolean(rule) => rule.run_once(ctx),
+            Self::OxcNoRedundantJump(rule) => rule.run_once(ctx),
+            Self::OxcNoRedundantOptional(rule) => rule.run_once(ctx),
+            Self::OxcNoReflectApply(rule) => rule.run_once(ctx),
+            Self::OxcNoReflectGet(rule) => rule.run_once(ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.run_once(ctx),
+            Self::OxcNoRuntimeTypeof(rule) => rule.run_once(ctx),
+            Self::OxcNoSameLineConditional(rule) => rule.run_once(ctx),
+            Self::OxcNoShapeInSymbolNames(rule) => rule.run_once(ctx),
+            Self::OxcNoSkippedTests(rule) => rule.run_once(ctx),
+            Self::OxcNoSmallSwitch(rule) => rule.run_once(ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.run_once(ctx),
+            Self::OxcNoUndefinedArgument(rule) => rule.run_once(ctx),
+            Self::OxcNoUniqKey(rule) => rule.run_once(ctx),
+            Self::OxcNoUnknownParameters(rule) => rule.run_once(ctx),
+            Self::OxcNoUnknownReturns(rule) => rule.run_once(ctx),
+            Self::OxcNoUnknownTypeAliases(rule) => rule.run_once(ctx),
+            Self::OxcNoUnsafeDictionaryType(rule) => rule.run_once(ctx),
+            Self::OxcNoUnsafeUnzip(rule) => rule.run_once(ctx),
+            Self::OxcNoUnthrownError(rule) => rule.run_once(ctx),
+            Self::OxcNoUnusedCollection(rule) => rule.run_once(ctx),
+            Self::OxcNoUnverifiedCertificate(rule) => rule.run_once(ctx),
+            Self::OxcNoUnverifiedHostname(rule) => rule.run_once(ctx),
+            Self::OxcNoUselessIncrement(rule) => rule.run_once(ctx),
+            Self::OxcNoWeakCipher(rule) => rule.run_once(ctx),
+            Self::OxcNoWeakKeys(rule) => rule.run_once(ctx),
+            Self::OxcNoWeakSsl(rule) => rule.run_once(ctx),
+            Self::OxcNoWidenThenAssert(rule) => rule.run_once(ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_once(ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_once(ctx),
+            Self::OxcPostMessage(rule) => rule.run_once(ctx),
+            Self::OxcPreferDefaultLast(rule) => rule.run_once(ctx),
+            Self::OxcPreferSingleBooleanReturn(rule) => rule.run_once(ctx),
+            Self::OxcPreferWhile(rule) => rule.run_once(ctx),
+            Self::OxcProductionDebug(rule) => rule.run_once(ctx),
+            Self::OxcPseudoRandom(rule) => rule.run_once(ctx),
+            Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.run_once(ctx),
+            Self::OxcSingleCharInCharacterClasses(rule) => rule.run_once(ctx),
+            Self::OxcSingleCharacterAlternation(rule) => rule.run_once(ctx),
             Self::OxcUninvokedArrayCallback(rule) => rule.run_once(ctx),
+            Self::OxcUnusedImport(rule) => rule.run_once(ctx),
+            Self::OxcUnusedNamedGroups(rule) => rule.run_once(ctx),
+            Self::OxcUseTypeAlias(rule) => rule.run_once(ctx),
+            Self::OxcVoidUse(rule) => rule.run_once(ctx),
             Self::NextjsGoogleFontDisplay(rule) => rule.run_once(ctx),
             Self::NextjsGoogleFontPreconnect(rule) => rule.run_once(ctx),
             Self::NextjsInlineScriptId(rule) => rule.run_once(ctx),
@@ -14346,6 +15650,7 @@ impl RuleEnum {
             Self::EslintNoNonoctalDecimalEscape(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoObjCalls(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoObjectConstructor(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::EslintNoOctal(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoParamReassign(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoPlusplus(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::EslintNoPromiseExecutorReturn(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -14968,7 +16273,9 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::JsxA11YScope(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::JsxA11YTabindexNoPositive(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcAnchorPrecedence(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcApproxConstant(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcArrayCallbackWithoutReturn(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcBadArrayMethodOnArguments(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcBadBitwiseOperator(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcBadCharAtComparison(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -14978,23 +16285,116 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcBadReplaceAllArg(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcBranchesSharingCode(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcClassName(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcCommaOrLogicalOrCase(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcConciseRegex(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcConstComparisons(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcConstructorForSideEffects(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcDifferentTypesComparison(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcDoubleComparisons(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcDuplicatesInCharacterClass(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcEmptyStringRepetition(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcErasingOp(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcForLoopIncrementSign(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcGeneratorWithoutYield(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcInOperatorTypeError(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcLabelPosition(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcLinkWithTargetBlank(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcMaxSwitchCases(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcMisrefactoredAssignOp(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcMissingThrow(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoAccumulatingSpread(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoAllDuplicatedBranches(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoAngularBypassSanitization(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoAsyncAwait(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoAsyncConstructor(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoBarrelFile(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoCaseLabelInSwitch(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoChainedTypeAssertions(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoClearTextProtocols(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoCollectionSizeMischeck(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoCommentedCode(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoConstEnum(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoDuplicateInComposite(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoDuplicatedBranches(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoEmptyAfterReluctant(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoEmptyAlternatives(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoEmptyCollection(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoEmptyGroup(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoEmptyTestFile(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoEqualsInForTermination(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoExclusiveTests(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoGlobalThis(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoHardcodedIp(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoHardcodedPasswords(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoHardcodedSecrets(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoIdenticalConditions(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoIdenticalExpressions(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoIgnoredExceptions(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoIgnoredReturn(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoImplicitGlobal(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoInMisuse(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoInsecureCookie(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoInternalApiUse(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoInvertedBooleanCheck(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoKnownValueWidening(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoLiteralCall(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoMapSpread(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoModuleMocking(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoNestedAssignment(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoNestedFunctions(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoNestedTemplateLiterals(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoObjectParameters(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoOptionalChaining(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoOsCommandFromPath(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoRedundantBoolean(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoRedundantJump(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoRedundantOptional(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoReflectApply(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoReflectGet(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoRuntimeTypeof(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoSameLineConditional(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoShapeInSymbolNames(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoSkippedTests(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoSmallSwitch(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoUndefinedArgument(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoUniqKey(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoUnknownParameters(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoUnknownReturns(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoUnknownTypeAliases(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoUnsafeDictionaryType(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoUnsafeUnzip(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoUnthrownError(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoUnusedCollection(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoUnverifiedCertificate(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoUnverifiedHostname(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoUselessIncrement(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoWeakCipher(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoWeakKeys(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoWeakSsl(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcNoWidenThenAssert(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcPostMessage(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcPreferDefaultLast(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcPreferSingleBooleanReturn(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcPreferWhile(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcProductionDebug(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcPseudoRandom(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcRequireSafetyCommentForTypeAssertion(rule) => {
+                rule.run_on_jest_node(jest_node, ctx)
+            }
+            Self::OxcSingleCharInCharacterClasses(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcSingleCharacterAlternation(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcUninvokedArrayCallback(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcUnusedImport(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcUnusedNamedGroups(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcUseTypeAlias(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcVoidUse(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::NextjsGoogleFontDisplay(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::NextjsGoogleFontPreconnect(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::NextjsInlineScriptId(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -15348,6 +16748,7 @@ impl RuleEnum {
             Self::EslintNoNonoctalDecimalEscape(rule) => rule.should_run(ctx),
             Self::EslintNoObjCalls(rule) => rule.should_run(ctx),
             Self::EslintNoObjectConstructor(rule) => rule.should_run(ctx),
+            Self::EslintNoOctal(rule) => rule.should_run(ctx),
             Self::EslintNoParamReassign(rule) => rule.should_run(ctx),
             Self::EslintNoPlusplus(rule) => rule.should_run(ctx),
             Self::EslintNoPromiseExecutorReturn(rule) => rule.should_run(ctx),
@@ -15866,7 +17267,9 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(rule) => rule.should_run(ctx),
             Self::JsxA11YScope(rule) => rule.should_run(ctx),
             Self::JsxA11YTabindexNoPositive(rule) => rule.should_run(ctx),
+            Self::OxcAnchorPrecedence(rule) => rule.should_run(ctx),
             Self::OxcApproxConstant(rule) => rule.should_run(ctx),
+            Self::OxcArrayCallbackWithoutReturn(rule) => rule.should_run(ctx),
             Self::OxcBadArrayMethodOnArguments(rule) => rule.should_run(ctx),
             Self::OxcBadBitwiseOperator(rule) => rule.should_run(ctx),
             Self::OxcBadCharAtComparison(rule) => rule.should_run(ctx),
@@ -15876,23 +17279,114 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(rule) => rule.should_run(ctx),
             Self::OxcBadReplaceAllArg(rule) => rule.should_run(ctx),
             Self::OxcBranchesSharingCode(rule) => rule.should_run(ctx),
+            Self::OxcClassName(rule) => rule.should_run(ctx),
+            Self::OxcCommaOrLogicalOrCase(rule) => rule.should_run(ctx),
+            Self::OxcConciseRegex(rule) => rule.should_run(ctx),
             Self::OxcConstComparisons(rule) => rule.should_run(ctx),
+            Self::OxcConstructorForSideEffects(rule) => rule.should_run(ctx),
+            Self::OxcDifferentTypesComparison(rule) => rule.should_run(ctx),
             Self::OxcDoubleComparisons(rule) => rule.should_run(ctx),
+            Self::OxcDuplicatesInCharacterClass(rule) => rule.should_run(ctx),
+            Self::OxcEmptyStringRepetition(rule) => rule.should_run(ctx),
             Self::OxcErasingOp(rule) => rule.should_run(ctx),
+            Self::OxcForLoopIncrementSign(rule) => rule.should_run(ctx),
+            Self::OxcGeneratorWithoutYield(rule) => rule.should_run(ctx),
+            Self::OxcInOperatorTypeError(rule) => rule.should_run(ctx),
+            Self::OxcLabelPosition(rule) => rule.should_run(ctx),
+            Self::OxcLinkWithTargetBlank(rule) => rule.should_run(ctx),
+            Self::OxcMaxSwitchCases(rule) => rule.should_run(ctx),
             Self::OxcMisrefactoredAssignOp(rule) => rule.should_run(ctx),
             Self::OxcMissingThrow(rule) => rule.should_run(ctx),
             Self::OxcNoAccumulatingSpread(rule) => rule.should_run(ctx),
+            Self::OxcNoAllDuplicatedBranches(rule) => rule.should_run(ctx),
+            Self::OxcNoAngularBypassSanitization(rule) => rule.should_run(ctx),
             Self::OxcNoAsyncAwait(rule) => rule.should_run(ctx),
+            Self::OxcNoAsyncConstructor(rule) => rule.should_run(ctx),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.should_run(ctx),
             Self::OxcNoBarrelFile(rule) => rule.should_run(ctx),
+            Self::OxcNoCaseLabelInSwitch(rule) => rule.should_run(ctx),
+            Self::OxcNoChainedTypeAssertions(rule) => rule.should_run(ctx),
+            Self::OxcNoClearTextProtocols(rule) => rule.should_run(ctx),
+            Self::OxcNoCollectionSizeMischeck(rule) => rule.should_run(ctx),
+            Self::OxcNoCommentedCode(rule) => rule.should_run(ctx),
+            Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.should_run(ctx),
             Self::OxcNoConstEnum(rule) => rule.should_run(ctx),
+            Self::OxcNoDuplicateInComposite(rule) => rule.should_run(ctx),
+            Self::OxcNoDuplicatedBranches(rule) => rule.should_run(ctx),
+            Self::OxcNoEmptyAfterReluctant(rule) => rule.should_run(ctx),
+            Self::OxcNoEmptyAlternatives(rule) => rule.should_run(ctx),
+            Self::OxcNoEmptyCollection(rule) => rule.should_run(ctx),
+            Self::OxcNoEmptyGroup(rule) => rule.should_run(ctx),
+            Self::OxcNoEmptyTestFile(rule) => rule.should_run(ctx),
+            Self::OxcNoEqualsInForTermination(rule) => rule.should_run(ctx),
+            Self::OxcNoExclusiveTests(rule) => rule.should_run(ctx),
+            Self::OxcNoGlobalThis(rule) => rule.should_run(ctx),
+            Self::OxcNoHardcodedIp(rule) => rule.should_run(ctx),
+            Self::OxcNoHardcodedPasswords(rule) => rule.should_run(ctx),
+            Self::OxcNoHardcodedSecrets(rule) => rule.should_run(ctx),
+            Self::OxcNoIdenticalConditions(rule) => rule.should_run(ctx),
+            Self::OxcNoIdenticalExpressions(rule) => rule.should_run(ctx),
+            Self::OxcNoIgnoredExceptions(rule) => rule.should_run(ctx),
+            Self::OxcNoIgnoredReturn(rule) => rule.should_run(ctx),
+            Self::OxcNoImplicitGlobal(rule) => rule.should_run(ctx),
+            Self::OxcNoInMisuse(rule) => rule.should_run(ctx),
+            Self::OxcNoInsecureCookie(rule) => rule.should_run(ctx),
+            Self::OxcNoInternalApiUse(rule) => rule.should_run(ctx),
+            Self::OxcNoInvertedBooleanCheck(rule) => rule.should_run(ctx),
+            Self::OxcNoKnownValueWidening(rule) => rule.should_run(ctx),
+            Self::OxcNoLiteralCall(rule) => rule.should_run(ctx),
             Self::OxcNoMapSpread(rule) => rule.should_run(ctx),
+            Self::OxcNoModuleMocking(rule) => rule.should_run(ctx),
+            Self::OxcNoNestedAssignment(rule) => rule.should_run(ctx),
+            Self::OxcNoNestedFunctions(rule) => rule.should_run(ctx),
+            Self::OxcNoNestedTemplateLiterals(rule) => rule.should_run(ctx),
+            Self::OxcNoObjectParameters(rule) => rule.should_run(ctx),
             Self::OxcNoOptionalChaining(rule) => rule.should_run(ctx),
+            Self::OxcNoOsCommandFromPath(rule) => rule.should_run(ctx),
+            Self::OxcNoRedundantBoolean(rule) => rule.should_run(ctx),
+            Self::OxcNoRedundantJump(rule) => rule.should_run(ctx),
+            Self::OxcNoRedundantOptional(rule) => rule.should_run(ctx),
+            Self::OxcNoReflectApply(rule) => rule.should_run(ctx),
+            Self::OxcNoReflectGet(rule) => rule.should_run(ctx),
             Self::OxcNoRestSpreadProperties(rule) => rule.should_run(ctx),
+            Self::OxcNoRuntimeTypeof(rule) => rule.should_run(ctx),
+            Self::OxcNoSameLineConditional(rule) => rule.should_run(ctx),
+            Self::OxcNoShapeInSymbolNames(rule) => rule.should_run(ctx),
+            Self::OxcNoSkippedTests(rule) => rule.should_run(ctx),
+            Self::OxcNoSmallSwitch(rule) => rule.should_run(ctx),
             Self::OxcNoThisInExportedFunction(rule) => rule.should_run(ctx),
+            Self::OxcNoUndefinedArgument(rule) => rule.should_run(ctx),
+            Self::OxcNoUniqKey(rule) => rule.should_run(ctx),
+            Self::OxcNoUnknownParameters(rule) => rule.should_run(ctx),
+            Self::OxcNoUnknownReturns(rule) => rule.should_run(ctx),
+            Self::OxcNoUnknownTypeAliases(rule) => rule.should_run(ctx),
+            Self::OxcNoUnsafeDictionaryType(rule) => rule.should_run(ctx),
+            Self::OxcNoUnsafeUnzip(rule) => rule.should_run(ctx),
+            Self::OxcNoUnthrownError(rule) => rule.should_run(ctx),
+            Self::OxcNoUnusedCollection(rule) => rule.should_run(ctx),
+            Self::OxcNoUnverifiedCertificate(rule) => rule.should_run(ctx),
+            Self::OxcNoUnverifiedHostname(rule) => rule.should_run(ctx),
+            Self::OxcNoUselessIncrement(rule) => rule.should_run(ctx),
+            Self::OxcNoWeakCipher(rule) => rule.should_run(ctx),
+            Self::OxcNoWeakKeys(rule) => rule.should_run(ctx),
+            Self::OxcNoWeakSsl(rule) => rule.should_run(ctx),
+            Self::OxcNoWidenThenAssert(rule) => rule.should_run(ctx),
             Self::OxcNumberArgOutOfRange(rule) => rule.should_run(ctx),
             Self::OxcOnlyUsedInRecursion(rule) => rule.should_run(ctx),
+            Self::OxcPostMessage(rule) => rule.should_run(ctx),
+            Self::OxcPreferDefaultLast(rule) => rule.should_run(ctx),
+            Self::OxcPreferSingleBooleanReturn(rule) => rule.should_run(ctx),
+            Self::OxcPreferWhile(rule) => rule.should_run(ctx),
+            Self::OxcProductionDebug(rule) => rule.should_run(ctx),
+            Self::OxcPseudoRandom(rule) => rule.should_run(ctx),
+            Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.should_run(ctx),
+            Self::OxcSingleCharInCharacterClasses(rule) => rule.should_run(ctx),
+            Self::OxcSingleCharacterAlternation(rule) => rule.should_run(ctx),
             Self::OxcUninvokedArrayCallback(rule) => rule.should_run(ctx),
+            Self::OxcUnusedImport(rule) => rule.should_run(ctx),
+            Self::OxcUnusedNamedGroups(rule) => rule.should_run(ctx),
+            Self::OxcUseTypeAlias(rule) => rule.should_run(ctx),
+            Self::OxcVoidUse(rule) => rule.should_run(ctx),
             Self::NextjsGoogleFontDisplay(rule) => rule.should_run(ctx),
             Self::NextjsGoogleFontPreconnect(rule) => rule.should_run(ctx),
             Self::NextjsInlineScriptId(rule) => rule.should_run(ctx),
@@ -16238,6 +17732,7 @@ impl RuleEnum {
             }
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::IS_TSGOLINT_RULE,
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::IS_TSGOLINT_RULE,
+            Self::EslintNoOctal(_) => EslintNoOctal::IS_TSGOLINT_RULE,
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::IS_TSGOLINT_RULE,
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::IS_TSGOLINT_RULE,
             Self::EslintNoPromiseExecutorReturn(_) => {
@@ -17058,7 +18553,11 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(_) => JsxA11YRoleSupportsAriaProps::IS_TSGOLINT_RULE,
             Self::JsxA11YScope(_) => JsxA11YScope::IS_TSGOLINT_RULE,
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::IS_TSGOLINT_RULE,
+            Self::OxcAnchorPrecedence(_) => OxcAnchorPrecedence::IS_TSGOLINT_RULE,
             Self::OxcApproxConstant(_) => OxcApproxConstant::IS_TSGOLINT_RULE,
+            Self::OxcArrayCallbackWithoutReturn(_) => {
+                OxcArrayCallbackWithoutReturn::IS_TSGOLINT_RULE
+            }
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::IS_TSGOLINT_RULE,
             Self::OxcBadBitwiseOperator(_) => OxcBadBitwiseOperator::IS_TSGOLINT_RULE,
             Self::OxcBadCharAtComparison(_) => OxcBadCharAtComparison::IS_TSGOLINT_RULE,
@@ -17070,23 +18569,126 @@ impl RuleEnum {
             }
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::IS_TSGOLINT_RULE,
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::IS_TSGOLINT_RULE,
+            Self::OxcClassName(_) => OxcClassName::IS_TSGOLINT_RULE,
+            Self::OxcCommaOrLogicalOrCase(_) => OxcCommaOrLogicalOrCase::IS_TSGOLINT_RULE,
+            Self::OxcConciseRegex(_) => OxcConciseRegex::IS_TSGOLINT_RULE,
             Self::OxcConstComparisons(_) => OxcConstComparisons::IS_TSGOLINT_RULE,
+            Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::IS_TSGOLINT_RULE,
+            Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::IS_TSGOLINT_RULE,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::IS_TSGOLINT_RULE,
+            Self::OxcDuplicatesInCharacterClass(_) => {
+                OxcDuplicatesInCharacterClass::IS_TSGOLINT_RULE
+            }
+            Self::OxcEmptyStringRepetition(_) => OxcEmptyStringRepetition::IS_TSGOLINT_RULE,
             Self::OxcErasingOp(_) => OxcErasingOp::IS_TSGOLINT_RULE,
+            Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::IS_TSGOLINT_RULE,
+            Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::IS_TSGOLINT_RULE,
+            Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::IS_TSGOLINT_RULE,
+            Self::OxcLabelPosition(_) => OxcLabelPosition::IS_TSGOLINT_RULE,
+            Self::OxcLinkWithTargetBlank(_) => OxcLinkWithTargetBlank::IS_TSGOLINT_RULE,
+            Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::IS_TSGOLINT_RULE,
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::IS_TSGOLINT_RULE,
             Self::OxcMissingThrow(_) => OxcMissingThrow::IS_TSGOLINT_RULE,
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::IS_TSGOLINT_RULE,
+            Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::IS_TSGOLINT_RULE,
+            Self::OxcNoAngularBypassSanitization(_) => {
+                OxcNoAngularBypassSanitization::IS_TSGOLINT_RULE
+            }
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::IS_TSGOLINT_RULE,
+            Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::IS_TSGOLINT_RULE,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::IS_TSGOLINT_RULE,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::IS_TSGOLINT_RULE,
+            Self::OxcNoCaseLabelInSwitch(_) => OxcNoCaseLabelInSwitch::IS_TSGOLINT_RULE,
+            Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::IS_TSGOLINT_RULE,
+            Self::OxcNoClearTextProtocols(_) => OxcNoClearTextProtocols::IS_TSGOLINT_RULE,
+            Self::OxcNoCollectionSizeMischeck(_) => OxcNoCollectionSizeMischeck::IS_TSGOLINT_RULE,
+            Self::OxcNoCommentedCode(_) => OxcNoCommentedCode::IS_TSGOLINT_RULE,
+            Self::OxcNoConditionalEmptyObjectSpread(_) => {
+                OxcNoConditionalEmptyObjectSpread::IS_TSGOLINT_RULE
+            }
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::IS_TSGOLINT_RULE,
+            Self::OxcNoDuplicateInComposite(_) => OxcNoDuplicateInComposite::IS_TSGOLINT_RULE,
+            Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::IS_TSGOLINT_RULE,
+            Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::IS_TSGOLINT_RULE,
+            Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::IS_TSGOLINT_RULE,
+            Self::OxcNoEmptyCollection(_) => OxcNoEmptyCollection::IS_TSGOLINT_RULE,
+            Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::IS_TSGOLINT_RULE,
+            Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::IS_TSGOLINT_RULE,
+            Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::IS_TSGOLINT_RULE,
+            Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::IS_TSGOLINT_RULE,
+            Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::IS_TSGOLINT_RULE,
+            Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::IS_TSGOLINT_RULE,
+            Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::IS_TSGOLINT_RULE,
+            Self::OxcNoHardcodedSecrets(_) => OxcNoHardcodedSecrets::IS_TSGOLINT_RULE,
+            Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::IS_TSGOLINT_RULE,
+            Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::IS_TSGOLINT_RULE,
+            Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::IS_TSGOLINT_RULE,
+            Self::OxcNoIgnoredReturn(_) => OxcNoIgnoredReturn::IS_TSGOLINT_RULE,
+            Self::OxcNoImplicitGlobal(_) => OxcNoImplicitGlobal::IS_TSGOLINT_RULE,
+            Self::OxcNoInMisuse(_) => OxcNoInMisuse::IS_TSGOLINT_RULE,
+            Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::IS_TSGOLINT_RULE,
+            Self::OxcNoInternalApiUse(_) => OxcNoInternalApiUse::IS_TSGOLINT_RULE,
+            Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::IS_TSGOLINT_RULE,
+            Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::IS_TSGOLINT_RULE,
+            Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::IS_TSGOLINT_RULE,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::IS_TSGOLINT_RULE,
+            Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::IS_TSGOLINT_RULE,
+            Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::IS_TSGOLINT_RULE,
+            Self::OxcNoNestedFunctions(_) => OxcNoNestedFunctions::IS_TSGOLINT_RULE,
+            Self::OxcNoNestedTemplateLiterals(_) => OxcNoNestedTemplateLiterals::IS_TSGOLINT_RULE,
+            Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::IS_TSGOLINT_RULE,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::IS_TSGOLINT_RULE,
+            Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::IS_TSGOLINT_RULE,
+            Self::OxcNoRedundantBoolean(_) => OxcNoRedundantBoolean::IS_TSGOLINT_RULE,
+            Self::OxcNoRedundantJump(_) => OxcNoRedundantJump::IS_TSGOLINT_RULE,
+            Self::OxcNoRedundantOptional(_) => OxcNoRedundantOptional::IS_TSGOLINT_RULE,
+            Self::OxcNoReflectApply(_) => OxcNoReflectApply::IS_TSGOLINT_RULE,
+            Self::OxcNoReflectGet(_) => OxcNoReflectGet::IS_TSGOLINT_RULE,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::IS_TSGOLINT_RULE,
+            Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::IS_TSGOLINT_RULE,
+            Self::OxcNoSameLineConditional(_) => OxcNoSameLineConditional::IS_TSGOLINT_RULE,
+            Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::IS_TSGOLINT_RULE,
+            Self::OxcNoSkippedTests(_) => OxcNoSkippedTests::IS_TSGOLINT_RULE,
+            Self::OxcNoSmallSwitch(_) => OxcNoSmallSwitch::IS_TSGOLINT_RULE,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::IS_TSGOLINT_RULE,
+            Self::OxcNoUndefinedArgument(_) => OxcNoUndefinedArgument::IS_TSGOLINT_RULE,
+            Self::OxcNoUniqKey(_) => OxcNoUniqKey::IS_TSGOLINT_RULE,
+            Self::OxcNoUnknownParameters(_) => OxcNoUnknownParameters::IS_TSGOLINT_RULE,
+            Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::IS_TSGOLINT_RULE,
+            Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::IS_TSGOLINT_RULE,
+            Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::IS_TSGOLINT_RULE,
+            Self::OxcNoUnsafeUnzip(_) => OxcNoUnsafeUnzip::IS_TSGOLINT_RULE,
+            Self::OxcNoUnthrownError(_) => OxcNoUnthrownError::IS_TSGOLINT_RULE,
+            Self::OxcNoUnusedCollection(_) => OxcNoUnusedCollection::IS_TSGOLINT_RULE,
+            Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::IS_TSGOLINT_RULE,
+            Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::IS_TSGOLINT_RULE,
+            Self::OxcNoUselessIncrement(_) => OxcNoUselessIncrement::IS_TSGOLINT_RULE,
+            Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::IS_TSGOLINT_RULE,
+            Self::OxcNoWeakKeys(_) => OxcNoWeakKeys::IS_TSGOLINT_RULE,
+            Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::IS_TSGOLINT_RULE,
+            Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::IS_TSGOLINT_RULE,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::IS_TSGOLINT_RULE,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::IS_TSGOLINT_RULE,
+            Self::OxcPostMessage(_) => OxcPostMessage::IS_TSGOLINT_RULE,
+            Self::OxcPreferDefaultLast(_) => OxcPreferDefaultLast::IS_TSGOLINT_RULE,
+            Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::IS_TSGOLINT_RULE,
+            Self::OxcPreferWhile(_) => OxcPreferWhile::IS_TSGOLINT_RULE,
+            Self::OxcProductionDebug(_) => OxcProductionDebug::IS_TSGOLINT_RULE,
+            Self::OxcPseudoRandom(_) => OxcPseudoRandom::IS_TSGOLINT_RULE,
+            Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
+                OxcRequireSafetyCommentForTypeAssertion::IS_TSGOLINT_RULE
+            }
+            Self::OxcSingleCharInCharacterClasses(_) => {
+                OxcSingleCharInCharacterClasses::IS_TSGOLINT_RULE
+            }
+            Self::OxcSingleCharacterAlternation(_) => {
+                OxcSingleCharacterAlternation::IS_TSGOLINT_RULE
+            }
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::IS_TSGOLINT_RULE,
+            Self::OxcUnusedImport(_) => OxcUnusedImport::IS_TSGOLINT_RULE,
+            Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::IS_TSGOLINT_RULE,
+            Self::OxcUseTypeAlias(_) => OxcUseTypeAlias::IS_TSGOLINT_RULE,
+            Self::OxcVoidUse(_) => OxcVoidUse::IS_TSGOLINT_RULE,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::IS_TSGOLINT_RULE,
             Self::NextjsGoogleFontPreconnect(_) => NextjsGoogleFontPreconnect::IS_TSGOLINT_RULE,
             Self::NextjsInlineScriptId(_) => NextjsInlineScriptId::IS_TSGOLINT_RULE,
@@ -17488,6 +19090,7 @@ impl RuleEnum {
             Self::EslintNoNonoctalDecimalEscape(_) => EslintNoNonoctalDecimalEscape::VERSION,
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::VERSION,
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::VERSION,
+            Self::EslintNoOctal(_) => EslintNoOctal::VERSION,
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::VERSION,
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::VERSION,
             Self::EslintNoPromiseExecutorReturn(_) => EslintNoPromiseExecutorReturn::VERSION,
@@ -18154,7 +19757,9 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(_) => JsxA11YRoleSupportsAriaProps::VERSION,
             Self::JsxA11YScope(_) => JsxA11YScope::VERSION,
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::VERSION,
+            Self::OxcAnchorPrecedence(_) => OxcAnchorPrecedence::VERSION,
             Self::OxcApproxConstant(_) => OxcApproxConstant::VERSION,
+            Self::OxcArrayCallbackWithoutReturn(_) => OxcArrayCallbackWithoutReturn::VERSION,
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::VERSION,
             Self::OxcBadBitwiseOperator(_) => OxcBadBitwiseOperator::VERSION,
             Self::OxcBadCharAtComparison(_) => OxcBadCharAtComparison::VERSION,
@@ -18164,23 +19769,118 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(_) => OxcBadObjectLiteralComparison::VERSION,
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::VERSION,
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::VERSION,
+            Self::OxcClassName(_) => OxcClassName::VERSION,
+            Self::OxcCommaOrLogicalOrCase(_) => OxcCommaOrLogicalOrCase::VERSION,
+            Self::OxcConciseRegex(_) => OxcConciseRegex::VERSION,
             Self::OxcConstComparisons(_) => OxcConstComparisons::VERSION,
+            Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::VERSION,
+            Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::VERSION,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::VERSION,
+            Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::VERSION,
+            Self::OxcEmptyStringRepetition(_) => OxcEmptyStringRepetition::VERSION,
             Self::OxcErasingOp(_) => OxcErasingOp::VERSION,
+            Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::VERSION,
+            Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::VERSION,
+            Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::VERSION,
+            Self::OxcLabelPosition(_) => OxcLabelPosition::VERSION,
+            Self::OxcLinkWithTargetBlank(_) => OxcLinkWithTargetBlank::VERSION,
+            Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::VERSION,
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::VERSION,
             Self::OxcMissingThrow(_) => OxcMissingThrow::VERSION,
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::VERSION,
+            Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::VERSION,
+            Self::OxcNoAngularBypassSanitization(_) => OxcNoAngularBypassSanitization::VERSION,
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::VERSION,
+            Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::VERSION,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::VERSION,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::VERSION,
+            Self::OxcNoCaseLabelInSwitch(_) => OxcNoCaseLabelInSwitch::VERSION,
+            Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::VERSION,
+            Self::OxcNoClearTextProtocols(_) => OxcNoClearTextProtocols::VERSION,
+            Self::OxcNoCollectionSizeMischeck(_) => OxcNoCollectionSizeMischeck::VERSION,
+            Self::OxcNoCommentedCode(_) => OxcNoCommentedCode::VERSION,
+            Self::OxcNoConditionalEmptyObjectSpread(_) => {
+                OxcNoConditionalEmptyObjectSpread::VERSION
+            }
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::VERSION,
+            Self::OxcNoDuplicateInComposite(_) => OxcNoDuplicateInComposite::VERSION,
+            Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::VERSION,
+            Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::VERSION,
+            Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::VERSION,
+            Self::OxcNoEmptyCollection(_) => OxcNoEmptyCollection::VERSION,
+            Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::VERSION,
+            Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::VERSION,
+            Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::VERSION,
+            Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::VERSION,
+            Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::VERSION,
+            Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::VERSION,
+            Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::VERSION,
+            Self::OxcNoHardcodedSecrets(_) => OxcNoHardcodedSecrets::VERSION,
+            Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::VERSION,
+            Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::VERSION,
+            Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::VERSION,
+            Self::OxcNoIgnoredReturn(_) => OxcNoIgnoredReturn::VERSION,
+            Self::OxcNoImplicitGlobal(_) => OxcNoImplicitGlobal::VERSION,
+            Self::OxcNoInMisuse(_) => OxcNoInMisuse::VERSION,
+            Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::VERSION,
+            Self::OxcNoInternalApiUse(_) => OxcNoInternalApiUse::VERSION,
+            Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::VERSION,
+            Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::VERSION,
+            Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::VERSION,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::VERSION,
+            Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::VERSION,
+            Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::VERSION,
+            Self::OxcNoNestedFunctions(_) => OxcNoNestedFunctions::VERSION,
+            Self::OxcNoNestedTemplateLiterals(_) => OxcNoNestedTemplateLiterals::VERSION,
+            Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::VERSION,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::VERSION,
+            Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::VERSION,
+            Self::OxcNoRedundantBoolean(_) => OxcNoRedundantBoolean::VERSION,
+            Self::OxcNoRedundantJump(_) => OxcNoRedundantJump::VERSION,
+            Self::OxcNoRedundantOptional(_) => OxcNoRedundantOptional::VERSION,
+            Self::OxcNoReflectApply(_) => OxcNoReflectApply::VERSION,
+            Self::OxcNoReflectGet(_) => OxcNoReflectGet::VERSION,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::VERSION,
+            Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::VERSION,
+            Self::OxcNoSameLineConditional(_) => OxcNoSameLineConditional::VERSION,
+            Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::VERSION,
+            Self::OxcNoSkippedTests(_) => OxcNoSkippedTests::VERSION,
+            Self::OxcNoSmallSwitch(_) => OxcNoSmallSwitch::VERSION,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::VERSION,
+            Self::OxcNoUndefinedArgument(_) => OxcNoUndefinedArgument::VERSION,
+            Self::OxcNoUniqKey(_) => OxcNoUniqKey::VERSION,
+            Self::OxcNoUnknownParameters(_) => OxcNoUnknownParameters::VERSION,
+            Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::VERSION,
+            Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::VERSION,
+            Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::VERSION,
+            Self::OxcNoUnsafeUnzip(_) => OxcNoUnsafeUnzip::VERSION,
+            Self::OxcNoUnthrownError(_) => OxcNoUnthrownError::VERSION,
+            Self::OxcNoUnusedCollection(_) => OxcNoUnusedCollection::VERSION,
+            Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::VERSION,
+            Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::VERSION,
+            Self::OxcNoUselessIncrement(_) => OxcNoUselessIncrement::VERSION,
+            Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::VERSION,
+            Self::OxcNoWeakKeys(_) => OxcNoWeakKeys::VERSION,
+            Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::VERSION,
+            Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::VERSION,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::VERSION,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::VERSION,
+            Self::OxcPostMessage(_) => OxcPostMessage::VERSION,
+            Self::OxcPreferDefaultLast(_) => OxcPreferDefaultLast::VERSION,
+            Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::VERSION,
+            Self::OxcPreferWhile(_) => OxcPreferWhile::VERSION,
+            Self::OxcProductionDebug(_) => OxcProductionDebug::VERSION,
+            Self::OxcPseudoRandom(_) => OxcPseudoRandom::VERSION,
+            Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
+                OxcRequireSafetyCommentForTypeAssertion::VERSION
+            }
+            Self::OxcSingleCharInCharacterClasses(_) => OxcSingleCharInCharacterClasses::VERSION,
+            Self::OxcSingleCharacterAlternation(_) => OxcSingleCharacterAlternation::VERSION,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::VERSION,
+            Self::OxcUnusedImport(_) => OxcUnusedImport::VERSION,
+            Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::VERSION,
+            Self::OxcUseTypeAlias(_) => OxcUseTypeAlias::VERSION,
+            Self::OxcVoidUse(_) => OxcVoidUse::VERSION,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::VERSION,
             Self::NextjsGoogleFontPreconnect(_) => NextjsGoogleFontPreconnect::VERSION,
             Self::NextjsInlineScriptId(_) => NextjsInlineScriptId::VERSION,
@@ -18543,6 +20243,7 @@ impl RuleEnum {
             Self::EslintNoNonoctalDecimalEscape(_) => EslintNoNonoctalDecimalEscape::HAS_CONFIG,
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::HAS_CONFIG,
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::HAS_CONFIG,
+            Self::EslintNoOctal(_) => EslintNoOctal::HAS_CONFIG,
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::HAS_CONFIG,
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::HAS_CONFIG,
             Self::EslintNoPromiseExecutorReturn(_) => EslintNoPromiseExecutorReturn::HAS_CONFIG,
@@ -19235,7 +20936,9 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(_) => JsxA11YRoleSupportsAriaProps::HAS_CONFIG,
             Self::JsxA11YScope(_) => JsxA11YScope::HAS_CONFIG,
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::HAS_CONFIG,
+            Self::OxcAnchorPrecedence(_) => OxcAnchorPrecedence::HAS_CONFIG,
             Self::OxcApproxConstant(_) => OxcApproxConstant::HAS_CONFIG,
+            Self::OxcArrayCallbackWithoutReturn(_) => OxcArrayCallbackWithoutReturn::HAS_CONFIG,
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::HAS_CONFIG,
             Self::OxcBadBitwiseOperator(_) => OxcBadBitwiseOperator::HAS_CONFIG,
             Self::OxcBadCharAtComparison(_) => OxcBadCharAtComparison::HAS_CONFIG,
@@ -19245,23 +20948,118 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(_) => OxcBadObjectLiteralComparison::HAS_CONFIG,
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::HAS_CONFIG,
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::HAS_CONFIG,
+            Self::OxcClassName(_) => OxcClassName::HAS_CONFIG,
+            Self::OxcCommaOrLogicalOrCase(_) => OxcCommaOrLogicalOrCase::HAS_CONFIG,
+            Self::OxcConciseRegex(_) => OxcConciseRegex::HAS_CONFIG,
             Self::OxcConstComparisons(_) => OxcConstComparisons::HAS_CONFIG,
+            Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::HAS_CONFIG,
+            Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::HAS_CONFIG,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::HAS_CONFIG,
+            Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::HAS_CONFIG,
+            Self::OxcEmptyStringRepetition(_) => OxcEmptyStringRepetition::HAS_CONFIG,
             Self::OxcErasingOp(_) => OxcErasingOp::HAS_CONFIG,
+            Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::HAS_CONFIG,
+            Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::HAS_CONFIG,
+            Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::HAS_CONFIG,
+            Self::OxcLabelPosition(_) => OxcLabelPosition::HAS_CONFIG,
+            Self::OxcLinkWithTargetBlank(_) => OxcLinkWithTargetBlank::HAS_CONFIG,
+            Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::HAS_CONFIG,
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::HAS_CONFIG,
             Self::OxcMissingThrow(_) => OxcMissingThrow::HAS_CONFIG,
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::HAS_CONFIG,
+            Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::HAS_CONFIG,
+            Self::OxcNoAngularBypassSanitization(_) => OxcNoAngularBypassSanitization::HAS_CONFIG,
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::HAS_CONFIG,
+            Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::HAS_CONFIG,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::HAS_CONFIG,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::HAS_CONFIG,
+            Self::OxcNoCaseLabelInSwitch(_) => OxcNoCaseLabelInSwitch::HAS_CONFIG,
+            Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::HAS_CONFIG,
+            Self::OxcNoClearTextProtocols(_) => OxcNoClearTextProtocols::HAS_CONFIG,
+            Self::OxcNoCollectionSizeMischeck(_) => OxcNoCollectionSizeMischeck::HAS_CONFIG,
+            Self::OxcNoCommentedCode(_) => OxcNoCommentedCode::HAS_CONFIG,
+            Self::OxcNoConditionalEmptyObjectSpread(_) => {
+                OxcNoConditionalEmptyObjectSpread::HAS_CONFIG
+            }
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::HAS_CONFIG,
+            Self::OxcNoDuplicateInComposite(_) => OxcNoDuplicateInComposite::HAS_CONFIG,
+            Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::HAS_CONFIG,
+            Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::HAS_CONFIG,
+            Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::HAS_CONFIG,
+            Self::OxcNoEmptyCollection(_) => OxcNoEmptyCollection::HAS_CONFIG,
+            Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::HAS_CONFIG,
+            Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::HAS_CONFIG,
+            Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::HAS_CONFIG,
+            Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::HAS_CONFIG,
+            Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::HAS_CONFIG,
+            Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::HAS_CONFIG,
+            Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::HAS_CONFIG,
+            Self::OxcNoHardcodedSecrets(_) => OxcNoHardcodedSecrets::HAS_CONFIG,
+            Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::HAS_CONFIG,
+            Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::HAS_CONFIG,
+            Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::HAS_CONFIG,
+            Self::OxcNoIgnoredReturn(_) => OxcNoIgnoredReturn::HAS_CONFIG,
+            Self::OxcNoImplicitGlobal(_) => OxcNoImplicitGlobal::HAS_CONFIG,
+            Self::OxcNoInMisuse(_) => OxcNoInMisuse::HAS_CONFIG,
+            Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::HAS_CONFIG,
+            Self::OxcNoInternalApiUse(_) => OxcNoInternalApiUse::HAS_CONFIG,
+            Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::HAS_CONFIG,
+            Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::HAS_CONFIG,
+            Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::HAS_CONFIG,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::HAS_CONFIG,
+            Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::HAS_CONFIG,
+            Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::HAS_CONFIG,
+            Self::OxcNoNestedFunctions(_) => OxcNoNestedFunctions::HAS_CONFIG,
+            Self::OxcNoNestedTemplateLiterals(_) => OxcNoNestedTemplateLiterals::HAS_CONFIG,
+            Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::HAS_CONFIG,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::HAS_CONFIG,
+            Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::HAS_CONFIG,
+            Self::OxcNoRedundantBoolean(_) => OxcNoRedundantBoolean::HAS_CONFIG,
+            Self::OxcNoRedundantJump(_) => OxcNoRedundantJump::HAS_CONFIG,
+            Self::OxcNoRedundantOptional(_) => OxcNoRedundantOptional::HAS_CONFIG,
+            Self::OxcNoReflectApply(_) => OxcNoReflectApply::HAS_CONFIG,
+            Self::OxcNoReflectGet(_) => OxcNoReflectGet::HAS_CONFIG,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::HAS_CONFIG,
+            Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::HAS_CONFIG,
+            Self::OxcNoSameLineConditional(_) => OxcNoSameLineConditional::HAS_CONFIG,
+            Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::HAS_CONFIG,
+            Self::OxcNoSkippedTests(_) => OxcNoSkippedTests::HAS_CONFIG,
+            Self::OxcNoSmallSwitch(_) => OxcNoSmallSwitch::HAS_CONFIG,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::HAS_CONFIG,
+            Self::OxcNoUndefinedArgument(_) => OxcNoUndefinedArgument::HAS_CONFIG,
+            Self::OxcNoUniqKey(_) => OxcNoUniqKey::HAS_CONFIG,
+            Self::OxcNoUnknownParameters(_) => OxcNoUnknownParameters::HAS_CONFIG,
+            Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::HAS_CONFIG,
+            Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::HAS_CONFIG,
+            Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::HAS_CONFIG,
+            Self::OxcNoUnsafeUnzip(_) => OxcNoUnsafeUnzip::HAS_CONFIG,
+            Self::OxcNoUnthrownError(_) => OxcNoUnthrownError::HAS_CONFIG,
+            Self::OxcNoUnusedCollection(_) => OxcNoUnusedCollection::HAS_CONFIG,
+            Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::HAS_CONFIG,
+            Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::HAS_CONFIG,
+            Self::OxcNoUselessIncrement(_) => OxcNoUselessIncrement::HAS_CONFIG,
+            Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::HAS_CONFIG,
+            Self::OxcNoWeakKeys(_) => OxcNoWeakKeys::HAS_CONFIG,
+            Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::HAS_CONFIG,
+            Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::HAS_CONFIG,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::HAS_CONFIG,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::HAS_CONFIG,
+            Self::OxcPostMessage(_) => OxcPostMessage::HAS_CONFIG,
+            Self::OxcPreferDefaultLast(_) => OxcPreferDefaultLast::HAS_CONFIG,
+            Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::HAS_CONFIG,
+            Self::OxcPreferWhile(_) => OxcPreferWhile::HAS_CONFIG,
+            Self::OxcProductionDebug(_) => OxcProductionDebug::HAS_CONFIG,
+            Self::OxcPseudoRandom(_) => OxcPseudoRandom::HAS_CONFIG,
+            Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
+                OxcRequireSafetyCommentForTypeAssertion::HAS_CONFIG
+            }
+            Self::OxcSingleCharInCharacterClasses(_) => OxcSingleCharInCharacterClasses::HAS_CONFIG,
+            Self::OxcSingleCharacterAlternation(_) => OxcSingleCharacterAlternation::HAS_CONFIG,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::HAS_CONFIG,
+            Self::OxcUnusedImport(_) => OxcUnusedImport::HAS_CONFIG,
+            Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::HAS_CONFIG,
+            Self::OxcUseTypeAlias(_) => OxcUseTypeAlias::HAS_CONFIG,
+            Self::OxcVoidUse(_) => OxcVoidUse::HAS_CONFIG,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::HAS_CONFIG,
             Self::NextjsGoogleFontPreconnect(_) => NextjsGoogleFontPreconnect::HAS_CONFIG,
             Self::NextjsInlineScriptId(_) => NextjsInlineScriptId::HAS_CONFIG,
@@ -19625,6 +21423,7 @@ impl RuleEnum {
             Self::EslintNoNonoctalDecimalEscape(_) => EslintNoNonoctalDecimalEscape::INFO,
             Self::EslintNoObjCalls(_) => EslintNoObjCalls::INFO,
             Self::EslintNoObjectConstructor(_) => EslintNoObjectConstructor::INFO,
+            Self::EslintNoOctal(_) => EslintNoOctal::INFO,
             Self::EslintNoParamReassign(_) => EslintNoParamReassign::INFO,
             Self::EslintNoPlusplus(_) => EslintNoPlusplus::INFO,
             Self::EslintNoPromiseExecutorReturn(_) => EslintNoPromiseExecutorReturn::INFO,
@@ -20247,7 +22046,9 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(_) => JsxA11YRoleSupportsAriaProps::INFO,
             Self::JsxA11YScope(_) => JsxA11YScope::INFO,
             Self::JsxA11YTabindexNoPositive(_) => JsxA11YTabindexNoPositive::INFO,
+            Self::OxcAnchorPrecedence(_) => OxcAnchorPrecedence::INFO,
             Self::OxcApproxConstant(_) => OxcApproxConstant::INFO,
+            Self::OxcArrayCallbackWithoutReturn(_) => OxcArrayCallbackWithoutReturn::INFO,
             Self::OxcBadArrayMethodOnArguments(_) => OxcBadArrayMethodOnArguments::INFO,
             Self::OxcBadBitwiseOperator(_) => OxcBadBitwiseOperator::INFO,
             Self::OxcBadCharAtComparison(_) => OxcBadCharAtComparison::INFO,
@@ -20257,23 +22058,116 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(_) => OxcBadObjectLiteralComparison::INFO,
             Self::OxcBadReplaceAllArg(_) => OxcBadReplaceAllArg::INFO,
             Self::OxcBranchesSharingCode(_) => OxcBranchesSharingCode::INFO,
+            Self::OxcClassName(_) => OxcClassName::INFO,
+            Self::OxcCommaOrLogicalOrCase(_) => OxcCommaOrLogicalOrCase::INFO,
+            Self::OxcConciseRegex(_) => OxcConciseRegex::INFO,
             Self::OxcConstComparisons(_) => OxcConstComparisons::INFO,
+            Self::OxcConstructorForSideEffects(_) => OxcConstructorForSideEffects::INFO,
+            Self::OxcDifferentTypesComparison(_) => OxcDifferentTypesComparison::INFO,
             Self::OxcDoubleComparisons(_) => OxcDoubleComparisons::INFO,
+            Self::OxcDuplicatesInCharacterClass(_) => OxcDuplicatesInCharacterClass::INFO,
+            Self::OxcEmptyStringRepetition(_) => OxcEmptyStringRepetition::INFO,
             Self::OxcErasingOp(_) => OxcErasingOp::INFO,
+            Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::INFO,
+            Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::INFO,
+            Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::INFO,
+            Self::OxcLabelPosition(_) => OxcLabelPosition::INFO,
+            Self::OxcLinkWithTargetBlank(_) => OxcLinkWithTargetBlank::INFO,
+            Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::INFO,
             Self::OxcMisrefactoredAssignOp(_) => OxcMisrefactoredAssignOp::INFO,
             Self::OxcMissingThrow(_) => OxcMissingThrow::INFO,
             Self::OxcNoAccumulatingSpread(_) => OxcNoAccumulatingSpread::INFO,
+            Self::OxcNoAllDuplicatedBranches(_) => OxcNoAllDuplicatedBranches::INFO,
+            Self::OxcNoAngularBypassSanitization(_) => OxcNoAngularBypassSanitization::INFO,
             Self::OxcNoAsyncAwait(_) => OxcNoAsyncAwait::INFO,
+            Self::OxcNoAsyncConstructor(_) => OxcNoAsyncConstructor::INFO,
             Self::OxcNoAsyncEndpointHandlers(_) => OxcNoAsyncEndpointHandlers::INFO,
             Self::OxcNoBarrelFile(_) => OxcNoBarrelFile::INFO,
+            Self::OxcNoCaseLabelInSwitch(_) => OxcNoCaseLabelInSwitch::INFO,
+            Self::OxcNoChainedTypeAssertions(_) => OxcNoChainedTypeAssertions::INFO,
+            Self::OxcNoClearTextProtocols(_) => OxcNoClearTextProtocols::INFO,
+            Self::OxcNoCollectionSizeMischeck(_) => OxcNoCollectionSizeMischeck::INFO,
+            Self::OxcNoCommentedCode(_) => OxcNoCommentedCode::INFO,
+            Self::OxcNoConditionalEmptyObjectSpread(_) => OxcNoConditionalEmptyObjectSpread::INFO,
             Self::OxcNoConstEnum(_) => OxcNoConstEnum::INFO,
+            Self::OxcNoDuplicateInComposite(_) => OxcNoDuplicateInComposite::INFO,
+            Self::OxcNoDuplicatedBranches(_) => OxcNoDuplicatedBranches::INFO,
+            Self::OxcNoEmptyAfterReluctant(_) => OxcNoEmptyAfterReluctant::INFO,
+            Self::OxcNoEmptyAlternatives(_) => OxcNoEmptyAlternatives::INFO,
+            Self::OxcNoEmptyCollection(_) => OxcNoEmptyCollection::INFO,
+            Self::OxcNoEmptyGroup(_) => OxcNoEmptyGroup::INFO,
+            Self::OxcNoEmptyTestFile(_) => OxcNoEmptyTestFile::INFO,
+            Self::OxcNoEqualsInForTermination(_) => OxcNoEqualsInForTermination::INFO,
+            Self::OxcNoExclusiveTests(_) => OxcNoExclusiveTests::INFO,
+            Self::OxcNoGlobalThis(_) => OxcNoGlobalThis::INFO,
+            Self::OxcNoHardcodedIp(_) => OxcNoHardcodedIp::INFO,
+            Self::OxcNoHardcodedPasswords(_) => OxcNoHardcodedPasswords::INFO,
+            Self::OxcNoHardcodedSecrets(_) => OxcNoHardcodedSecrets::INFO,
+            Self::OxcNoIdenticalConditions(_) => OxcNoIdenticalConditions::INFO,
+            Self::OxcNoIdenticalExpressions(_) => OxcNoIdenticalExpressions::INFO,
+            Self::OxcNoIgnoredExceptions(_) => OxcNoIgnoredExceptions::INFO,
+            Self::OxcNoIgnoredReturn(_) => OxcNoIgnoredReturn::INFO,
+            Self::OxcNoImplicitGlobal(_) => OxcNoImplicitGlobal::INFO,
+            Self::OxcNoInMisuse(_) => OxcNoInMisuse::INFO,
+            Self::OxcNoInsecureCookie(_) => OxcNoInsecureCookie::INFO,
+            Self::OxcNoInternalApiUse(_) => OxcNoInternalApiUse::INFO,
+            Self::OxcNoInvertedBooleanCheck(_) => OxcNoInvertedBooleanCheck::INFO,
+            Self::OxcNoKnownValueWidening(_) => OxcNoKnownValueWidening::INFO,
+            Self::OxcNoLiteralCall(_) => OxcNoLiteralCall::INFO,
             Self::OxcNoMapSpread(_) => OxcNoMapSpread::INFO,
+            Self::OxcNoModuleMocking(_) => OxcNoModuleMocking::INFO,
+            Self::OxcNoNestedAssignment(_) => OxcNoNestedAssignment::INFO,
+            Self::OxcNoNestedFunctions(_) => OxcNoNestedFunctions::INFO,
+            Self::OxcNoNestedTemplateLiterals(_) => OxcNoNestedTemplateLiterals::INFO,
+            Self::OxcNoObjectParameters(_) => OxcNoObjectParameters::INFO,
             Self::OxcNoOptionalChaining(_) => OxcNoOptionalChaining::INFO,
+            Self::OxcNoOsCommandFromPath(_) => OxcNoOsCommandFromPath::INFO,
+            Self::OxcNoRedundantBoolean(_) => OxcNoRedundantBoolean::INFO,
+            Self::OxcNoRedundantJump(_) => OxcNoRedundantJump::INFO,
+            Self::OxcNoRedundantOptional(_) => OxcNoRedundantOptional::INFO,
+            Self::OxcNoReflectApply(_) => OxcNoReflectApply::INFO,
+            Self::OxcNoReflectGet(_) => OxcNoReflectGet::INFO,
             Self::OxcNoRestSpreadProperties(_) => OxcNoRestSpreadProperties::INFO,
+            Self::OxcNoRuntimeTypeof(_) => OxcNoRuntimeTypeof::INFO,
+            Self::OxcNoSameLineConditional(_) => OxcNoSameLineConditional::INFO,
+            Self::OxcNoShapeInSymbolNames(_) => OxcNoShapeInSymbolNames::INFO,
+            Self::OxcNoSkippedTests(_) => OxcNoSkippedTests::INFO,
+            Self::OxcNoSmallSwitch(_) => OxcNoSmallSwitch::INFO,
             Self::OxcNoThisInExportedFunction(_) => OxcNoThisInExportedFunction::INFO,
+            Self::OxcNoUndefinedArgument(_) => OxcNoUndefinedArgument::INFO,
+            Self::OxcNoUniqKey(_) => OxcNoUniqKey::INFO,
+            Self::OxcNoUnknownParameters(_) => OxcNoUnknownParameters::INFO,
+            Self::OxcNoUnknownReturns(_) => OxcNoUnknownReturns::INFO,
+            Self::OxcNoUnknownTypeAliases(_) => OxcNoUnknownTypeAliases::INFO,
+            Self::OxcNoUnsafeDictionaryType(_) => OxcNoUnsafeDictionaryType::INFO,
+            Self::OxcNoUnsafeUnzip(_) => OxcNoUnsafeUnzip::INFO,
+            Self::OxcNoUnthrownError(_) => OxcNoUnthrownError::INFO,
+            Self::OxcNoUnusedCollection(_) => OxcNoUnusedCollection::INFO,
+            Self::OxcNoUnverifiedCertificate(_) => OxcNoUnverifiedCertificate::INFO,
+            Self::OxcNoUnverifiedHostname(_) => OxcNoUnverifiedHostname::INFO,
+            Self::OxcNoUselessIncrement(_) => OxcNoUselessIncrement::INFO,
+            Self::OxcNoWeakCipher(_) => OxcNoWeakCipher::INFO,
+            Self::OxcNoWeakKeys(_) => OxcNoWeakKeys::INFO,
+            Self::OxcNoWeakSsl(_) => OxcNoWeakSsl::INFO,
+            Self::OxcNoWidenThenAssert(_) => OxcNoWidenThenAssert::INFO,
             Self::OxcNumberArgOutOfRange(_) => OxcNumberArgOutOfRange::INFO,
             Self::OxcOnlyUsedInRecursion(_) => OxcOnlyUsedInRecursion::INFO,
+            Self::OxcPostMessage(_) => OxcPostMessage::INFO,
+            Self::OxcPreferDefaultLast(_) => OxcPreferDefaultLast::INFO,
+            Self::OxcPreferSingleBooleanReturn(_) => OxcPreferSingleBooleanReturn::INFO,
+            Self::OxcPreferWhile(_) => OxcPreferWhile::INFO,
+            Self::OxcProductionDebug(_) => OxcProductionDebug::INFO,
+            Self::OxcPseudoRandom(_) => OxcPseudoRandom::INFO,
+            Self::OxcRequireSafetyCommentForTypeAssertion(_) => {
+                OxcRequireSafetyCommentForTypeAssertion::INFO
+            }
+            Self::OxcSingleCharInCharacterClasses(_) => OxcSingleCharInCharacterClasses::INFO,
+            Self::OxcSingleCharacterAlternation(_) => OxcSingleCharacterAlternation::INFO,
             Self::OxcUninvokedArrayCallback(_) => OxcUninvokedArrayCallback::INFO,
+            Self::OxcUnusedImport(_) => OxcUnusedImport::INFO,
+            Self::OxcUnusedNamedGroups(_) => OxcUnusedNamedGroups::INFO,
+            Self::OxcUseTypeAlias(_) => OxcUseTypeAlias::INFO,
+            Self::OxcVoidUse(_) => OxcVoidUse::INFO,
             Self::NextjsGoogleFontDisplay(_) => NextjsGoogleFontDisplay::INFO,
             Self::NextjsGoogleFontPreconnect(_) => NextjsGoogleFontPreconnect::INFO,
             Self::NextjsInlineScriptId(_) => NextjsInlineScriptId::INFO,
@@ -20618,6 +22512,7 @@ impl RuleEnum {
             Self::EslintNoNonoctalDecimalEscape(rule) => rule.types_info(),
             Self::EslintNoObjCalls(rule) => rule.types_info(),
             Self::EslintNoObjectConstructor(rule) => rule.types_info(),
+            Self::EslintNoOctal(rule) => rule.types_info(),
             Self::EslintNoParamReassign(rule) => rule.types_info(),
             Self::EslintNoPlusplus(rule) => rule.types_info(),
             Self::EslintNoPromiseExecutorReturn(rule) => rule.types_info(),
@@ -21136,7 +23031,9 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(rule) => rule.types_info(),
             Self::JsxA11YScope(rule) => rule.types_info(),
             Self::JsxA11YTabindexNoPositive(rule) => rule.types_info(),
+            Self::OxcAnchorPrecedence(rule) => rule.types_info(),
             Self::OxcApproxConstant(rule) => rule.types_info(),
+            Self::OxcArrayCallbackWithoutReturn(rule) => rule.types_info(),
             Self::OxcBadArrayMethodOnArguments(rule) => rule.types_info(),
             Self::OxcBadBitwiseOperator(rule) => rule.types_info(),
             Self::OxcBadCharAtComparison(rule) => rule.types_info(),
@@ -21146,23 +23043,114 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(rule) => rule.types_info(),
             Self::OxcBadReplaceAllArg(rule) => rule.types_info(),
             Self::OxcBranchesSharingCode(rule) => rule.types_info(),
+            Self::OxcClassName(rule) => rule.types_info(),
+            Self::OxcCommaOrLogicalOrCase(rule) => rule.types_info(),
+            Self::OxcConciseRegex(rule) => rule.types_info(),
             Self::OxcConstComparisons(rule) => rule.types_info(),
+            Self::OxcConstructorForSideEffects(rule) => rule.types_info(),
+            Self::OxcDifferentTypesComparison(rule) => rule.types_info(),
             Self::OxcDoubleComparisons(rule) => rule.types_info(),
+            Self::OxcDuplicatesInCharacterClass(rule) => rule.types_info(),
+            Self::OxcEmptyStringRepetition(rule) => rule.types_info(),
             Self::OxcErasingOp(rule) => rule.types_info(),
+            Self::OxcForLoopIncrementSign(rule) => rule.types_info(),
+            Self::OxcGeneratorWithoutYield(rule) => rule.types_info(),
+            Self::OxcInOperatorTypeError(rule) => rule.types_info(),
+            Self::OxcLabelPosition(rule) => rule.types_info(),
+            Self::OxcLinkWithTargetBlank(rule) => rule.types_info(),
+            Self::OxcMaxSwitchCases(rule) => rule.types_info(),
             Self::OxcMisrefactoredAssignOp(rule) => rule.types_info(),
             Self::OxcMissingThrow(rule) => rule.types_info(),
             Self::OxcNoAccumulatingSpread(rule) => rule.types_info(),
+            Self::OxcNoAllDuplicatedBranches(rule) => rule.types_info(),
+            Self::OxcNoAngularBypassSanitization(rule) => rule.types_info(),
             Self::OxcNoAsyncAwait(rule) => rule.types_info(),
+            Self::OxcNoAsyncConstructor(rule) => rule.types_info(),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.types_info(),
             Self::OxcNoBarrelFile(rule) => rule.types_info(),
+            Self::OxcNoCaseLabelInSwitch(rule) => rule.types_info(),
+            Self::OxcNoChainedTypeAssertions(rule) => rule.types_info(),
+            Self::OxcNoClearTextProtocols(rule) => rule.types_info(),
+            Self::OxcNoCollectionSizeMischeck(rule) => rule.types_info(),
+            Self::OxcNoCommentedCode(rule) => rule.types_info(),
+            Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.types_info(),
             Self::OxcNoConstEnum(rule) => rule.types_info(),
+            Self::OxcNoDuplicateInComposite(rule) => rule.types_info(),
+            Self::OxcNoDuplicatedBranches(rule) => rule.types_info(),
+            Self::OxcNoEmptyAfterReluctant(rule) => rule.types_info(),
+            Self::OxcNoEmptyAlternatives(rule) => rule.types_info(),
+            Self::OxcNoEmptyCollection(rule) => rule.types_info(),
+            Self::OxcNoEmptyGroup(rule) => rule.types_info(),
+            Self::OxcNoEmptyTestFile(rule) => rule.types_info(),
+            Self::OxcNoEqualsInForTermination(rule) => rule.types_info(),
+            Self::OxcNoExclusiveTests(rule) => rule.types_info(),
+            Self::OxcNoGlobalThis(rule) => rule.types_info(),
+            Self::OxcNoHardcodedIp(rule) => rule.types_info(),
+            Self::OxcNoHardcodedPasswords(rule) => rule.types_info(),
+            Self::OxcNoHardcodedSecrets(rule) => rule.types_info(),
+            Self::OxcNoIdenticalConditions(rule) => rule.types_info(),
+            Self::OxcNoIdenticalExpressions(rule) => rule.types_info(),
+            Self::OxcNoIgnoredExceptions(rule) => rule.types_info(),
+            Self::OxcNoIgnoredReturn(rule) => rule.types_info(),
+            Self::OxcNoImplicitGlobal(rule) => rule.types_info(),
+            Self::OxcNoInMisuse(rule) => rule.types_info(),
+            Self::OxcNoInsecureCookie(rule) => rule.types_info(),
+            Self::OxcNoInternalApiUse(rule) => rule.types_info(),
+            Self::OxcNoInvertedBooleanCheck(rule) => rule.types_info(),
+            Self::OxcNoKnownValueWidening(rule) => rule.types_info(),
+            Self::OxcNoLiteralCall(rule) => rule.types_info(),
             Self::OxcNoMapSpread(rule) => rule.types_info(),
+            Self::OxcNoModuleMocking(rule) => rule.types_info(),
+            Self::OxcNoNestedAssignment(rule) => rule.types_info(),
+            Self::OxcNoNestedFunctions(rule) => rule.types_info(),
+            Self::OxcNoNestedTemplateLiterals(rule) => rule.types_info(),
+            Self::OxcNoObjectParameters(rule) => rule.types_info(),
             Self::OxcNoOptionalChaining(rule) => rule.types_info(),
+            Self::OxcNoOsCommandFromPath(rule) => rule.types_info(),
+            Self::OxcNoRedundantBoolean(rule) => rule.types_info(),
+            Self::OxcNoRedundantJump(rule) => rule.types_info(),
+            Self::OxcNoRedundantOptional(rule) => rule.types_info(),
+            Self::OxcNoReflectApply(rule) => rule.types_info(),
+            Self::OxcNoReflectGet(rule) => rule.types_info(),
             Self::OxcNoRestSpreadProperties(rule) => rule.types_info(),
+            Self::OxcNoRuntimeTypeof(rule) => rule.types_info(),
+            Self::OxcNoSameLineConditional(rule) => rule.types_info(),
+            Self::OxcNoShapeInSymbolNames(rule) => rule.types_info(),
+            Self::OxcNoSkippedTests(rule) => rule.types_info(),
+            Self::OxcNoSmallSwitch(rule) => rule.types_info(),
             Self::OxcNoThisInExportedFunction(rule) => rule.types_info(),
+            Self::OxcNoUndefinedArgument(rule) => rule.types_info(),
+            Self::OxcNoUniqKey(rule) => rule.types_info(),
+            Self::OxcNoUnknownParameters(rule) => rule.types_info(),
+            Self::OxcNoUnknownReturns(rule) => rule.types_info(),
+            Self::OxcNoUnknownTypeAliases(rule) => rule.types_info(),
+            Self::OxcNoUnsafeDictionaryType(rule) => rule.types_info(),
+            Self::OxcNoUnsafeUnzip(rule) => rule.types_info(),
+            Self::OxcNoUnthrownError(rule) => rule.types_info(),
+            Self::OxcNoUnusedCollection(rule) => rule.types_info(),
+            Self::OxcNoUnverifiedCertificate(rule) => rule.types_info(),
+            Self::OxcNoUnverifiedHostname(rule) => rule.types_info(),
+            Self::OxcNoUselessIncrement(rule) => rule.types_info(),
+            Self::OxcNoWeakCipher(rule) => rule.types_info(),
+            Self::OxcNoWeakKeys(rule) => rule.types_info(),
+            Self::OxcNoWeakSsl(rule) => rule.types_info(),
+            Self::OxcNoWidenThenAssert(rule) => rule.types_info(),
             Self::OxcNumberArgOutOfRange(rule) => rule.types_info(),
             Self::OxcOnlyUsedInRecursion(rule) => rule.types_info(),
+            Self::OxcPostMessage(rule) => rule.types_info(),
+            Self::OxcPreferDefaultLast(rule) => rule.types_info(),
+            Self::OxcPreferSingleBooleanReturn(rule) => rule.types_info(),
+            Self::OxcPreferWhile(rule) => rule.types_info(),
+            Self::OxcProductionDebug(rule) => rule.types_info(),
+            Self::OxcPseudoRandom(rule) => rule.types_info(),
+            Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.types_info(),
+            Self::OxcSingleCharInCharacterClasses(rule) => rule.types_info(),
+            Self::OxcSingleCharacterAlternation(rule) => rule.types_info(),
             Self::OxcUninvokedArrayCallback(rule) => rule.types_info(),
+            Self::OxcUnusedImport(rule) => rule.types_info(),
+            Self::OxcUnusedNamedGroups(rule) => rule.types_info(),
+            Self::OxcUseTypeAlias(rule) => rule.types_info(),
+            Self::OxcVoidUse(rule) => rule.types_info(),
             Self::NextjsGoogleFontDisplay(rule) => rule.types_info(),
             Self::NextjsGoogleFontPreconnect(rule) => rule.types_info(),
             Self::NextjsInlineScriptId(rule) => rule.types_info(),
@@ -21492,6 +23480,7 @@ impl RuleEnum {
             Self::EslintNoNonoctalDecimalEscape(rule) => rule.run_info(),
             Self::EslintNoObjCalls(rule) => rule.run_info(),
             Self::EslintNoObjectConstructor(rule) => rule.run_info(),
+            Self::EslintNoOctal(rule) => rule.run_info(),
             Self::EslintNoParamReassign(rule) => rule.run_info(),
             Self::EslintNoPlusplus(rule) => rule.run_info(),
             Self::EslintNoPromiseExecutorReturn(rule) => rule.run_info(),
@@ -22010,7 +23999,9 @@ impl RuleEnum {
             Self::JsxA11YRoleSupportsAriaProps(rule) => rule.run_info(),
             Self::JsxA11YScope(rule) => rule.run_info(),
             Self::JsxA11YTabindexNoPositive(rule) => rule.run_info(),
+            Self::OxcAnchorPrecedence(rule) => rule.run_info(),
             Self::OxcApproxConstant(rule) => rule.run_info(),
+            Self::OxcArrayCallbackWithoutReturn(rule) => rule.run_info(),
             Self::OxcBadArrayMethodOnArguments(rule) => rule.run_info(),
             Self::OxcBadBitwiseOperator(rule) => rule.run_info(),
             Self::OxcBadCharAtComparison(rule) => rule.run_info(),
@@ -22020,23 +24011,114 @@ impl RuleEnum {
             Self::OxcBadObjectLiteralComparison(rule) => rule.run_info(),
             Self::OxcBadReplaceAllArg(rule) => rule.run_info(),
             Self::OxcBranchesSharingCode(rule) => rule.run_info(),
+            Self::OxcClassName(rule) => rule.run_info(),
+            Self::OxcCommaOrLogicalOrCase(rule) => rule.run_info(),
+            Self::OxcConciseRegex(rule) => rule.run_info(),
             Self::OxcConstComparisons(rule) => rule.run_info(),
+            Self::OxcConstructorForSideEffects(rule) => rule.run_info(),
+            Self::OxcDifferentTypesComparison(rule) => rule.run_info(),
             Self::OxcDoubleComparisons(rule) => rule.run_info(),
+            Self::OxcDuplicatesInCharacterClass(rule) => rule.run_info(),
+            Self::OxcEmptyStringRepetition(rule) => rule.run_info(),
             Self::OxcErasingOp(rule) => rule.run_info(),
+            Self::OxcForLoopIncrementSign(rule) => rule.run_info(),
+            Self::OxcGeneratorWithoutYield(rule) => rule.run_info(),
+            Self::OxcInOperatorTypeError(rule) => rule.run_info(),
+            Self::OxcLabelPosition(rule) => rule.run_info(),
+            Self::OxcLinkWithTargetBlank(rule) => rule.run_info(),
+            Self::OxcMaxSwitchCases(rule) => rule.run_info(),
             Self::OxcMisrefactoredAssignOp(rule) => rule.run_info(),
             Self::OxcMissingThrow(rule) => rule.run_info(),
             Self::OxcNoAccumulatingSpread(rule) => rule.run_info(),
+            Self::OxcNoAllDuplicatedBranches(rule) => rule.run_info(),
+            Self::OxcNoAngularBypassSanitization(rule) => rule.run_info(),
             Self::OxcNoAsyncAwait(rule) => rule.run_info(),
+            Self::OxcNoAsyncConstructor(rule) => rule.run_info(),
             Self::OxcNoAsyncEndpointHandlers(rule) => rule.run_info(),
             Self::OxcNoBarrelFile(rule) => rule.run_info(),
+            Self::OxcNoCaseLabelInSwitch(rule) => rule.run_info(),
+            Self::OxcNoChainedTypeAssertions(rule) => rule.run_info(),
+            Self::OxcNoClearTextProtocols(rule) => rule.run_info(),
+            Self::OxcNoCollectionSizeMischeck(rule) => rule.run_info(),
+            Self::OxcNoCommentedCode(rule) => rule.run_info(),
+            Self::OxcNoConditionalEmptyObjectSpread(rule) => rule.run_info(),
             Self::OxcNoConstEnum(rule) => rule.run_info(),
+            Self::OxcNoDuplicateInComposite(rule) => rule.run_info(),
+            Self::OxcNoDuplicatedBranches(rule) => rule.run_info(),
+            Self::OxcNoEmptyAfterReluctant(rule) => rule.run_info(),
+            Self::OxcNoEmptyAlternatives(rule) => rule.run_info(),
+            Self::OxcNoEmptyCollection(rule) => rule.run_info(),
+            Self::OxcNoEmptyGroup(rule) => rule.run_info(),
+            Self::OxcNoEmptyTestFile(rule) => rule.run_info(),
+            Self::OxcNoEqualsInForTermination(rule) => rule.run_info(),
+            Self::OxcNoExclusiveTests(rule) => rule.run_info(),
+            Self::OxcNoGlobalThis(rule) => rule.run_info(),
+            Self::OxcNoHardcodedIp(rule) => rule.run_info(),
+            Self::OxcNoHardcodedPasswords(rule) => rule.run_info(),
+            Self::OxcNoHardcodedSecrets(rule) => rule.run_info(),
+            Self::OxcNoIdenticalConditions(rule) => rule.run_info(),
+            Self::OxcNoIdenticalExpressions(rule) => rule.run_info(),
+            Self::OxcNoIgnoredExceptions(rule) => rule.run_info(),
+            Self::OxcNoIgnoredReturn(rule) => rule.run_info(),
+            Self::OxcNoImplicitGlobal(rule) => rule.run_info(),
+            Self::OxcNoInMisuse(rule) => rule.run_info(),
+            Self::OxcNoInsecureCookie(rule) => rule.run_info(),
+            Self::OxcNoInternalApiUse(rule) => rule.run_info(),
+            Self::OxcNoInvertedBooleanCheck(rule) => rule.run_info(),
+            Self::OxcNoKnownValueWidening(rule) => rule.run_info(),
+            Self::OxcNoLiteralCall(rule) => rule.run_info(),
             Self::OxcNoMapSpread(rule) => rule.run_info(),
+            Self::OxcNoModuleMocking(rule) => rule.run_info(),
+            Self::OxcNoNestedAssignment(rule) => rule.run_info(),
+            Self::OxcNoNestedFunctions(rule) => rule.run_info(),
+            Self::OxcNoNestedTemplateLiterals(rule) => rule.run_info(),
+            Self::OxcNoObjectParameters(rule) => rule.run_info(),
             Self::OxcNoOptionalChaining(rule) => rule.run_info(),
+            Self::OxcNoOsCommandFromPath(rule) => rule.run_info(),
+            Self::OxcNoRedundantBoolean(rule) => rule.run_info(),
+            Self::OxcNoRedundantJump(rule) => rule.run_info(),
+            Self::OxcNoRedundantOptional(rule) => rule.run_info(),
+            Self::OxcNoReflectApply(rule) => rule.run_info(),
+            Self::OxcNoReflectGet(rule) => rule.run_info(),
             Self::OxcNoRestSpreadProperties(rule) => rule.run_info(),
+            Self::OxcNoRuntimeTypeof(rule) => rule.run_info(),
+            Self::OxcNoSameLineConditional(rule) => rule.run_info(),
+            Self::OxcNoShapeInSymbolNames(rule) => rule.run_info(),
+            Self::OxcNoSkippedTests(rule) => rule.run_info(),
+            Self::OxcNoSmallSwitch(rule) => rule.run_info(),
             Self::OxcNoThisInExportedFunction(rule) => rule.run_info(),
+            Self::OxcNoUndefinedArgument(rule) => rule.run_info(),
+            Self::OxcNoUniqKey(rule) => rule.run_info(),
+            Self::OxcNoUnknownParameters(rule) => rule.run_info(),
+            Self::OxcNoUnknownReturns(rule) => rule.run_info(),
+            Self::OxcNoUnknownTypeAliases(rule) => rule.run_info(),
+            Self::OxcNoUnsafeDictionaryType(rule) => rule.run_info(),
+            Self::OxcNoUnsafeUnzip(rule) => rule.run_info(),
+            Self::OxcNoUnthrownError(rule) => rule.run_info(),
+            Self::OxcNoUnusedCollection(rule) => rule.run_info(),
+            Self::OxcNoUnverifiedCertificate(rule) => rule.run_info(),
+            Self::OxcNoUnverifiedHostname(rule) => rule.run_info(),
+            Self::OxcNoUselessIncrement(rule) => rule.run_info(),
+            Self::OxcNoWeakCipher(rule) => rule.run_info(),
+            Self::OxcNoWeakKeys(rule) => rule.run_info(),
+            Self::OxcNoWeakSsl(rule) => rule.run_info(),
+            Self::OxcNoWidenThenAssert(rule) => rule.run_info(),
             Self::OxcNumberArgOutOfRange(rule) => rule.run_info(),
             Self::OxcOnlyUsedInRecursion(rule) => rule.run_info(),
+            Self::OxcPostMessage(rule) => rule.run_info(),
+            Self::OxcPreferDefaultLast(rule) => rule.run_info(),
+            Self::OxcPreferSingleBooleanReturn(rule) => rule.run_info(),
+            Self::OxcPreferWhile(rule) => rule.run_info(),
+            Self::OxcProductionDebug(rule) => rule.run_info(),
+            Self::OxcPseudoRandom(rule) => rule.run_info(),
+            Self::OxcRequireSafetyCommentForTypeAssertion(rule) => rule.run_info(),
+            Self::OxcSingleCharInCharacterClasses(rule) => rule.run_info(),
+            Self::OxcSingleCharacterAlternation(rule) => rule.run_info(),
             Self::OxcUninvokedArrayCallback(rule) => rule.run_info(),
+            Self::OxcUnusedImport(rule) => rule.run_info(),
+            Self::OxcUnusedNamedGroups(rule) => rule.run_info(),
+            Self::OxcUseTypeAlias(rule) => rule.run_info(),
+            Self::OxcVoidUse(rule) => rule.run_info(),
             Self::NextjsGoogleFontDisplay(rule) => rule.run_info(),
             Self::NextjsGoogleFontPreconnect(rule) => rule.run_info(),
             Self::NextjsInlineScriptId(rule) => rule.run_info(),
@@ -22388,6 +24470,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::EslintNoNonoctalDecimalEscape(EslintNoNonoctalDecimalEscape::default()),
         RuleEnum::EslintNoObjCalls(EslintNoObjCalls::default()),
         RuleEnum::EslintNoObjectConstructor(EslintNoObjectConstructor::default()),
+        RuleEnum::EslintNoOctal(EslintNoOctal::default()),
         RuleEnum::EslintNoParamReassign(EslintNoParamReassign::default()),
         RuleEnum::EslintNoPlusplus(EslintNoPlusplus::default()),
         RuleEnum::EslintNoPromiseExecutorReturn(EslintNoPromiseExecutorReturn::default()),
@@ -23010,7 +25093,9 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::JsxA11YRoleSupportsAriaProps(JsxA11YRoleSupportsAriaProps::default()),
         RuleEnum::JsxA11YScope(JsxA11YScope::default()),
         RuleEnum::JsxA11YTabindexNoPositive(JsxA11YTabindexNoPositive::default()),
+        RuleEnum::OxcAnchorPrecedence(OxcAnchorPrecedence::default()),
         RuleEnum::OxcApproxConstant(OxcApproxConstant::default()),
+        RuleEnum::OxcArrayCallbackWithoutReturn(OxcArrayCallbackWithoutReturn::default()),
         RuleEnum::OxcBadArrayMethodOnArguments(OxcBadArrayMethodOnArguments::default()),
         RuleEnum::OxcBadBitwiseOperator(OxcBadBitwiseOperator::default()),
         RuleEnum::OxcBadCharAtComparison(OxcBadCharAtComparison::default()),
@@ -23020,23 +25105,116 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcBadObjectLiteralComparison(OxcBadObjectLiteralComparison::default()),
         RuleEnum::OxcBadReplaceAllArg(OxcBadReplaceAllArg::default()),
         RuleEnum::OxcBranchesSharingCode(OxcBranchesSharingCode::default()),
+        RuleEnum::OxcClassName(OxcClassName::default()),
+        RuleEnum::OxcCommaOrLogicalOrCase(OxcCommaOrLogicalOrCase::default()),
+        RuleEnum::OxcConciseRegex(OxcConciseRegex::default()),
         RuleEnum::OxcConstComparisons(OxcConstComparisons::default()),
+        RuleEnum::OxcConstructorForSideEffects(OxcConstructorForSideEffects::default()),
+        RuleEnum::OxcDifferentTypesComparison(OxcDifferentTypesComparison::default()),
         RuleEnum::OxcDoubleComparisons(OxcDoubleComparisons::default()),
+        RuleEnum::OxcDuplicatesInCharacterClass(OxcDuplicatesInCharacterClass::default()),
+        RuleEnum::OxcEmptyStringRepetition(OxcEmptyStringRepetition::default()),
         RuleEnum::OxcErasingOp(OxcErasingOp::default()),
+        RuleEnum::OxcForLoopIncrementSign(OxcForLoopIncrementSign::default()),
+        RuleEnum::OxcGeneratorWithoutYield(OxcGeneratorWithoutYield::default()),
+        RuleEnum::OxcInOperatorTypeError(OxcInOperatorTypeError::default()),
+        RuleEnum::OxcLabelPosition(OxcLabelPosition::default()),
+        RuleEnum::OxcLinkWithTargetBlank(OxcLinkWithTargetBlank::default()),
+        RuleEnum::OxcMaxSwitchCases(OxcMaxSwitchCases::default()),
         RuleEnum::OxcMisrefactoredAssignOp(OxcMisrefactoredAssignOp::default()),
         RuleEnum::OxcMissingThrow(OxcMissingThrow::default()),
         RuleEnum::OxcNoAccumulatingSpread(OxcNoAccumulatingSpread::default()),
+        RuleEnum::OxcNoAllDuplicatedBranches(OxcNoAllDuplicatedBranches::default()),
+        RuleEnum::OxcNoAngularBypassSanitization(OxcNoAngularBypassSanitization::default()),
         RuleEnum::OxcNoAsyncAwait(OxcNoAsyncAwait::default()),
+        RuleEnum::OxcNoAsyncConstructor(OxcNoAsyncConstructor::default()),
         RuleEnum::OxcNoAsyncEndpointHandlers(OxcNoAsyncEndpointHandlers::default()),
         RuleEnum::OxcNoBarrelFile(OxcNoBarrelFile::default()),
+        RuleEnum::OxcNoCaseLabelInSwitch(OxcNoCaseLabelInSwitch::default()),
+        RuleEnum::OxcNoChainedTypeAssertions(OxcNoChainedTypeAssertions::default()),
+        RuleEnum::OxcNoClearTextProtocols(OxcNoClearTextProtocols::default()),
+        RuleEnum::OxcNoCollectionSizeMischeck(OxcNoCollectionSizeMischeck::default()),
+        RuleEnum::OxcNoCommentedCode(OxcNoCommentedCode::default()),
+        RuleEnum::OxcNoConditionalEmptyObjectSpread(OxcNoConditionalEmptyObjectSpread::default()),
         RuleEnum::OxcNoConstEnum(OxcNoConstEnum::default()),
+        RuleEnum::OxcNoDuplicateInComposite(OxcNoDuplicateInComposite::default()),
+        RuleEnum::OxcNoDuplicatedBranches(OxcNoDuplicatedBranches::default()),
+        RuleEnum::OxcNoEmptyAfterReluctant(OxcNoEmptyAfterReluctant::default()),
+        RuleEnum::OxcNoEmptyAlternatives(OxcNoEmptyAlternatives::default()),
+        RuleEnum::OxcNoEmptyCollection(OxcNoEmptyCollection::default()),
+        RuleEnum::OxcNoEmptyGroup(OxcNoEmptyGroup::default()),
+        RuleEnum::OxcNoEmptyTestFile(OxcNoEmptyTestFile::default()),
+        RuleEnum::OxcNoEqualsInForTermination(OxcNoEqualsInForTermination::default()),
+        RuleEnum::OxcNoExclusiveTests(OxcNoExclusiveTests::default()),
+        RuleEnum::OxcNoGlobalThis(OxcNoGlobalThis::default()),
+        RuleEnum::OxcNoHardcodedIp(OxcNoHardcodedIp::default()),
+        RuleEnum::OxcNoHardcodedPasswords(OxcNoHardcodedPasswords::default()),
+        RuleEnum::OxcNoHardcodedSecrets(OxcNoHardcodedSecrets::default()),
+        RuleEnum::OxcNoIdenticalConditions(OxcNoIdenticalConditions::default()),
+        RuleEnum::OxcNoIdenticalExpressions(OxcNoIdenticalExpressions::default()),
+        RuleEnum::OxcNoIgnoredExceptions(OxcNoIgnoredExceptions::default()),
+        RuleEnum::OxcNoIgnoredReturn(OxcNoIgnoredReturn::default()),
+        RuleEnum::OxcNoImplicitGlobal(OxcNoImplicitGlobal::default()),
+        RuleEnum::OxcNoInMisuse(OxcNoInMisuse::default()),
+        RuleEnum::OxcNoInsecureCookie(OxcNoInsecureCookie::default()),
+        RuleEnum::OxcNoInternalApiUse(OxcNoInternalApiUse::default()),
+        RuleEnum::OxcNoInvertedBooleanCheck(OxcNoInvertedBooleanCheck::default()),
+        RuleEnum::OxcNoKnownValueWidening(OxcNoKnownValueWidening::default()),
+        RuleEnum::OxcNoLiteralCall(OxcNoLiteralCall::default()),
         RuleEnum::OxcNoMapSpread(OxcNoMapSpread::default()),
+        RuleEnum::OxcNoModuleMocking(OxcNoModuleMocking::default()),
+        RuleEnum::OxcNoNestedAssignment(OxcNoNestedAssignment::default()),
+        RuleEnum::OxcNoNestedFunctions(OxcNoNestedFunctions::default()),
+        RuleEnum::OxcNoNestedTemplateLiterals(OxcNoNestedTemplateLiterals::default()),
+        RuleEnum::OxcNoObjectParameters(OxcNoObjectParameters::default()),
         RuleEnum::OxcNoOptionalChaining(OxcNoOptionalChaining::default()),
+        RuleEnum::OxcNoOsCommandFromPath(OxcNoOsCommandFromPath::default()),
+        RuleEnum::OxcNoRedundantBoolean(OxcNoRedundantBoolean::default()),
+        RuleEnum::OxcNoRedundantJump(OxcNoRedundantJump::default()),
+        RuleEnum::OxcNoRedundantOptional(OxcNoRedundantOptional::default()),
+        RuleEnum::OxcNoReflectApply(OxcNoReflectApply::default()),
+        RuleEnum::OxcNoReflectGet(OxcNoReflectGet::default()),
         RuleEnum::OxcNoRestSpreadProperties(OxcNoRestSpreadProperties::default()),
+        RuleEnum::OxcNoRuntimeTypeof(OxcNoRuntimeTypeof::default()),
+        RuleEnum::OxcNoSameLineConditional(OxcNoSameLineConditional::default()),
+        RuleEnum::OxcNoShapeInSymbolNames(OxcNoShapeInSymbolNames::default()),
+        RuleEnum::OxcNoSkippedTests(OxcNoSkippedTests::default()),
+        RuleEnum::OxcNoSmallSwitch(OxcNoSmallSwitch::default()),
         RuleEnum::OxcNoThisInExportedFunction(OxcNoThisInExportedFunction::default()),
+        RuleEnum::OxcNoUndefinedArgument(OxcNoUndefinedArgument::default()),
+        RuleEnum::OxcNoUniqKey(OxcNoUniqKey::default()),
+        RuleEnum::OxcNoUnknownParameters(OxcNoUnknownParameters::default()),
+        RuleEnum::OxcNoUnknownReturns(OxcNoUnknownReturns::default()),
+        RuleEnum::OxcNoUnknownTypeAliases(OxcNoUnknownTypeAliases::default()),
+        RuleEnum::OxcNoUnsafeDictionaryType(OxcNoUnsafeDictionaryType::default()),
+        RuleEnum::OxcNoUnsafeUnzip(OxcNoUnsafeUnzip::default()),
+        RuleEnum::OxcNoUnthrownError(OxcNoUnthrownError::default()),
+        RuleEnum::OxcNoUnusedCollection(OxcNoUnusedCollection::default()),
+        RuleEnum::OxcNoUnverifiedCertificate(OxcNoUnverifiedCertificate::default()),
+        RuleEnum::OxcNoUnverifiedHostname(OxcNoUnverifiedHostname::default()),
+        RuleEnum::OxcNoUselessIncrement(OxcNoUselessIncrement::default()),
+        RuleEnum::OxcNoWeakCipher(OxcNoWeakCipher::default()),
+        RuleEnum::OxcNoWeakKeys(OxcNoWeakKeys::default()),
+        RuleEnum::OxcNoWeakSsl(OxcNoWeakSsl::default()),
+        RuleEnum::OxcNoWidenThenAssert(OxcNoWidenThenAssert::default()),
         RuleEnum::OxcNumberArgOutOfRange(OxcNumberArgOutOfRange::default()),
         RuleEnum::OxcOnlyUsedInRecursion(OxcOnlyUsedInRecursion::default()),
+        RuleEnum::OxcPostMessage(OxcPostMessage::default()),
+        RuleEnum::OxcPreferDefaultLast(OxcPreferDefaultLast::default()),
+        RuleEnum::OxcPreferSingleBooleanReturn(OxcPreferSingleBooleanReturn::default()),
+        RuleEnum::OxcPreferWhile(OxcPreferWhile::default()),
+        RuleEnum::OxcProductionDebug(OxcProductionDebug::default()),
+        RuleEnum::OxcPseudoRandom(OxcPseudoRandom::default()),
+        RuleEnum::OxcRequireSafetyCommentForTypeAssertion(
+            OxcRequireSafetyCommentForTypeAssertion::default(),
+        ),
+        RuleEnum::OxcSingleCharInCharacterClasses(OxcSingleCharInCharacterClasses::default()),
+        RuleEnum::OxcSingleCharacterAlternation(OxcSingleCharacterAlternation::default()),
         RuleEnum::OxcUninvokedArrayCallback(OxcUninvokedArrayCallback::default()),
+        RuleEnum::OxcUnusedImport(OxcUnusedImport::default()),
+        RuleEnum::OxcUnusedNamedGroups(OxcUnusedNamedGroups::default()),
+        RuleEnum::OxcUseTypeAlias(OxcUseTypeAlias::default()),
+        RuleEnum::OxcVoidUse(OxcVoidUse::default()),
         RuleEnum::NextjsGoogleFontDisplay(NextjsGoogleFontDisplay::default()),
         RuleEnum::NextjsGoogleFontPreconnect(NextjsGoogleFontPreconnect::default()),
         RuleEnum::NextjsInlineScriptId(NextjsInlineScriptId::default()),

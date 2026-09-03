@@ -1,0 +1,10 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-empty-test-file): Add some tests to this file or delete it.
+   ╭─[/Users/michal/Projects/oxc/crates/oxc_linter/fixtures/import/example.test.ts:1:1]
+ 1 │ const helper = true;
+   · ────────────────────
+   ╰────

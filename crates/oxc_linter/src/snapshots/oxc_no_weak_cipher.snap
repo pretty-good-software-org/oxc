@@ -1,0 +1,18 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-weak-cipher): Do not use a weak cipher algorithm.
+   ╭─[no_weak_cipher.tsx:1:16]
+ 1 │ const cipher = "AES-128-ECB";
+   ·                ─────────────
+   ╰────
+  help: Use a modern authenticated encryption algorithm such as AES-GCM.
+
+  ⚠ oxc(no-weak-cipher): Do not use a weak cipher algorithm.
+   ╭─[no_weak_cipher.tsx:1:16]
+ 1 │ const cipher = "RC4";
+   ·                ─────
+   ╰────
+  help: Use a modern authenticated encryption algorithm such as AES-GCM.

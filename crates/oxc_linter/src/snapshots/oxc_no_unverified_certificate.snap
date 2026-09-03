@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-unverified-certificate): Do not disable TLS certificate verification.
+   ╭─[no_unverified_certificate.tsx:1:19]
+ 1 │ const options = { rejectUnauthorized: false };
+   ·                   ─────────────────────────
+   ╰────
+  help: Keep `rejectUnauthorized` enabled and use a trusted certificate.

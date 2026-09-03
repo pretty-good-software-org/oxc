@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-os-command-from-path): Do not execute a command resolved from PATH.
+   ╭─[no_os_command_from_path.tsx:1:1]
+ 1 │ exec("curl https://example.test");
+   · ─────────────────────────────────
+   ╰────
+  help: Use a trusted absolute executable path or an allowlisted command.

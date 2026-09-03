@@ -1,0 +1,18 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-internal-api-use): Do not use internal APIs of your dependencies.
+   ╭─[no_internal_api_use.tsx:1:17]
+ 1 │ import api from 'package/node_modules/internal/api';
+   ·                 ───────────────────────────────────
+   ╰────
+  help: Import the dependency through its public package API.
+
+  ⚠ oxc(no-internal-api-use): Do not use internal APIs of your dependencies.
+   ╭─[no_internal_api_use.tsx:1:9]
+ 1 │ require('package/node_modules/internal/api');
+   ·         ───────────────────────────────────
+   ╰────
+  help: Import the dependency through its public package API.

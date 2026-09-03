@@ -1,0 +1,18 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-collection-size-mischeck): The `length` property of `items` is always greater than or equal to zero.
+   ╭─[no_collection_size_mischeck.tsx:1:5]
+ 1 │ if (items.length < 0) {}
+   ·     ────────────────
+   ╰────
+  help: Use `<` only with a meaningful non-negative comparison.
+
+  ⚠ oxc(no-collection-size-mischeck): The `size` property of `items` is always greater than or equal to zero.
+   ╭─[no_collection_size_mischeck.tsx:1:5]
+ 1 │ if (items.size >= 0) {}
+   ·     ───────────────
+   ╰────
+  help: Use `>=` only with a meaningful non-negative comparison.

@@ -17,11 +17,11 @@ concurrency:
 
 jobs:
   check:
-    if: github.repository == 'oxc-project/oxc'
+    if: github.repository == 'pretty-good-software-org/oxc'
     name: Check version
     runs-on: ubuntu-slim
     outputs:
-      version_changed: ${{ steps.oxfmt.outputs.version_changed && steps.oxlint.outputs.version_changed }}
+      version_changed: ${{ steps.oxlint.outputs.version_changed }}
       oxfmt_version: ${{ steps.oxfmt.outputs.version }}
       oxlint_version: ${{ steps.oxlint.outputs.version }}
     steps:
@@ -39,7 +39,7 @@ jobs:
         id: oxlint
         with:
           file-name: npm/oxlint/package.json
-          file-url: https://unpkg.com/oxlint@latest/package.json
+          diff-search: "true"
 
       - name: Validate rule versions
         if: steps.oxlint.outputs.version_changed == 'true'
@@ -291,7 +291,7 @@ jobs:
       - uses: tsickert/discord-webhook@b217a69502f52803de774ded2b1ab7c282e99645 # v7.0.0
         with:
           webhook-url: ${{ secrets.DISCORD_OXC_CORE_CHANNEL }}
-          content: "Requesting approval: https://github.com/oxc-project/oxc/actions/workflows/release_apps.yml"
+          content: "Requesting approval: https://github.com/pretty-good-software-org/oxc/actions/workflows/release_apps.yml"
 
   publish-oxlint:
     name: Publish Oxlint
@@ -300,12 +300,13 @@ jobs:
     environment: release
     permissions:
       id-token: write # for `pnpm publish --provenance`
+      packages: write
     env:
       package_path: npm/oxlint
       plugins_package_path: npm/oxlint-plugins
       plugin_eslint_package_path: npm/oxlint-plugin-eslint
       npm_dir: npm/oxlint-release
-      PUBLISH_FLAGS: "--provenance --access public --no-git-checks"
+      PUBLISH_FLAGS: "--no-git-checks"
     steps:
       - uses: taiki-e/checkout-action@7d1e50e93dc4fb3bba58f85018fadf77898aee8b # v1.4.2
 
@@ -343,9 +344,16 @@ jobs:
           node .github/scripts/check-npm-packages.js "${plugins_package_path}"
           node .github/scripts/check-npm-packages.js "${plugin_eslint_package_path}"
 
+      - name: Configure GitHub Packages authentication
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "@pretty-good-software-org:registry=https://npm.pkg.github.com" >> "$HOME/.npmrc"
+          echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> "$HOME/.npmrc"
+
       - name: Trusted Publish
         run: |
-          # Trusted publishing is configured, publish token is not required.
+          # The scoped fork package is published to GitHub Packages with GITHUB_TOKEN.
           # Publish sub-packages and adds `optionalDependencies` to main package.
           pnpm napi pre-publish --no-gh-release -t npm --package-json-path ${package_path}/package.json --npm-dir ${npm_dir}
           # Publish `oxlint` package

@@ -245,9 +245,139 @@ fn transform_rule_and_plugin_name<'a>(
     rule_name: &'a str,
     plugin_name: &'a str,
 ) -> (&'a str, &'a str) {
-    let plugin_name = match plugin_name {
-        "typescript" if is_eslint_rule_adapted_to_typescript(rule_name) => "eslint",
-        _ => plugin_name,
+    let (rule_name, plugin_name) = match (plugin_name, rule_name) {
+        ("typescript", name) if is_eslint_rule_adapted_to_typescript(name) => (name, "eslint"),
+        ("sonarjs", "no-parameter-reassignment") => ("no-param-reassign", "eslint"),
+        ("sonarjs", "array-callback-without-return") => ("array-callback-without-return", "oxc"),
+        ("sonarjs", "class-name") => ("class-name", "oxc"),
+        ("sonarjs", "no-all-duplicated-branches") => ("no-all-duplicated-branches", "oxc"),
+        ("sonarjs", "no-angular-bypass-sanitization") => ("no-angular-bypass-sanitization", "oxc"),
+        ("sonarjs", "no-async-constructor") => ("no-async-constructor", "oxc"),
+        ("sonarjs", "constructor-for-side-effects") => ("constructor-for-side-effects", "oxc"),
+        ("sonarjs", "no-empty-group") => ("no-empty-group", "oxc"),
+        ("sonarjs", "no-empty-alternatives") => ("no-empty-alternatives", "oxc"),
+        ("sonarjs", "no-equals-in-for-termination") => ("no-equals-in-for-termination", "oxc"),
+        ("sonarjs", "no-case-label-in-switch") => ("no-case-label-in-switch", "oxc"),
+        ("sonarjs", "no-clear-text-protocols") => ("no-clear-text-protocols", "oxc"),
+        ("sonarjs", "no-collection-size-mischeck") => ("no-collection-size-mischeck", "oxc"),
+        ("sonarjs", "no-commented-code") => ("no-commented-code", "oxc"),
+        ("sonarjs", "generator-without-yield") => ("generator-without-yield", "oxc"),
+        ("sonarjs", "no-global-this") => ("no-global-this", "oxc"),
+        ("sonarjs", "no-hardcoded-ip") => ("no-hardcoded-ip", "oxc"),
+        ("sonarjs", "no-os-command-from-path") => ("no-os-command-from-path", "oxc"),
+        ("sonarjs", "max-switch-cases") => ("max-switch-cases", "oxc"),
+        ("sonarjs", "no-small-switch") => ("no-small-switch", "oxc"),
+        ("sonarjs", "no-same-line-conditional") => ("no-same-line-conditional", "oxc"),
+        ("sonarjs", "no-skipped-tests") => ("no-skipped-tests", "oxc"),
+        ("sonarjs", "no-nested-assignment") => ("no-nested-assignment", "oxc"),
+        ("sonarjs", "no-nested-functions") => ("no-nested-functions", "oxc"),
+        ("sonarjs", "no-nested-template-literals") => ("no-nested-template-literals", "oxc"),
+        ("sonarjs", "no-redundant-boolean") => ("no-redundant-boolean", "oxc"),
+        ("sonarjs", "no-redundant-jump") => ("no-redundant-jump", "oxc"),
+        ("sonarjs", "no-redundant-optional") => ("no-redundant-optional", "oxc"),
+        ("sonarjs", "no-duplicated-branches") => ("no-duplicated-branches", "oxc"),
+        ("sonarjs", "no-duplicate-in-composite") => ("no-duplicate-in-composite", "oxc"),
+        ("sonarjs", "duplicates-in-character-class") => ("duplicates-in-character-class", "oxc"),
+        ("sonarjs", "no-hardcoded-passwords") => ("no-hardcoded-passwords", "oxc"),
+        ("sonarjs", "no-hardcoded-secrets") => ("no-hardcoded-secrets", "oxc"),
+        ("sonarjs", "insecure-cookie" | "no-insecure-cookie") => ("no-insecure-cookie", "oxc"),
+        ("sonarjs", "no-inverted-boolean-check") => ("no-inverted-boolean-check", "oxc"),
+        ("sonarjs", "no-weak-cipher") => ("no-weak-cipher", "oxc"),
+        ("sonarjs", "no-weak-ssl" | "weak-ssl") => ("no-weak-ssl", "oxc"),
+        ("sonarjs", "single-character-alternation") => ("single-character-alternation", "oxc"),
+        ("sonarjs", "single-char-in-character-classes") => {
+            ("single-char-in-character-classes", "oxc")
+        }
+        ("sonarjs", "unused-import") => ("unused-import", "oxc"),
+        ("sonarjs", "unused-named-groups") => ("unused-named-groups", "oxc"),
+        ("sonarjs", "use-type-alias") => ("use-type-alias", "oxc"),
+        ("sonarjs", "void-use") => ("void-use", "oxc"),
+        ("sonarjs", "no-weak-keys") => ("no-weak-keys", "oxc"),
+        ("sonarjs", "no-unverified-certificate" | "unverified-certificate") => {
+            ("no-unverified-certificate", "oxc")
+        }
+        ("sonarjs", "no-unverified-hostname" | "unverified-hostname") => {
+            ("no-unverified-hostname", "oxc")
+        }
+        ("sonarjs", "no-undefined-argument") => ("no-undefined-argument", "oxc"),
+        ("sonarjs", "fixme-tag" | "todo-tag") => ("no-warning-comments", "eslint"),
+        ("sonarjs", "in-operator-type-error") => ("in-operator-type-error", "oxc"),
+        ("sonarjs", "no-in-misuse") => ("no-in-misuse", "oxc"),
+        ("sonarjs", "no-implicit-global") => ("no-implicit-global", "oxc"),
+        ("sonarjs", "label-position") => ("label-position", "oxc"),
+        ("sonarjs", "link-with-target-blank") => ("link-with-target-blank", "oxc"),
+        ("sonarjs", "no-exclusive-tests") => ("no-exclusive-tests", "oxc"),
+        ("sonarjs", "no-identical-conditions") => ("no-identical-conditions", "oxc"),
+        ("sonarjs", "no-ignored-exceptions") => ("no-ignored-exceptions", "oxc"),
+        ("sonarjs", "no-ignored-return") => ("no-ignored-return", "oxc"),
+        ("sonarjs", "no-internal-api-use") => ("no-internal-api-use", "oxc"),
+        ("sonarjs", "no-identical-expressions") => ("no-identical-expressions", "oxc"),
+        ("sonarjs", "bitwise-operators") => ("no-bitwise", "eslint"),
+        ("sonarjs", "code-eval") => ("no-eval", "eslint"),
+        ("sonarjs", "no-nested-conditional") => ("no-nested-ternary", "eslint"),
+        ("sonarjs", "no-primitive-wrappers") => ("no-new-wrappers", "eslint"),
+        ("anti-slop", "no-chained-type-assertions") => ("no-chained-type-assertions", "oxc"),
+        ("anti-slop", "no-known-value-widening") => ("no-known-value-widening", "oxc"),
+        ("anti-slop", "no-conditional-empty-object-spread") => {
+            ("no-conditional-empty-object-spread", "oxc")
+        }
+        ("anti-slop", "no-module-mocking") => ("no-module-mocking", "oxc"),
+        ("anti-slop", "no-object-parameters") => ("no-object-parameters", "oxc"),
+        ("anti-slop", "no-unknown-parameters") => ("no-unknown-parameters", "oxc"),
+        ("anti-slop", "no-unknown-returns") => ("no-unknown-returns", "oxc"),
+        ("sonarjs", "no-empty-after-reluctant") => ("no-empty-after-reluctant", "oxc"),
+        ("sonarjs", "different-types-comparison") => ("different-types-comparison", "oxc"),
+        ("sonarjs", "no-empty-test-file") => ("no-empty-test-file", "oxc"),
+        ("sonarjs", "no-empty-collection") => ("no-empty-collection", "oxc"),
+        ("sonarjs", "no-unsafe-unzip") => ("no-unsafe-unzip", "oxc"),
+        ("sonarjs", "no-unthrown-error") => ("no-unthrown-error", "oxc"),
+        ("sonarjs", "no-unused-collection") => ("no-unused-collection", "oxc"),
+        ("sonarjs", "no-useless-increment") => ("no-useless-increment", "oxc"),
+        ("sonarjs", "no-uniq-key") => ("no-uniq-key", "oxc"),
+        ("sonarjs", "no-literal-call") => ("no-literal-call", "oxc"),
+        ("anti-slop", "no-unsafe-dictionary-type") => ("no-unsafe-dictionary-type", "oxc"),
+        ("anti-slop", "no-widen-then-assert") => ("no-widen-then-assert", "oxc"),
+        ("anti-slop", "no-unknown-type-aliases") => ("no-unknown-type-aliases", "oxc"),
+        ("anti-slop", "no-reflect-apply") => ("no-reflect-apply", "oxc"),
+        ("anti-slop", "no-reflect-get") => ("no-reflect-get", "oxc"),
+        ("anti-slop", "no-runtime-typeof") => ("no-runtime-typeof", "oxc"),
+        ("anti-slop", "no-shape-in-symbol-names") => ("no-shape-in-symbol-names", "oxc"),
+        ("anti-slop", "require-safety-comment-for-type-assertion") => {
+            ("require-safety-comment-for-type-assertion", "oxc")
+        }
+        ("pgs-oxlint-compat", "no-octal") => ("no-octal", "eslint"),
+        ("sonarjs", "post-message") => ("post-message", "oxc"),
+        ("sonarjs", "prefer-default-last") => ("prefer-default-last", "oxc"),
+        ("sonarjs", "prefer-single-boolean-return") => ("prefer-single-boolean-return", "oxc"),
+        ("sonarjs", "prefer-while") => ("prefer-while", "oxc"),
+        ("sonarjs", "pseudo-random") => ("pseudo-random", "oxc"),
+        ("sonarjs", "production-debug") => ("production-debug", "oxc"),
+        ("sonarjs", "anchor-precedence") => ("anchor-precedence", "oxc"),
+        ("sonarjs", "comma-or-logical-or-case") => ("comma-or-logical-or-case", "oxc"),
+        ("sonarjs", "concise-regex") => ("concise-regex", "oxc"),
+        ("sonarjs", "empty-string-repetition") => ("empty-string-repetition", "oxc"),
+        ("sonarjs", "for-loop-increment-sign") => ("for-loop-increment-sign", "oxc"),
+        ("sonarjs", "no-array-delete") => ("no-array-delete", "typescript"),
+        ("sonarjs", "prefer-regexp-exec") => ("prefer-regexp-exec", "typescript"),
+        ("sonarjs", name)
+            if matches!(
+                name,
+                "block-scoped-var"
+                    | "no-control-regex"
+                    | "no-delete-var"
+                    | "no-empty-character-class"
+                    | "no-fallthrough"
+                    | "no-invalid-regexp"
+                    | "no-labels"
+                    | "no-misleading-character-class"
+                    | "no-regex-spaces"
+                    | "no-unused-vars"
+                    | "no-useless-catch"
+            ) =>
+        {
+            (name, "eslint")
+        }
+        _ => (rule_name, plugin_name),
     };
 
     (rule_name, plugin_name)
@@ -671,6 +801,11 @@ pub fn normalize_rule_name(name: &str) -> String {
 
 pub(super) fn unalias_plugin_name(plugin_name: &str, rule_name: &str) -> (String, String) {
     let normalized = super::plugins::normalize_plugin_name(plugin_name);
+    if normalized == "sonarjs" {
+        let (rule_name, plugin_name) = transform_rule_and_plugin_name(rule_name, "sonarjs");
+        let plugin_name = if plugin_name == "sonarjs" { "oxc" } else { plugin_name };
+        return (plugin_name.to_string(), rule_name.to_string());
+    }
     let plugin_name = match normalized.as_ref() {
         // e.g. "@next/google-font-display", "@next/next/google-font-display"
         "@next" | "@next/next" => "nextjs".to_string(),
@@ -949,6 +1084,42 @@ mod test {
 
         assert!(result.is_ok());
         assert!(rules.is_empty());
+    }
+
+    #[test]
+    fn test_sonarjs_aliases_to_native_rules() {
+        assert_eq!(
+            super::transform_rule_and_plugin_name("no-parameter-reassignment", "sonarjs"),
+            ("no-param-reassign", "eslint")
+        );
+        assert_eq!(
+            super::transform_rule_and_plugin_name("no-labels", "sonarjs"),
+            ("no-labels", "eslint")
+        );
+        assert_eq!(
+            super::transform_rule_and_plugin_name("bitwise-operators", "sonarjs"),
+            ("no-bitwise", "eslint")
+        );
+        assert_eq!(
+            super::transform_rule_and_plugin_name("cognitive-complexity", "sonarjs"),
+            ("cognitive-complexity", "sonarjs")
+        );
+        assert_eq!(
+            super::transform_rule_and_plugin_name("no-chained-type-assertions", "anti-slop"),
+            ("no-chained-type-assertions", "oxc")
+        );
+        assert_eq!(
+            super::transform_rule_and_plugin_name("no-reflect-get", "anti-slop"),
+            ("no-reflect-get", "oxc")
+        );
+        assert_eq!(
+            super::transform_rule_and_plugin_name("no-runtime-typeof", "anti-slop"),
+            ("no-runtime-typeof", "oxc")
+        );
+        assert_eq!(
+            super::transform_rule_and_plugin_name("no-octal", "pgs-oxlint-compat"),
+            ("no-octal", "eslint")
+        );
     }
 
     #[test]

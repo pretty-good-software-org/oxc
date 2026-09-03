@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-angular-bypass-sanitization): Review this Angular sanitization bypass.
+   ╭─[no_angular_bypass_sanitization.tsx:1:1]
+ 1 │ sanitizer.bypassSecurityTrustHtml(value)
+   · ─────────────────────────────────
+   ╰────
+  help: Use Angular's standard sanitization instead of bypassing its security checks.

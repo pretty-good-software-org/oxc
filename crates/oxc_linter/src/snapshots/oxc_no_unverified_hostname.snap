@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-unverified-hostname): Do not disable TLS hostname verification.
+   ╭─[no_unverified_hostname.tsx:1:19]
+ 1 │ const options = { checkServerIdentity: () => undefined };
+   ·                   ────────────────────────────────────
+   ╰────
+  help: Validate the peer hostname against the certificate.

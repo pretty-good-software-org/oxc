@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-all-duplicated-branches): Remove this conditional structure or edit its branches.
+   ╭─[no_all_duplicated_branches.tsx:1:16]
+ 1 │ const result = condition ? value : value;
+   ·                ─────────────────────────
+   ╰────
+  help: Make the branches produce different results or simplify the condition.

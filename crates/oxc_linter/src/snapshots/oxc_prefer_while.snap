@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(prefer-while): Replace this `for` loop with a `while` loop.
+   ╭─[prefer_while.tsx:1:1]
+ 1 │ for (; ready(); ) run();
+   · ────────────────────────
+   ╰────
+  help: Use `while (condition)` when the loop has no initializer or update.

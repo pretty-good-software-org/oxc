@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-nested-functions): Reduce the nesting depth of this function.
+   ╭─[no_nested_functions.tsx:1:61]
+ 1 │ function a() { function b() { function c() { function d() { function e() {} } } } }
+   ·                                                             ───────────────
+   ╰────
+  help: Extract the nested function or simplify the control flow.

@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-ignored-exceptions): Handle this exception or do not catch it at all.
+   ╭─[no_ignored_exceptions.tsx:1:16]
+ 1 │ try { run(); } catch (error) { recover(); }
+   ·                ────────────────────────────
+   ╰────
+  help: Use the caught exception or remove the catch clause.

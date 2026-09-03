@@ -1,0 +1,18 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(in-operator-type-error): The right-hand side of `in` must be an object.
+   ╭─[in_operator_type_error.tsx:1:8]
+ 1 │ 'x' in 1
+   ·        ─
+   ╰────
+  help: Check that the value is not null or a primitive before using `in`.
+
+  ⚠ oxc(in-operator-type-error): The right-hand side of `in` must be an object.
+   ╭─[in_operator_type_error.tsx:1:8]
+ 1 │ 'x' in null
+   ·        ────
+   ╰────
+  help: Check that the value is not null or a primitive before using `in`.

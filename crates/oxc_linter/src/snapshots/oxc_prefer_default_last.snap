@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(prefer-default-last): Move the default case to the end of the switch.
+   ╭─[prefer_default_last.tsx:1:18]
+ 1 │ switch (value) { default: fallback(); case 1: one(); }
+   ·                  ────────────────────
+   ╰────
+  help: Keep explicit cases together before the fallback case.

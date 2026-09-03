@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-unthrown-error): Throw this error or remove this useless statement.
+   ╭─[no_unthrown_error.tsx:1:1]
+ 1 │ new Error('failure');
+   · ────────────────────
+   ╰────
+  help: Prefix the error construction with `throw` or use the error value.

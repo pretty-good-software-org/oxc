@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(duplicates-in-character-class): Remove duplicate characters from this regex character class.
+   ╭─[duplicates_in_character_class.tsx:1:17]
+ 1 │ const pattern = /[aaz]/;
+   ·                 ───────
+   ╰────
+  help: Keep each character or range only once.

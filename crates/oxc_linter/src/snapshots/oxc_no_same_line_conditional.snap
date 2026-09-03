@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-same-line-conditional): Move this `if` to a new line or add the missing `else`.
+   ╭─[no_same_line_conditional.tsx:1:17]
+ 1 │ if (one) run(); if (two) run();
+   ·                 ───────
+   ╰────
+  help: Put adjacent conditionals on separate lines or combine them with `else if`.

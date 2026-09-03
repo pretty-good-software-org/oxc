@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-ignored-return): Use the result returned by `map` or remove this call.
+   ╭─[no_ignored_return.tsx:1:1]
+ 1 │ values.map(transform);
+   · ─────────────────────
+   ╰────
+  help: Assign or return the result instead of discarding it.

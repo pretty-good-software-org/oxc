@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(concise-regex): Use concise character class syntax in this regular expression.
+   ╭─[concise_regex.tsx:1:1]
+ 1 │ /[0-9]+/
+   · ────────
+   ╰────
+  help: Replace `[0-9]` with `\d` or `[a-zA-Z0-9_]` with `\w`.

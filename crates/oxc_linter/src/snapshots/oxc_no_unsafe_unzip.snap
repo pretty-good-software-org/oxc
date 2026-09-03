@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-unsafe-unzip): Make sure that expanding this archive file is safe here.
+   ╭─[no_unsafe_unzip.tsx:1:1]
+ 1 │ jszip.loadAsync(data)
+   · ───────────────
+   ╰────
+  help: Validate archive entries and prevent path traversal before extraction.

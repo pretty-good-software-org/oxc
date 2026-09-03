@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-empty-collection): Review this usage of an empty collection.
+   ╭─[no_empty_collection.tsx:1:7]
+ 1 │ const values = []; values.length;
+   ·       ──────
+   ╰────
+  help: Populate the collection before reading from it or remove the operation.

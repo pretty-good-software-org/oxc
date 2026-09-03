@@ -1,0 +1,11 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(no-weak-keys): Use cryptographic key parameters that provide sufficient security.
+   ╭─[no_weak_keys.tsx:1:1]
+ 1 │ crypto.generateKeyPair('rsa', { modulusLength: 1024 })
+   · ──────────────────────────────────────────────────────
+   ╰────
+  help: Use at least a 2048-bit RSA modulus, a 224-bit DSA divisor, or a stronger elliptic curve.

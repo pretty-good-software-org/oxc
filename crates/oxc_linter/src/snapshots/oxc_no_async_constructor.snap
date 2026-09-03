@@ -1,0 +1,10 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  × Constructor can't be an async method
+   ╭─[no_async_constructor.tsx:1:23]
+ 1 │ class Example { async constructor() {} }
+   ·                       ───────────
+   ╰────
