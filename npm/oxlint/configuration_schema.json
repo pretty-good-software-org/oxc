@@ -1516,6 +1516,46 @@
       ]
     },
     "Config": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "default": "^[A-Z][a-zA-Z0-9]*$",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Config2": {
+      "type": "object",
+      "properties": {
+        "passwordWords": {
+          "default": [
+            "password",
+            "pwd",
+            "passwd",
+            "passphrase"
+          ],
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Config3": {
+      "type": "object",
+      "properties": {
+        "threshold": {
+          "default": 4,
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        }
+      },
+      "additionalProperties": false
+    },
+    "Config4": {
       "type": "array",
       "items": [
         {
@@ -5097,6 +5137,9 @@
         "no-object-constructor": {
           "$ref": "#/definitions/RuleNoConfig"
         },
+        "no-octal": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
         "no-param-reassign": {
           "anyOf": [
             {
@@ -5933,7 +5976,13 @@
             }
           ]
         },
+        "oxc/anchor-precedence": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
         "oxc/approx-constant": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/array-callback-without-return": {
           "$ref": "#/definitions/RuleNoConfig"
         },
         "oxc/bad-array-method-on-arguments": {
@@ -5963,14 +6012,89 @@
         "oxc/branches-sharing-code": {
           "$ref": "#/definitions/RuleNoConfig"
         },
+        "oxc/class-name": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/RuleNoConfig"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/AllowWarnDeny"
+                },
+                {
+                  "$ref": "#/definitions/Config"
+                }
+              ],
+              "maxItems": 2,
+              "minItems": 2
+            }
+          ]
+        },
+        "oxc/comma-or-logical-or-case": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/concise-regex": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
         "oxc/const-comparisons": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/constructor-for-side-effects": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/different-types-comparison": {
           "$ref": "#/definitions/RuleNoConfig"
         },
         "oxc/double-comparisons": {
           "$ref": "#/definitions/RuleNoConfig"
         },
+        "oxc/duplicates-in-character-class": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/empty-string-repetition": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
         "oxc/erasing-op": {
           "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/for-loop-increment-sign": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/generator-without-yield": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/in-operator-type-error": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/label-position": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/link-with-target-blank": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/max-switch-cases": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/RuleNoConfig"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/AllowWarnDeny"
+                },
+                {
+                  "type": "integer",
+                  "format": "uint",
+                  "minimum": 0.0
+                }
+              ],
+              "maxItems": 2,
+              "minItems": 2
+            }
+          ]
         },
         "oxc/misrefactored-assign-op": {
           "$ref": "#/definitions/RuleNoConfig"
@@ -5981,7 +6105,16 @@
         "oxc/no-accumulating-spread": {
           "$ref": "#/definitions/RuleNoConfig"
         },
+        "oxc/no-all-duplicated-branches": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-angular-bypass-sanitization": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
         "oxc/no-async-await": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-async-constructor": {
           "$ref": "#/definitions/RuleNoConfig"
         },
         "oxc/no-async-endpoint-handlers": {
@@ -6024,7 +6157,114 @@
             }
           ]
         },
+        "oxc/no-case-label-in-switch": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-chained-type-assertions": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-clear-text-protocols": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-collection-size-mischeck": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-commented-code": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-conditional-empty-object-spread": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
         "oxc/no-const-enum": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-duplicate-in-composite": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-duplicated-branches": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-empty-after-reluctant": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-empty-alternatives": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-empty-collection": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-empty-group": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-empty-test-file": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-equals-in-for-termination": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-exclusive-tests": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-global-this": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-hardcoded-ip": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-hardcoded-passwords": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/RuleNoConfig"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/AllowWarnDeny"
+                },
+                {
+                  "$ref": "#/definitions/Config2"
+                }
+              ],
+              "maxItems": 2,
+              "minItems": 2
+            }
+          ]
+        },
+        "oxc/no-hardcoded-secrets": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-identical-conditions": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-identical-expressions": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-ignored-exceptions": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-ignored-return": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-implicit-global": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-in-misuse": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-insecure-cookie": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-internal-api-use": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-inverted-boolean-check": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-known-value-widening": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-literal-call": {
           "$ref": "#/definitions/RuleNoConfig"
         },
         "oxc/no-map-spread": {
@@ -6047,6 +6287,38 @@
             }
           ]
         },
+        "oxc/no-module-mocking": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-nested-assignment": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-nested-functions": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/RuleNoConfig"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/AllowWarnDeny"
+                },
+                {
+                  "$ref": "#/definitions/Config3"
+                }
+              ],
+              "maxItems": 2,
+              "minItems": 2
+            }
+          ]
+        },
+        "oxc/no-nested-template-literals": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-object-parameters": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
         "oxc/no-optional-chaining": {
           "anyOf": [
             {
@@ -6066,6 +6338,24 @@
               "minItems": 2
             }
           ]
+        },
+        "oxc/no-os-command-from-path": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-redundant-boolean": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-redundant-jump": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-redundant-optional": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-reflect-apply": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-reflect-get": {
+          "$ref": "#/definitions/RuleNoConfig"
         },
         "oxc/no-rest-spread-properties": {
           "anyOf": [
@@ -6087,7 +6377,73 @@
             }
           ]
         },
+        "oxc/no-runtime-typeof": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-same-line-conditional": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-shape-in-symbol-names": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-skipped-tests": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-small-switch": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
         "oxc/no-this-in-exported-function": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-undefined-argument": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-uniq-key": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-unknown-parameters": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-unknown-returns": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-unknown-type-aliases": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-unsafe-dictionary-type": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-unsafe-unzip": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-unthrown-error": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-unused-collection": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-unverified-certificate": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-unverified-hostname": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-useless-increment": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-weak-cipher": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-weak-keys": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-weak-ssl": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/no-widen-then-assert": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/non-existent-operator": {
           "$ref": "#/definitions/RuleNoConfig"
         },
         "oxc/number-arg-out-of-range": {
@@ -6096,7 +6452,46 @@
         "oxc/only-used-in-recursion": {
           "$ref": "#/definitions/RuleNoConfig"
         },
+        "oxc/post-message": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/prefer-default-last": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/prefer-single-boolean-return": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/prefer-while": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/production-debug": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/pseudo-random": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/require-safety-comment-for-type-assertion": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/single-char-in-character-classes": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/single-character-alternation": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
         "oxc/uninvoked-array-callback": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/unused-import": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/unused-named-groups": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/use-type-alias": {
+          "$ref": "#/definitions/RuleNoConfig"
+        },
+        "oxc/void-use": {
           "$ref": "#/definitions/RuleNoConfig"
         },
         "prefer-arrow-callback": {
