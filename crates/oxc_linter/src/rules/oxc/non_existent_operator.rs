@@ -20,7 +20,7 @@ declare_oxc_lint!(
     /// ### What it does
     ///
     /// Reports assignments and initializations that look like they were meant to use a
-    /// compound assignment operator (`+=`, `-=`, `!=`) but instead accidentally use `=`
+    /// assignment or comparison operator (`+=`, `-=`, `!=`) but instead accidentally use `=`
     /// immediately followed by a unary operator (`=+`, `=-`, `=!`), e.g. `x =- 1;`.
     ///
     /// ### Why is this bad?
@@ -82,7 +82,7 @@ fn check_operator<'a>(unary_node: &Expression<'a>, is_assignment: bool, ctx: &Li
 
     let source = ctx.source_text();
     let unary_start = unary.span.start;
-    let argument_start = unary.argument.span().start;
+    let argument_start = unary.argument.get_inner_expression().span().start;
 
     // The unary operator must NOT be adjacent to its operand (there is whitespace between
     // them), otherwise this is a normal, unambiguous unary expression.
@@ -144,6 +144,8 @@ fn test() {
         "let x =- 1;",
         "let x =+ 1;",
         "let x =! x;",
+        "x =-(y);",
+        "x =-/*comment*/y;",
     ];
 
     let fix = vec![
