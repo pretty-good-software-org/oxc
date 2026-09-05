@@ -407,6 +407,7 @@ pub use crate::rules::oxc::erasing_op::ErasingOp as OxcErasingOp;
 pub use crate::rules::oxc::for_loop_increment_sign::ForLoopIncrementSign as OxcForLoopIncrementSign;
 pub use crate::rules::oxc::generator_without_yield::GeneratorWithoutYield as OxcGeneratorWithoutYield;
 pub use crate::rules::oxc::in_operator_type_error::InOperatorTypeError as OxcInOperatorTypeError;
+pub use crate::rules::oxc::index_of_compare_to_positive_number::IndexOfCompareToPositiveNumber as OxcIndexOfCompareToPositiveNumber;
 pub use crate::rules::oxc::label_position::LabelPosition as OxcLabelPosition;
 pub use crate::rules::oxc::link_with_target_blank::LinkWithTargetBlank as OxcLinkWithTargetBlank;
 pub use crate::rules::oxc::max_switch_cases::MaxSwitchCases as OxcMaxSwitchCases;
@@ -1670,6 +1671,7 @@ pub enum RuleEnum {
     OxcForLoopIncrementSign(OxcForLoopIncrementSign),
     OxcGeneratorWithoutYield(OxcGeneratorWithoutYield),
     OxcInOperatorTypeError(OxcInOperatorTypeError),
+    OxcIndexOfCompareToPositiveNumber(OxcIndexOfCompareToPositiveNumber),
     OxcLabelPosition(OxcLabelPosition),
     OxcLinkWithTargetBlank(OxcLinkWithTargetBlank),
     OxcMaxSwitchCases(OxcMaxSwitchCases),
@@ -2729,7 +2731,8 @@ const OXC_ERASING_OP_ID: usize = OXC_EMPTY_STRING_REPETITION_ID + 1usize;
 const OXC_FOR_LOOP_INCREMENT_SIGN_ID: usize = OXC_ERASING_OP_ID + 1usize;
 const OXC_GENERATOR_WITHOUT_YIELD_ID: usize = OXC_FOR_LOOP_INCREMENT_SIGN_ID + 1usize;
 const OXC_IN_OPERATOR_TYPE_ERROR_ID: usize = OXC_GENERATOR_WITHOUT_YIELD_ID + 1usize;
-const OXC_LABEL_POSITION_ID: usize = OXC_IN_OPERATOR_TYPE_ERROR_ID + 1usize;
+const OXC_INDEX_OF_COMPARE_TO_POSITIVE_NUMBER_ID: usize = OXC_IN_OPERATOR_TYPE_ERROR_ID + 1usize;
+const OXC_LABEL_POSITION_ID: usize = OXC_INDEX_OF_COMPARE_TO_POSITIVE_NUMBER_ID + 1usize;
 const OXC_LINK_WITH_TARGET_BLANK_ID: usize = OXC_LABEL_POSITION_ID + 1usize;
 const OXC_MAX_SWITCH_CASES_ID: usize = OXC_LINK_WITH_TARGET_BLANK_ID + 1usize;
 const OXC_MISREFACTORED_ASSIGN_OP_ID: usize = OXC_MAX_SWITCH_CASES_ID + 1usize;
@@ -3034,7 +3037,7 @@ const VUE_VALID_DEFINE_EMITS_ID: usize = VUE_RETURN_IN_EMITS_VALIDATOR_ID + 1usi
 const VUE_VALID_DEFINE_OPTIONS_ID: usize = VUE_VALID_DEFINE_EMITS_ID + 1usize;
 const VUE_VALID_DEFINE_PROPS_ID: usize = VUE_VALID_DEFINE_OPTIONS_ID + 1usize;
 const VUE_VALID_NEXT_TICK_ID: usize = VUE_VALID_DEFINE_PROPS_ID + 1usize;
-static RULE_NAMES: [&str; 965usize] = [
+static RULE_NAMES: [&str; 966usize] = [
     ImportConsistentTypeSpecifierStyle::NAME,
     ImportDefault::NAME,
     ImportExport::NAME,
@@ -3714,6 +3717,7 @@ static RULE_NAMES: [&str; 965usize] = [
     OxcForLoopIncrementSign::NAME,
     OxcGeneratorWithoutYield::NAME,
     OxcInOperatorTypeError::NAME,
+    OxcIndexOfCompareToPositiveNumber::NAME,
     OxcLabelPosition::NAME,
     OxcLinkWithTargetBlank::NAME,
     OxcMaxSwitchCases::NAME,
@@ -4799,6 +4803,9 @@ impl RuleEnum {
             Self::OxcForLoopIncrementSign(_) => OXC_FOR_LOOP_INCREMENT_SIGN_ID,
             Self::OxcGeneratorWithoutYield(_) => OXC_GENERATOR_WITHOUT_YIELD_ID,
             Self::OxcInOperatorTypeError(_) => OXC_IN_OPERATOR_TYPE_ERROR_ID,
+            Self::OxcIndexOfCompareToPositiveNumber(_) => {
+                OXC_INDEX_OF_COMPARE_TO_POSITIVE_NUMBER_ID
+            }
             Self::OxcLabelPosition(_) => OXC_LABEL_POSITION_ID,
             Self::OxcLinkWithTargetBlank(_) => OXC_LINK_WITH_TARGET_BLANK_ID,
             Self::OxcMaxSwitchCases(_) => OXC_MAX_SWITCH_CASES_ID,
@@ -5937,6 +5944,9 @@ impl RuleEnum {
             Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::CATEGORY,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::CATEGORY,
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::CATEGORY,
+            Self::OxcIndexOfCompareToPositiveNumber(_) => {
+                OxcIndexOfCompareToPositiveNumber::CATEGORY
+            }
             Self::OxcLabelPosition(_) => OxcLabelPosition::CATEGORY,
             Self::OxcLinkWithTargetBlank(_) => OxcLinkWithTargetBlank::CATEGORY,
             Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::CATEGORY,
@@ -7039,6 +7049,7 @@ impl RuleEnum {
             Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::FIX,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::FIX,
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::FIX,
+            Self::OxcIndexOfCompareToPositiveNumber(_) => OxcIndexOfCompareToPositiveNumber::FIX,
             Self::OxcLabelPosition(_) => OxcLabelPosition::FIX,
             Self::OxcLinkWithTargetBlank(_) => OxcLinkWithTargetBlank::FIX,
             Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::FIX,
@@ -8345,6 +8356,9 @@ impl RuleEnum {
             Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::documentation(),
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::documentation(),
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::documentation(),
+            Self::OxcIndexOfCompareToPositiveNumber(_) => {
+                OxcIndexOfCompareToPositiveNumber::documentation()
+            }
             Self::OxcLabelPosition(_) => OxcLabelPosition::documentation(),
             Self::OxcLinkWithTargetBlank(_) => OxcLinkWithTargetBlank::documentation(),
             Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::documentation(),
@@ -10679,6 +10693,10 @@ impl RuleEnum {
                 .or_else(|| OxcGeneratorWithoutYield::schema(generator)),
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::config_schema(generator)
                 .or_else(|| OxcInOperatorTypeError::schema(generator)),
+            Self::OxcIndexOfCompareToPositiveNumber(_) => {
+                OxcIndexOfCompareToPositiveNumber::config_schema(generator)
+                    .or_else(|| OxcIndexOfCompareToPositiveNumber::schema(generator))
+            }
             Self::OxcLabelPosition(_) => OxcLabelPosition::config_schema(generator)
                 .or_else(|| OxcLabelPosition::schema(generator)),
             Self::OxcLinkWithTargetBlank(_) => OxcLinkWithTargetBlank::config_schema(generator)
@@ -12128,6 +12146,7 @@ impl RuleEnum {
             Self::OxcForLoopIncrementSign(_) => "oxc",
             Self::OxcGeneratorWithoutYield(_) => "oxc",
             Self::OxcInOperatorTypeError(_) => "oxc",
+            Self::OxcIndexOfCompareToPositiveNumber(_) => "oxc",
             Self::OxcLabelPosition(_) => "oxc",
             Self::OxcLinkWithTargetBlank(_) => "oxc",
             Self::OxcMaxSwitchCases(_) => "oxc",
@@ -14240,6 +14259,7 @@ impl RuleEnum {
             Self::OxcForLoopIncrementSign(rule) => rule.run(node, ctx),
             Self::OxcGeneratorWithoutYield(rule) => rule.run(node, ctx),
             Self::OxcInOperatorTypeError(rule) => rule.run(node, ctx),
+            Self::OxcIndexOfCompareToPositiveNumber(rule) => rule.run(node, ctx),
             Self::OxcLabelPosition(rule) => rule.run(node, ctx),
             Self::OxcLinkWithTargetBlank(rule) => rule.run(node, ctx),
             Self::OxcMaxSwitchCases(rule) => rule.run(node, ctx),
@@ -15222,6 +15242,7 @@ impl RuleEnum {
             Self::OxcForLoopIncrementSign(rule) => rule.run_once(ctx),
             Self::OxcGeneratorWithoutYield(rule) => rule.run_once(ctx),
             Self::OxcInOperatorTypeError(rule) => rule.run_once(ctx),
+            Self::OxcIndexOfCompareToPositiveNumber(rule) => rule.run_once(ctx),
             Self::OxcLabelPosition(rule) => rule.run_once(ctx),
             Self::OxcLinkWithTargetBlank(rule) => rule.run_once(ctx),
             Self::OxcMaxSwitchCases(rule) => rule.run_once(ctx),
@@ -16311,6 +16332,7 @@ impl RuleEnum {
             Self::OxcForLoopIncrementSign(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcGeneratorWithoutYield(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcInOperatorTypeError(rule) => rule.run_on_jest_node(jest_node, ctx),
+            Self::OxcIndexOfCompareToPositiveNumber(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcLabelPosition(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcLinkWithTargetBlank(rule) => rule.run_on_jest_node(jest_node, ctx),
             Self::OxcMaxSwitchCases(rule) => rule.run_on_jest_node(jest_node, ctx),
@@ -17306,6 +17328,7 @@ impl RuleEnum {
             Self::OxcForLoopIncrementSign(rule) => rule.should_run(ctx),
             Self::OxcGeneratorWithoutYield(rule) => rule.should_run(ctx),
             Self::OxcInOperatorTypeError(rule) => rule.should_run(ctx),
+            Self::OxcIndexOfCompareToPositiveNumber(rule) => rule.should_run(ctx),
             Self::OxcLabelPosition(rule) => rule.should_run(ctx),
             Self::OxcLinkWithTargetBlank(rule) => rule.should_run(ctx),
             Self::OxcMaxSwitchCases(rule) => rule.should_run(ctx),
@@ -18599,6 +18622,9 @@ impl RuleEnum {
             Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::IS_TSGOLINT_RULE,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::IS_TSGOLINT_RULE,
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::IS_TSGOLINT_RULE,
+            Self::OxcIndexOfCompareToPositiveNumber(_) => {
+                OxcIndexOfCompareToPositiveNumber::IS_TSGOLINT_RULE
+            }
             Self::OxcLabelPosition(_) => OxcLabelPosition::IS_TSGOLINT_RULE,
             Self::OxcLinkWithTargetBlank(_) => OxcLinkWithTargetBlank::IS_TSGOLINT_RULE,
             Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::IS_TSGOLINT_RULE,
@@ -19798,6 +19824,9 @@ impl RuleEnum {
             Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::VERSION,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::VERSION,
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::VERSION,
+            Self::OxcIndexOfCompareToPositiveNumber(_) => {
+                OxcIndexOfCompareToPositiveNumber::VERSION
+            }
             Self::OxcLabelPosition(_) => OxcLabelPosition::VERSION,
             Self::OxcLinkWithTargetBlank(_) => OxcLinkWithTargetBlank::VERSION,
             Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::VERSION,
@@ -20978,6 +21007,9 @@ impl RuleEnum {
             Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::HAS_CONFIG,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::HAS_CONFIG,
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::HAS_CONFIG,
+            Self::OxcIndexOfCompareToPositiveNumber(_) => {
+                OxcIndexOfCompareToPositiveNumber::HAS_CONFIG
+            }
             Self::OxcLabelPosition(_) => OxcLabelPosition::HAS_CONFIG,
             Self::OxcLinkWithTargetBlank(_) => OxcLinkWithTargetBlank::HAS_CONFIG,
             Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::HAS_CONFIG,
@@ -22089,6 +22121,7 @@ impl RuleEnum {
             Self::OxcForLoopIncrementSign(_) => OxcForLoopIncrementSign::INFO,
             Self::OxcGeneratorWithoutYield(_) => OxcGeneratorWithoutYield::INFO,
             Self::OxcInOperatorTypeError(_) => OxcInOperatorTypeError::INFO,
+            Self::OxcIndexOfCompareToPositiveNumber(_) => OxcIndexOfCompareToPositiveNumber::INFO,
             Self::OxcLabelPosition(_) => OxcLabelPosition::INFO,
             Self::OxcLinkWithTargetBlank(_) => OxcLinkWithTargetBlank::INFO,
             Self::OxcMaxSwitchCases(_) => OxcMaxSwitchCases::INFO,
@@ -23075,6 +23108,7 @@ impl RuleEnum {
             Self::OxcForLoopIncrementSign(rule) => rule.types_info(),
             Self::OxcGeneratorWithoutYield(rule) => rule.types_info(),
             Self::OxcInOperatorTypeError(rule) => rule.types_info(),
+            Self::OxcIndexOfCompareToPositiveNumber(rule) => rule.types_info(),
             Self::OxcLabelPosition(rule) => rule.types_info(),
             Self::OxcLinkWithTargetBlank(rule) => rule.types_info(),
             Self::OxcMaxSwitchCases(rule) => rule.types_info(),
@@ -24044,6 +24078,7 @@ impl RuleEnum {
             Self::OxcForLoopIncrementSign(rule) => rule.run_info(),
             Self::OxcGeneratorWithoutYield(rule) => rule.run_info(),
             Self::OxcInOperatorTypeError(rule) => rule.run_info(),
+            Self::OxcIndexOfCompareToPositiveNumber(rule) => rule.run_info(),
             Self::OxcLabelPosition(rule) => rule.run_info(),
             Self::OxcLinkWithTargetBlank(rule) => rule.run_info(),
             Self::OxcMaxSwitchCases(rule) => rule.run_info(),
@@ -25139,6 +25174,7 @@ pub static RULES: std::sync::LazyLock<Vec<RuleEnum>> = std::sync::LazyLock::new(
         RuleEnum::OxcForLoopIncrementSign(OxcForLoopIncrementSign::default()),
         RuleEnum::OxcGeneratorWithoutYield(OxcGeneratorWithoutYield::default()),
         RuleEnum::OxcInOperatorTypeError(OxcInOperatorTypeError::default()),
+        RuleEnum::OxcIndexOfCompareToPositiveNumber(OxcIndexOfCompareToPositiveNumber::default()),
         RuleEnum::OxcLabelPosition(OxcLabelPosition::default()),
         RuleEnum::OxcLinkWithTargetBlank(OxcLinkWithTargetBlank::default()),
         RuleEnum::OxcMaxSwitchCases(OxcMaxSwitchCases::default()),

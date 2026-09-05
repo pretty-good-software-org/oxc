@@ -766,6 +766,7 @@ pub(crate) mod oxc {
     pub mod for_loop_increment_sign;
     pub mod generator_without_yield;
     pub mod in_operator_type_error;
+    pub mod index_of_compare_to_positive_number;
     pub mod label_position;
     pub mod link_with_target_blank;
     pub mod max_switch_cases;

@@ -392,6 +392,7 @@ oxc/erasing-op                                             |   20604
 oxc/for-loop-increment-sign                                |     557
 oxc/generator-without-yield                                |   14283
 oxc/in-operator-type-error                                 |   20604
+oxc/index-of-compare-to-positive-number                    |   20604
 oxc/label-position                                         |       5
 oxc/link-with-target-blank                                 |   62606
 oxc/max-switch-cases                                       |     284

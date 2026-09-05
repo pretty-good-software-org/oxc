@@ -1,0 +1,82 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(index-of-compare-to-positive-number): This check ignores index 0; consider using 'includes' method to make this check safe and explicit.
+   ╭─[index_of_compare_to_positive_number.tsx:1:1]
+ 1 │ [1, 2, 3].indexOf(x) > 0;
+   · ────────────────────────
+   ╰────
+
+  ⚠ oxc(index-of-compare-to-positive-number): This check ignores index 0; consider using 'includes' method to make this check safe and explicit.
+   ╭─[index_of_compare_to_positive_number.tsx:1:1]
+ 1 │ new Array(1, 2, 3).indexOf(x) > 0;
+   · ─────────────────────────────────
+   ╰────
+
+  ⚠ oxc(index-of-compare-to-positive-number): This check ignores index 0; consider using 'includes' method to make this check safe and explicit.
+   ╭─[index_of_compare_to_positive_number.tsx:1:1]
+ 1 │ Array.from(iterable).indexOf(x) > 0;
+   · ───────────────────────────────────
+   ╰────
+
+  ⚠ oxc(index-of-compare-to-positive-number): This check ignores index 0; consider using 'includes' method to make this check safe and explicit.
+   ╭─[index_of_compare_to_positive_number.tsx:1:1]
+ 1 │ Array.of(1, 2).indexOf(x) > 0;
+   · ─────────────────────────────
+   ╰────
+
+  ⚠ oxc(index-of-compare-to-positive-number): This check ignores index 0; consider using 'includes' method to make this check safe and explicit.
+   ╭─[index_of_compare_to_positive_number.tsx:1:1]
+ 1 │ Object.keys(obj).indexOf(x) > 0;
+   · ───────────────────────────────
+   ╰────
+
+  ⚠ oxc(index-of-compare-to-positive-number): This check ignores index 0; consider using 'includes' method to make this check safe and explicit.
+   ╭─[index_of_compare_to_positive_number.tsx:1:1]
+ 1 │ Object.values(obj).indexOf(x) > 0;
+   · ─────────────────────────────────
+   ╰────
+
+  ⚠ oxc(index-of-compare-to-positive-number): This check ignores index 0; consider using 'includes' method to make this check safe and explicit.
+   ╭─[index_of_compare_to_positive_number.tsx:1:1]
+ 1 │ Object.entries(obj).indexOf(x) > 0;
+   · ──────────────────────────────────
+   ╰────
+
+  ⚠ oxc(index-of-compare-to-positive-number): This check ignores index 0; consider using 'includes' method to make this check safe and explicit.
+   ╭─[index_of_compare_to_positive_number.tsx:1:1]
+ 1 │ array.map(f).indexOf(x) > 0;
+   · ───────────────────────────
+   ╰────
+
+  ⚠ oxc(index-of-compare-to-positive-number): This check ignores index 0; consider using 'includes' method to make this check safe and explicit.
+   ╭─[index_of_compare_to_positive_number.tsx:1:1]
+ 1 │ array.filter(f).indexOf(x) > 0;
+   · ──────────────────────────────
+   ╰────
+
+  ⚠ oxc(index-of-compare-to-positive-number): This check ignores index 0; consider using 'includes' method to make this check safe and explicit.
+   ╭─[index_of_compare_to_positive_number.tsx:1:1]
+ 1 │ array.slice(1).indexOf(x) > 0;
+   · ─────────────────────────────
+   ╰────
+
+  ⚠ oxc(index-of-compare-to-positive-number): This check ignores index 0; consider using 'includes' method to make this check safe and explicit.
+   ╭─[index_of_compare_to_positive_number.tsx:1:1]
+ 1 │ array.concat(other).indexOf(x) > 0;
+   · ──────────────────────────────────
+   ╰────
+
+  ⚠ oxc(index-of-compare-to-positive-number): This check ignores index 0; consider using 'includes' method to make this check safe and explicit.
+   ╭─[index_of_compare_to_positive_number.tsx:1:1]
+ 1 │ array.flat().indexOf(x) > 0;
+   · ───────────────────────────
+   ╰────
+
+  ⚠ oxc(index-of-compare-to-positive-number): This check ignores index 0; consider using 'includes' method to make this check safe and explicit.
+   ╭─[index_of_compare_to_positive_number.tsx:1:1]
+ 1 │ array.flatMap(f).indexOf(x) > 0;
+   · ───────────────────────────────
+   ╰────
