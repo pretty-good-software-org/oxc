@@ -22,7 +22,7 @@ impl Rule for NoImplicitGlobal {
     fn should_run(&self, ctx: &crate::context::ContextHost) -> bool {
         // The partial loader does not model Svelte's implicit reactive bindings.
         // Enable this rule once framework-aware scope analysis supplies those bindings.
-        !ctx.file_extension().is_some_and(|extension| extension == "svelte")
+        ctx.file_extension().is_none_or(|extension| extension != "svelte")
     }
 
     fn run_once(&self, ctx: &LintContext) {
