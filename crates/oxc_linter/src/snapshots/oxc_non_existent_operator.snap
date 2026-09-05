@@ -1,0 +1,43 @@
+---
+source: crates/oxc_linter/src/tester.rs
+assertion_line: 505
+---
+
+  ⚠ oxc(non-existent-operator): Was "-=" meant instead?
+   ╭─[non_existent_operator.tsx:1:14]
+ 1 │ let x = 1; x =- 1;
+   ·              ──
+   ╰────
+  help: Replace `=-` with `-=`.
+
+  ⚠ oxc(non-existent-operator): Was "+=" meant instead?
+   ╭─[non_existent_operator.tsx:1:14]
+ 1 │ let x = 1; x =+ 1;
+   ·              ──
+   ╰────
+  help: Replace `=+` with `+=`.
+
+  ⚠ oxc(non-existent-operator): Was "!=" meant instead?
+   ╭─[non_existent_operator.tsx:1:14]
+ 1 │ let x = 1; x =! x;
+   ·              ──
+   ╰────
+  help: Replace `=!` with `!=`.
+
+  ⚠ oxc(non-existent-operator): Was "-=" meant instead?
+   ╭─[non_existent_operator.tsx:1:7]
+ 1 │ let x =- 1;
+   ·       ──
+   ╰────
+
+  ⚠ oxc(non-existent-operator): Was "+=" meant instead?
+   ╭─[non_existent_operator.tsx:1:7]
+ 1 │ let x =+ 1;
+   ·       ──
+   ╰────
+
+  ⚠ oxc(non-existent-operator): Was "!=" meant instead?
+   ╭─[non_existent_operator.tsx:1:7]
+ 1 │ let x =! x;
+   ·       ──
+   ╰────
