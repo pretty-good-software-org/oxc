@@ -19,6 +19,12 @@ declare_oxc_lint!(
 );
 
 impl Rule for NoImplicitGlobal {
+    fn should_run(&self, ctx: &crate::context::ContextHost) -> bool {
+        // The partial loader does not model Svelte's implicit reactive bindings.
+        // Enable this rule once framework-aware scope analysis supplies those bindings.
+        !ctx.file_extension().is_some_and(|extension| extension == "svelte")
+    }
+
     fn run_once(&self, ctx: &LintContext) {
         for (name, reference_ids) in ctx.scoping().root_unresolved_references() {
             if ctx.get_global_variable_value(name).is_some() {
@@ -50,4 +56,13 @@ fn test() {
         vec!["implicitValue = 1;"],
     )
     .test_and_snapshot();
+}
+
+#[test]
+fn test_svelte_reactive_bindings() {
+    use crate::tester::Tester;
+    let pass = vec!["<script>$: ({ name } = person); name = 'updated';</script>"];
+    Tester::new(NoImplicitGlobal::NAME, NoImplicitGlobal::PLUGIN, pass, vec![])
+        .change_rule_path("test.svelte")
+        .test();
 }
