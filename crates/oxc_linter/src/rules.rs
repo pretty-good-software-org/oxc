@@ -845,6 +845,7 @@ pub(crate) mod oxc {
     pub mod no_weak_keys;
     pub mod no_weak_ssl;
     pub mod no_widen_then_assert;
+    pub mod non_existent_operator;
     pub mod number_arg_out_of_range;
     pub mod only_used_in_recursion;
     pub mod post_message;

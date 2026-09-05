@@ -6,6 +6,33 @@ arguments: --type-aware
 working directory: fixtures/cli/tsgolint_disable_directives
 ----------
 
+  ! oxc(no-chained-type-assertions): Avoid chained TypeScript assertions.
+   ,-[no-unnecessary-type-parameters-disable.ts:7:10]
+ 6 |   // oxlint-disable-next-line typescript/no-unsafe-type-assertion
+ 7 |   return input as any as T;
+   :          ^^^^^^^^^^^^
+ 8 | }
+   `----
+  help: Use one named type or validate the value at its boundary.
+
+  ! oxc(require-safety-comment-for-type-assertion): This type assertion has no `SAFETY:` justification.
+   ,-[no-unnecessary-type-parameters-disable.ts:7:10]
+ 6 |   // oxlint-disable-next-line typescript/no-unsafe-type-assertion
+ 7 |   return input as any as T;
+   :          ^^^^^^^^^^^^
+ 8 | }
+   `----
+  help: State the invariant TypeScript cannot express immediately before the assertion.
+
+  ! oxc(require-safety-comment-for-type-assertion): This type assertion has no `SAFETY:` justification.
+   ,-[no-unnecessary-type-parameters-disable.ts:7:10]
+ 6 |   // oxlint-disable-next-line typescript/no-unsafe-type-assertion
+ 7 |   return input as any as T;
+   :          ^^^^^^^^^^^^^^^^^
+ 8 | }
+   `----
+  help: State the invariant TypeScript cannot express immediately before the assertion.
+
   ! eslint(no-unused-expressions): Expected expression to be used
    ,-[test.ts:6:1]
  5 | // oxlint-disable-next-line typescript/no-floating-promises
@@ -144,8 +171,8 @@ working directory: fixtures/cli/tsgolint_disable_directives
     `----
   help: Consider removing this declaration.
 
-Found 15 warnings and 0 errors.
-Finished in <variable>ms on 3 files with 111 rules using 1 threads.
+Found 18 warnings and 0 errors.
+Finished in <variable>ms on 3 files with 163 rules using 1 threads.
 ----------
 CLI result: LintSucceeded
 ----------

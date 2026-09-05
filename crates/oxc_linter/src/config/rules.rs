@@ -357,6 +357,7 @@ fn transform_rule_and_plugin_name<'a>(
         ("sonarjs", "concise-regex") => ("concise-regex", "oxc"),
         ("sonarjs", "empty-string-repetition") => ("empty-string-repetition", "oxc"),
         ("sonarjs", "for-loop-increment-sign") => ("for-loop-increment-sign", "oxc"),
+        ("sonarjs", "non-existent-operator") => ("non-existent-operator", "oxc"),
         ("sonarjs", "no-array-delete") => ("no-array-delete", "typescript"),
         ("sonarjs", "prefer-regexp-exec") => ("prefer-regexp-exec", "typescript"),
         ("sonarjs", name)

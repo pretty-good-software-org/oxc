@@ -19,10 +19,6 @@
     "url": "git+https://github.com/pretty-good-software-org/oxc",
     "directory": "npm/oxlint"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
-    "access": "restricted"
-  },
   "bin": {
     "oxlint": "bin/oxlint"
   },
@@ -45,6 +41,10 @@
       "default": "./dist/plugins-dev.js"
     },
     "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
   },
   "peerDependencies": {
     "oxlint-tsgolint": ">=7.0.2001",
