@@ -25,6 +25,13 @@ impl Rule for LabelPosition {
         if is_label_target(&statement.body) {
             return;
         }
+        // Svelte uses top-level `$:` labels for reactive statements, not control flow.
+        if statement.label.name == "$"
+            && ctx.file_extension().is_some_and(|extension| extension == "svelte")
+            && matches!(ctx.nodes().parent_kind(node.id()), AstKind::Program(_))
+        {
+            return;
+        }
         ctx.diagnostic(
             OxcDiagnostic::warn("Move this label to a loop or switch statement.")
                 .with_help("Labels should identify statements that can be continued or broken.")
@@ -52,7 +59,17 @@ fn test() {
         LabelPosition::NAME,
         LabelPosition::PLUGIN,
         vec!["loop: for (;;) break loop;"],
-        vec!["label: if (value) run();"],
+        vec!["label: if (value) run();", "$: run();"],
     )
     .test_and_snapshot();
+}
+
+#[test]
+fn test_svelte_reactivity() {
+    use crate::tester::Tester;
+    let pass = vec!["<script>$: run(); $: { run(); }</script>"];
+    let fail = vec!["<script>label: run();</script>"];
+    Tester::new(LabelPosition::NAME, LabelPosition::PLUGIN, pass, fail)
+        .change_rule_path("test.svelte")
+        .test();
 }

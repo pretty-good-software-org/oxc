@@ -1195,6 +1195,7 @@ export interface DummyRuleMap {
   "no-nonoctal-decimal-escape"?: RuleNoConfig;
   "no-obj-calls"?: RuleNoConfig;
   "no-object-constructor"?: RuleNoConfig;
+  "no-octal"?: RuleNoConfig;
   "no-param-reassign"?: RuleNoConfig | [AllowWarnDeny, NoParamReassignConfig];
   "no-plusplus"?: RuleNoConfig | [AllowWarnDeny, NoPlusplus];
   "no-promise-executor-return"?: RuleNoConfig | [AllowWarnDeny, NoPromiseExecutorReturnConfig];
@@ -1266,7 +1267,9 @@ export interface DummyRuleMap {
     RuleNoConfig | [AllowWarnDeny, ShorthandType] | [AllowWarnDeny, ShorthandType, ObjectShorthandOptions];
   "one-var"?: RuleNoConfig | [AllowWarnDeny, OneVar];
   "operator-assignment"?: RuleNoConfig | [AllowWarnDeny, AlwaysNever];
+  "oxc/anchor-precedence"?: RuleNoConfig;
   "oxc/approx-constant"?: RuleNoConfig;
+  "oxc/array-callback-without-return"?: RuleNoConfig;
   "oxc/bad-array-method-on-arguments"?: RuleNoConfig;
   "oxc/bad-bitwise-operator"?: RuleNoConfig;
   "oxc/bad-char-at-comparison"?: RuleNoConfig;
@@ -1276,23 +1279,115 @@ export interface DummyRuleMap {
   "oxc/bad-object-literal-comparison"?: RuleNoConfig;
   "oxc/bad-replace-all-arg"?: RuleNoConfig;
   "oxc/branches-sharing-code"?: RuleNoConfig;
+  "oxc/class-name"?: RuleNoConfig | [AllowWarnDeny, Config];
+  "oxc/comma-or-logical-or-case"?: RuleNoConfig;
+  "oxc/concise-regex"?: RuleNoConfig;
   "oxc/const-comparisons"?: RuleNoConfig;
+  "oxc/constructor-for-side-effects"?: RuleNoConfig;
+  "oxc/different-types-comparison"?: RuleNoConfig;
   "oxc/double-comparisons"?: RuleNoConfig;
+  "oxc/duplicates-in-character-class"?: RuleNoConfig;
+  "oxc/empty-string-repetition"?: RuleNoConfig;
   "oxc/erasing-op"?: RuleNoConfig;
+  "oxc/for-loop-increment-sign"?: RuleNoConfig;
+  "oxc/generator-without-yield"?: RuleNoConfig;
+  "oxc/in-operator-type-error"?: RuleNoConfig;
+  "oxc/label-position"?: RuleNoConfig;
+  "oxc/link-with-target-blank"?: RuleNoConfig;
+  "oxc/max-switch-cases"?: RuleNoConfig | [AllowWarnDeny, number];
   "oxc/misrefactored-assign-op"?: RuleNoConfig;
   "oxc/missing-throw"?: RuleNoConfig;
   "oxc/no-accumulating-spread"?: RuleNoConfig;
+  "oxc/no-all-duplicated-branches"?: RuleNoConfig;
+  "oxc/no-angular-bypass-sanitization"?: RuleNoConfig;
   "oxc/no-async-await"?: RuleNoConfig;
+  "oxc/no-async-constructor"?: RuleNoConfig;
   "oxc/no-async-endpoint-handlers"?: RuleNoConfig | [AllowWarnDeny, NoAsyncEndpointHandlersConfig];
   "oxc/no-barrel-file"?: RuleNoConfig | [AllowWarnDeny, NoBarrelFile];
+  "oxc/no-case-label-in-switch"?: RuleNoConfig;
+  "oxc/no-chained-type-assertions"?: RuleNoConfig;
+  "oxc/no-clear-text-protocols"?: RuleNoConfig;
+  "oxc/no-collection-size-mischeck"?: RuleNoConfig;
+  "oxc/no-commented-code"?: RuleNoConfig;
+  "oxc/no-conditional-empty-object-spread"?: RuleNoConfig;
   "oxc/no-const-enum"?: RuleNoConfig;
+  "oxc/no-duplicate-in-composite"?: RuleNoConfig;
+  "oxc/no-duplicated-branches"?: RuleNoConfig;
+  "oxc/no-empty-after-reluctant"?: RuleNoConfig;
+  "oxc/no-empty-alternatives"?: RuleNoConfig;
+  "oxc/no-empty-collection"?: RuleNoConfig;
+  "oxc/no-empty-group"?: RuleNoConfig;
+  "oxc/no-empty-test-file"?: RuleNoConfig;
+  "oxc/no-equals-in-for-termination"?: RuleNoConfig;
+  "oxc/no-exclusive-tests"?: RuleNoConfig;
+  "oxc/no-global-this"?: RuleNoConfig;
+  "oxc/no-hardcoded-ip"?: RuleNoConfig;
+  "oxc/no-hardcoded-passwords"?: RuleNoConfig | [AllowWarnDeny, Config2];
+  "oxc/no-hardcoded-secrets"?: RuleNoConfig;
+  "oxc/no-identical-conditions"?: RuleNoConfig;
+  "oxc/no-identical-expressions"?: RuleNoConfig;
+  "oxc/no-ignored-exceptions"?: RuleNoConfig;
+  "oxc/no-ignored-return"?: RuleNoConfig;
+  "oxc/no-implicit-global"?: RuleNoConfig;
+  "oxc/no-in-misuse"?: RuleNoConfig;
+  "oxc/no-insecure-cookie"?: RuleNoConfig;
+  "oxc/no-internal-api-use"?: RuleNoConfig;
+  "oxc/no-inverted-boolean-check"?: RuleNoConfig;
+  "oxc/no-known-value-widening"?: RuleNoConfig;
+  "oxc/no-literal-call"?: RuleNoConfig;
   "oxc/no-map-spread"?: RuleNoConfig | [AllowWarnDeny, NoMapSpreadConfig];
+  "oxc/no-module-mocking"?: RuleNoConfig;
+  "oxc/no-nested-assignment"?: RuleNoConfig;
+  "oxc/no-nested-functions"?: RuleNoConfig | [AllowWarnDeny, Config3];
+  "oxc/no-nested-template-literals"?: RuleNoConfig;
+  "oxc/no-object-parameters"?: RuleNoConfig;
   "oxc/no-optional-chaining"?: RuleNoConfig | [AllowWarnDeny, NoOptionalChainingConfig];
+  "oxc/no-os-command-from-path"?: RuleNoConfig;
+  "oxc/no-redundant-boolean"?: RuleNoConfig;
+  "oxc/no-redundant-jump"?: RuleNoConfig;
+  "oxc/no-redundant-optional"?: RuleNoConfig;
+  "oxc/no-reflect-apply"?: RuleNoConfig;
+  "oxc/no-reflect-get"?: RuleNoConfig;
   "oxc/no-rest-spread-properties"?: RuleNoConfig | [AllowWarnDeny, NoRestSpreadPropertiesOptions];
+  "oxc/no-runtime-typeof"?: RuleNoConfig;
+  "oxc/no-same-line-conditional"?: RuleNoConfig;
+  "oxc/no-shape-in-symbol-names"?: RuleNoConfig;
+  "oxc/no-skipped-tests"?: RuleNoConfig;
+  "oxc/no-small-switch"?: RuleNoConfig;
   "oxc/no-this-in-exported-function"?: RuleNoConfig;
+  "oxc/no-undefined-argument"?: RuleNoConfig;
+  "oxc/no-uniq-key"?: RuleNoConfig;
+  "oxc/no-unknown-parameters"?: RuleNoConfig;
+  "oxc/no-unknown-returns"?: RuleNoConfig;
+  "oxc/no-unknown-type-aliases"?: RuleNoConfig;
+  "oxc/no-unsafe-dictionary-type"?: RuleNoConfig;
+  "oxc/no-unsafe-unzip"?: RuleNoConfig;
+  "oxc/no-unthrown-error"?: RuleNoConfig;
+  "oxc/no-unused-collection"?: RuleNoConfig;
+  "oxc/no-unverified-certificate"?: RuleNoConfig;
+  "oxc/no-unverified-hostname"?: RuleNoConfig;
+  "oxc/no-useless-increment"?: RuleNoConfig;
+  "oxc/no-weak-cipher"?: RuleNoConfig;
+  "oxc/no-weak-keys"?: RuleNoConfig;
+  "oxc/no-weak-ssl"?: RuleNoConfig;
+  "oxc/no-widen-then-assert"?: RuleNoConfig;
+  "oxc/non-existent-operator"?: RuleNoConfig;
   "oxc/number-arg-out-of-range"?: RuleNoConfig;
   "oxc/only-used-in-recursion"?: RuleNoConfig;
+  "oxc/post-message"?: RuleNoConfig;
+  "oxc/prefer-default-last"?: RuleNoConfig;
+  "oxc/prefer-single-boolean-return"?: RuleNoConfig;
+  "oxc/prefer-while"?: RuleNoConfig;
+  "oxc/production-debug"?: RuleNoConfig;
+  "oxc/pseudo-random"?: RuleNoConfig;
+  "oxc/require-safety-comment-for-type-assertion"?: RuleNoConfig;
+  "oxc/single-char-in-character-classes"?: RuleNoConfig;
+  "oxc/single-character-alternation"?: RuleNoConfig;
   "oxc/uninvoked-array-callback"?: RuleNoConfig;
+  "oxc/unused-import"?: RuleNoConfig;
+  "oxc/unused-named-groups"?: RuleNoConfig;
+  "oxc/use-type-alias"?: RuleNoConfig;
+  "oxc/void-use"?: RuleNoConfig;
   "prefer-arrow-callback"?: RuleNoConfig | [AllowWarnDeny, PreferArrowCallbackConfig];
   "prefer-const"?: RuleNoConfig | [AllowWarnDeny, PreferConstConfig];
   "prefer-destructuring"?:
@@ -4303,6 +4398,9 @@ export interface OneVarOptions {
    */
   var?: OneVarMode;
 }
+export interface Config {
+  format?: string;
+}
 export interface NoAsyncEndpointHandlersConfig {
   /**
    * An array of names that are allowed to be async.
@@ -4315,6 +4413,9 @@ export interface NoBarrelFile {
    * before the rule is triggered.
    */
   threshold?: number;
+}
+export interface Config2 {
+  passwordWords?: string[];
 }
 export interface NoMapSpreadConfig {
   /**
@@ -4351,6 +4452,9 @@ export interface NoMapSpreadConfig {
    * In these cases, `Object.assign` is not really more performant than spreads.
    */
   ignoreRereads?: boolean;
+}
+export interface Config3 {
+  threshold?: number;
 }
 export interface NoOptionalChainingConfig {
   /**

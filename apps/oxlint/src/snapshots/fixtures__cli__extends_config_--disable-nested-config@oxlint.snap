@@ -14,6 +14,13 @@ working directory: fixtures/cli/extends_config
    `----
   help: Consider removing this declaration.
 
+  ! oxc(no-known-value-widening): Binding `x` discards known type evidence.
+   ,-[overrides/test.ts:1:7]
+ 1 | const x: any = 3;
+   :       ^
+   `----
+  help: Keep inference or use a named owner contract instead of a broad type.
+
   ! eslint(no-unused-vars): Function 'component' is declared but never used.
    ,-[overrides/test.tsx:1:10]
  1 | function component(): any {
@@ -30,8 +37,8 @@ working directory: fixtures/cli/extends_config
    `----
   help: Remove the debugger statement
 
-Found 3 warnings and 0 errors.
-Finished in <variable>ms on 4 files with 96 rules using 1 threads.
+Found 4 warnings and 0 errors.
+Finished in <variable>ms on 4 files with 148 rules using 1 threads.
 ----------
 CLI result: LintSucceeded
 ----------
